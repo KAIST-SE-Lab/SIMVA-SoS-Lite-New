@@ -10,6 +10,11 @@ public class Main {
 
         System.out.println("Hello World!");
 
+        try {
+            UIManager.setLookAndFeel(UIManager.getLookAndFeel());
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         LaunchWindow launchWindow = new LaunchWindow();
 
         //SimEngineFrame simEngineFrame = new SimEngineFrame();

@@ -7,16 +7,23 @@ import java.awt.event.ActionListener;
 public class LaunchWindow implements ActionListener {
 
     JFrame frame = new JFrame();
-    JButton startButton = new JButton("Start");
+
+    JButton startButton1 = new JButton("Start1");
+    JButton startButton2 = new JButton("Start2");
+
     JButton dialogButton = new JButton("Dialog");
 
     public LaunchWindow(){
 
-        startButton.setBounds(100, 100, 200, 100);
-        startButton.setFocusable(false);
-        startButton.addActionListener(this);
+        startButton1.setBounds(100, 100, 200, 100);
+        startButton1.setFocusable(false);
+        startButton1.addActionListener(this);
 
-        dialogButton.setBounds(100, 220, 200, 100);
+        startButton2.setBounds(100, 210, 200, 100);
+        startButton2.setFocusable(false);
+        startButton2.addActionListener(this);
+
+        dialogButton.setBounds(100, 320, 200, 100);
         dialogButton.setFocusable(false);
         dialogButton.addActionListener(this);
 
@@ -25,16 +32,23 @@ public class LaunchWindow implements ActionListener {
         frame.setLayout(null);
         frame.setVisible(true);
 
-        frame.add(startButton);
+        frame.add(startButton1);
+        frame.add(startButton2);
         frame.add(dialogButton);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == startButton){
+        if (e.getSource() == startButton1){
             frame.dispose();
-            SimEngineFrame simEngineFrame = new SimEngineFrame();
-        } else if(e.getSource() == dialogButton) {
+//            SimEngineFrame simEngineFrame = new SimEngineFrame();
+            MyFrame myFrame = new MyFrame();
+        }
+        else if(e.getSource() == startButton2){
+            frame.dispose();
+            MyFrame2 myFrame2 = new MyFrame2();
+        }
+        else if(e.getSource() == dialogButton) {
             //PLAIN, INFORMATION, QUESTION, WARNING, ERROR
             //JOptionPane.showMessageDialog(null, "A Dialog is shown", "Dialog", JOptionPane.PLAIN_MESSAGE);
 
