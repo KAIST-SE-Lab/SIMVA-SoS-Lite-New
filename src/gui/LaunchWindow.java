@@ -10,6 +10,7 @@ public class LaunchWindow implements ActionListener {
 
     JButton startButton1 = new JButton("Start1");
     JButton startButton2 = new JButton("Start2");
+    JButton startButton3 = new JButton("Start3");
 
     JButton dialogButton = new JButton("Dialog");
 
@@ -23,7 +24,11 @@ public class LaunchWindow implements ActionListener {
         startButton2.setFocusable(false);
         startButton2.addActionListener(this);
 
-        dialogButton.setBounds(100, 320, 200, 100);
+        startButton3.setBounds(100, 320, 200, 100);
+        startButton3.setFocusable(false);
+        startButton3.addActionListener(this);
+
+        dialogButton.setBounds(100, 430, 200, 100);
         dialogButton.setFocusable(false);
         dialogButton.addActionListener(this);
 
@@ -34,6 +39,7 @@ public class LaunchWindow implements ActionListener {
 
         frame.add(startButton1);
         frame.add(startButton2);
+        frame.add(startButton3);
         frame.add(dialogButton);
     }
 
@@ -47,6 +53,10 @@ public class LaunchWindow implements ActionListener {
         else if(e.getSource() == startButton2){
             frame.dispose();
             MyFrame2 myFrame2 = new MyFrame2();
+        }
+        else if(e.getSource() == startButton3){
+            frame.dispose();
+            GameFrame gameFrame = new GameFrame();
         }
         else if(e.getSource() == dialogButton) {
             //PLAIN, INFORMATION, QUESTION, WARNING, ERROR

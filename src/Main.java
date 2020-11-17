@@ -11,8 +11,19 @@ public class Main {
         System.out.println("Hello World!");
 
         try {
-            UIManager.setLookAndFeel(UIManager.getLookAndFeel());
+//            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+
         } catch (UnsupportedLookAndFeelException e) {
+            System.err.println("Error Message: " + e);
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         LaunchWindow launchWindow = new LaunchWindow();
