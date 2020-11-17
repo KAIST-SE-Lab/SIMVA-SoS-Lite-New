@@ -1,5 +1,6 @@
 package kr.ac.kaist.se.view;
 
+import kr.ac.kaist.se.view.part.SimEngineTabPane;
 import kr.ac.kaist.se.view.part.SimStatusBarPanel;
 
 import javax.swing.*;
@@ -28,6 +29,7 @@ public class SimInputUI implements ActionListener, Runnable {
     JMenuItem helpMenuItem;
     JMenuItem aboutMenuItem;
 
+    SimEngineTabPane simEngineTabPane;
 
     JButton openSimModelButton;
     JButton openSimConfigButton;
@@ -113,6 +115,11 @@ public class SimInputUI implements ActionListener, Runnable {
         openSimScenarioButton.addActionListener(this);
     }
 
+    private void initTabbedPanes() {
+        simEngineTabPane = new SimEngineTabPane();
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object sourceObj = e.getSource();
@@ -152,6 +159,8 @@ public class SimInputUI implements ActionListener, Runnable {
         initButtons();
         initStatusBar();
 
+        initTabbedPanes();
+
         /* Add components */
         inputUIframe.setJMenuBar(menuBar);
 
@@ -163,6 +172,8 @@ public class SimInputUI implements ActionListener, Runnable {
         contentPane.setLayout(new BorderLayout());
 
         inputUIframe.add(statusBar, BorderLayout.SOUTH);
+        inputUIframe.add(simEngineTabPane, BorderLayout.CENTER);
+
 
         inputUIframe.addWindowListener(new WindowAdapter() {
             @Override
@@ -184,6 +195,8 @@ public class SimInputUI implements ActionListener, Runnable {
 
         inputUIframe.setVisible(true);
     }
+
+
 
     private class TimerThread extends Thread{
 
