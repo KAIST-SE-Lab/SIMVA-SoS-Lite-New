@@ -1,0 +1,25 @@
+package kr.ac.kaist.se.view.part;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class SeparatorPanel extends JPanel {
+    protected Color leftColor;
+    protected Color rightColor;
+
+    public SeparatorPanel(Color leftColor, Color rightColor) {
+        this.leftColor = leftColor;
+        this.rightColor = rightColor;
+        setOpaque(false);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        g.setColor(leftColor);
+        g.drawLine(0, 0, 0, getHeight());
+        g.setColor(rightColor);
+        g.drawLine(1, 0, 1, getHeight());
+    }
+}
