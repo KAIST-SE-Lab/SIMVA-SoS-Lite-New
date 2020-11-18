@@ -39,9 +39,7 @@ public class SimInputUI implements ActionListener, Runnable {
 
     SimEngineTabPane simEngineTabPane;
 
-    JButton openSimModelButton;
-    JButton openSimConfigButton;
-    JButton openSimScenarioButton;
+
 
     SimStatusBarPanel statusBar;
 
@@ -66,8 +64,6 @@ public class SimInputUI implements ActionListener, Runnable {
 
         initMenu();
 
-
-        initButtons();
         initStatusBar();
 
         initTabbedPanes();
@@ -205,19 +201,7 @@ public class SimInputUI implements ActionListener, Runnable {
     }
 
 
-    private void initButtons() {
-        openSimModelButton = new JButton("Open a simulation model");
-        //openSimModelButton.setBounds(30, 30, 340, 30);
-        openSimModelButton.setPreferredSize(new Dimension(340, 30));
-        openSimConfigButton = new JButton("Open a simulation configuration");
-        openSimConfigButton.setPreferredSize(new Dimension(340, 30));
-        openSimScenarioButton = new JButton("Open a simulation scenario");
-        openSimScenarioButton.setPreferredSize(new Dimension(340, 30));
 
-        openSimModelButton.addActionListener(this);
-        openSimConfigButton.addActionListener(this);
-        openSimScenarioButton.addActionListener(this);
-    }
 
     private void initTabbedPanes() {
         simEngineTabPane = new SimEngineTabPane();
@@ -230,11 +214,11 @@ public class SimInputUI implements ActionListener, Runnable {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         // Menu items
-        if (sourceObj == openSimModelMenuItem || sourceObj == openSimModelButton){
+        if (sourceObj == openSimModelMenuItem){
             System.out.println("[" + timestamp + "] OpenSimModel MenuItem is selected.");
-        } else if (sourceObj == openSimConfigMenuItem || sourceObj == openSimConfigButton){
+        } else if (sourceObj == openSimConfigMenuItem){
             System.out.println("[" + timestamp + "] OpenSimConfig MenuItem is selected.");
-        } else if (sourceObj == openSimScenarioMenuItem || sourceObj == openSimScenarioButton){
+        } else if (sourceObj == openSimScenarioMenuItem){
             System.out.println("[" + timestamp + "] OpenSimScenario MenuItem is selected.");
         } else if (sourceObj == exitMenuItem){
             System.out.println("[" + timestamp + "] ExitMenuItem is selected.");

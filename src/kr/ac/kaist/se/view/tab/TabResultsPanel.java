@@ -5,8 +5,10 @@ import kr.ac.kaist.se.view.toolbar.ToolBarSimMode;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class TabResultsPanel extends JPanel {
+public class TabResultsPanel extends JPanel implements ActionListener {
 
     ToolBarResultsMode toolBarResultsMode;
 
@@ -21,5 +23,10 @@ public class TabResultsPanel extends JPanel {
     private void initToolBar() {
         toolBarResultsMode = new ToolBarResultsMode();
         add(toolBarResultsMode, BorderLayout.PAGE_START);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
