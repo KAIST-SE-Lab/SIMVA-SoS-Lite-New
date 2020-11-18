@@ -21,13 +21,21 @@ public class SimInputUI implements ActionListener, Runnable {
 
     JMenuBar menuBar;
     JMenu fileMenu;
+    JMenu simulationMenu;
+    JMenu resultsMenu;
     JMenu helpMenu;
     JMenuItem openSimModelMenuItem;
     JMenuItem openSimConfigMenuItem;
     JMenuItem openSimScenarioMenuItem;
     JMenuItem exitMenuItem;
+    JMenuItem configSimulationMenuItem;
+    JMenuItem startSimulationMenuItem;
+    JMenuItem stopSimulationMenuItem;
+    JMenuItem exportResultsMenuItem;
+    JMenuItem exportLogsMenuItem;
     JMenuItem helpMenuItem;
     JMenuItem aboutMenuItem;
+
 
     SimEngineTabPane simEngineTabPane;
 
@@ -42,6 +50,69 @@ public class SimInputUI implements ActionListener, Runnable {
     JLabel simTimeLabel;
 
     public SimInputUI(){
+    }
+
+    @Override
+    public void run() {
+        simEngineIcon = new ImageIcon("logo.png");
+
+        inputUIframe = new JFrame();
+        inputUIframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        inputUIframe.setTitle("Simulation Engine: Simulation Input");
+        inputUIframe.setIconImage(simEngineIcon.getImage());
+        inputUIframe.setSize(800, 800);
+        //inputUIframe.setLayout(new GridLayout(3,1));
+        inputUIframe.setLayout(new BorderLayout());
+
+        initMenu();
+
+
+        initButtons();
+        initStatusBar();
+
+        initTabbedPanes();
+
+        /* Add components */
+        inputUIframe.setJMenuBar(menuBar);
+        //inputUIframe.add(toolBarSimMode, BorderLayout.PAGE_START);
+
+
+        //inputUIframe.add(toolbar, BorderLayout.PAGE_START);
+
+        //inputUIframe.add(openSimModelButton, "Center");
+        //inputUIframe.add(openSimConfigButton, "Center");
+        //inputUIframe.add(openSimScenarioButton, "Center");
+
+        Container contentPane = inputUIframe.getContentPane();
+        contentPane.setLayout(new BorderLayout());
+
+        inputUIframe.add(statusBar, BorderLayout.SOUTH);
+        inputUIframe.add(simEngineTabPane, BorderLayout.CENTER);
+
+        //inputUIframe.pack();
+
+
+        inputUIframe.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                super.windowOpened(e);
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                System.out.println("[" + timestamp + "] Simulation engine is terminated.");
+                exitProcedure();
+                super.windowClosing(e);
+            }
+        });
+
+        timerThread = new TimerThread(simDataLabel, simTimeLabel);
+        timerThread.start();
+
+        inputUIframe.setVisible(true);
+
+        //System.out.println(simDataLabel.getTopLevelAncestor());
     }
 
     private void exitProcedure() {
@@ -68,20 +139,41 @@ public class SimInputUI implements ActionListener, Runnable {
     private void initMenu() {
         menuBar = new JMenuBar();
         fileMenu = new JMenu("File");
+        simulationMenu = new JMenu("Simulation");
+        resultsMenu = new JMenu("Results");
         helpMenu = new JMenu("Help");
 
-        openSimModelMenuItem = new JMenuItem("Open a Simulation Model");
+        openSimModelMenuItem = new JMenuItem("Open Simulation Model");
         openSimModelMenuItem.setMnemonic(KeyEvent.VK_M);
         openSimModelMenuItem.addActionListener(this);
-        openSimConfigMenuItem = new JMenuItem("Open a Simulation Configuration");
+        openSimConfigMenuItem = new JMenuItem("Open Simulation Configuration");
         openSimConfigMenuItem.setMnemonic(KeyEvent.VK_C);
         openSimConfigMenuItem.addActionListener(this);
-        openSimScenarioMenuItem = new JMenuItem("Open a Simulation Scenario");
+        openSimScenarioMenuItem = new JMenuItem("Open Simulation Scenario");
         openSimScenarioMenuItem.setMnemonic(KeyEvent.VK_S);
         openSimScenarioMenuItem.addActionListener(this);
         exitMenuItem = new JMenuItem("Exit");
         exitMenuItem.setMnemonic(KeyEvent.VK_X);
         exitMenuItem.addActionListener(this);
+
+        configSimulationMenuItem = new JMenuItem("Config Simulation");
+        configSimulationMenuItem.setMnemonic(KeyEvent.VK_G);
+        configSimulationMenuItem.addActionListener(this);
+        startSimulationMenuItem = new JMenuItem("Start Simulation");
+        startSimulationMenuItem.setMnemonic(KeyEvent.VK_S);
+        startSimulationMenuItem.addActionListener(this);
+        stopSimulationMenuItem = new JMenuItem("Stop Simulation");
+        stopSimulationMenuItem.setMnemonic(KeyEvent.VK_T);
+        stopSimulationMenuItem.addActionListener(this);
+
+        exportResultsMenuItem = new JMenuItem("Export Simulation Results");
+        exportResultsMenuItem.setMnemonic(KeyEvent.VK_G);
+        exportResultsMenuItem.addActionListener(this);
+        exportLogsMenuItem = new JMenuItem("Export Logs");
+        exportLogsMenuItem.setMnemonic(KeyEvent.VK_G);
+        exportLogsMenuItem.addActionListener(this);
+
+
         helpMenuItem = new JMenuItem("Help");
         helpMenuItem.setMnemonic(KeyEvent.VK_H);
         helpMenuItem.addActionListener(this);
@@ -92,14 +184,26 @@ public class SimInputUI implements ActionListener, Runnable {
         fileMenu.add(openSimModelMenuItem);
         fileMenu.add(openSimConfigMenuItem);
         fileMenu.add(openSimScenarioMenuItem);
+        fileMenu.add(new JSeparator());
         fileMenu.add(exitMenuItem);
+
+        simulationMenu.add(configSimulationMenuItem);
+        simulationMenu.add(new JSeparator());
+        simulationMenu.add(startSimulationMenuItem);
+        simulationMenu.add(stopSimulationMenuItem);
+
+        resultsMenu.add(exportResultsMenuItem);
+        resultsMenu.add(exportLogsMenuItem);
 
         helpMenu.add(helpMenuItem);
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(fileMenu);
+        menuBar.add(simulationMenu);
+        menuBar.add(resultsMenu);
         menuBar.add(helpMenu);
     }
+
 
     private void initButtons() {
         openSimModelButton = new JButton("Open a simulation model");
@@ -127,16 +231,26 @@ public class SimInputUI implements ActionListener, Runnable {
 
         // Menu items
         if (sourceObj == openSimModelMenuItem || sourceObj == openSimModelButton){
-            System.out.println("[" + timestamp + "] Open Sim Model MenuItem is selected.");
+            System.out.println("[" + timestamp + "] OpenSimModel MenuItem is selected.");
         } else if (sourceObj == openSimConfigMenuItem || sourceObj == openSimConfigButton){
-            System.out.println("[" + timestamp + "] Open Sim Config MenuItem is selected.");
+            System.out.println("[" + timestamp + "] OpenSimConfig MenuItem is selected.");
         } else if (sourceObj == openSimScenarioMenuItem || sourceObj == openSimScenarioButton){
-            System.out.println("[" + timestamp + "] Open Sim Scenario MenuItem is selected.");
+            System.out.println("[" + timestamp + "] OpenSimScenario MenuItem is selected.");
         } else if (sourceObj == exitMenuItem){
-            System.out.println("[" + timestamp + "] Exit MenuItem is selected.");
+            System.out.println("[" + timestamp + "] ExitMenuItem is selected.");
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] Simulation engine is terminated.");
             System.exit(0);
+        } else if (sourceObj == configSimulationMenuItem){
+            System.out.println("[" + timestamp + "] ConfigSim MenuItem is selected.");
+        } else if (sourceObj == startSimulationMenuItem){
+            System.out.println("[" + timestamp + "] StartSim MenuItem is selected.");
+        } else if (sourceObj == stopSimulationMenuItem){
+            System.out.println("[" + timestamp + "] StopSim MenuItem is selected.");
+        } else if (sourceObj == exportResultsMenuItem){
+            System.out.println("[" + timestamp + "] ExportResults MenuItem is selected.");
+        } else if (sourceObj == exportLogsMenuItem){
+            System.out.println("[" + timestamp + "] ExportLogs MenuItem is selected.");
         } else if (sourceObj == helpMenuItem){
             System.out.println("[" + timestamp + "] Help MenuItem is selected.");
         } else if (sourceObj == aboutMenuItem){
@@ -144,57 +258,8 @@ public class SimInputUI implements ActionListener, Runnable {
         }
     }
 
-    @Override
-    public void run() {
-        simEngineIcon = new ImageIcon("logo.png");
-
-        inputUIframe = new JFrame();
-        inputUIframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        inputUIframe.setTitle("Simulation Engine: Simulation Input");
-        inputUIframe.setIconImage(simEngineIcon.getImage());
-        inputUIframe.setSize(400, 200);
-        inputUIframe.setLayout(new GridLayout(3,1));
-
-        initMenu();
-        initButtons();
-        initStatusBar();
-
-        initTabbedPanes();
-
-        /* Add components */
-        inputUIframe.setJMenuBar(menuBar);
-
-        //inputUIframe.add(openSimModelButton, "Center");
-        //inputUIframe.add(openSimConfigButton, "Center");
-        //inputUIframe.add(openSimScenarioButton, "Center");
-
-        Container contentPane = inputUIframe.getContentPane();
-        contentPane.setLayout(new BorderLayout());
-
-        inputUIframe.add(statusBar, BorderLayout.SOUTH);
-        inputUIframe.add(simEngineTabPane, BorderLayout.CENTER);
 
 
-        inputUIframe.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-                super.windowOpened(e);
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                System.out.println("[" + timestamp + "] Simulation engine is terminated.");
-                exitProcedure();
-                super.windowClosing(e);
-            }
-        });
-
-        timerThread = new TimerThread(simDataLabel, simTimeLabel);
-        timerThread.start();
-
-        inputUIframe.setVisible(true);
-    }
 
 
 
