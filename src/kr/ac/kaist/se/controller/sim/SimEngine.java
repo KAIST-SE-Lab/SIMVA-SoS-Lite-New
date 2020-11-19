@@ -16,12 +16,11 @@ public class SimEngine {
     protected SimConfiguration simConfig;
     protected SimScenario simScenario;
 
-    public SimEngine() {
-    }
 
     public SimEngine(SoS simModel) {
         this.simModel = simModel;
     }
+
 
     public SimEngine(SoS simModel, SimConfiguration simConfig, SimScenario simScenario) {
         this.simModel = simModel;

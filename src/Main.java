@@ -9,60 +9,71 @@ import java.sql.Timestamp;
 
 public class Main {
 
+    /**
+     * @param args
+     * args[0]: isGuiMode (0/others)
+     * args[1]: isOnMape (0/others)
+     * args[2]:
+     */
     public static void main(String[] args) {
 
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] Simulation engine is launched.");
+        Timestamp timestamp;
 
-        // Launch a GUI for taking input files from a user
-        launchSimInputUI();
+        //A user can select a mode for launching SimEngine
+        //Non-GUI Mode
+        if (args[0].equals("0")){
+            timestamp = new Timestamp(System.currentTimeMillis());
+            System.out.println("[" + timestamp + "] Simulation engine is launched (Non-GUI Mode).");
 
+            //MAPE-loop is off
+            if (args[1].equals("0")){
+
+            }
+            //MAPE-loop is on
+            else{
+
+            }
+        }
+        //GUI Mode
+        else{
+            timestamp = new Timestamp(System.currentTimeMillis());
+            System.out.println("[" + timestamp + "] Simulation engine is launched (GUI Mode).");
+
+            //MAPE-loop is off
+            if (args[1].equals("0")){
+
+            }
+            //MAPE-loop is on
+            else{
+
+            }
+
+            // Launch a GUI for taking input files from a user
+            launchSimInputUI();
+        }
+
+
+
+        // Initialize simulation model
         initSimModel();
-        ToySoS toySoS = new ToySoS();
 
-
-
-        SimEngine simEngine = new SimEngine(toySoS);
+//        ToySoS toySoS = new ToySoS();
+//        SimEngine simEngine = new SimEngine(toySoS);
 
         timestamp = new Timestamp(System.currentTimeMillis());
-        //System.out.println("[" + timestamp + "] Simulation engine is terminated.");
+        System.out.println("[" + timestamp + "] Simulation engine is terminated.");
 
-//        try {
-////            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-//            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-//
-//        } catch (UnsupportedLookAndFeelException e) {
-//            System.err.println("Error Message: " + e);
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        } catch (InstantiationException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        LaunchWindow launchWindow = new LaunchWindow();
-
-        //SimEngineFrame simEngineFrame = new SimEngineFrame();
-        /*
-        JFrame simEngineFrame = new JFrame();
-        simEngineFrame.setTitle("Simulation Engine Frame");
-        simEngineFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        simEngineFrame.setResizable(false);
-        simEngineFrame.setSize(420, 420);
-        simEngineFrame.setVisible(true);
-
-        ImageIcon image = new ImageIcon("logo.png");
-        simEngineFrame.setIconImage(image.getImage());
-
-        simEngineFrame.getContentPane().setBackground(Color.DARK_GRAY);
-        simEngineFrame.getContentPane().setBackground(new Color(0,0,0));
-
-         */
 
     }
+
+    /**
+     * Initialization of a simulation model
+     */
+    private static void initSimModel() {
+
+    }
+
+
 
     /**
      * Method to launch a GUI for taking input files from a user.
@@ -88,12 +99,7 @@ public class Main {
     }
 
 
-    /**
-     * Initialization of a simulation model
-     */
-    private static void initSimModel() {
 
-    }
 
 
 }
