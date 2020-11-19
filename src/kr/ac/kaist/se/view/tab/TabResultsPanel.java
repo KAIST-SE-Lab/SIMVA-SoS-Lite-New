@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 
 public class TabResultsPanel extends JPanel implements ActionListener {
 
@@ -27,6 +28,8 @@ public class TabResultsPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Object sourceObj = e.getSource();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
     }
 }

@@ -106,6 +106,7 @@ public class SimInputUI implements ActionListener, Runnable {
         timerThread = new TimerThread(simDataLabel, simTimeLabel);
         timerThread.start();
 
+        inputUIframe.pack();
         inputUIframe.setVisible(true);
 
         //System.out.println(simDataLabel.getTopLevelAncestor());
