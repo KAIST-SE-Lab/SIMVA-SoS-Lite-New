@@ -6,4 +6,8 @@ package kr.ac.kaist.se.simdata.output.intermediate;
  * @author ehcho, yjshin, ymbaek
  */
 public class RunResult {
+
+    public RunResult(){
+
+    }
 }

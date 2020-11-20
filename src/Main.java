@@ -9,69 +9,46 @@ import java.sql.Timestamp;
 
 public class Main {
 
+    public static Timestamp timestamp;
+
     /**
      * @param args
      * args[0]: isGuiMode (0/others)
      * args[1]: isOnMape (0/others)
-     * args[2]:
+     * args[2]: is
      */
     public static void main(String[] args) {
 
-        Timestamp timestamp;
 
         //A user can select a mode for launching SimEngine
         //Non-GUI Mode
         if (args[0].equals("0")){
             timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("[" + timestamp + "] Simulation engine is launched (Non-GUI Mode).");
+            System.out.println("[" + timestamp + "] (Main) Simulation engine is launched (Non-GUI Mode).");
 
-            //MAPE-loop is off
-            if (args[1].equals("0")){
+            ToySoS toySoS = new ToySoS();
+            SimEngine simEngine = new SimEngine(toySoS, args[1], null, null);
 
-            }
-            //MAPE-loop is on
-            else{
+            simEngine.startSimulation();
 
-            }
         }
         //GUI Mode
         else{
             timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("[" + timestamp + "] Simulation engine is launched (GUI Mode).");
-
-            //MAPE-loop is off
-            if (args[1].equals("0")){
-
-            }
-            //MAPE-loop is on
-            else{
-
-            }
+            System.out.println("[" + timestamp + "] (Main) Simulation engine is launched (GUI Mode).");
 
             // Launch a GUI for taking input files from a user
             launchSimInputUI();
         }
 
 
-
-        // Initialize simulation model
-        initSimModel();
-
-//        ToySoS toySoS = new ToySoS();
-//        SimEngine simEngine = new SimEngine(toySoS);
-
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] Simulation engine is terminated.");
+        System.out.println("[" + timestamp + "] (Main) Simulation engine is terminated.");
 
 
     }
 
-    /**
-     * Initialization of a simulation model
-     */
-    private static void initSimModel() {
 
-    }
 
 
 
@@ -97,8 +74,6 @@ public class Main {
         //SimInputUI simInputUI = new SimInputUI();
         SwingUtilities.invokeLater(new SimInputUI());
     }
-
-
 
 
 

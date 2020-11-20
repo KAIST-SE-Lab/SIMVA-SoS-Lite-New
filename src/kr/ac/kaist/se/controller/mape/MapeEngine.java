@@ -7,4 +7,11 @@ package kr.ac.kaist.se.controller.mape;
  * @author ymbaek
  */
 public class MapeEngine {
+
+    //TODO: define attributes
+
+
+    public MapeEngine(){
+
+    }
 }

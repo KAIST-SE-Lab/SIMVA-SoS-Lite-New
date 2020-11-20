@@ -1,6 +1,9 @@
 package kr.ac.kaist.se.model.sos;
 
 import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
+import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
+
+import java.util.ArrayList;
 
 /**
  * Abstract class to represent a System-of-Systems (SoS)
@@ -15,4 +18,25 @@ import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
  * @author ymbaek, ehcho, yjshin
  */
 public abstract class SoS extends _SimContainerObject_ {
+
+    /* Member containers */
+    protected ArrayList<Organization> orgList;      //List of organizations
+    protected ArrayList<Infrastructure> infraList;  //List of infrastructures
+    protected ArrayList<Environment> envList;       //List of environments
+
+    /* Member constituents */
+    protected ArrayList<Constituent> csList;       //List of all constituent systems
+
+    /* Infrastructure entities */
+    protected ArrayList<SystemEntity> systemEntityList;     //List of infra system entities
+    //Service
+    //Resource
+
+    /* Environment entities */
+
+    public RunResult run(){
+        //RunResult runResult = new RunResult();
+
+        return null;
+    }
 }
