@@ -91,17 +91,23 @@ public class SimScenarioEvent extends _SimEvent_ {
 
             ArrayList<SimScenarioUnitEvent> unitEventList = new ArrayList<>();
 
+            int eventEndTime = 0;
+            int unitEventStartTime = startTime;
+
+            int appendIdNum = 0;
+            String appendIdString;
+            String unitEventId;
 
             // Instant event (single UnitEvent object)
-            if (occPattern == EnumEventOccPattern.INSTANT){
+            if (occPattern == EnumEventOccPattern.INSTANT || occPattern == EnumEventOccPattern.CONSTANT){
 
-                int unitEventStartTime = startTime;
-                int appendIdNum = 0;
-                String appendIdString;
-                String unitEventId;
+                if(occPattern == EnumEventOccPattern.INSTANT){
+                    eventEndTime = unitEventStartTime + duration;
+                }else if(occPattern == EnumEventOccPattern.CONSTANT){
+                    eventEndTime = simTotalTime;
+                }
 
-                for(int evntDuration = 0; evntDuration < duration; evntDuration++){
-
+                while(unitEventStartTime < eventEndTime){
                     //TODO: debug
                     appendIdString = String.format("%03d", appendIdNum);
                     unitEventId = id + "_" + appendIdString;
@@ -123,10 +129,36 @@ public class SimScenarioEvent extends _SimEvent_ {
                     appendIdNum++;
                     numOfUnitEvents++;
                 }
+//                for(int evntDuration = 0; evntDuration < duration; evntDuration++){
+//
+//                    //TODO: debug
+//                    appendIdString = String.format("%03d", appendIdNum);
+//                    unitEventId = id + "_" + appendIdString;
+//
+//                    SimScenarioUnitEvent unitEvent = new SimScenarioUnitEvent(  unitEventId,
+//                            name,
+//                            eventType,
+//                            targetObjId,
+//                            targetObj,
+//                            targetScope,
+//                            predefBehavior,
+//                            unitEventStartTime,
+//                            isProbabilistic,
+//                            probDist,
+//                            probExp);
+//
+//                    unitEventList.add(unitEvent);
+//                    unitEventStartTime++;
+//                    appendIdNum++;
+//                    numOfUnitEvents++;
+//                }
             }
             // Constant or periodic event (multiple UnitEvent objects)
             else{
+                //TODO: constant and periodic
+                for(int periodNum = 0; periodNum < simTotalTime; periodNum++){
 
+                }
             }
 
             timestamp = new Timestamp(System.currentTimeMillis());
@@ -134,7 +166,7 @@ public class SimScenarioEvent extends _SimEvent_ {
 
             System.out.print("[" + timestamp + "] ");
             for (int numOfEvents = 0; numOfEvents < unitEventList.size(); numOfEvents++){
-                System.out.print("(" + numOfEvents+ ")" + unitEventList.get(numOfEvents).getId() + " ");
+                System.out.print("(" + numOfEvents+ ")" + unitEventList.get(numOfEvents).getId() + "[" + unitEventList.get(numOfEvents).getStartTime() + "] ");
             }
 
             System.out.println();

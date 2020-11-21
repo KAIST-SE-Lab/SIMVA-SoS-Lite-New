@@ -57,7 +57,24 @@ public class Main {
                     EnumEventProbDist.NOT_PROBABILISTIC,
                     null);
 
+            SimScenarioEvent event02 = new SimScenarioEvent("event01",
+                    "event01",
+                    EnumEventType.VALUE_UPDATE,
+                    exampleConfig.getSimTotalTime(),
+                    null,
+                    null,
+                    EnumEventTargetScope.SINGLE_OBJECT,
+                    EnumEventPredefBehavior.NOT_DETERMINED,
+                    EnumEventOccPattern.CONSTANT,
+                    60,
+                    -1,
+                    -1,
+                    false,
+                    EnumEventProbDist.NOT_PROBABILISTIC,
+                    null);
+
             exampleScenario.addSimScenarioEvent(event01);
+            exampleScenario.addSimScenarioEvent(event02);
 
 
 
