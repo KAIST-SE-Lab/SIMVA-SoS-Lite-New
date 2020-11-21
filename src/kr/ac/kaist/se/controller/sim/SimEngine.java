@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 
 /**
  * Simulation engine for a simulation of a simulation model
- * Discrete-time event-based simulation
+ * Discrete-time evnt-based simulation
  *
  * @inputs  Simulation Model (simModel)
  *          MapeMode (isMapeOn)
