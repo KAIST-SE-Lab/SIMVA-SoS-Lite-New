@@ -12,4 +12,28 @@ public abstract class _SimEvent_ {
     protected String name;              //name of an event (used as a label)
     protected EnumEventType eventType;   //type of an event
 
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public EnumEventType getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(EnumEventType eventType) {
+        this.eventType = eventType;
+    }
 }

@@ -69,14 +69,14 @@ public class SimEngine {
             System.out.println("[" + timestamp + "] (SimEngine:initSimEngine) simModel: null");
         }
         if (simConfig != null) {
-            // Initialize simulation model
+            // Initialize simulation configuration
             initSimConfig(simConfig);
         } else {
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] (SimEngine:initSimEngine) simConfig: null");
         }
         if (simScenario != null) {
-            // Initialize simulation model
+            // Initialize simulation scenario
             initSimScenario(simScenario);
         } else {
             timestamp = new Timestamp(System.currentTimeMillis());

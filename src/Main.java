@@ -1,6 +1,10 @@
 import gui.LaunchWindow;
 import gui.SimEngineFrame;
 import kr.ac.kaist.se.controller.sim.SimEngine;
+import kr.ac.kaist.se.model.abst.evnt.*;
+import kr.ac.kaist.se.simdata.evnt.SimScenarioEvent;
+import kr.ac.kaist.se.simdata.input.SimConfiguration;
+import kr.ac.kaist.se.simdata.input.SimScenario;
 import kr.ac.kaist.se.view.SimInputUI;
 
 import javax.swing.*;
@@ -8,8 +12,6 @@ import java.awt.*;
 import java.sql.Timestamp;
 
 public class Main {
-
-    public static Timestamp timestamp;
 
     /**
      * @param args
@@ -19,6 +21,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        Timestamp timestamp;
 
         //A user can select a mode for launching SimEngine
         //Non-GUI Mode
@@ -26,8 +29,42 @@ public class Main {
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] (Main) Simulation engine is launched (Non-GUI Mode).");
 
+            /* Input SimModel */
             ToySoS toySoS = new ToySoS();
-            SimEngine simEngine = new SimEngine(toySoS, args[1], null, null);
+
+            /* Input SimConfiguration */
+            //TODO: remove this section after debugging
+            SimConfiguration exampleConfig = new SimConfiguration();
+            exampleConfig.setSimTotalTime(100);
+
+            /* Input SimScenario */
+            //TODO: remove this section after debugging
+            SimScenario exampleScenario = new SimScenario();
+
+            SimScenarioEvent event01 = new SimScenarioEvent("event01",
+                    "event01",
+                    EnumEventType.VALUE_UPDATE,
+                    exampleConfig.getSimTotalTime(),
+                    null,
+                    null,
+                    EnumEventTargetScope.SINGLE_OBJECT,
+                    EnumEventPredefBehavior.NOT_DETERMINED,
+                    EnumEventOccPattern.INSTANT,
+                    50,
+                    30,
+                    -1,
+                    false,
+                    EnumEventProbDist.NOT_PROBABILISTIC,
+                    null);
+
+            exampleScenario.addSimScenarioEvent(event01);
+
+
+
+
+
+            /* Declaration and initialization of SimEngine */
+            SimEngine simEngine = new SimEngine(toySoS, args[1], exampleConfig, exampleScenario);
 
             simEngine.startSimulation();
 
