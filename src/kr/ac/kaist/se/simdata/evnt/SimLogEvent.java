@@ -6,6 +6,8 @@ import kr.ac.kaist.se.model.abst.evnt._SimEvent_;
 /**
  * An event that is used to recorded in a log (SimLog)
  * A SimLogEvent should contain timestamp and run/update results for each tick of simulation
+ *
+ * @author ymbaek
  */
 public class SimLogEvent extends _SimEvent_ {
 
