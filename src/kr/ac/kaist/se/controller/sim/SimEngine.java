@@ -122,19 +122,14 @@ public class SimEngine {
 
         SimLog simLog = new SimLog();
 
+        printSimInputInfo();
+
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (SimEngine:startSimulation) Simulation is started.");
-        System.out.println("[" + timestamp + "] ┌─ Simulation Inputs ─────────────────────────────┐");
-        System.out.println("[" + timestamp + "]  - Simulation Configuration ");
-        System.out.println("[" + timestamp + "]    > [simTotalTime: " + simConfig.getSimTotalTime() + "]");
-        System.out.println("[" + timestamp + "]    > [SimMapeMode: " + simConfig.isSimMapeMode() + "]");
-        System.out.println("[" + timestamp + "]    > [SimHasScenario: " + simConfig.isSimHasScenario() + "]");
-        System.out.println("[" + timestamp + "]  - Simulation Scenario ");
-        System.out.println("[" + timestamp + "] └─────────────────────────────────────────────────┘");
 
         for(int cur_tick = 0; cur_tick < this.simConfig.getSimTotalTime(); cur_tick++){
             timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("[" + timestamp + "] (SimEngine:startSimulation) cur_tick: " + cur_tick);
+            //System.out.println("[" + timestamp + "] (SimEngine:startSimulation) cur_tick: " + cur_tick);
 
             RunResult curTickSimResult = runSimModel();
         }
@@ -154,6 +149,22 @@ public class SimEngine {
 
 
         return simLog;
+
+    }
+
+    private void printSimInputInfo() {
+        timestamp = new Timestamp(System.currentTimeMillis());
+
+        System.out.println("[" + timestamp + "] ┌─ Simulation Inputs ─────────────────────────────┐");
+        System.out.println("[" + timestamp + "]  - Simulation Configuration ");
+        System.out.println("[" + timestamp + "]    > [simTotalTime: " + simConfig.getSimTotalTime() + "]");
+        System.out.println("[" + timestamp + "]    > [SimMapeMode: " + simConfig.isSimMapeMode() + "]");
+        System.out.println("[" + timestamp + "]    > [SimHasScenario: " + simConfig.isSimHasScenario() + "]");
+        System.out.println("[" + timestamp + "]  - Simulation Scenario ");
+        System.out.println("[" + timestamp + "]    > [scenarioName: " + simScenario.getScenarioName() + "]");
+        System.out.println("[" + timestamp + "]    > [numOfEvents (length): " + simScenario.getNumOfEvents() + "]");
+        System.out.println("[" + timestamp + "]    > [numOfUnitEvents (length of unit events): " + simScenario.getNumOfUnitEvents() + "]");
+        System.out.println("[" + timestamp + "] └─────────────────────────────────────────────────┘");
 
     }
 

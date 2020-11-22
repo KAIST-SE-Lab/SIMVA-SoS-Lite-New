@@ -4,10 +4,12 @@ import kr.ac.kaist.se.model.abst.evnt.*;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
 
 /**
- * Unit event for scenario execution
+ * Unit event (1-tick event) for scenario execution
  * @author ymbaek
  */
 public class SimScenarioUnitEvent extends _SimEvent_{
+
+    protected SimScenarioEvent parentEvent;
 
     /* Target information */
     protected String targetObjId;       //Id of target object
@@ -27,7 +29,8 @@ public class SimScenarioUnitEvent extends _SimEvent_{
     protected String probExp;               //Expression of probability (this should conform to probDist)
 
 
-    public SimScenarioUnitEvent(String id,
+    public SimScenarioUnitEvent(SimScenarioEvent parentEvent,
+                                String id,
                                 String name,
                                 EnumEventType eventType,
                                 String targetObjId,
@@ -39,6 +42,8 @@ public class SimScenarioUnitEvent extends _SimEvent_{
                                 EnumEventProbDist probDist,
                                 String probExp) {
 
+        this.parentEvent = parentEvent;         //Base SimScenarioEvent
+
         this.id = id;
         this.name = name;
         this.eventType = eventType;
@@ -47,16 +52,14 @@ public class SimScenarioUnitEvent extends _SimEvent_{
         this.targetObj = targetObj;
         this.targetScope = targetScope;
         this.predefBehavior = predefBehavior;
-        this.startTime = startTime;
+        this.startTime = startTime;             //Start time of unit event (1-tick)
         this.isProbabilistic = isProbabilistic;
         this.probDist = probDist;
         this.probExp = probExp;
     }
 
     public void executeEvent(){
-        if (predefBehavior == EnumEventPredefBehavior.NOT_DETERMINED){
-
-        }
+        parentEvent.executeEvent();
     }
 
 
