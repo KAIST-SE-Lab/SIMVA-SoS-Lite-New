@@ -42,6 +42,9 @@ public abstract class SoS extends _SimContainerObject_ {
         initLists();
     }
 
+    /**
+     * Initialization of member lists
+     */
     private void initLists() {
         orgList = new ArrayList<>();
         infraList = new ArrayList<>();

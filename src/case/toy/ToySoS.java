@@ -5,7 +5,7 @@ import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 public class ToySoS extends SoS {
 
     public ToySoS(){
-
+        super("id", "name");
     }
 
     @Override
