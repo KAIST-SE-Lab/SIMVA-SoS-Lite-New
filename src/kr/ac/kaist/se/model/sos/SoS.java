@@ -34,6 +34,25 @@ public abstract class SoS extends _SimContainerObject_ {
 
     /* Environment entities */
 
+
+    public SoS(String sosId, String sosName){
+        this.id = sosId;
+        this.name = sosName;
+
+        initLists();
+    }
+
+    private void initLists() {
+        orgList = new ArrayList<>();
+        infraList = new ArrayList<>();
+        envList = new ArrayList<>();
+
+        csList = new ArrayList<>();
+
+        systemEntityList = new ArrayList<>();
+    }
+
+
     public RunResult run(){
         //RunResult runResult = new RunResult();
 

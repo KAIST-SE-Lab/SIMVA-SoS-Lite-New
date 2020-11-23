@@ -1,4 +1,4 @@
 package kr.ac.kaist.se.model.sos;
 
-public class Constituent extends SystemEntity {
+public abstract class Constituent extends SystemEntity {
 }

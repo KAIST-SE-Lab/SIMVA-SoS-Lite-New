@@ -15,7 +15,7 @@ import java.util.UUID;
 public abstract class _SimObject_ implements Simulatable {
 
     /** Universally unique object id */
-    protected String id;
+    protected String id;        //Every SimObject should have its own unique id
     /** Name of an object */
     protected String name;
 
