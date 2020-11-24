@@ -13,5 +13,5 @@ import kr.ac.kaist.se.model.intf.Communicatable;
  *
  * @author ymbaek, ehcho, yjshin
  */
-public abstract class SystemEntity extends _SimActionableObject_ implements Actionable, Communicatable {
+public abstract class SystemEntity extends _SimActionableObject_ implements Communicatable {
 }
