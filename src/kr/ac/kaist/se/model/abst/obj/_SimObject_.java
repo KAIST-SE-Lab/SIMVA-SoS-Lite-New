@@ -34,16 +34,22 @@ public abstract class _SimObject_ implements Simulatable {
     protected Queue<_SimMessage_> msgQueue;
 
 
+    /**
+     * Print object information of a _SimObject_
+     */
     protected void printObjInfo(){
         String thisClassName = this.getClass().getSimpleName();
 
-        timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (" + thisClassName + ") An object is created.");
-        System.out.println("[" + timestamp + "] (" + thisClassName + ") id: " + this.id +
-                ", name: " + this.name +
-                ", isStatic: " + this.isStatic +
-                ", isActivated: " + this.isActivated +
-                ", isAvailable: " + this.isAvailable
-        );
+        if (this.getClass() != null){
+            timestamp = new Timestamp(System.currentTimeMillis());
+            System.out.println("[" + timestamp + "] (" + thisClassName + ") An object is created.");
+            System.out.println("[" + timestamp + "] (" + thisClassName + ") id: " + this.id +
+                    ", name: " + this.name +
+                    ", isStatic: " + this.isStatic +
+                    ", isActivated: " + this.isActivated +
+                    ", isAvailable: " + this.isAvailable
+            );
+        }
+
     }
 }
