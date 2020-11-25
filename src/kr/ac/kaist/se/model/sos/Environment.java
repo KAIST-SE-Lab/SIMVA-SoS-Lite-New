@@ -14,5 +14,33 @@ import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
  */
 public abstract class Environment extends _SimContainerObject_ {
 
-    protected SoS mySoS;                //SoS that this organization belongs to
+    protected SoS mySoS;                //SoS that this environment belongs to
+
+    public Environment(SoS simModel, String envId, String envName){
+        this.mySoS = simModel;
+
+        this.id = envId;
+        this.name = envName;
+
+        //If the default state need to be different, modify codes below.
+        this.isStatic = true;
+        this.isActivated = true;
+        this.isAvailable = true;
+
+        printObjInfo();
+    }
+
+    public Environment(SoS simModel, String envId, String envName, boolean isStatic, boolean isActivated, boolean isAvailable){
+        this.mySoS = simModel;
+
+        this.id = envId;
+        this.name = envName;
+
+        //If the default state need to be different, modify codes below.
+        this.isStatic = isStatic;
+        this.isActivated = isActivated;
+        this.isAvailable = isAvailable;
+
+        printObjInfo();
+    }
 }

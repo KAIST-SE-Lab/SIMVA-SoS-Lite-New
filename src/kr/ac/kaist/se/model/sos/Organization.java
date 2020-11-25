@@ -21,8 +21,6 @@ import java.util.LinkedList;
  */
 public abstract class Organization extends _SimContainerObject_ {
 
-    Timestamp timestamp;    //Timestamp for stdout
-
     protected SoS mySoS;                //SoS that this organization belongs to
     protected Organization parentOrg;   //Organization that this organization belongs to
 

@@ -22,9 +22,6 @@ import java.util.ArrayList;
  */
 public abstract class SoS extends _SimContainerObject_ {
 
-    Timestamp timestamp;    //Timestamp for stdout
-
-
     /* Member containers */
     protected ArrayList<Organization> orgList;      //List of organizations
     protected ArrayList<Infrastructure> infraList;  //List of infrastructures
