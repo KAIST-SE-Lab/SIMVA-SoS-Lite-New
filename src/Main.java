@@ -41,6 +41,7 @@ public class Main {
             //TODO: remove this section after debugging
             SimScenario exampleScenario = new SimScenario("Scenario01", false);
 
+            /*
             //INSTANT (50, 70, 30, -1)
             SimScenarioEvent event01 = new SimScenarioEvent("event01",
                     "event01",
@@ -95,6 +96,8 @@ public class Main {
             exampleScenario.addSimScenarioEvent(event01);
             exampleScenario.addSimScenarioEvent(event02);
             exampleScenario.addSimScenarioEvent(event03);
+
+             */
 
             /* Declaration and initialization of SimEngine */
             SimEngine simEngine = new SimEngine(toySoS, args[1], exampleConfig, exampleScenario);

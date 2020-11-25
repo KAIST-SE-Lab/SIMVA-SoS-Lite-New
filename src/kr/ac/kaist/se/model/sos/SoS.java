@@ -1,6 +1,7 @@
 package kr.ac.kaist.se.model.sos;
 
 import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
+import kr.ac.kaist.se.model.abst.obj._SimObject_;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 
 import java.sql.Timestamp;
@@ -66,9 +67,49 @@ public abstract class SoS extends _SimContainerObject_ {
     }
 
 
+    /**
+     * Method to obtain an object of a member of this SimModel (SoS)
+     *
+     * @param objId     unique id of object
+     * @return          object that has the given id
+     */
+    public _SimObject_ getMemberSimObject(String objId){
+        for (Organization org: orgList){
+            if (org.getId().equals(objId)){
+                return org;
+            }
+        }
+        for (Infrastructure infra: infraList){
+            if (infra.getId().equals(objId)){
+                return infra;
+            }
+        }
+        for (Environment env: envList){
+            if (env.getId().equals(objId)){
+                return env;
+            }
+        }
+        for (Constituent cs: csList){
+            if (cs.getId().equals(objId)){
+                return cs;
+            }
+        }
+        for (SystemEntity systemEntity: systemEntityList){
+            if (systemEntity.getId().equals(objId)){
+                return systemEntity;
+            }
+        }
+
+        //If any object is not found, null is returned.
+        return null;
+    }
+
+
     public RunResult run(){
         //RunResult runResult = new RunResult();
 
         return null;
     }
+
+
 }

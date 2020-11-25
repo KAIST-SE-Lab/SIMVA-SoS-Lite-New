@@ -52,4 +52,52 @@ public abstract class _SimObject_ implements Simulatable {
         }
 
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isStatic() {
+        return isStatic;
+    }
+
+    public void setStatic(boolean aStatic) {
+        isStatic = aStatic;
+    }
+
+    public boolean isActivated() {
+        return isActivated;
+    }
+
+    public void setActivated(boolean activated) {
+        isActivated = activated;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
+    public Queue<_SimMessage_> getMsgQueue() {
+        return msgQueue;
+    }
+
+    public void setMsgQueue(Queue<_SimMessage_> msgQueue) {
+        this.msgQueue = msgQueue;
+    }
 }
