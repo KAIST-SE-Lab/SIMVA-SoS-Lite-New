@@ -5,6 +5,7 @@ import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.intf.Actionable;
 import kr.ac.kaist.se.model.intf.Communicatable;
 import kr.ac.kaist.se.model.intf.Movable;
+import kr.ac.kaist.se.model.intf.Stateful;
 
 import java.util.LinkedList;
 
@@ -15,11 +16,12 @@ import java.util.LinkedList;
  * A SystemEntity can perform its own actions (i.e., Actionable),
  * and it can do communication actions (i.e., Communicatable).
  *
- * Interfaces: Simulatable, Actionable, Movable, Communicatable
+ * Interfaces: Simulatable, Actionable, Stateful, Movable, Communicatable
  *
  * @author ymbaek, ehcho, yjshin
  */
-public abstract class SystemEntity extends _SimActionableObject_ implements Communicatable, Movable {
+public abstract class SystemEntity extends _SimActionableObject_
+        implements Stateful, Communicatable, Movable {
 
     protected SoS mySoS;                //SoS that this object belongs to
     protected Infrastructure myInfra;   //Infrastructure that this object belongs to

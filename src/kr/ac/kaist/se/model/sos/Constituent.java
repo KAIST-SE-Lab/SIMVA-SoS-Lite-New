@@ -5,6 +5,7 @@ import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.intf.Communicatable;
 import kr.ac.kaist.se.model.intf.DecisionMakeable;
 import kr.ac.kaist.se.model.intf.Movable;
+import kr.ac.kaist.se.model.intf.Stateful;
 
 import java.util.LinkedList;
 
@@ -14,11 +15,12 @@ import java.util.LinkedList;
  * According to the M2SoS, a Constituent is one and only object that can belong to an organization.
  * A Constituent can communicate (i.e., Communicatable) and make its own decisions (i.e., DecisionMakeable).
  *
- * Interfaces: Simulatable, Actionable, Movable, Communicatable, DecisionMakeable
+ * Interfaces: Simulatable, Actionable, Stateful, Movable, Communicatable, DecisionMakeable
  *
  * @author ymbaek, ehcho, yjshin
  */
-public abstract class Constituent extends _SimActionableObject_ implements Movable, Communicatable, DecisionMakeable {
+public abstract class Constituent extends _SimActionableObject_
+        implements Stateful, Movable, Communicatable, DecisionMakeable {
 
     protected SoS mySoS;                //SoS that this object belongs to
     protected Organization myOrg;       //Organization that this object belongs to
