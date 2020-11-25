@@ -9,7 +9,12 @@ import kr.ac.kaist.se.model.intf.DecisionMakeable;
  * Since a SystemEntity extends SystemEntity, it is Actionable, Communicatable.
  * In addition, a Constituent can make its own decisions (i.e., DecisionMakeable).
  *
+ * Interfaces: Simulatable, Actionable, Communicatable, DecisionMakeable
+ *
  * @author ymbaek, ehcho, yjshin
  */
 public abstract class Constituent extends SystemEntity implements DecisionMakeable {
+
+    protected SoS mySoS;                //SoS that this organization belongs to
+
 }

@@ -13,4 +13,6 @@ import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
  * @author ymbaek, ehcho, yjshin
  */
 public abstract class Environment extends _SimContainerObject_ {
+
+    protected SoS mySoS;                //SoS that this organization belongs to
 }

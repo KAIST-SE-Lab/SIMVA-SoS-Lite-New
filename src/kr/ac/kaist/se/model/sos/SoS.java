@@ -15,6 +15,8 @@ import java.util.ArrayList;
  * which consists of organization(s), infrastructure(s), environment(s),
  * and each _SimContainerObject_ consists of member objects.
  *
+ * Interfaces: Simulatable
+ *
  * @author ymbaek, ehcho, yjshin
  */
 public abstract class SoS extends _SimContainerObject_ {

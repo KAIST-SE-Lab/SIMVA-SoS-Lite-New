@@ -11,7 +11,11 @@ import kr.ac.kaist.se.model.intf.Communicatable;
  * A SystemEntity can perform its own actions (i.e., Actionable),
  * and it can do communication actions (i.e., Communicatable).
  *
+ * Interfaces: Simulatable, Actionable, Communicatable
+ *
  * @author ymbaek, ehcho, yjshin
  */
 public abstract class SystemEntity extends _SimActionableObject_ implements Communicatable {
+
+    protected SoS mySoS;                //SoS that this organization belongs to
 }
