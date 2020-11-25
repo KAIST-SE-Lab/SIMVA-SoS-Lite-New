@@ -9,6 +9,7 @@ public abstract class _SimDataVariable_ {
     protected String dataId;        //id of a data (variable)
     protected String dataName;      //name of a data (variable)
     protected String dataType;      //type of a data (variable)
+
     protected String dataCurValue;  //current value of a data (variable)
 
     protected _SimDomain_ dataDomain;   //domain of a data variable (min-max/enum)
