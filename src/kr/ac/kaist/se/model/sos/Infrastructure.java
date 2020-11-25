@@ -13,6 +13,9 @@ import java.util.LinkedList;
  * an infrastructure consists of one or more SystemEntities, ServiceEntities, and ResourceEntities.
  * Main purpose of building an infrastructure is to support goal achievement.
  *
+ * Interfaces: Simulatable
+ * (An infra is not movable)
+ *
  * @author ymbaek, ehcho, yjshin
  */
 public abstract class Infrastructure extends _SimContainerObject_ {

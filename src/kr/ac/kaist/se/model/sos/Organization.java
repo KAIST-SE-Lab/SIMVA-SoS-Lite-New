@@ -2,6 +2,7 @@ package kr.ac.kaist.se.model.sos;
 
 import kr.ac.kaist.se.model.abst.msg._SimMessage_;
 import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
+import kr.ac.kaist.se.model.intf.Movable;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -15,11 +16,11 @@ import java.util.LinkedList;
  * an organization consists of multiple SystemEntities,
  * and driven by a task(s) to be accomplished by collective capabilities of the SystemEntities.
  *
- * Interfaces: Simulatable, Actionable, Communicatable
+ * Interfaces: Simulatable, Movable
  *
  * @author ymbaek, ehcho, yjshin
  */
-public abstract class Organization extends _SimContainerObject_ {
+public abstract class Organization extends _SimContainerObject_ implements Movable {
 
     protected SoS mySoS;                //SoS that this organization belongs to
     protected Organization parentOrg;   //Organization that this organization belongs to

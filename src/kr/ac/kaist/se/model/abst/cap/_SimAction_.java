@@ -10,17 +10,32 @@ import kr.ac.kaist.se.model.sos.SoS;
  */
 public abstract class _SimAction_ {
 
-    protected SoS accessibleSoS;
-    protected _SimActionableObject_ actionSubject;
+    protected SoS accessibleSoS;    //Accessible SimModel (SoS)
+    protected _SimActionableObject_ actionSubject;  //Subject who performs this action
 
-    protected String actionId;
-    protected String actionTag;
-    protected String actionName;
+    protected String actionId;      //id of action
+    protected String actionName;    //name of action
 
-    protected int actionDuration;
-    protected float actionCost;
-    protected float actionBenefit;
+    protected int actionDuration = -1;  //duration of action execution
+    protected float actionCost = -1;    //cost for action execution
+    protected float actionBenefit = -1; //benefit from action execution
 
+
+    public _SimAction_(SoS accessibleSoS,
+                       _SimActionableObject_ actionSubject,
+                       String actionId,
+                       String actionName,
+                       int actionDuration,
+                       float actionCost,
+                       float actionBenefit) {
+        this.accessibleSoS = accessibleSoS;
+        this.actionSubject = actionSubject;
+        this.actionId = actionId;
+        this.actionName = actionName;
+        this.actionDuration = actionDuration;
+        this.actionCost = actionCost;
+        this.actionBenefit = actionBenefit;
+    }
 
     protected abstract boolean checkPrecondition();
 
@@ -50,14 +65,6 @@ public abstract class _SimAction_ {
 
     public void setActionId(String actionId) {
         this.actionId = actionId;
-    }
-
-    public String getActionTag() {
-        return actionTag;
-    }
-
-    public void setActionTag(String actionTag) {
-        this.actionTag = actionTag;
     }
 
     public String getActionName() {

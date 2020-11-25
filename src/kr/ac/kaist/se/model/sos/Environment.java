@@ -10,6 +10,9 @@ import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
  * an environment consists of multiple external EnvElements (passive or active),
  * which interact with constituent objects of an SoS.
  *
+ * Interfaces: Simulatable
+ * (An env is not movable)
+ *
  * @author ymbaek, ehcho, yjshin
  */
 public abstract class Environment extends _SimContainerObject_ {
