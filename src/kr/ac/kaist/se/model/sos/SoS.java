@@ -3,6 +3,7 @@ package kr.ac.kaist.se.model.sos;
 import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +21,9 @@ import java.util.ArrayList;
  * @author ymbaek, ehcho, yjshin
  */
 public abstract class SoS extends _SimContainerObject_ {
+
+    Timestamp timestamp;    //Timestamp for stdout
+
 
     /* Member containers */
     protected ArrayList<Organization> orgList;      //List of organizations
@@ -41,8 +45,15 @@ public abstract class SoS extends _SimContainerObject_ {
         this.id = sosId;
         this.name = sosName;
 
+        //If the default state need to be different, modify codes below.
+        this.isStatic = true;
+        this.isActivated = true;
+        this.isAvailable = true;
+
+        printObjInfo();
         initLists();
     }
+
 
     /**
      * Initialization of member lists
