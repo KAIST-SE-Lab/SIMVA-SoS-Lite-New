@@ -1,4 +1,4 @@
-package kr.ac.kaist.se.controller.sim;
+package kr.ac.kaist.se.controller.util;
 
 import kr.ac.kaist.se.simdata.evnt.SimScenarioEvent;
 
