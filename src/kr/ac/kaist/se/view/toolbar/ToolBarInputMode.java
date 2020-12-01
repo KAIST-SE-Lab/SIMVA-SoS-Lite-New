@@ -1,7 +1,5 @@
 package kr.ac.kaist.se.view.toolbar;
 
-import kr.ac.kaist.se.view.SimInputUI;
-
 import java.awt.event.ActionEvent;
 
 public class ToolBarInputMode extends BaseToolBar {
@@ -20,7 +18,7 @@ public class ToolBarInputMode extends BaseToolBar {
 
         if (actionCommand == "ACTION01"){
             System.out.println("Action01 is selected");
-            //SimInputUI.simStatusLabel.setText("Action01 is selected.");
+            //MainUI.simStatusLabel.setText("Action01 is selected.");
         }
     }
 }

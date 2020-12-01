@@ -11,13 +11,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class SimInputUI implements ActionListener, Runnable {
+public class MainUI implements ActionListener, Runnable {
 
     protected TimerThread timerThread;
 
     ImageIcon simEngineIcon;
 
-    JFrame inputUIframe;
+    JFrame mainUIframe;
 
     JMenuBar menuBar;
     JMenu fileMenu;
@@ -47,20 +47,20 @@ public class SimInputUI implements ActionListener, Runnable {
     JLabel simDataLabel;
     JLabel simTimeLabel;
 
-    public SimInputUI(){
+    public MainUI(){
     }
 
     @Override
     public void run() {
         simEngineIcon = new ImageIcon("logo.png");
 
-        inputUIframe = new JFrame();
-        inputUIframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        inputUIframe.setTitle("Simulation Engine: Simulation Input");
-        inputUIframe.setIconImage(simEngineIcon.getImage());
-        inputUIframe.setSize(800, 800);
-        //inputUIframe.setLayout(new GridLayout(3,1));
-        inputUIframe.setLayout(new BorderLayout());
+        mainUIframe = new JFrame();
+        mainUIframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainUIframe.setTitle("Simulation Engine: Simulation Input");
+        mainUIframe.setIconImage(simEngineIcon.getImage());
+        mainUIframe.setSize(800, 800);
+        //mainUIframe.setLayout(new GridLayout(3,1));
+        mainUIframe.setLayout(new BorderLayout());
 
         initMenu();
 
@@ -69,26 +69,26 @@ public class SimInputUI implements ActionListener, Runnable {
         initTabbedPanes();
 
         /* Add components */
-        inputUIframe.setJMenuBar(menuBar);
-        //inputUIframe.add(toolBarSimMode, BorderLayout.PAGE_START);
+        mainUIframe.setJMenuBar(menuBar);
+        //mainUIframe.add(toolBarSimMode, BorderLayout.PAGE_START);
 
 
-        //inputUIframe.add(toolbar, BorderLayout.PAGE_START);
+        //mainUIframe.add(toolbar, BorderLayout.PAGE_START);
 
-        //inputUIframe.add(openSimModelButton, "Center");
-        //inputUIframe.add(openSimConfigButton, "Center");
-        //inputUIframe.add(openSimScenarioButton, "Center");
+        //mainUIframe.add(openSimModelButton, "Center");
+        //mainUIframe.add(openSimConfigButton, "Center");
+        //mainUIframe.add(openSimScenarioButton, "Center");
 
-        Container contentPane = inputUIframe.getContentPane();
+        Container contentPane = mainUIframe.getContentPane();
         contentPane.setLayout(new BorderLayout());
 
-        inputUIframe.add(statusBar, BorderLayout.SOUTH);
-        inputUIframe.add(simEngineTabPane, BorderLayout.CENTER);
+        mainUIframe.add(statusBar, BorderLayout.SOUTH);
+        mainUIframe.add(simEngineTabPane, BorderLayout.CENTER);
 
-        //inputUIframe.pack();
+        //mainUIframe.pack();
 
 
-        inputUIframe.addWindowListener(new WindowAdapter() {
+        mainUIframe.addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
                 super.windowOpened(e);
@@ -106,8 +106,8 @@ public class SimInputUI implements ActionListener, Runnable {
         timerThread = new TimerThread(simDataLabel, simTimeLabel);
         timerThread.start();
 
-        inputUIframe.pack();
-        inputUIframe.setVisible(true);
+        mainUIframe.pack();
+        mainUIframe.setVisible(true);
 
         //System.out.println(simDataLabel.getTopLevelAncestor());
     }

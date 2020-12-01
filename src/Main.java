@@ -1,14 +1,9 @@
-import gui.LaunchWindow;
-import gui.SimEngineFrame;
 import kr.ac.kaist.se.controller.sim.SimEngine;
-import kr.ac.kaist.se.model.abst.evnt.*;
-import kr.ac.kaist.se.simdata.evnt.SimScenarioEvent;
 import kr.ac.kaist.se.simdata.input.SimConfiguration;
 import kr.ac.kaist.se.simdata.input.SimScenario;
-import kr.ac.kaist.se.view.SimInputUI;
+import kr.ac.kaist.se.view.MainUI;
 
 import javax.swing.*;
-import java.awt.*;
 import java.sql.Timestamp;
 
 public class Main {
@@ -125,7 +120,7 @@ public class Main {
 
     /**
      * Method to launch a GUI for taking input files from a user.
-     * This method instantiates SimInputUI (simInputUI),
+     * This method instantiates MainUI (simInputUI),
      * which has menus/buttons for choosing input files.
      */
     private static void launchSimInputUI() {
@@ -142,8 +137,8 @@ public class Main {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        //SimInputUI simInputUI = new SimInputUI();
-        SwingUtilities.invokeLater(new SimInputUI());
+        //MainUI simInputUI = new MainUI();
+        SwingUtilities.invokeLater(new MainUI());
     }
 
 
