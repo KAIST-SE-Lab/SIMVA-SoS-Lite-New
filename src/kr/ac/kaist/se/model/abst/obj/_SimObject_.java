@@ -13,7 +13,7 @@ import java.util.Queue;
  */
 public abstract class _SimObject_ implements Simulatable {
 
-    Timestamp timestamp;    //Timestamp for stdout
+    protected Timestamp timestamp;    //Timestamp for stdout
 
 
     /** Universally unique object id */
