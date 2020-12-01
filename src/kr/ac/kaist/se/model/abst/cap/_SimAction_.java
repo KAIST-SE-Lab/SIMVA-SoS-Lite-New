@@ -21,7 +21,7 @@ public abstract class _SimAction_ {
     protected float actionBenefit = -1; //benefit from action execution
 
 
-    public _SimAction_(SoS accessibleSoS,
+    protected _SimAction_(SoS accessibleSoS,
                        _SimActionableObject_ actionSubject,
                        String actionId,
                        String actionName,
@@ -36,6 +36,7 @@ public abstract class _SimAction_ {
         this.actionCost = actionCost;
         this.actionBenefit = actionBenefit;
     }
+
 
     protected abstract boolean checkPrecondition();
 
