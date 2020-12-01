@@ -1,9 +1,6 @@
 package kr.ac.kaist.se.model.sos;
 
-import kr.ac.kaist.se.model.abst.msg._SimMessage_;
 import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
-
-import java.util.LinkedList;
 
 /**
  * Abstract class to represent an Infrastructure (Infra)

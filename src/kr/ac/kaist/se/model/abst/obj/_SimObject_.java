@@ -1,12 +1,10 @@
 package kr.ac.kaist.se.model.abst.obj;
 
-import kr.ac.kaist.se.model.abst.msg._SimMessage_;
+import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.intf.Simulatable;
 
 import java.sql.Timestamp;
-import java.util.LinkedList;
 import java.util.Queue;
-import java.util.UUID;
 
 /**
  * Abstract class for general simulation objects

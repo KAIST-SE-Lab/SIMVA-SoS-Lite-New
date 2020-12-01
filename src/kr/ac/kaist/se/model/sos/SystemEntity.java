@@ -1,8 +1,7 @@
 package kr.ac.kaist.se.model.sos;
 
-import kr.ac.kaist.se.model.abst.msg._SimMessage_;
+import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
-import kr.ac.kaist.se.model.intf.Actionable;
 import kr.ac.kaist.se.model.intf.Communicatable;
 import kr.ac.kaist.se.model.intf.Movable;
 import kr.ac.kaist.se.model.intf.Stateful;
