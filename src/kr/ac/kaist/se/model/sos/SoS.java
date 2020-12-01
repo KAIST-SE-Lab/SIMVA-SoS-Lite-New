@@ -50,7 +50,9 @@ public abstract class SoS extends _SimContainerObject_ {
         this.isAvailable = true;
 
         printObjInfo();
+
         initLists();
+        initSoSModel();
     }
 
 
@@ -59,7 +61,7 @@ public abstract class SoS extends _SimContainerObject_ {
      */
     private void initLists() {
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (SoS) Lists are initialized.");
+        System.out.println("[" + timestamp + "] (SoS(" + this.id + "):initLists) Lists are initialized.");
 
         orgList = new ArrayList<>();
         infraList = new ArrayList<>();
@@ -72,12 +74,93 @@ public abstract class SoS extends _SimContainerObject_ {
 
 
     /**
+     * Abstract method for the initialization of simulation models of an SoS.
+     * (e.g., Org, Infra, Env, CSs, and so on.)
+     * This method should be implemented to build a complete SoS model.
+     */
+    protected abstract void initSoSModel();
+
+    /**
+     *
+     */
+    protected void printModelInfo(){
+        timestamp = new Timestamp(System.currentTimeMillis());
+
+        int orgCount = 0;
+        int infraCount = 0;
+        int envCount = 0;
+        int csCount = 0;
+
+        System.out.println("[" + timestamp + "] ┌─ Simulation Model ─────────────────────────────┐");
+        System.out.println("[" + timestamp + "]  - SoS(" + this.id + ")");
+        System.out.println("[" + timestamp + "]    > [simTotalTime: ]");
+        System.out.println("[" + timestamp + "]  - " + orgList.size() + " Organization(s)");
+        printOrgs(orgList);
+//        for (Organization org: orgList){
+//            printOrgs(org);
+////            System.out.println("[" + timestamp + "]    > [" + orgCount + ":" + org.getId() + "] ");
+////            orgCount++;
+//        }
+        System.out.println("[" + timestamp + "]  - " + csList.size() + " Constituent(s)");
+        for (Constituent cs: csList){
+            System.out.println("[" + timestamp + "]    > [" + csCount + ":" + cs.getId() + "] ");
+            csCount++;
+        }
+        System.out.println("[" + timestamp + "]  - " + infraList.size() + " Infrastructure(s) ");
+        for (Infrastructure infra: infraList){
+            System.out.println("[" + timestamp + "]    > [" + infraCount + ":" + infra.getId() + "] ");
+            infraCount++;
+        }
+        System.out.println("[" + timestamp + "]  - " + envList.size() + " Environment(s) ");
+        for (Environment env: envList){
+            System.out.println("[" + timestamp + "]    > [" + envCount + ":" + env.getId() + "] ");
+            envCount++;
+        }
+//        System.out.println("[" + timestamp + "]  - " + .size() + " Map ");
+        System.out.println("[" + timestamp + "] └─────────────────────────────────────────────────┘");
+    }
+
+
+    /**
+     *
+     * @param aOrgList
+     * @return
+     */
+    private int printOrgs(ArrayList<Organization> aOrgList){
+        int cnt = 0;
+        for (Organization org: aOrgList){
+
+            System.out.println("[" + timestamp + "]    > [" + cnt + ":" + org.getId() + "] ");
+
+            // If the org has sub-organizations
+            if (org.subOrgList.size() != 0){
+                printOrgs(org.subOrgList);
+//                for (Organization suborg: org.subOrgList){
+//                    cnt += printOrgs(suborg);
+//                }
+            }
+
+            cnt++;
+//            System.out.println("[" + timestamp + "]    > [" + orgCount + ":" + org.getId() + "] ");
+//            orgCount++;
+        }
+        return cnt;
+    }
+
+
+    /**
      * Method to obtain an object of a member of this SimModel (SoS)
      *
      * @param objId     unique id of object
      * @return          object that has the given id
      */
     public _SimObject_ getMemberSimObject(String objId){
+
+        //SoS
+        if(this.id.equals(objId)){
+            return this;
+        }
+
         for (Organization org: orgList){
             if (org.getId().equals(objId)){
                 return org;
@@ -141,93 +224,141 @@ public abstract class SoS extends _SimContainerObject_ {
         timestamp = new Timestamp(System.currentTimeMillis());
 
         if(!isDuplicateId(aOrg.getId()) && orgList.add(aOrg) == true){
-            System.out.println("[" + timestamp + "] (SoS:addOrg) An Organization object is successfully added (" + aOrg.getId() + ").");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addOrg) An Organization object is successfully added (id: " + aOrg.getId() + ").");
         }else{
-            System.out.println("[" + timestamp + "] (SoS:addOrg) An Organization object is failed to be added.");
-            System.out.println("[" + timestamp + "] (SoS:addOrg) aOrg(id): " + aOrg + "(" + aOrg.getId() +"), isDuplicateId: " + isDuplicateId(aOrg.getId()));
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addOrg) An Organization object is failed to be added.");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addOrg) aOrg(id): " + aOrg + "(" + aOrg.getId() +"), isDuplicateId: " + isDuplicateId(aOrg.getId()));
         }
     }
 
     public void removeOrg(Organization aOrg){
+        timestamp = new Timestamp(System.currentTimeMillis());
         if(orgList.remove(aOrg) == true){
-            System.out.println("[" + timestamp + "] (SoS:removeOrg) An Organization object is successfully removed (" + aOrg.getId() + ").");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeOrg) An Organization object is successfully removed (id: " + aOrg.getId() + ").");
         }else{
-            System.out.println("[" + timestamp + "] (SoS:removeOrg) An Organization object is failed to be removed.");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeOrg) An Organization object is failed to be removed.");
 
         }
     }
 
     public void addInfra(Infrastructure aInfra){
+        timestamp = new Timestamp(System.currentTimeMillis());
         if(!isDuplicateId(aInfra.getId()) && infraList.add(aInfra) == true){
-            System.out.println("[" + timestamp + "] (SoS:addInfra) An Infrastructure object is successfully added (" + aInfra.getId() + ").");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addInfra) An Infrastructure object is successfully added (id: " + aInfra.getId() + ").");
         }else{
-            System.out.println("[" + timestamp + "] (SoS:addInfra) An Infrastructure object is failed to be added.");
-            System.out.println("[" + timestamp + "] (SoS:addInfra) aInfra(id): " + aInfra + "(" + aInfra.getId() +"), isDuplicateId: " + isDuplicateId(aInfra.getId()));
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addInfra) An Infrastructure object is failed to be added.");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addInfra) aInfra(id): " + aInfra + "(" + aInfra.getId() +"), isDuplicateId: " + isDuplicateId(aInfra.getId()));
         }
     }
 
     public void removeInfra(Infrastructure aInfra){
+        timestamp = new Timestamp(System.currentTimeMillis());
         if(infraList.remove(aInfra) == true){
-            System.out.println("[" + timestamp + "] (SoS:removeInfra) An Infrastructure object is successfully removed (" + aInfra.getId() + ").");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeInfra) An Infrastructure object is successfully removed (id: " + aInfra.getId() + ").");
         }else{
-            System.out.println("[" + timestamp + "] (SoS:removeInfra) An Infrastructure object is failed to be removed.");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeInfra) An Infrastructure object is failed to be removed.");
 
         }
     }
 
     public void addEnv(Environment aEnv){
+        timestamp = new Timestamp(System.currentTimeMillis());
         if(!isDuplicateId(aEnv.getId()) && envList.add(aEnv) == true){
-            System.out.println("[" + timestamp + "] (SoS:addEnv) An Environment object is successfully added (" + aEnv.getId() + ").");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addEnv) An Environment object is successfully added (id: " + aEnv.getId() + ").");
         }else{
-            System.out.println("[" + timestamp + "] (SoS:addEnv) An Environment object is failed to be added.");
-            System.out.println("[" + timestamp + "] (SoS:addEnv) aEnv(id): " + aEnv + "(" + aEnv.getId() +"), isDuplicateId: " + isDuplicateId(aEnv.getId()));
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addEnv) An Environment object is failed to be added.");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addEnv) aEnv(id): " + aEnv + "(" + aEnv.getId() +"), isDuplicateId: " + isDuplicateId(aEnv.getId()));
         }
     }
 
     public void removeEnv(Environment aEnv){
+        timestamp = new Timestamp(System.currentTimeMillis());
         if(envList.remove(aEnv) == true){
-            System.out.println("[" + timestamp + "] (SoS:removeEnv) An Environment object is successfully removed (" + aEnv.getId() + ").");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeEnv) An Environment object is successfully removed (id: " + aEnv.getId() + ").");
         }else{
-            System.out.println("[" + timestamp + "] (SoS:removeEnv) An Environment object is failed to be removed.");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeEnv) An Environment object is failed to be removed.");
 
         }
     }
 
     public void addCS(Constituent aCS){
+        timestamp = new Timestamp(System.currentTimeMillis());
         if(!isDuplicateId(aCS.getId()) && csList.add(aCS) == true){
-            System.out.println("[" + timestamp + "] (SoS:addCS) An Constituent object is successfully added (" + aCS.getId() + ").");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addCS) An Constituent object is successfully added (id: " + aCS.getId() + ").");
         }else{
-            System.out.println("[" + timestamp + "] (SoS:addCS) An Constituent object is failed to be added.");
-            System.out.println("[" + timestamp + "] (SoS:addCS) aCS(id): " + aCS + "(" + aCS.getId() +"), isDuplicateId: " + isDuplicateId(aCS.getId()));
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addCS) An Constituent object is failed to be added.");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addCS) aCS(id): " + aCS + "(" + aCS.getId() +"), isDuplicateId: " + isDuplicateId(aCS.getId()));
         }
     }
 
     public void removeCS(Constituent aCS){
+        timestamp = new Timestamp(System.currentTimeMillis());
         if(csList.remove(aCS) == true){
-            System.out.println("[" + timestamp + "] (SoS:removeCS) An Constituent object is successfully removed (" + aCS.getId() + ").");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeCS) An Constituent object is successfully removed (id: " + aCS.getId() + ").");
         }else{
-            System.out.println("[" + timestamp + "] (SoS:removeCS) An Constituent object is failed to be removed.");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeCS) An Constituent object is failed to be removed.");
         }
     }
 
     public void addSystemEntity(SystemEntity aSystemEntity){
+        timestamp = new Timestamp(System.currentTimeMillis());
         if(!isDuplicateId(aSystemEntity.getId()) && systemEntityList.add(aSystemEntity) == true){
-            System.out.println("[" + timestamp + "] (SoS:addCS) An SystemEntity object is successfully added (" + aSystemEntity.getId() + ").");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addCS) An SystemEntity object is successfully added (id: " + aSystemEntity.getId() + ").");
         }else{
-            System.out.println("[" + timestamp + "] (SoS:addCS) An SystemEntity object is failed to be added.");
-            System.out.println("[" + timestamp + "] (SoS:addCS) aSystemEntity(id): " + aSystemEntity + "(" + aSystemEntity.getId() +"), isDuplicateId: " + isDuplicateId(aSystemEntity.getId()));
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addCS) An SystemEntity object is failed to be added.");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addCS) aSystemEntity(id): " + aSystemEntity + "(" + aSystemEntity.getId() +"), isDuplicateId: " + isDuplicateId(aSystemEntity.getId()));
         }
     }
 
     public void removeSystemEntity(SystemEntity aSystemEntity){
+        timestamp = new Timestamp(System.currentTimeMillis());
         if(systemEntityList.remove(aSystemEntity) == true){
-            System.out.println("[" + timestamp + "] (SoS:removeCS) An SystemEntity object is successfully removed (" + aSystemEntity.getId() + ").");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeCS) An SystemEntity object is successfully removed (id: " + aSystemEntity.getId() + ").");
         }else{
-            System.out.println("[" + timestamp + "] (SoS:removeCS) An SystemEntity object is failed to be removed.");
+            System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeCS) An SystemEntity object is failed to be removed.");
         }
     }
 
 
+    /* Getters & Setters */
 
+    public ArrayList<Organization> getOrgList() {
+        return orgList;
+    }
 
+    public void setOrgList(ArrayList<Organization> orgList) {
+        this.orgList = orgList;
+    }
+
+    public ArrayList<Infrastructure> getInfraList() {
+        return infraList;
+    }
+
+    public void setInfraList(ArrayList<Infrastructure> infraList) {
+        this.infraList = infraList;
+    }
+
+    public ArrayList<Environment> getEnvList() {
+        return envList;
+    }
+
+    public void setEnvList(ArrayList<Environment> envList) {
+        this.envList = envList;
+    }
+
+    public ArrayList<Constituent> getCsList() {
+        return csList;
+    }
+
+    public void setCsList(ArrayList<Constituent> csList) {
+        this.csList = csList;
+    }
+
+    public ArrayList<SystemEntity> getSystemEntityList() {
+        return systemEntityList;
+    }
+
+    public void setSystemEntityList(ArrayList<SystemEntity> systemEntityList) {
+        this.systemEntityList = systemEntityList;
+    }
 }

@@ -17,8 +17,11 @@ public class RunResult {
     private ArrayList<_SimAction_> selectedActionList;
     private ArrayList<RunResult> subRunResults;
 
-    public RunResult(){
+    public RunResult(_SimObject_ runSubject, ArrayList<_SimAction_> selectedActionList){
+        this.runSubject = runSubject;
+        this.selectedActionList = selectedActionList;
 
+        this.subRunResults = new ArrayList<RunResult>();
     }
 
     public _SimObject_ getRunSubject() {

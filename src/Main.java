@@ -25,7 +25,8 @@ public class Main {
             System.out.println("[" + timestamp + "] (Main) Simulation engine is launched (Non-GUI Mode).");
 
             /* Input SimModel */
-            ToySoS toySoS = new ToySoS();
+            ToySoS toySoS = new ToySoS(); // no id
+            //SoS toySoS = new ToySoS("TOYSOS01", "ToySoS");
 
             /* Input SimConfiguration */
             //TODO: remove this section after debugging
