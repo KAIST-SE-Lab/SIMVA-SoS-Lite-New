@@ -155,7 +155,7 @@ public class SimEngine {
     private void printSimInputInfo() {
         timestamp = new Timestamp(System.currentTimeMillis());
 
-        System.out.println("[" + timestamp + "] ┌─ Simulation Inputs ─────────────────────────────┐");
+        System.out.println("[" + timestamp + "] ┌─ Simulation Inputs ───────────────────────────────────────────────┐");
         System.out.println("[" + timestamp + "]  - Simulation Configuration ");
         System.out.println("[" + timestamp + "]    > [simTotalTime: " + simConfig.getSimTotalTime() + "]");
         System.out.println("[" + timestamp + "]    > [SimMapeMode: " + simConfig.isSimMapeMode() + "]");
@@ -164,7 +164,7 @@ public class SimEngine {
         System.out.println("[" + timestamp + "]    > [scenarioName: " + simScenario.getScenarioName() + "]");
         System.out.println("[" + timestamp + "]    > [numOfEvents (length): " + simScenario.getNumOfEvents() + "]");
         System.out.println("[" + timestamp + "]    > [numOfUnitEvents (length of unit events): " + simScenario.getNumOfUnitEvents() + "]");
-        System.out.println("[" + timestamp + "] └─────────────────────────────────────────────────┘");
+        System.out.println("[" + timestamp + "] └───────────────────────────────────────────────────────────────────┘");
 
     }
 

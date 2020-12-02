@@ -91,33 +91,32 @@ public abstract class SoS extends _SimContainerObject_ {
         int envCount = 0;
         int csCount = 0;
 
-        System.out.println("[" + timestamp + "] ┌─ Simulation Model ─────────────────────────────┐");
+        System.out.println("[" + timestamp + "] ┌─ Simulation Model ───────────────────────────────────────────────┐");
         System.out.println("[" + timestamp + "]  - SoS(" + this.id + ")");
         System.out.println("[" + timestamp + "]    > [simTotalTime: ]");
-        System.out.println("[" + timestamp + "]  - " + orgList.size() + " Organization(s)");
-        printOrgs(orgList);
-//        for (Organization org: orgList){
-//            printOrgs(org);
-////            System.out.println("[" + timestamp + "]    > [" + orgCount + ":" + org.getId() + "] ");
-////            orgCount++;
-//        }
+        System.out.println("[" + timestamp + "]  ===================================================================");
+        System.out.println("[" + timestamp + "]  - " + getNumOfAllOrgs(orgList) + " Organization(s)");
+        printOrgs(orgList, 0);
+        System.out.println("[" + timestamp + "]  ===================================================================");
         System.out.println("[" + timestamp + "]  - " + csList.size() + " Constituent(s)");
         for (Constituent cs: csList){
-            System.out.println("[" + timestamp + "]    > [" + csCount + ":" + cs.getId() + "] ");
+            System.out.println("[" + timestamp + "]    > [" + csCount + ":" + cs.getId() + " | belongs to:" + cs.getMyOrg() + "] ");
             csCount++;
         }
+        System.out.println("[" + timestamp + "]  ===================================================================");
         System.out.println("[" + timestamp + "]  - " + infraList.size() + " Infrastructure(s) ");
         for (Infrastructure infra: infraList){
             System.out.println("[" + timestamp + "]    > [" + infraCount + ":" + infra.getId() + "] ");
             infraCount++;
         }
+        System.out.println("[" + timestamp + "]  ===================================================================");
         System.out.println("[" + timestamp + "]  - " + envList.size() + " Environment(s) ");
         for (Environment env: envList){
             System.out.println("[" + timestamp + "]    > [" + envCount + ":" + env.getId() + "] ");
             envCount++;
         }
 //        System.out.println("[" + timestamp + "]  - " + .size() + " Map ");
-        System.out.println("[" + timestamp + "] └─────────────────────────────────────────────────┘");
+        System.out.println("[" + timestamp + "] └───────────────────────────────────────────────────────────────────┘");
     }
 
 
@@ -126,23 +125,65 @@ public abstract class SoS extends _SimContainerObject_ {
      * @param aOrgList
      * @return
      */
-    private int printOrgs(ArrayList<Organization> aOrgList){
-        int cnt = 0;
+    private void printOrgs(ArrayList<Organization> aOrgList, int depth){
         for (Organization org: aOrgList){
 
-            System.out.println("[" + timestamp + "]    > [" + cnt + ":" + org.getId() + "] ");
+            System.out.print("[" + timestamp + "]    ");
+            for (int i=0;i<depth;i++){
+                System.out.print("  ");
+            }
+            System.out.print("------------------------------------\n");
 
-            // If the org has sub-organizations
+            System.out.print("[" + timestamp + "]    ");
+            for (int i=0;i<depth;i++){
+                System.out.print("  ");
+            }
+            System.out.print("> [" + org.getId() +
+                    " | depth(" + depth + ") " +
+                    " | suborg size:" + org.subOrgList.size() +
+                    " | all-member size:" + org.getAllMemberCSList().size() +
+                    " | direct-member size:" + org.getDirectCSList().size() + "] \n");
+
+
+            /* All Member CSs */
+            System.out.print("[" + timestamp + "]    ");
+            for (int i = 0; i < depth; i++) {
+                System.out.print("  ");
+            }
+            System.out.print("└> All Members: ");
+            for (Constituent memberCS : org.allMemberCSList){
+                System.out.print("[" + memberCS.getId() + "] ");
+            }
+            System.out.print("\n");
+
+            /* Direct CSs */
+            System.out.print("[" + timestamp + "]    ");
+            for (int i = 0; i < depth; i++) {
+                System.out.print("  ");
+            }
+            System.out.print("└> Direct Members: ");
+            for (Constituent memberCS : org.directCSList){
+                System.out.print("[" + memberCS.getId() + "] ");
+            }
+            System.out.print("\n");
+
+
             if (org.subOrgList.size() != 0){
-                printOrgs(org.subOrgList);
-//                for (Organization suborg: org.subOrgList){
-//                    cnt += printOrgs(suborg);
-//                }
+                printOrgs(org.subOrgList, depth+1);
             }
 
+        }
+
+    }
+
+    private int getNumOfAllOrgs(ArrayList<Organization> aOrgList){
+        int cnt = 0;
+        for (Organization org: aOrgList){
+            // If the org has sub-organizations
+            if (org.subOrgList.size() != 0){
+                cnt += getNumOfAllOrgs(org.subOrgList);
+            }
             cnt++;
-//            System.out.println("[" + timestamp + "]    > [" + orgCount + ":" + org.getId() + "] ");
-//            orgCount++;
         }
         return cnt;
     }

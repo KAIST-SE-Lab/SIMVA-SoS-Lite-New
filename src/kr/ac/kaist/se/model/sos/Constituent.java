@@ -61,4 +61,20 @@ public abstract class Constituent extends _SimActionableObject_
 
         printObjInfo();
     }
+
+    public SoS getMySoS() {
+        return mySoS;
+    }
+
+    public void setMySoS(SoS mySoS) {
+        this.mySoS = mySoS;
+    }
+
+    public Organization getMyOrg() {
+        return myOrg;
+    }
+
+    public void setMyOrg(Organization myOrg) {
+        this.myOrg = myOrg;
+    }
 }
