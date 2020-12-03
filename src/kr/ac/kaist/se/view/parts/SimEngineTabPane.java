@@ -1,4 +1,4 @@
-package kr.ac.kaist.se.view.part;
+package kr.ac.kaist.se.view.parts;
 
 import kr.ac.kaist.se.view.tab.TabInputUIPanel;
 import kr.ac.kaist.se.view.tab.TabResultsPanel;

@@ -1,7 +1,6 @@
-package kr.ac.kaist.se.view.part;
+package kr.ac.kaist.se.view.parts;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class FileChooserPanel extends JPanel {

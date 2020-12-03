@@ -83,6 +83,7 @@ public class ToySoS extends SoS {
         this.addOrg(org1);
         this.addOrg(org2);
 
+
         org1.addCS(csA, true);
         org1.addCS(csB, true);
         org1.addCS(csB, true); //duplicated
@@ -94,7 +95,8 @@ public class ToySoS extends SoS {
 
         org2.addCS(csH, true);
 
-        
+
+
         printModelInfo();
     }
 

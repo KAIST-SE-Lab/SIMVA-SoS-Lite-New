@@ -1,7 +1,7 @@
 package kr.ac.kaist.se.view;
 
-import kr.ac.kaist.se.view.part.SimEngineTabPane;
-import kr.ac.kaist.se.view.part.SimStatusBarPanel;
+import kr.ac.kaist.se.view.parts.SimEngineTabPane;
+import kr.ac.kaist.se.view.parts.SimStatusBarPanel;
 
 import javax.swing.*;
 import java.awt.*;

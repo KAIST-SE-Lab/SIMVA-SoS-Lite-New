@@ -1,4 +1,5 @@
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
+import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.sos.Constituent;
 import kr.ac.kaist.se.model.sos.Organization;
 import kr.ac.kaist.se.model.sos.SoS;
@@ -25,7 +26,7 @@ public class CS01B extends Constituent {
     }
 
     @Override
-    public void sendMsg() {
+    public void sendMsg(_SimMessage_ msgObj) {
 
     }
 

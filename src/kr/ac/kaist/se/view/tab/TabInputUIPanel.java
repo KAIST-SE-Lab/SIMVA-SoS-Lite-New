@@ -1,6 +1,6 @@
 package kr.ac.kaist.se.view.tab;
 
-import kr.ac.kaist.se.view.part.FileChooserPanel;
+import kr.ac.kaist.se.view.parts.FileChooserPanel;
 import kr.ac.kaist.se.view.toolbar.ToolBarInputMode;
 
 import javax.swing.*;

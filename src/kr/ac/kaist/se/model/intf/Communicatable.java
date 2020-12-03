@@ -1,5 +1,7 @@
 package kr.ac.kaist.se.model.intf;
 
+import kr.ac.kaist.se.model.abst.comm._SimMessage_;
+
 /**
  * Interface for objects that can communicate with other objects.
  * Communicatable objects can execute sendMsg(..) and readIncomingMsgs(..).
@@ -9,7 +11,7 @@ package kr.ac.kaist.se.model.intf;
 public interface Communicatable {
 
     //TODO: check return
-    void sendMsg();
+    void sendMsg(_SimMessage_ msgObj);
 
     //TODO: check return
     void readIncomingMsgs();
