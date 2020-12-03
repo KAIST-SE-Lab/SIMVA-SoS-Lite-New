@@ -311,8 +311,8 @@ public abstract class SoS extends _SimContainerObject_ {
                 }
             }
         }else{
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):addOrg) An Organization object is failed to be added.");
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):addOrg) aOrg(id): " + aOrg + "(" + aOrg.getId() +"), isDuplicateId: " + isDuplicateId(aOrg.getId()));
+            System.err.println("[" + timestamp + "] ADD_ORG_TO_SOS_FAILED: (SoS(" + this.id + "):addOrg) An Organization object is failed to be added.");
+            System.err.println("[" + timestamp + "] ADD_ORG_TO_SOS_FAILED: (SoS(" + this.id + "):addOrg) aOrg(id): " + aOrg + "(" + aOrg.getId() +"), isDuplicateId: " + isDuplicateId(aOrg.getId()));
         }
     }
 
@@ -333,7 +333,7 @@ public abstract class SoS extends _SimContainerObject_ {
         if(orgList.remove(aOrg) == true){
             System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeOrg) An Organization object is successfully removed (id: " + aOrg.getId() + ").");
         }else{
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):removeOrg) An Organization object is failed to be removed.");
+            System.err.println("[" + timestamp + "] REMOVE_ORG_FROM_SOS_FAILED: (SoS(" + this.id + "):removeOrg) An Organization object is failed to be removed.");
 
         }
     }
@@ -343,8 +343,8 @@ public abstract class SoS extends _SimContainerObject_ {
         if(!isDuplicateId(aInfra.getId()) && infraList.add(aInfra) == true){
             System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addInfra) An Infrastructure object is successfully added (id: " + aInfra.getId() + ").");
         }else{
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):addInfra) An Infrastructure object is failed to be added.");
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):addInfra) aInfra(id): " + aInfra + "(" + aInfra.getId() +"), isDuplicateId: " + isDuplicateId(aInfra.getId()));
+            System.err.println("[" + timestamp + "] ADD_INFRA_TO_SOS_FAILED: (SoS(" + this.id + "):addInfra) An Infrastructure object is failed to be added.");
+            System.err.println("[" + timestamp + "] ADD_INFRA_TO_SOS_FAILED: (SoS(" + this.id + "):addInfra) aInfra(id): " + aInfra + "(" + aInfra.getId() +"), isDuplicateId: " + isDuplicateId(aInfra.getId()));
         }
     }
 
@@ -353,7 +353,7 @@ public abstract class SoS extends _SimContainerObject_ {
         if(infraList.remove(aInfra) == true){
             System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeInfra) An Infrastructure object is successfully removed (id: " + aInfra.getId() + ").");
         }else{
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):removeInfra) An Infrastructure object is failed to be removed.");
+            System.err.println("[" + timestamp + "] REMOVE_INFRA_FROM_SOS_FAILED: (SoS(" + this.id + "):removeInfra) An Infrastructure object is failed to be removed.");
 
         }
     }
@@ -363,8 +363,8 @@ public abstract class SoS extends _SimContainerObject_ {
         if(!isDuplicateId(aEnv.getId()) && envList.add(aEnv) == true){
             System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addEnv) An Environment object is successfully added (id: " + aEnv.getId() + ").");
         }else{
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):addEnv) An Environment object is failed to be added.");
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):addEnv) aEnv(id): " + aEnv + "(" + aEnv.getId() +"), isDuplicateId: " + isDuplicateId(aEnv.getId()));
+            System.err.println("[" + timestamp + "] ADD_ENV_TO_SOS_FAILED: (SoS(" + this.id + "):addEnv) An Environment object is failed to be added.");
+            System.err.println("[" + timestamp + "] ADD_ENV_TO_SOS_FAILED: (SoS(" + this.id + "):addEnv) aEnv(id): " + aEnv + "(" + aEnv.getId() +"), isDuplicateId: " + isDuplicateId(aEnv.getId()));
         }
     }
 
@@ -373,7 +373,7 @@ public abstract class SoS extends _SimContainerObject_ {
         if(envList.remove(aEnv) == true){
             System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeEnv) An Environment object is successfully removed (id: " + aEnv.getId() + ").");
         }else{
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):removeEnv) An Environment object is failed to be removed.");
+            System.err.println("[" + timestamp + "] REMOVE_ENV_FROM_SOS_FAILED: (SoS(" + this.id + "):removeEnv) An Environment object is failed to be removed.");
 
         }
     }
@@ -386,8 +386,8 @@ public abstract class SoS extends _SimContainerObject_ {
 
             System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addCS) An Constituent object is successfully added (id: " + aCS.getId() + ").");
         }else{
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):addCS) An Constituent object is failed to be added.");
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):addCS) aCS(id): " + aCS + "(" + aCS.getId() +"), isDuplicateId: " + isDuplicateId(aCS.getId()));
+            System.err.println("[" + timestamp + "] ADD_CS_TO_SOS_FAILED: (SoS(" + this.id + "):addCS) An Constituent object is failed to be added.");
+            System.err.println("[" + timestamp + "] ADD_CS_TO_SOS_FAILED: (SoS(" + this.id + "):addCS) aCS(id): " + aCS + "(" + aCS.getId() +"), isDuplicateId: " + isDuplicateId(aCS.getId()));
         }
     }
 
@@ -396,7 +396,7 @@ public abstract class SoS extends _SimContainerObject_ {
         if(csList.remove(aCS) == true){
             System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeCS) An Constituent object is successfully removed (id: " + aCS.getId() + ").");
         }else{
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):removeCS) An Constituent object is failed to be removed.");
+            System.err.println("[" + timestamp + "] REMOVE_CS_FROM_SOS_FAILED: (SoS(" + this.id + "):removeCS) An Constituent object is failed to be removed.");
         }
     }
 
@@ -405,8 +405,8 @@ public abstract class SoS extends _SimContainerObject_ {
         if(!isDuplicateId(aSystemEntity.getId()) && systemEntityList.add(aSystemEntity) == true){
             System.out.println("[" + timestamp + "] (SoS(" + this.id + "):addCS) An SystemEntity object is successfully added (id: " + aSystemEntity.getId() + ").");
         }else{
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):addCS) An SystemEntity object is failed to be added.");
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):addCS) aSystemEntity(id): " + aSystemEntity + "(" + aSystemEntity.getId() +"), isDuplicateId: " + isDuplicateId(aSystemEntity.getId()));
+            System.err.println("[" + timestamp + "] ADD_SYS_TO_SOS_FAILED: (SoS(" + this.id + "):addCS) An SystemEntity object is failed to be added.");
+            System.err.println("[" + timestamp + "] ADD_SYS_TO_SOS_FAILED: (SoS(" + this.id + "):addCS) aSystemEntity(id): " + aSystemEntity + "(" + aSystemEntity.getId() +"), isDuplicateId: " + isDuplicateId(aSystemEntity.getId()));
         }
     }
 
@@ -415,7 +415,7 @@ public abstract class SoS extends _SimContainerObject_ {
         if(systemEntityList.remove(aSystemEntity) == true){
             System.out.println("[" + timestamp + "] (SoS(" + this.id + "):removeCS) An SystemEntity object is successfully removed (id: " + aSystemEntity.getId() + ").");
         }else{
-            System.err.println("[" + timestamp + "] (SoS(" + this.id + "):removeCS) An SystemEntity object is failed to be removed.");
+            System.err.println("[" + timestamp + "] REMOVE_SYS_FROM_SOS_FAILED: (SoS(" + this.id + "):removeCS) An SystemEntity object is failed to be removed.");
         }
     }
 

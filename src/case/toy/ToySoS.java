@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 public class ToySoS extends SoS {
 
-    public ToySoS(){
+    public ToySoS() {
         super("TOYSOS01", "ToySoS");
     }
 
@@ -32,7 +32,7 @@ public class ToySoS extends SoS {
         ExampleCSType csB = new ExampleCSType(this, null, "CS0B", "Constituent B");
         ExampleCSType csC = new ExampleCSType(this, null, "CS0C", "Constituent C");
         ExampleCSType csD = new ExampleCSType(this, null, "CS0D", "Constituent D");
-        ExampleCSType csE = new ExampleCSType(this, null, "CS0D", "Constituent E");
+        ExampleCSType csE = new ExampleCSType(this, null, "CS0E", "Constituent E");
         ExampleCSType csF = new ExampleCSType(this, null, "CS0F", "Constituent F");
         ExampleCSType csG = new ExampleCSType(this, null, "CS0G", "Constituent G");
         ExampleCSType csH = new ExampleCSType(this, null, "CS0H", "Constituent H");
@@ -44,9 +44,44 @@ public class ToySoS extends SoS {
 
         /* Case 1: Organizational structure -> CS added */
 
+//        org1.addSubOrg(org1A);
+//        org1.addSubOrg(org1B);
+//        org1A.addSubOrg(org1AA);
+//
+//        org1.addCS(csA, true);
+//        org1.addCS(csB, true);
+//        org1.addCS(csB, true); //duplicated
+//        org1A.addCS(csC, true);
+//        org1B.addCS(csD, true);
+//        org1B.addCS(csE, true);
+//        org1AA.addCS(csF, true);
+//        org1AA.addCS(csG, true);
+//
+//        org2.addCS(csH, true);
+//
+//        this.addOrg(org1);
+//        this.addOrg(org2);
+//
+//        this.addCS(csI);    //Direct addition of a CS to SoS
+
+
+        /* Case 2: CS added -> Organizational structure */
+
+        this.addCS(csA);
+        this.addCS(csB);
+        this.addCS(csC);
+        this.addCS(csD);
+        this.addCS(csE);
+        this.addCS(csF);
+        this.addCS(csG);
+        this.addCS(csH);
+
         org1.addSubOrg(org1A);
         org1.addSubOrg(org1B);
         org1A.addSubOrg(org1AA);
+
+        this.addOrg(org1);
+        this.addOrg(org2);
 
         org1.addCS(csA, true);
         org1.addCS(csB, true);
@@ -59,46 +94,9 @@ public class ToySoS extends SoS {
 
         org2.addCS(csH, true);
 
-        this.addOrg(org1);
-        this.addOrg(org2);
-
-        this.addCS(csI);
-//        this.removeOrg(org1);
-//        this.removeOrg(org1A);
-
-//        org2.addSubOrgDynamically(org2A);
-
-//        org1.addCS(csA);
-//        org1.addCS(csB);
-//        org1A.addCS(csC);
-//        org1B.addCS(csD);
-//        org1B.addCS(csE);
-//        org1AA.addCS(csF);
-//        org1AA.addCS(csG);
-
-        /* Case 2: CS added -> Organizational structure */
-
-        // org
-        // cs
-        // org
-
-//        org1.addSubOrg(org1A);
-//        org1.addSubOrg(org1B);
-//
-//        org1.addCS(cs01a);
-//        org1.addCS(cs01b);
-//        org1A.addCS(cs02a);
-//
-//        this.addOrg(org1);
-//        //this.addOrg(org2);
-//
-//        this.addCS(cs01a);
-//        this.addCS(cs01b);
-//        this.addCS(cs02a);
-
+        
         printModelInfo();
     }
-
 
 
     @Override

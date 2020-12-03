@@ -11,11 +11,11 @@ import java.util.LinkedList;
 /**
  * Abstract class to represent an Orgniazation (Org)
  * (1-tier _SimContainerObject_)
- *
+ * <p>
  * According to the Meta-Model for Systems-of-Systems (M2SoS),
  * an organization consists of multiple SystemEntities,
  * and driven by a task(s) to be accomplished by collective capabilities of the SystemEntities.
- *
+ * <p>
  * Interfaces: Simulatable, Movable
  *
  * @author ymbaek, ehcho, yjshin
@@ -35,7 +35,7 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
     protected ArrayList<Constituent> directCSList;      //CSs that only (directly) belong to this org
 
 
-    public Organization(SoS simModel, String orgId, String orgName){
+    public Organization(SoS simModel, String orgId, String orgName) {
         this.mySoS = simModel;
 
         this.id = orgId;
@@ -54,7 +54,7 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
     }
 
 
-    public Organization(SoS simModel, String orgId, String orgName, boolean isStatic, boolean isActivated, boolean isAvailable){
+    public Organization(SoS simModel, String orgId, String orgName, boolean isStatic, boolean isActivated, boolean isAvailable) {
         this.mySoS = simModel;
 
         this.id = orgId;
@@ -76,7 +76,7 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
     /**
      * Initialization of member lists
      */
-    public void initLists(){
+    public void initLists() {
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (Organization(" + this.id + "):initLists) Lists are initialized.");
 
@@ -88,41 +88,62 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
 
     /**
      * A method to check if a CS is contained or not
+     *
      * @param aCS a CS object to be checked
      * @return true if the CS is contained in this organization
      */
-    public boolean isContainedInAllMemberCSList(Constituent aCS){
+    public boolean isContainedInAllMemberCSList(Constituent aCS) {
         return this.allMemberCSList.contains(aCS);
     }
 
-    public boolean isContainedInDirectCSList(Constituent aCS){
+    /**
+     * @param aCS
+     * @return
+     */
+    public boolean isContainedInDirectCSList(Constituent aCS) {
         return this.directCSList.contains(aCS);
     }
 
-    public boolean isAlreadyContainedCS(Constituent aCS){
+    /**
+     * @param aCS
+     * @return
+     */
+    public boolean isCSAlreadyContainedInOrg(Constituent aCS) {
         boolean isContained = false;
 
-        if(allMemberCSList.contains(aCS) || directCSList.contains(aCS)){
+        if (allMemberCSList.contains(aCS) || directCSList.contains(aCS)) {
             isContained = true;
         }
 
-        for (Constituent cs : mySoS.getCsList()){
-            if (aCS.getId().equals(cs.getId())){
+        return isContained;
+    }
+
+    /**
+     * @param aCS
+     * @return
+     */
+    public boolean isCSAlreadyContainedInSoS(Constituent aCS) {
+        boolean isContained = false;
+
+        for (Constituent cs : mySoS.getCsList()) {
+            if (aCS.getId().equals(cs.getId())) {
                 isContained = true;
             }
         }
+
         return isContained;
     }
 
     /**
      * NOTE: this method inspects multiple sub-organizations
+     *
      * @param aCS
      * @return
      */
-    public boolean IsSubOrgsContainCS(Constituent aCS){
-        for (Organization suborg: this.subOrgList){
+    public boolean isSubOrgsContainCS(Constituent aCS) {
+        for (Organization suborg : this.subOrgList) {
             //If a sub-organization contains this CS as a member
-            if (suborg.isContainedInAllMemberCSList(aCS)){
+            if (suborg.isContainedInAllMemberCSList(aCS)) {
                 return true;
             }
         }
@@ -135,7 +156,7 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
     (Sub-Org, CS (member, direct))
      */
 
-    public void addSubOrg(Organization subOrg){
+    public void addSubOrg(Organization subOrg) {
         this.subOrgList.add(subOrg);
         subOrg.setParentOrg(this);
 
@@ -146,9 +167,10 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
     /**
      * Add a suborganization after this organization had been added into SoS
      * (for dynamic reconfiguration of an organization)
+     *
      * @param subOrg
      */
-    public void addSubOrgDynamically(Organization subOrg){
+    public void addSubOrgDynamically(Organization subOrg) {
         this.subOrgList.add(subOrg);
         subOrg.setParentOrg(this);
         this.getMySoS().addOrg(subOrg);
@@ -157,7 +179,7 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
         System.out.println("[" + timestamp + "] (Organization(" + this.id + "):addSubOrg) A sub-organization is added (id: " + subOrg.getId() + ").");
     }
 
-    public void removeSubOrg(Organization subOrg){
+    public void removeSubOrg(Organization subOrg) {
         this.subOrgList.remove(subOrg);
 
         timestamp = new Timestamp(System.currentTimeMillis());
@@ -165,12 +187,13 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
     }
 
     /**
-     *
      * @param aCS
+     * @param isDirect
      */
-    public void addCS(Constituent aCS, boolean isDirect){
+    public void addCS(Constituent aCS, boolean isDirect) {
 
-        if(!isAlreadyContainedCS(aCS)) {
+        //If aCS isn't contained in this organization
+        if (!isCSAlreadyContainedInOrg(aCS)) {
 
             //Set affiliated SoS (org's SoS = CS's SoS)
             aCS.setMySoS(this.getMySoS());
@@ -191,10 +214,25 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
                 //addCS() is called until top-level organization is reached.
                 this.getParentOrg().addCS(aCS, false);
             }
-        }else{
-            System.err.println("ERR");
         }
+
+        //If aCS is already contained in this organization
+        else {
+            timestamp = new Timestamp(System.currentTimeMillis());
+            System.err.println("[" + timestamp + "] ADD_CS_TO_ORG_FAILED: A CS to be added already exists in this Org (" + aCS.getId() + " in " + this.id + ").");
+        }
+
     }
+
+
+//    /**
+//     *
+//     * @param aCS
+//     * @param isDirect
+//     */
+//    public void addCSDynamically(Constituent aCS, boolean isDirect){
+//
+//    }
 //    public void addCS(Constituent aCS){
 //
 //        //If a CS is not included in an SoS before adding it into an org.
@@ -234,26 +272,25 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
 //    }
 
     /**
-     *
      * @param aCS
      */
-    public void removeCS(Constituent aCS){
+    public void removeCS(Constituent aCS) {
         timestamp = new Timestamp(System.currentTimeMillis());
 
         this.allMemberCSList.remove(aCS);
 
         //If this CS is also contained in the directed CS list,
         //the CS is removed from the DirectCSList
-        if (isContainedInDirectCSList(aCS)){
+        if (isContainedInDirectCSList(aCS)) {
             this.directCSList.remove(aCS);
         }
         //If this CS is not contained in the directed CS list,
-        else{
+        else {
             //For every sub-organizations,
-            for (Organization suborg: this.subOrgList){
+            for (Organization suborg : this.subOrgList) {
                 //If a sub organization contains this CS as a member CS,
                 //the CS is also removed from the sub-organization.
-                if (suborg.isContainedInAllMemberCSList(aCS)){
+                if (suborg.isContainedInAllMemberCSList(aCS)) {
                     suborg.removeCS(aCS);
                 }
             }
@@ -261,31 +298,30 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
 
         //If this organization is not a top-level organization,
         //the parent organization tries to add this CS as a direct CS.
-        if (parentOrg != null){
+        if (parentOrg != null) {
             parentOrg.tryToAddDirectCS(aCS);
         }
     }
 
     /**
-     *
      * @param aCS
      */
-    public void tryToAddDirectCS(Constituent aCS){
+    public void tryToAddDirectCS(Constituent aCS) {
         timestamp = new Timestamp(System.currentTimeMillis());
 
-        if (!this.IsSubOrgsContainCS(aCS)){
+        if (!this.isSubOrgsContainCS(aCS)) {
             this.addCSToDirectCSList(aCS);
         }
     }
 
 
-    public void addCSToDirectCSList(Constituent aCS){
+    public void addCSToDirectCSList(Constituent aCS) {
         timestamp = new Timestamp(System.currentTimeMillis());
 
         this.directCSList.add(aCS);
     }
 
-    public void removeCSFromDirectCSList(Constituent aCS){
+    public void removeCSFromDirectCSList(Constituent aCS) {
         timestamp = new Timestamp(System.currentTimeMillis());
 
         this.directCSList.remove(aCS);
