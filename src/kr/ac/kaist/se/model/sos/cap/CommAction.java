@@ -12,14 +12,14 @@ import kr.ac.kaist.se.model.sos.SoS;
  */
 public class CommAction extends _SimAction_ {
 
-    protected CommAction(SoS accessibleSoS,
+    public CommAction(SoS accessibleSoS,
                          _SimActionableObject_ actionSubject,
                          String actionId,
                          String actionName) {
         super(accessibleSoS, actionSubject, actionId, actionName);
     }
 
-    protected CommAction(SoS accessibleSoS,
+    public CommAction(SoS accessibleSoS,
                          _SimActionableObject_ actionSubject,
                          String actionId,
                          String actionName,

@@ -13,14 +13,14 @@ import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
  */
 public class MoveAction extends _SimAction_ {
 
-    protected MoveAction(SoS accessibleSoS,
+    public MoveAction(SoS accessibleSoS,
                          _SimActionableObject_ actionSubject,
                          String actionId,
                          String actionName) {
         super(accessibleSoS, actionSubject, actionId, actionName);
     }
 
-    protected MoveAction(SoS accessibleSoS,
+    public MoveAction(SoS accessibleSoS,
                          _SimActionableObject_ actionSubject,
                          String actionId,
                          String actionName,

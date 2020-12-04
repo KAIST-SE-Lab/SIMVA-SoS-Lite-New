@@ -3,6 +3,7 @@ import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.sos.Constituent;
 import kr.ac.kaist.se.model.sos.Organization;
 import kr.ac.kaist.se.model.sos.SoS;
+import kr.ac.kaist.se.model.sos.cap.MoveAction;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 
 public class ExampleCSType extends Constituent {
@@ -19,7 +20,7 @@ public class ExampleCSType extends Constituent {
 
     @Override
     protected void initActions() {
-
+        moveAction = new MoveAction(mySoS, this, "MOVEACTION01", "Move Action of ExampleCSType");
     }
 
 
