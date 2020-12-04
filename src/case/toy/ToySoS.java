@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 public class ToySoS extends SoS {
 
-    ToySoSMap toySoSMap;
+    //TODO: check 'public static'
+    public static ToySoSMap toySoSMap;
 
     public ToySoS() {
         super("TOYSOS01", "ToySoS");
@@ -70,41 +71,41 @@ public class ToySoS extends SoS {
 //        this.addCS(csI);    //Direct addition of a CS to SoS
 
 
-        /* Case 2: CS added -> Organizational structure */
-
-        this.addCS(csA);
-        this.addCS(csB);
-        this.addCS(csC);
-        this.addCS(csD);
-        this.addCS(csE);
-        this.addCS(csF);
-        this.addCS(csG);
-        this.addCS(csH);
-
-        org1.addSubOrg(org1A);
-        org1.addSubOrg(org1B);
-        org1A.addSubOrg(org1AA);
-
-        this.addOrg(org1);
-        this.addOrg(org2);
-
-
-        org1.addCS(csA, true);
-        org1.addCS(csB, true);
-        org1.addCS(csB, true); //duplicated
-        org1A.addCS(csC, true);
-        org1B.addCS(csD, true);
-        org1B.addCS(csE, true);
-        org1AA.addCS(csF, true);
-        org1AA.addCS(csG, true);
-
-        org2.addCS(csH, true);
-
-
-        /* Map Initialization */
-
-
-        printModelInfo();
+//        /* Case 2: CS added -> Organizational structure */
+//
+//        this.addCS(csA);
+//        this.addCS(csB);
+//        this.addCS(csC);
+//        this.addCS(csD);
+//        this.addCS(csE);
+//        this.addCS(csF);
+//        this.addCS(csG);
+//        this.addCS(csH);
+//
+//        org1.addSubOrg(org1A);
+//        org1.addSubOrg(org1B);
+//        org1A.addSubOrg(org1AA);
+//
+//        this.addOrg(org1);
+//        this.addOrg(org2);
+//
+//
+//        org1.addCS(csA, true);
+//        org1.addCS(csB, true);
+//        org1.addCS(csB, true); //duplicated
+//        org1A.addCS(csC, true);
+//        org1B.addCS(csD, true);
+//        org1B.addCS(csE, true);
+//        org1AA.addCS(csF, true);
+//        org1AA.addCS(csG, true);
+//
+//        org2.addCS(csH, true);
+//
+//
+//        /* Map Initialization */
+//
+//
+//        printModelInfo();
     }
 
     /**
@@ -115,9 +116,9 @@ public class ToySoS extends SoS {
         ArrayList<LocInformationVar> locInfos = new ArrayList<>();
 
         //TODO: Add domains for each dimensionVar
-        LocDimensionVar xDim = new LocDimensionVar();
-        LocDimensionVar yDim = new LocDimensionVar();
-        LocDimensionVar floorDim = new LocDimensionVar();
+        MapCoordinateDimensionType xDim = new MapCoordinateDimensionType();
+        MapCoordinateDimensionType yDim = new MapCoordinateDimensionType();
+        MapFloorDimensionType floorDim = new MapFloorDimensionType();
 
         mapDimensions.add(xDim);
         mapDimensions.add(yDim);
@@ -130,7 +131,7 @@ public class ToySoS extends SoS {
         locInfos.add(isAccessibleInfo);
         locInfos.add(isChargingStation);
 
-        toySoSMap = new ToySoSMap("MAP01", mapDimensions);
+        toySoSMap = new ToySoSMap("MAP01", "Map One", mapDimensions);
     }
 
 
@@ -143,4 +144,8 @@ public class ToySoS extends SoS {
     public UpdateResult update(RunResult runResult) {
         return null;
     }
+
+
+
+
 }

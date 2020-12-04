@@ -3,12 +3,16 @@ package kr.ac.kaist.se.model.abst.cap;
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.sos.SoS;
 
+import java.sql.Timestamp;
+
 /**
  * Abstract class to represent an action object
  *
  * @author ymbaek
  */
 public abstract class _SimAction_ {
+
+    protected Timestamp timestamp;    //Timestamp for stdout
 
     protected SoS accessibleSoS;    //Accessible SimModel (SoS)
     protected _SimActionableObject_ actionSubject;  //Subject who performs this action

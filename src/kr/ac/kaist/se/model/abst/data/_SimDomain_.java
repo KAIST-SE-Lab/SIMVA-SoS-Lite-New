@@ -1,5 +1,6 @@
 package kr.ac.kaist.se.model.abst.data;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -8,6 +9,9 @@ import java.util.ArrayList;
  * @author ymbaek
  */
 public abstract class _SimDomain_ {
+
+    protected Timestamp timestamp;    //Timestamp for stdout
+
     protected EnumDataDomainType domainType;
 
     protected boolean isLogical;

@@ -8,4 +8,5 @@ import kr.ac.kaist.se.model.abst.data._SimDataVariable_;
  * @author ymbaek
  */
 public class LocInformationVar extends _SimDataVariable_ {
+
 }

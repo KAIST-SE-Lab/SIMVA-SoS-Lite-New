@@ -1,5 +1,7 @@
 package kr.ac.kaist.se.model.abst.evnt;
 
+import java.sql.Timestamp;
+
 /**
  * Abstract class for event-based classes
  * SimScenarioEvent and SimLogEvent are type of _SimEvent_
@@ -7,6 +9,8 @@ package kr.ac.kaist.se.model.abst.evnt;
  * @author ymbaek
  */
 public abstract class _SimEvent_ {
+
+    protected Timestamp timestamp;    //Timestamp for stdout
 
     protected String id;                //id of an event
     protected String name;              //name of an event (used as a label)

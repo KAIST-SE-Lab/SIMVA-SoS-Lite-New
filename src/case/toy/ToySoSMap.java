@@ -4,11 +4,18 @@ import kr.ac.kaist.se.model.sos.data.LocDimensionVar;
 import java.util.ArrayList;
 
 public class ToySoSMap extends SimMap {
-    public ToySoSMap(String name) {
-        super(name);
+
+
+    public ToySoSMap(String mapId, String mapName) {
+        super(mapId, mapName);
     }
 
-    public ToySoSMap(String name, ArrayList<LocDimensionVar> mapDimensions) {
-        super(name, mapDimensions);
+    public ToySoSMap(String mapId, String mapName, ArrayList<LocDimensionVar> mapDimensions) {
+        super(mapId, mapName, mapDimensions);
+    }
+
+    @Override
+    protected void initializeMap() {
+
     }
 }

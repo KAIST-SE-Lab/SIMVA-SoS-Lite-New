@@ -1,11 +1,16 @@
 package kr.ac.kaist.se.model.abst.data;
 
+import java.sql.Timestamp;
+
 /**
  * Abstract class to represent a data variable
  *
  * @author ymbaek
  */
 public abstract class _SimDataVariable_ {
+
+    protected Timestamp timestamp;    //Timestamp for stdout
+
     protected String dataId;        //id of a data (variable)
     protected String dataName;      //name of a data (variable)
     protected String dataType;      //type of a data (variable)

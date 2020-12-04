@@ -3,6 +3,7 @@ package kr.ac.kaist.se.model.sos.cap;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.sos.SoS;
+import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 
 /**
  * A concrete class to represent an action for geographical movement.
@@ -36,5 +37,8 @@ public abstract class MoveAction extends _SimAction_ {
     @Override
     public void executeAction() {
 
+        //TODO: This code is a psuedo way to implement a MoveAction
+
+        ObjectLocation curLoc = new ObjectLocation();
     }
 }
