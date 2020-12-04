@@ -1,11 +1,16 @@
 import kr.ac.kaist.se.model.sos.EnumOrgType;
 import kr.ac.kaist.se.model.sos.SoS;
+import kr.ac.kaist.se.model.sos.data.LocDimensionVar;
+import kr.ac.kaist.se.model.sos.data.LocInformationVar;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class ToySoS extends SoS {
+
+    ToySoSMap toySoSMap;
 
     public ToySoS() {
         super("TOYSOS01", "ToySoS");
@@ -96,8 +101,36 @@ public class ToySoS extends SoS {
         org2.addCS(csH, true);
 
 
+        /* Map Initialization */
+
 
         printModelInfo();
+    }
+
+    /**
+     * Initialization of a map
+     */
+    private void initMap(){
+        ArrayList<LocDimensionVar> mapDimensions = new ArrayList<>();
+        ArrayList<LocInformationVar> locInfos = new ArrayList<>();
+
+        //TODO: Add domains for each dimensionVar
+        LocDimensionVar xDim = new LocDimensionVar();
+        LocDimensionVar yDim = new LocDimensionVar();
+        LocDimensionVar floorDim = new LocDimensionVar();
+
+        mapDimensions.add(xDim);
+        mapDimensions.add(yDim);
+        mapDimensions.add(floorDim);
+
+        //TODO: Add domains for each informationVar
+        LocInformationVar isAccessibleInfo = new LocInformationVar();
+        LocInformationVar isChargingStation = new LocInformationVar();
+
+        locInfos.add(isAccessibleInfo);
+        locInfos.add(isChargingStation);
+
+        toySoSMap = new ToySoSMap("MAP01", mapDimensions);
     }
 
 

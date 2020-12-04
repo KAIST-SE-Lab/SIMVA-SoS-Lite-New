@@ -3,6 +3,7 @@ package kr.ac.kaist.se.model.sos;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
 import kr.ac.kaist.se.model.intf.Movable;
+import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ import java.util.LinkedList;
  * @author ymbaek, ehcho, yjshin
  */
 public abstract class Organization extends _SimContainerObject_ implements Movable {
+
+    protected ObjectLocation orgObjectLocation;
 
     protected SoS mySoS;                //SoS that this organization belongs to
     protected Organization parentOrg;   //Organization that this organization belongs to
@@ -84,6 +87,8 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
         allMemberCSList = new ArrayList<>();
         directCSList = new ArrayList<>();
     }
+
+
 
 
     /**
@@ -330,6 +335,18 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
 
 
     /* Getters & Setters */
+
+    /**
+     * A method that returns current location of this object
+     * @return ObjectLocation of this organization
+     */
+    public ObjectLocation getCurLocation() {
+        return orgObjectLocation;
+    }
+
+    public void setOrgObjectLocation(ObjectLocation orgObjectLocation) {
+        this.orgObjectLocation = orgObjectLocation;
+    }
 
     public SoS getMySoS() {
         return mySoS;

@@ -1,5 +1,6 @@
 import kr.ac.kaist.se.model.sos.Organization;
 import kr.ac.kaist.se.model.sos.SoS;
+import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
