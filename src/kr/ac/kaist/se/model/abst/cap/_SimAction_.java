@@ -20,14 +20,23 @@ public abstract class _SimAction_ {
     protected float actionCost = -1;    //cost for action execution
     protected float actionBenefit = -1; //benefit from action execution
 
-
-    protected _SimAction_(SoS accessibleSoS,
+    protected  _SimAction_(SoS accessibleSoS,
                        _SimActionableObject_ actionSubject,
                        String actionId,
-                       String actionName,
-                       int actionDuration,
-                       float actionCost,
-                       float actionBenefit) {
+                       String actionName) {
+        this.accessibleSoS = accessibleSoS;
+        this.actionSubject = actionSubject;
+        this.actionId = actionId;
+        this.actionName = actionName;
+    }
+
+    protected _SimAction_(SoS accessibleSoS,
+                          _SimActionableObject_ actionSubject,
+                          String actionId,
+                          String actionName,
+                          int actionDuration,
+                          float actionCost,
+                          float actionBenefit) {
         this.accessibleSoS = accessibleSoS;
         this.actionSubject = actionSubject;
         this.actionId = actionId;

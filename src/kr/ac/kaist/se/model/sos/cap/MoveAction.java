@@ -9,7 +9,14 @@ import kr.ac.kaist.se.model.sos.SoS;
  *
  * @author ymbaek
  */
-public class MoveAction extends _SimAction_ {
+public abstract class MoveAction extends _SimAction_ {
+
+    protected MoveAction(SoS accessibleSoS,
+                         _SimActionableObject_ actionSubject,
+                         String actionId,
+                         String actionName) {
+        super(accessibleSoS, actionSubject, actionId, actionName);
+    }
 
     protected MoveAction(SoS accessibleSoS,
                          _SimActionableObject_ actionSubject,

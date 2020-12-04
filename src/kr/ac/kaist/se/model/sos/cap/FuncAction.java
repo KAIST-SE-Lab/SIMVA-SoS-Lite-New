@@ -15,6 +15,13 @@ public abstract class FuncAction extends _SimAction_ {
     protected FuncAction(SoS accessibleSoS,
                          _SimActionableObject_ actionSubject,
                          String actionId,
+                         String actionName) {
+        super(accessibleSoS, actionSubject, actionId, actionName);
+    }
+
+    protected FuncAction(SoS accessibleSoS,
+                         _SimActionableObject_ actionSubject,
+                         String actionId,
                          String actionName,
                          int actionDuration,
                          float actionCost,
