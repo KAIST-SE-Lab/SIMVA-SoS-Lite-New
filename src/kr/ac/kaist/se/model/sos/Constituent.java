@@ -6,6 +6,7 @@ import kr.ac.kaist.se.model.intf.Communicatable;
 import kr.ac.kaist.se.model.intf.DecisionMakeable;
 import kr.ac.kaist.se.model.intf.Movable;
 import kr.ac.kaist.se.model.intf.Stateful;
+import kr.ac.kaist.se.model.sos.cap.MoveAction;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 
 import java.util.LinkedList;
@@ -27,6 +28,8 @@ public abstract class Constituent extends _SimActionableObject_
 
     protected SoS mySoS;                //SoS that this object belongs to
     protected Organization myOrg;       //Organization that this object belongs to
+
+    protected MoveAction moveAction;
 
     //TODO: knowledge base
     //TODO: decision making
@@ -64,6 +67,9 @@ public abstract class Constituent extends _SimActionableObject_
 
         printObjInfo();
     }
+
+
+
 
 
     /* Getters & Setters */

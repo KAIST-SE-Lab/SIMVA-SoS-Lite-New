@@ -13,7 +13,7 @@ import kr.ac.kaist.se.model.abst.data._SimDataVariable_;
  */
 public abstract class LocDimensionVar extends _SimDataVariable_ {
 
-    protected abstract void increaseValueOfDim(int diff);
-    protected abstract void decreaseValueOfDim(int diff);
+    public abstract void increaseValueOfDim(int diff);
+    public abstract void decreaseValueOfDim(int diff);
 
 }

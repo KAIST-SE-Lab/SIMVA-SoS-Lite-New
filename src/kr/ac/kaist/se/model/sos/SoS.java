@@ -2,6 +2,7 @@ package kr.ac.kaist.se.model.sos;
 
 import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
+import kr.ac.kaist.se.model.map.SimMap;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 
 import java.sql.Timestamp;
@@ -38,6 +39,9 @@ public abstract class SoS extends _SimContainerObject_ {
     //Resource
 
     /* Environment entities */
+
+    /* Map */
+    public SimMap sosMap;
 
 
     public SoS(String sosId, String sosName){

@@ -37,6 +37,13 @@ public abstract class _SimActionableObject_ extends _SimObject_ implements Actio
         return updateResult;
     }
 
+    /* Abstract methods */
+
+    /**
+     * Initialization of actions
+     */
+    protected abstract void initActions();
+
     /**
      * Select an action(s) and store into selectedActionList
      */

@@ -7,6 +7,7 @@ import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 
 public class ExampleCSType extends Constituent {
 
+
     public ExampleCSType(SoS simModel, Organization myOrg, String csId, String csName) {
         super(simModel, myOrg, csId, csName);
     }
@@ -14,6 +15,13 @@ public class ExampleCSType extends Constituent {
     public ExampleCSType(SoS simModel, Organization myOrg, String csId, String csName, boolean isStatic, boolean isActivated, boolean isAvailable) {
         super(simModel, myOrg, csId, csName, isStatic, isActivated, isAvailable);
     }
+
+
+    @Override
+    protected void initActions() {
+
+    }
+
 
     @Override
     protected void selectActions() {

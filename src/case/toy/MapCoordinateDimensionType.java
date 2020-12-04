@@ -7,12 +7,12 @@ import kr.ac.kaist.se.model.sos.data.LocDimensionVar;
  */
 public class MapCoordinateDimensionType extends LocDimensionVar {
     @Override
-    protected void increaseValueOfDim(int diff) {
+    public void increaseValueOfDim(int diff) {
 
     }
 
     @Override
-    protected void decreaseValueOfDim(int diff) {
+    public void decreaseValueOfDim(int diff) {
 
     }
 }

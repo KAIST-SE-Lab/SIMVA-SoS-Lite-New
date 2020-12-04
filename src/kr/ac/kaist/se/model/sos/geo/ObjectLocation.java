@@ -7,4 +7,12 @@ import java.util.ArrayList;
 public class ObjectLocation {
 
     ArrayList<LocDimensionVar> objLocDims;
+
+    public ArrayList<LocDimensionVar> getObjLocDims() {
+        return objLocDims;
+    }
+
+    public void setObjLocDims(ArrayList<LocDimensionVar> objLocDims) {
+        this.objLocDims = objLocDims;
+    }
 }

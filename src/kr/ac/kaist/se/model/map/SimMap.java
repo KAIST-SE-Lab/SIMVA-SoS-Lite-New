@@ -15,7 +15,7 @@ import java.util.HashMap;
 public abstract class SimMap extends _SimMap_ {
 
     //Dimensions of this map
-    protected ArrayList<LocDimensionVar> mapDimensions;
+    public ArrayList<LocDimensionVar> mapDimensions;
 
     //Hashmap to store objects' locations
     protected HashMap<ObjectLocation, ArrayList<_SimObject_>> objLocationHashMap;
