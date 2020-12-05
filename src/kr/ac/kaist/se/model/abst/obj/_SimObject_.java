@@ -2,6 +2,7 @@ package kr.ac.kaist.se.model.abst.obj;
 
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.intf.Simulatable;
+import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 
 import java.sql.Timestamp;
 import java.util.Queue;
@@ -28,6 +29,9 @@ public abstract class _SimObject_ implements Simulatable {
     /** Available object / Unavailable object */
     protected boolean isAvailable;
 
+    /** Current location of this object */
+    protected ObjectLocation objLocation;   //Every SimObject has its geo-location
+
     /** Queue for storing incoming messages from other objects */
     protected Queue<_SimMessage_> msgQueue;
 
@@ -50,6 +54,8 @@ public abstract class _SimObject_ implements Simulatable {
         }
 
     }
+
+
 
     public String getId() {
         return id;
@@ -89,6 +95,18 @@ public abstract class _SimObject_ implements Simulatable {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    /**
+     * A method that returns current location of this object
+     * @return ObjectLocation of this organization
+     */
+    public ObjectLocation getCurLocation() {
+        return objLocation;
+    }
+
+    public void setObjLocation(ObjectLocation objLocation) {
+        this.objLocation = objLocation;
     }
 
     public Queue<_SimMessage_> getMsgQueue() {

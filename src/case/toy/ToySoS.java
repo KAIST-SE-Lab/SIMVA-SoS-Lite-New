@@ -1,8 +1,9 @@
 import kr.ac.kaist.se.model.abst.data._SimDomain_;
 import kr.ac.kaist.se.model.sos.EnumOrgType;
 import kr.ac.kaist.se.model.sos.SoS;
-import kr.ac.kaist.se.model.sos.data.LocDimensionVar;
-import kr.ac.kaist.se.model.sos.data.LocInformationVar;
+import kr.ac.kaist.se.model.sos.data.DataVarDomain;
+import kr.ac.kaist.se.model.sos.data.DimensionVar;
+import kr.ac.kaist.se.model.sos.data.DataVar;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
@@ -53,6 +54,8 @@ public class ToySoS extends SoS {
         initOrgs();
         initCSs();
         initData();
+
+        initMap();
 
 
 
@@ -172,21 +175,21 @@ public class ToySoS extends SoS {
      * Initialization of a map
      */
     private void initMap(){
-        ArrayList<LocDimensionVar> mapDimensions = new ArrayList<>();
-        ArrayList<LocInformationVar> locInfos = new ArrayList<>();
+        ArrayList<DimensionVar> mapDimensions = new ArrayList<>();
+        ArrayList<DataVar> dataVarList = new ArrayList<>();
 
         //TODO: Add domains for each dimensionVar
-        MapCoordinateDimensionType xDim = new MapCoordinateDimensionType();
-        MapCoordinateDimensionType yDim = new MapCoordinateDimensionType();
-        MapFloorDimensionType floorDim = new MapFloorDimensionType();
+        MapCoordinateDimensionType xDim = new MapCoordinateDimensionType("DIM_X", "xDimension", "Int");
+        MapCoordinateDimensionType yDim = new MapCoordinateDimensionType("DIM_Y", "yDimension", "Int");
+        MapFloorDimensionType floorDim = new MapFloorDimensionType("DIM_FLOOR", "floorNumDimension", "Enum");
 
         mapDimensions.add(xDim);
         mapDimensions.add(yDim);
         mapDimensions.add(floorDim);
 
         //TODO: Add domains for each informationVar
-//        LocInformationVar isAccessibleInfo = new LocInformationVar();
-//        LocInformationVar isChargingStation = new LocInformationVar();
+//        DataVar isAccessibleInfo = new DataVar();
+//        DataVar isChargingStation = new DataVar();
 //
 //        locInfos.add(isAccessibleInfo);
 //        locInfos.add(isChargingStation);
@@ -204,7 +207,7 @@ public class ToySoS extends SoS {
         return null;
     }
 
-    class ExampleDataDomain extends _SimDomain_{
+    class ExampleDataDomain extends DataVarDomain {
 
     }
 }

@@ -1,6 +1,7 @@
 package kr.ac.kaist.se.model.abst.data;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * Abstract class to represent a data variable
@@ -18,11 +19,16 @@ public abstract class _SimDataVariable_ {
     private Integer integerData;
     private Float floatData;
     private String stringData;
+    private ArrayList<String> enumData;
 
     protected String dataDefaultValue;  //default value of a data (variable)
     protected String dataCurValue;      //current value of a data (variable)
 
-    protected _SimDomain_ dataDomain;   //domain of a data variable (min-max/enum)
+    protected boolean isEnumData = false;
+    protected boolean isValueAssigned = false;
+    protected boolean isDomainConstrained = false;
+
+//    protected _SimDomain_ dataDomain;   //domain of a data variable (min-max/enum)
 
 
     public _SimDataVariable_(String dataId, String dataName, String dataType) {
@@ -35,60 +41,42 @@ public abstract class _SimDataVariable_ {
 
     }
 
-    public _SimDataVariable_(String dataId, String dataName, String dataType, _SimDomain_ dataDomain) {
-        this.dataId = dataId;
-        this.dataName = dataName;
-        this.dataType = dataType;
-        this.dataDomain = dataDomain;
 
-        setActualDataTypeVar(this.dataType);
-        printDataCreation();
-
-    }
-
-//    public _SimDataVariable_(String dataId, String dataName, String dataType, String dataCurValue, _SimDomain_ dataDomain) {
-//        this.dataId = dataId;
-//        this.dataName = dataName;
-//        this.dataType = dataType;
-//        this.dataCurValue = dataCurValue;
-//        this.dataDomain = dataDomain;
-//
-//        printDataCreation();
-//        setActualDataTypeVar(this.dataType);
-//    }
-
-
-    public _SimDataVariable_(String dataId, String dataName, String dataType, String dataDefaultValue, _SimDomain_ dataDomain) {
+    public _SimDataVariable_(String dataId, String dataName, String dataType, String dataDefaultValue) {
         this.dataId = dataId;
         this.dataName = dataName;
         this.dataType = dataType;
         this.dataDefaultValue = dataDefaultValue;
-        this.dataDomain = dataDomain;
+
+        this.dataCurValue = dataDefaultValue;
+        isValueAssigned = true;
 
         setActualDataTypeVar(this.dataType);
         printDataCreation();
 
     }
 
-    public _SimDataVariable_(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue, _SimDomain_ dataDomain) {
+    public _SimDataVariable_(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue) {
         this.dataId = dataId;
         this.dataName = dataName;
         this.dataType = dataType;
         this.dataDefaultValue = dataDefaultValue;
         this.dataCurValue = dataCurValue;
-        this.dataDomain = dataDomain;
+
+        isValueAssigned = true;
 
         setActualDataTypeVar(this.dataType);
         printDataCreation();
 
     }
 
-    private void printDataCreation(){
+    protected void printDataCreation(){
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") A data object (_SimDataVariable_) is created (" +
-                dataId + ", " + dataName + ", " + dataType + ", " + dataDefaultValue + ", " + dataCurValue + ", " + dataDomain.getDomainType() + ").");
+                dataId + ", " + dataName + ", " + dataType + ", " + dataDefaultValue + ", " + dataCurValue + ").");
 
     }
+
 
 
     /**
@@ -98,9 +86,12 @@ public abstract class _SimDataVariable_ {
      * @param dataType Data type of this _SimDataVariable_
      */
     private void setActualDataTypeVar(String dataType){
+//        System.out.println(dataType);
+
+        timestamp = new Timestamp(System.currentTimeMillis());
+
 
         if(dataCurValue != null) {
-
             //Integer data
             if (dataType.equals("INT") ||
                     dataType.equals("int") ||
@@ -108,6 +99,7 @@ public abstract class _SimDataVariable_ {
                     dataType.equals("INTEGER") ||
                     dataType.equals("integer")) {
                 //Integer.parseInt(this.dataCurValue);
+                System.out.println("INT");
                 integerData = Integer.valueOf(dataCurValue);
             }
             //Float data
@@ -117,6 +109,7 @@ public abstract class _SimDataVariable_ {
                     dataType.equals("DOUBLE") ||
                     dataType.equals("double") ||
                     dataType.equals("Double")) {
+                System.out.println("DOUBLE");
                 floatData = Float.valueOf(dataCurValue);
             }
             //String data
@@ -125,6 +118,7 @@ public abstract class _SimDataVariable_ {
                     dataType.equals("String") ||
                     dataType.equals("STR") ||
                     dataType.equals("str")) {
+                System.out.println("STR");
                 stringData = dataCurValue;
             }
             //Enumeration / Enumeration String data
@@ -134,17 +128,32 @@ public abstract class _SimDataVariable_ {
                     dataType.equals("ENUMSTRING") ||
                     dataType.equals("enumstring") ||
                     dataType.equals("EnumString")) {
-
+                System.out.println("ENUM");
+                isEnumData = true;
             }
         }
         else{
 
         }
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") Actual data: " + integerData + " | " + floatData + " | " + stringData);
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") Actual data: " + integerData + " | " + floatData + " | " + stringData + " | " + isEnumData);
 
     }
 
-    //    public String
+
+    /**
+     * A method to check if the given value is valid according to its domain definition.
+     * If the dataValue exceeds the domain or outlies from the domain, it returns false.
+     *
+     * @param dataValue a value to be checked
+     * @return true if the given value is valid
+     */
+    protected boolean isValidValue(String dataValue){
+        return true;
+    }
+
+
+
+    /* Getters & Setters */
 
     public String getDataId() {
         return dataId;
@@ -179,15 +188,6 @@ public abstract class _SimDataVariable_ {
         //TODO: Domain check
         this.dataCurValue = dataCurValue;
     }
-
-    public _SimDomain_ getDataDomain() {
-        return dataDomain;
-    }
-
-    public void setDataDomain(_SimDomain_ dataDomain) {
-        this.dataDomain = dataDomain;
-    }
-
     public int getIntegerData() {
         return integerData;
     }
@@ -210,5 +210,29 @@ public abstract class _SimDataVariable_ {
 
     public void setStringData(String stringData) {
         this.stringData = stringData;
+    }
+
+    public void setIntegerData(Integer integerData) {
+        this.integerData = integerData;
+    }
+
+    public void setFloatData(Float floatData) {
+        this.floatData = floatData;
+    }
+
+    public ArrayList<String> getEnumData() {
+        return enumData;
+    }
+
+    public void setEnumData(ArrayList<String> enumData) {
+        this.enumData = enumData;
+    }
+
+    public String getDataDefaultValue() {
+        return dataDefaultValue;
+    }
+
+    public void setDataDefaultValue(String dataDefaultValue) {
+        this.dataDefaultValue = dataDefaultValue;
     }
 }

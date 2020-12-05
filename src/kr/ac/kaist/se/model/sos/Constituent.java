@@ -24,7 +24,6 @@ import java.util.LinkedList;
 public abstract class Constituent extends _SimActionableObject_
         implements Stateful, Movable, Communicatable, DecisionMakeable {
 
-    protected ObjectLocation csObjectLocation;
 
     protected SoS mySoS;                //SoS that this object belongs to
     protected Organization myOrg;       //Organization that this object belongs to
@@ -74,17 +73,6 @@ public abstract class Constituent extends _SimActionableObject_
 
     /* Getters & Setters */
 
-    /**
-     * A method that returns current location of this object
-     * @return ObjectLocation of this organization
-     */
-    public ObjectLocation getCurLocation() {
-        return csObjectLocation;
-    }
-
-    public void setCsObjectLocation(ObjectLocation csObjectLocation) {
-        this.csObjectLocation = csObjectLocation;
-    }
 
     public SoS getMySoS() {
         return mySoS;

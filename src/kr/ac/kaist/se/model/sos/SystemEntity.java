@@ -23,8 +23,6 @@ import java.util.LinkedList;
 public abstract class SystemEntity extends _SimActionableObject_
         implements Stateful, Communicatable, Movable {
 
-    protected ObjectLocation systemObjectLocation;
-
     protected SoS mySoS;                //SoS that this object belongs to
     protected Infrastructure myInfra;   //Infrastructure that this object belongs to
 
@@ -65,13 +63,6 @@ public abstract class SystemEntity extends _SimActionableObject_
 
     /* Getters & Setters */
 
-    public ObjectLocation getCurLocation() {
-        return systemObjectLocation;
-    }
-
-    public void setSystemObjectLocation(ObjectLocation systemObjectLocation) {
-        this.systemObjectLocation = systemObjectLocation;
-    }
 
     public SoS getMySoS() {
         return mySoS;

@@ -10,8 +10,6 @@ import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
  */
 public interface Movable {
 
-    //TODO: check return
-    ObjectLocation getCurLocation();
 
     //TODO: check return
     void move();

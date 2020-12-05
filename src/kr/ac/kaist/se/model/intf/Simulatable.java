@@ -1,5 +1,6 @@
 package kr.ac.kaist.se.model.intf;
 
+import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
@@ -10,6 +11,15 @@ import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
  * @author ymbaek
  */
 public interface Simulatable {
+
+    /**
+     * Every SimObject has its current location information,
+     * thus curLocation can be obtained by calling this method
+     *
+     * @return current location of this simulatable object
+     */
+    ObjectLocation getCurLocation();
+
     /**
      * The method run() executes own behaviors, such as actions,
      * by selecting actions among capable actions (a set of actions, i.e., actionList).

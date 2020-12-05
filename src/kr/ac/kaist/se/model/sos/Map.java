@@ -1,8 +1,8 @@
 package kr.ac.kaist.se.model.sos;
 
 import kr.ac.kaist.se.model.abst.geo._SimMap_;
-import kr.ac.kaist.se.model.sos.data.LocDimensionVar;
-import kr.ac.kaist.se.model.sos.data.LocInformationVar;
+import kr.ac.kaist.se.model.sos.data.DimensionVar;
+import kr.ac.kaist.se.model.sos.data.DataVar;
 
 import java.util.ArrayList;
 
@@ -19,6 +19,6 @@ public abstract class Map extends _SimMap_ {
     protected String mapName;
      */
 
-    protected ArrayList<LocDimensionVar> locDimensionVarList;
-    protected ArrayList<LocInformationVar> locInformationVarList;
+    protected ArrayList<DimensionVar> dimensionVarList;
+    protected ArrayList<DataVar> dataVarList;
 }

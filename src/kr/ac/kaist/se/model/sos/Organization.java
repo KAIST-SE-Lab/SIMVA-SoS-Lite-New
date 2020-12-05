@@ -23,8 +23,6 @@ import java.util.LinkedList;
  */
 public abstract class Organization extends _SimContainerObject_ implements Movable {
 
-    protected ObjectLocation orgObjectLocation;
-
     protected SoS mySoS;                //SoS that this organization belongs to
     protected Organization parentOrg;   //Organization that this organization belongs to
 
@@ -335,18 +333,6 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
 
 
     /* Getters & Setters */
-
-    /**
-     * A method that returns current location of this object
-     * @return ObjectLocation of this organization
-     */
-    public ObjectLocation getCurLocation() {
-        return orgObjectLocation;
-    }
-
-    public void setOrgObjectLocation(ObjectLocation orgObjectLocation) {
-        this.orgObjectLocation = orgObjectLocation;
-    }
 
     public SoS getMySoS() {
         return mySoS;

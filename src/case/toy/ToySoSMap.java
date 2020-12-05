@@ -1,5 +1,5 @@
 import kr.ac.kaist.se.model.map.SimMap;
-import kr.ac.kaist.se.model.sos.data.LocDimensionVar;
+import kr.ac.kaist.se.model.sos.data.DimensionVar;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class ToySoSMap extends SimMap {
         super(mapId, mapName);
     }
 
-    public ToySoSMap(String mapId, String mapName, ArrayList<LocDimensionVar> mapDimensions) {
+    public ToySoSMap(String mapId, String mapName, ArrayList<DimensionVar> mapDimensions) {
         super(mapId, mapName, mapDimensions);
     }
 

@@ -1,18 +1,18 @@
 package kr.ac.kaist.se.model.sos.geo;
 
-import kr.ac.kaist.se.model.sos.data.LocDimensionVar;
+import kr.ac.kaist.se.model.sos.data.DimensionVar;
 
 import java.util.ArrayList;
 
 public class ObjectLocation {
 
-    ArrayList<LocDimensionVar> objLocDims;
+    ArrayList<DimensionVar> objLocDims;
 
-    public ArrayList<LocDimensionVar> getObjLocDims() {
+    public ArrayList<DimensionVar> getObjLocDims() {
         return objLocDims;
     }
 
-    public void setObjLocDims(ArrayList<LocDimensionVar> objLocDims) {
+    public void setObjLocDims(ArrayList<DimensionVar> objLocDims) {
         this.objLocDims = objLocDims;
     }
 }
