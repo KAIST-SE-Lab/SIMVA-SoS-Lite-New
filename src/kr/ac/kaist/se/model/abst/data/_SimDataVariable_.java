@@ -187,6 +187,8 @@ public abstract class _SimDataVariable_ {
     public void setDataCurValue(String dataCurValue) {
         //TODO: Domain check
         this.dataCurValue = dataCurValue;
+
+        setActualDataTypeVar(this.dataType);
     }
     public int getIntegerData() {
         return integerData;
