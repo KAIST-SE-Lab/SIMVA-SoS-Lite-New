@@ -1,6 +1,7 @@
 package kr.ac.kaist.se.model.map;
 
 import kr.ac.kaist.se.model.abst.geo._SimMap_;
+import kr.ac.kaist.se.model.abst.data._SimDataVariable_;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
 import kr.ac.kaist.se.model.sos.data.LocDimensionVar;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
@@ -18,7 +19,7 @@ public abstract class SimMap extends _SimMap_ {
     public ArrayList<LocDimensionVar> mapDimensions;
 
     //Hashmap to store objects' locations
-    protected HashMap<ObjectLocation, ArrayList<_SimObject_>> objLocationHashMap;
+    protected HashMap<ArrayList<_SimDataVariable_>, ArrayList<_SimObject_>> objLocationHashMap;
 
     public SimMap(String mapId, String mapName) {
         this.mapId = mapId;
