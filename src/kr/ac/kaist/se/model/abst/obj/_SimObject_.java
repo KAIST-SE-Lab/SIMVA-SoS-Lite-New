@@ -5,6 +5,7 @@ import kr.ac.kaist.se.model.intf.Simulatable;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 
 import java.sql.Timestamp;
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
@@ -33,7 +34,7 @@ public abstract class _SimObject_ implements Simulatable {
     protected ObjectLocation objLocation;   //Every SimObject has its geo-location
 
     /** Queue for storing incoming messages from other objects */
-    protected Queue<_SimMessage_> msgQueue;
+    protected Queue<_SimMessage_> msgQueue = new LinkedList<>();
 
 
     /**

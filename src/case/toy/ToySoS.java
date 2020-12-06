@@ -59,27 +59,27 @@ public class ToySoS extends SoS {
 
 
 
-        /* Case 1: Organizational structure -> CS added */
-
-        org1.addSubOrg(org1A);
-        org1.addSubOrg(org1B);
-        org1A.addSubOrg(org1AA);
-
-        org1.addCS(csA, true);
-        org1.addCS(csB, true);
-        org1.addCS(csB, true); //duplicated
-        org1A.addCS(csC, true);
-        org1B.addCS(csD, true);
-        org1B.addCS(csE, true);
-        org1AA.addCS(csF, true);
-        org1AA.addCS(csG, true);
-
-        org2.addCS(csH, true);
-
-        this.addOrg(org1);
-        this.addOrg(org2);
-
-        this.addCS(csI);    //Direct addition of a CS to SoS
+//        /* Case 1: Organizational structure -> CS added */
+//
+//        org1.addSubOrg(org1A);
+//        org1.addSubOrg(org1B);
+//        org1A.addSubOrg(org1AA);
+//
+//        org1.addCS(csA, true);
+//        org1.addCS(csB, true);
+//        org1.addCS(csB, true); //duplicated
+//        org1A.addCS(csC, true);
+//        org1B.addCS(csD, true);
+//        org1B.addCS(csE, true);
+//        org1AA.addCS(csF, true);
+//        org1AA.addCS(csG, true);
+//
+//        org2.addCS(csH, true);
+//
+//        this.addOrg(org1);
+//        this.addOrg(org2);
+//
+//        this.addCS(csI);    //Direct addition of a CS to SoS
 
 
         /* Case 2: CS added -> Organizational structure */
@@ -175,17 +175,6 @@ public class ToySoS extends SoS {
      * Initialization of a map
      */
     private void initMap(){
-        ArrayList<DimensionVar> mapDimensions = new ArrayList<>();
-        ArrayList<DataVar> dataVarList = new ArrayList<>();
-
-        //TODO: Add domains for each dimensionVar
-        MapCoordinateDimensionType xDim = new MapCoordinateDimensionType("DIM_X", "xDimension", "Int");
-        MapCoordinateDimensionType yDim = new MapCoordinateDimensionType("DIM_Y", "yDimension", "Int");
-        MapFloorDimensionType floorDim = new MapFloorDimensionType("DIM_FLOOR", "floorNumDimension", "Enum");
-
-        mapDimensions.add(xDim);
-        mapDimensions.add(yDim);
-        mapDimensions.add(floorDim);
 
         //TODO: Add domains for each informationVar
 //        DataVar isAccessibleInfo = new DataVar();
@@ -194,7 +183,12 @@ public class ToySoS extends SoS {
 //        locInfos.add(isAccessibleInfo);
 //        locInfos.add(isChargingStation);
 
-        toySoSMap = new ToySoSMap("MAP01", "Map One", mapDimensions);
+        toySoSMap = new ToySoSMap("MAP01", "Toy SoS Map 01");
+
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (ToySoS:initMap) An SoSMap is initialized.");
+
+        sosMap = toySoSMap;
     }
 
     @Override

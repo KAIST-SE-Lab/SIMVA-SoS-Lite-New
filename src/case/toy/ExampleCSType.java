@@ -20,7 +20,16 @@ public class ExampleCSType extends Constituent {
 
     @Override
     protected void initActions() {
-        moveAction = new MoveAction(mySoS, this, "MOVEACTION01", "Move Action of ExampleCSType");
+        //moveAction = new MoveAction(mySoS, this, "MOVEACTION01", "Move Action of ExampleCSType");
+
+        //mySoS.sosMap.mapDimensions.
+
+        initMoveActions();
+
+    }
+
+    private void initMoveActions(){
+
     }
 
 

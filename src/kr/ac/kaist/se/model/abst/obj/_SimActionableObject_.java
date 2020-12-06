@@ -15,8 +15,11 @@ import java.util.ArrayList;
  */
 public abstract class _SimActionableObject_ extends _SimObject_ implements Actionable {
 
-    protected ArrayList<_SimAction_> capableActionList;
-    protected ArrayList<_SimAction_> selectedActionList;
+    //List of capable actions
+    protected ArrayList<_SimAction_> capableActionList = new ArrayList<>();
+
+    //List of selected actions for execution of a particular tick
+    protected ArrayList<_SimAction_> selectedActionList = new ArrayList<>();
 
 
     /**

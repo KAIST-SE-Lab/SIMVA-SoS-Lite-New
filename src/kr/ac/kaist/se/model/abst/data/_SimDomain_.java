@@ -12,18 +12,67 @@ public abstract class _SimDomain_ {
 
     protected Timestamp timestamp;    //Timestamp for stdout
 
-    protected EnumDataDomainType domainType;
+    protected EnumDataDomainType domainType;    //Type of domain
 
-    protected boolean isLogical;
-    protected boolean isDiscrete;
+    protected double domainMinVal;  //Minimum value
+    protected double domainMaxVal;  //Maximum value
 
-    protected String defaultValue;
+    protected ArrayList<String> domainEnumVal = new ArrayList<>();  //Allowed enumeration values
 
-    protected double domainMinVal;
-    protected double domainMaxVal;
 
-    protected ArrayList<String> domainEnumVal;
+    /**
+     * A method to check if a given value is valid according to this domain.
+     * This method is overloaded according to the data type of the value.
+     *
+     * @return true if a given value is valid
+     */
+    /* For integer variable */
+    public boolean isValidValue(int value){
+        if (domainType == EnumDataDomainType.VALUE_RANGE){
+            //If the value is lower than domainMinVal or exceeds domainMaxVal
+            if (!(value >= domainMinVal && value <= domainMaxVal)){
+                return false;
+            }
+        }
+        //Wrong domainType
+        else{
+            return false;
+        }
+        return true;
+    }
 
+    /* For float variable */
+    public boolean isValidValue(float value){
+        if (domainType == EnumDataDomainType.VALUE_RANGE){
+            //If the value is lower than domainMinVal or exceeds domainMaxVal
+            if (!(value >= domainMinVal && value <= domainMaxVal)){
+                return false;
+            }
+        }
+        //Wrong domainType
+        else{
+            return false;
+        }
+        return true;
+    }
+
+    /* For enumeration variable */
+    public boolean isValidValue(String value){
+        boolean isAllowed = false;
+        if (domainType == EnumDataDomainType.ENUMERATION){
+            //If the value is lower than domainMinVal or exceeds domainMaxVal
+            for (String allowedString : domainEnumVal){
+                if (value.equals(allowedString)){
+                    isAllowed = true;
+                }
+            }
+        }
+        //Wrong domainType
+        else{
+            return false;
+        }
+        return isAllowed;
+    }
 
 
     public EnumDataDomainType getDomainType() {
@@ -32,30 +81,6 @@ public abstract class _SimDomain_ {
 
     public void setDomainType(EnumDataDomainType domainType) {
         this.domainType = domainType;
-    }
-
-    public boolean isLogical() {
-        return isLogical;
-    }
-
-    public void setLogical(boolean logical) {
-        isLogical = logical;
-    }
-
-    public boolean isDiscrete() {
-        return isDiscrete;
-    }
-
-    public void setDiscrete(boolean discrete) {
-        isDiscrete = discrete;
-    }
-
-    public String getDefaultValue() {
-        return defaultValue;
-    }
-
-    public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
     }
 
     public double getDomainMinVal() {
