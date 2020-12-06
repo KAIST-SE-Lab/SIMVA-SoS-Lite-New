@@ -15,6 +15,8 @@ import java.util.ArrayList;
  */
 public class MoveAction extends _SimAction_ {
 
+    protected ArrayList<DimensionVar> allowedDims = new ArrayList<>();
+
     public MoveAction(SoS accessibleSoS,
                          _SimActionableObject_ actionSubject,
                          String actionId,

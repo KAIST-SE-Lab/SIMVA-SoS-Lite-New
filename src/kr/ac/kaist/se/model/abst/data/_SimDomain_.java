@@ -12,10 +12,10 @@ public abstract class _SimDomain_ {
 
     protected Timestamp timestamp;    //Timestamp for stdout
 
-    protected EnumDataDomainType domainType;    //Type of domain
+    protected EnumDomainType domainType;    //Type of domain
 
-    protected double domainMinVal;  //Minimum value
-    protected double domainMaxVal;  //Maximum value
+    protected float domainMinVal;  //Minimum value
+    protected float domainMaxVal;  //Maximum value
 
     protected ArrayList<String> domainEnumVal = new ArrayList<>();  //Allowed enumeration values
 
@@ -28,7 +28,7 @@ public abstract class _SimDomain_ {
      */
     /* For integer variable */
     public boolean isValidValue(int value){
-        if (domainType == EnumDataDomainType.VALUE_RANGE){
+        if (domainType == EnumDomainType.VALUE_RANGE){
             //If the value is lower than domainMinVal or exceeds domainMaxVal
             if (!(value >= domainMinVal && value <= domainMaxVal)){
                 return false;
@@ -43,7 +43,7 @@ public abstract class _SimDomain_ {
 
     /* For float variable */
     public boolean isValidValue(float value){
-        if (domainType == EnumDataDomainType.VALUE_RANGE){
+        if (domainType == EnumDomainType.VALUE_RANGE){
             //If the value is lower than domainMinVal or exceeds domainMaxVal
             if (!(value >= domainMinVal && value <= domainMaxVal)){
                 return false;
@@ -59,7 +59,7 @@ public abstract class _SimDomain_ {
     /* For enumeration variable */
     public boolean isValidValue(String value){
         boolean isAllowed = false;
-        if (domainType == EnumDataDomainType.ENUMERATION){
+        if (domainType == EnumDomainType.ENUMERATION){
             //If the value is lower than domainMinVal or exceeds domainMaxVal
             for (String allowedString : domainEnumVal){
                 if (value.equals(allowedString)){
@@ -75,11 +75,11 @@ public abstract class _SimDomain_ {
     }
 
 
-    public EnumDataDomainType getDomainType() {
+    public EnumDomainType getDomainType() {
         return domainType;
     }
 
-    public void setDomainType(EnumDataDomainType domainType) {
+    public void setDomainType(EnumDomainType domainType) {
         this.domainType = domainType;
     }
 
@@ -87,7 +87,7 @@ public abstract class _SimDomain_ {
         return domainMinVal;
     }
 
-    public void setDomainMinVal(double domainMinVal) {
+    public void setDomainMinVal(float domainMinVal) {
         this.domainMinVal = domainMinVal;
     }
 
@@ -95,7 +95,7 @@ public abstract class _SimDomain_ {
         return domainMaxVal;
     }
 
-    public void setDomainMaxVal(double domainMaxVal) {
+    public void setDomainMaxVal(float domainMaxVal) {
         this.domainMaxVal = domainMaxVal;
     }
 
