@@ -96,9 +96,9 @@ public class Main {
              */
 
             /* Declaration and initialization of SimEngine */
-            SimEngine simEngine = new SimEngine(toySoS, args[1], exampleConfig, exampleScenario);
-
-            simEngine.startSimulation();
+//            SimEngine simEngine = new SimEngine(toySoS, args[1], exampleConfig, exampleScenario);
+//
+//            simEngine.startSimulation();
 
         }
         //GUI Mode

@@ -12,9 +12,9 @@ public abstract class _SimDataVariable_ {
 
     protected Timestamp timestamp;    //Timestamp for stdout
 
-    protected String dataId;        //id of a data (variable)
-    protected String dataName;      //name of a data (variable)
-    protected String dataType;      //type of a data (variable)
+    protected String varId;        //id of a data (variable)
+    protected String varName;      //name of a data (variable)
+    protected String varType;      //type of a data (variable)
 
     private Integer integerData;
     private Float floatData;
@@ -31,41 +31,41 @@ public abstract class _SimDataVariable_ {
 //    protected _SimDomain_ dataDomain;   //domain of a data variable (min-max/enum)
 
 
-    public _SimDataVariable_(String dataId, String dataName, String dataType) {
-        this.dataId = dataId;
-        this.dataName = dataName;
-        this.dataType = dataType;
+    public _SimDataVariable_(String varId, String varName, String varType) {
+        this.varId = varId;
+        this.varName = varName;
+        this.varType = varType;
 
-        setActualDataTypeVar(this.dataType);
+        setActualDataTypeVar(this.varType);
         printDataCreation();
 
     }
 
 
-    public _SimDataVariable_(String dataId, String dataName, String dataType, String dataDefaultValue) {
-        this.dataId = dataId;
-        this.dataName = dataName;
-        this.dataType = dataType;
+    public _SimDataVariable_(String varId, String varName, String varType, String dataDefaultValue) {
+        this.varId = varId;
+        this.varName = varName;
+        this.varType = varType;
         this.dataDefaultValue = dataDefaultValue;
 
         this.dataCurValue = dataDefaultValue;
         isValueAssigned = true;
 
-        setActualDataTypeVar(this.dataType);
+        setActualDataTypeVar(this.varType);
         printDataCreation();
 
     }
 
-    public _SimDataVariable_(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue) {
-        this.dataId = dataId;
-        this.dataName = dataName;
-        this.dataType = dataType;
+    public _SimDataVariable_(String varId, String varName, String varType, String dataDefaultValue, String dataCurValue) {
+        this.varId = varId;
+        this.varName = varName;
+        this.varType = varType;
         this.dataDefaultValue = dataDefaultValue;
         this.dataCurValue = dataCurValue;
 
         isValueAssigned = true;
 
-        setActualDataTypeVar(this.dataType);
+        setActualDataTypeVar(this.varType);
         printDataCreation();
 
     }
@@ -73,7 +73,7 @@ public abstract class _SimDataVariable_ {
     protected void printDataCreation(){
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") A data object (_SimDataVariable_) is created (" +
-                dataId + ", " + dataName + ", " + dataType + ", " + dataDefaultValue + ", " + dataCurValue + ").");
+                varId + ", " + varName + ", " + varType + ", " + dataDefaultValue + ", " + dataCurValue + ").");
 
     }
 
@@ -155,28 +155,28 @@ public abstract class _SimDataVariable_ {
 
     /* Getters & Setters */
 
-    public String getDataId() {
-        return dataId;
+    public String getVarId() {
+        return varId;
     }
 
-    public void setDataId(String dataId) {
-        this.dataId = dataId;
+    public void setVarId(String varId) {
+        this.varId = varId;
     }
 
-    public String getDataName() {
-        return dataName;
+    public String getVarName() {
+        return varName;
     }
 
-    public void setDataName(String dataName) {
-        this.dataName = dataName;
+    public void setVarName(String varName) {
+        this.varName = varName;
     }
 
-    public String getDataType() {
-        return dataType;
+    public String getVarType() {
+        return varType;
     }
 
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
+    public void setVarType(String varType) {
+        this.varType = varType;
     }
 
 
@@ -188,7 +188,7 @@ public abstract class _SimDataVariable_ {
         //TODO: Domain check
         this.dataCurValue = dataCurValue;
 
-        setActualDataTypeVar(this.dataType);
+        setActualDataTypeVar(this.varType);
     }
     public int getIntegerData() {
         return integerData;

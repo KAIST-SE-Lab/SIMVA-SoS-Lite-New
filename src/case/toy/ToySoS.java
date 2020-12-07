@@ -1,3 +1,4 @@
+import kr.ac.kaist.se.model.abst.data.EnumDomainType;
 import kr.ac.kaist.se.model.abst.data._SimDomain_;
 import kr.ac.kaist.se.model.sos.EnumOrgType;
 import kr.ac.kaist.se.model.sos.SoS;
@@ -154,20 +155,20 @@ public class ToySoS extends SoS {
      * Initialization of data
      */
     private void initData(){
-        ExampleDataDomain exampleDataDomainForDataA = new ExampleDataDomain();
-        dataA = new ExampleDataType("DATA0A", "Data A", "String", exampleDataDomainForDataA);
-
-        ExampleDataDomain exampleDataDomainForDataB = new ExampleDataDomain();
-        dataB = new ExampleDataType("DATA0B", "Data B", "String", "DEFAULT-STRING", exampleDataDomainForDataB);
-
-        ExampleDataDomain exampleDataDomainForDataC = new ExampleDataDomain();
-        dataC = new ExampleDataType("DATA0C", "Data C", "Int", "0", exampleDataDomainForDataC);
-
-        ExampleDataDomain exampleDataDomainForDataD = new ExampleDataDomain();
-        dataD = new ExampleDataType("DATA0D", "Data D", "Float", "-1", "0", exampleDataDomainForDataD);
-
-        ExampleDataDomain exampleDataDomainForDataE = new ExampleDataDomain();
-        dataE = new ExampleDataType("DATA0E", "Data E", "String", "DEFAULT-STRING", "CUR-STRING", exampleDataDomainForDataE);
+//        ExampleDataDomain exampleDataDomainForDataA = new ExampleDataDomain();
+//        dataA = new ExampleDataType("DATA0A", "Data A", "String", exampleDataDomainForDataA);
+//
+//        ExampleDataDomain exampleDataDomainForDataB = new ExampleDataDomain();
+//        dataB = new ExampleDataType("DATA0B", "Data B", "String", "DEFAULT-STRING", exampleDataDomainForDataB);
+//
+//        ExampleDataDomain exampleDataDomainForDataC = new ExampleDataDomain();
+//        dataC = new ExampleDataType("DATA0C", "Data C", "Int", "0", exampleDataDomainForDataC);
+//
+//        ExampleDataDomain exampleDataDomainForDataD = new ExampleDataDomain();
+//        dataD = new ExampleDataType("DATA0D", "Data D", "Float", "-1", "0", exampleDataDomainForDataD);
+//
+//        ExampleDataDomain exampleDataDomainForDataE = new ExampleDataDomain();
+//        dataE = new ExampleDataType("DATA0E", "Data E", "String", "DEFAULT-STRING", "CUR-STRING", exampleDataDomainForDataE);
     }
 
 
@@ -203,5 +204,16 @@ public class ToySoS extends SoS {
 
     class ExampleDataDomain extends DataVarDomain {
 
+        public ExampleDataDomain(EnumDomainType domainType, boolean isLogical, boolean isDiscrete, String defaultValue) {
+            super(domainType, isLogical, isDiscrete, defaultValue);
+        }
+
+        public ExampleDataDomain(EnumDomainType domainType, float domainMinVal, float domainMaxVal, boolean isLogical, boolean isDiscrete, String defaultValue) {
+            super(domainType, domainMinVal, domainMaxVal, isLogical, isDiscrete, defaultValue);
+        }
+
+        public ExampleDataDomain(EnumDomainType domainType, ArrayList<String> domainEnumVal, boolean isLogical, boolean isDiscrete, String defaultValue) {
+            super(domainType, domainEnumVal, isLogical, isDiscrete, defaultValue);
+        }
     }
 }

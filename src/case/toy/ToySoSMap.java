@@ -1,21 +1,21 @@
+import data.MapCoordinateDimensionDomain;
+import data.MapCoordinateDimensionType;
+import data.MapFloorDimensionDomain;
+import data.MapFloorDimensionType;
+import kr.ac.kaist.se.model.abst.data.EnumDomainType;
 import kr.ac.kaist.se.model.map.SimMap;
 import kr.ac.kaist.se.model.sos.data.DataVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
-import kr.ac.kaist.se.model.sos.data.DimensionVarDomain;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ToySoSMap extends SimMap {
 
-//    ArrayList<DimensionVar> mapDimensions = new ArrayList<>();
-    ArrayList<DataVar> dataVarList = new ArrayList<>();
-
-    MapCoordinateDimensionDomain xDimDomain = new MapCoordinateDimensionDomain();
-
-    //TODO: Add domains for each dimensionVar
-    MapCoordinateDimensionType xDim = new MapCoordinateDimensionType("DIM_X", "xDimension", "Int");
-    MapCoordinateDimensionType yDim = new MapCoordinateDimensionType("DIM_Y", "yDimension", "Int");
-    MapFloorDimensionType floorDim = new MapFloorDimensionType("DIM_FLOOR", "floorNumDimension", "Enum");
+    public static MapCoordinateDimensionType xDim;
+    public static MapCoordinateDimensionType yDim;
+    public static MapFloorDimensionType floorDim;
 
     public ToySoSMap(String mapId, String mapName) {
         super(mapId, mapName);
@@ -29,9 +29,24 @@ public class ToySoSMap extends SimMap {
 
 
     private void initDimensions(){
+
+        /* Definition of domains for each dimension variable */
+        MapCoordinateDimensionDomain xDimDomain = new MapCoordinateDimensionDomain(EnumDomainType.VALUE_RANGE, 0, 30);
+        MapCoordinateDimensionDomain yDimDomain = new MapCoordinateDimensionDomain(EnumDomainType.VALUE_RANGE, 0, 30);
+        MapFloorDimensionDomain floorDimDomain = new MapFloorDimensionDomain(EnumDomainType.ENUMERATION, new ArrayList<String>(Arrays.asList("FLOOR_1", "FLOOR_2")));
+
+        /* Initialization of every dimension with the domains defined */
+        xDim = new MapCoordinateDimensionType("DIM_X", "xDimension", "Int", xDimDomain);
+        yDim = new MapCoordinateDimensionType("DIM_Y", "yDimension", "Int", yDimDomain);
+        floorDim = new MapFloorDimensionType("DIM_FLOOR", "floorNumDimension", "Enum", floorDimDomain);
+
+        /* Add dimensions to this map */
         mapDimensions.add(xDim);
         mapDimensions.add(yDim);
         mapDimensions.add(floorDim);
+
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (ToySoSMap: initDimensions) Dimensions are initialized (size:" + mapDimensions.size() + ")");
     }
 
     @Override

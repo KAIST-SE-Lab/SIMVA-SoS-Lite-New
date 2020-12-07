@@ -1,7 +1,8 @@
 package kr.ac.kaist.se.model.sos.data;
 
 import kr.ac.kaist.se.model.abst.data._SimDataVariable_;
-import kr.ac.kaist.se.model.abst.data._SimDomain_;
+
+import java.sql.Timestamp;
 
 /**
  * Abstract class to define a dimension of a geolocation
@@ -23,6 +24,7 @@ public abstract class DimensionVar extends _SimDataVariable_ {
 
     public DimensionVar(String dataId, String dataName, String dataType) {
         super(dataId, dataName, dataType);
+        printDimensionVarCreation();
     }
 
     public DimensionVar(String dataId, String dataName, String dataType, DimensionVarDomain dataDomain) {
@@ -30,6 +32,8 @@ public abstract class DimensionVar extends _SimDataVariable_ {
 
         this.varDomain = dataDomain;
         this.isDomainConstrained = true;
+
+        printDimensionVarCreation();
     }
 
     public DimensionVar(String dataId, String dataName, String dataType, String dataCurValue, DimensionVarDomain dataDomain) {
@@ -37,6 +41,8 @@ public abstract class DimensionVar extends _SimDataVariable_ {
 
         this.varDomain = dataDomain;
         this.isDomainConstrained = true;
+
+        printDimensionVarCreation();
     }
 
     public DimensionVar(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue, DimensionVarDomain dataDomain) {
@@ -44,5 +50,19 @@ public abstract class DimensionVar extends _SimDataVariable_ {
 
         this.varDomain = dataDomain;
         this.isDomainConstrained = true;
+
+        printDimensionVarCreation();
+    }
+
+    private void printDimensionVarCreation(){
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (DimensionVar) A DimensionVar is initialized: " +
+                varId + " | " +
+                varName + " | " +
+                varType + " | varDomain(" +
+                varDomain.getDomainType() + ", " +
+                varDomain.getDomainMinVal() + ", " +
+                varDomain.getDomainMaxVal() + ", " +
+                varDomain.getDomainEnumVal() + ")");
     }
 }

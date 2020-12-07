@@ -1,3 +1,5 @@
+package data;
+
 import kr.ac.kaist.se.model.abst.data._SimDomain_;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVarDomain;

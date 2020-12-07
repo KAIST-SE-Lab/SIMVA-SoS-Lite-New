@@ -12,13 +12,30 @@ public abstract class _SimDomain_ {
 
     protected Timestamp timestamp;    //Timestamp for stdout
 
-    protected EnumDomainType domainType;    //Type of domain
+    protected EnumDomainType domainType = EnumDomainType.NOT_DETERMINED;    //Type of domain
 
-    protected float domainMinVal;  //Minimum value
-    protected float domainMaxVal;  //Maximum value
+    protected float domainMinVal = -99999;  //Minimum value
+    protected float domainMaxVal = 99999;  //Maximum value
 
     protected ArrayList<String> domainEnumVal = new ArrayList<>();  //Allowed enumeration values
 
+
+    public _SimDomain_(EnumDomainType domainType) {
+        this.domainType = domainType;
+    }
+
+    //Constructor for VALUE_RANGE domain
+    public _SimDomain_(EnumDomainType domainType, float domainMinVal, float domainMaxVal) {
+        this.domainType = domainType;
+        this.domainMinVal = domainMinVal;
+        this.domainMaxVal = domainMaxVal;
+    }
+
+    //Constructor for ENUMERATION domain
+    public _SimDomain_(EnumDomainType domainType, ArrayList<String> domainEnumVal) {
+        this.domainType = domainType;
+        this.domainEnumVal = domainEnumVal;
+    }
 
     /**
      * A method to check if a given value is valid according to this domain.
