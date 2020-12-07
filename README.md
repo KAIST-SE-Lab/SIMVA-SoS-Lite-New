@@ -23,21 +23,22 @@
 > Installation
 
 ### For Contributors
-Contributors of this project may extend this project to conduct an experiment that executes a simulation model(s) of a particular SoS. This project can be differently used for different types of contributers: (i) a methodologist who wants to develop his/her own method for analysis/design/development, (ii) a system engineer who performs actual modeling, verification, or validation.
+> Contributors of this project may extend this project to conduct an experiment that executes a simulation model(s) of a particular SoS. This project can be differently used for different types of contributers: (i) a methodologist who wants to develop his/her own method for analysis/design/development, (ii) a system engineer who performs actual modeling, verification, or validation.
 
-For methodologists
-- Something
+> For methodologists
+> - Something
 
-For system engineers
-- Something
+> For system engineers
+> - Something
 
 
 ## More Information
 
 ### Future Work
-- XML2Java: Automated model coversion from an XML file to Java-based SoS simulation models
+> - XML2Java: Automated model coversion from an XML file to Java-based SoS simulation models
 >> Description
-- XML2Property: Automated conversion of property models from an XML file to Java-based verification properties
+
+> - XML2Property: Automated conversion of property models from an XML file to Java-based verification properties
 >> Description
 
 ### Other Related Webpages
