@@ -1,11 +1,14 @@
 # Basic Simulation Engine for SoS Simulation and Verification
 
 ## Current Status of Development
-> Under Development
+
+Under the development of the initial project
 
 ## Introduction
 
 ### Simulation Models of a System-of-Systems
+
+To analyze a System-of-Systems (SoS) before deploying the system, simulation techniques have been utilized as base approaches to observe behaviors of an SoS beforehand. A simulation model(s) of an SoS represents structures and behaviors of an SoS, and they are executable by a particular simulation engine. 
 > Siulation Model
 
 ### Simulation and Verification of a System-of-Systems based on This Project
