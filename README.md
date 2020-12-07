@@ -10,6 +10,10 @@
 
 ### Simulation and Verification of a System-of-Systems based on This Project
 
+#### Discrete Time Agent-based Simulation
+
+#### Statistical Model Checking (SMC) and SMC-based Analysis
+
 ## Instructions
 
 ### Dependencies
