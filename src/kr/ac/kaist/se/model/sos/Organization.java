@@ -4,6 +4,7 @@ import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
 import kr.ac.kaist.se.model.intf.Movable;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
+import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -86,6 +87,28 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
         directCSList = new ArrayList<>();
     }
 
+
+    /**
+     * A method to actually run an organization
+     * This method executes included models of suborganizations and CSs
+     * @return
+     */
+    public RunResult run(){
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":run)");
+
+        //TODO: Message broadcasting
+
+        //Since an org is not an actionable object, selectedActionList is an empty list
+        //SubRunResults of suborgs and CSs will be added into the list
+        RunResult runResult = new RunResult(this, new ArrayList<>(0));
+
+        for(Organization suborg: this.subOrgList){
+            runResult.addSubRunResult(suborg.run());
+        }
+
+        return runResult;
+    }
 
 
 

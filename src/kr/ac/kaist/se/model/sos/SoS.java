@@ -89,6 +89,40 @@ public abstract class SoS extends _SimContainerObject_ {
      */
     protected abstract void initMap();
 
+
+
+    /**
+     * A method to actually run a simulation model (SoS)
+     * This method executes included models
+     * @return
+     */
+    public RunResult run(){
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":run)");
+
+        //Since an SoS is not an actionable object, selectedActionList is an empty list
+        //SubRunResults of orgs, envs, infras will be added into the list
+        RunResult runResult = new RunResult(this, new ArrayList<>(0));
+
+        //TODO: An option (of a SimConfiguration) to specify a running sequence
+
+        /* Running order: env -> infra -> org*/
+        for(Environment env: this.envList){
+            runResult.addSubRunResult(env.run());
+        }
+
+        for(Infrastructure infra: this.infraList){
+            runResult.addSubRunResult(infra.run());
+        }
+
+        for(Organization org: this.orgList){
+            runResult.addSubRunResult(org.run());
+        }
+
+        return runResult;
+    }
+
+
     /**
      *
      */
@@ -272,11 +306,7 @@ public abstract class SoS extends _SimContainerObject_ {
     }
 
 
-    public RunResult run(){
-        //RunResult runResult = new RunResult();
 
-        return null;
-    }
 
 
 

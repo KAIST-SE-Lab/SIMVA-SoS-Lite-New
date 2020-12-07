@@ -25,13 +25,13 @@ public class Main {
             System.out.println("[" + timestamp + "] (Main) Simulation engine is launched (Non-GUI Mode).");
 
             /* Input SimModel */
-            ToySoS toySoS = new ToySoS(); // no id
-            //SoS toySoS = new ToySoS("TOYSOS01", "ToySoS");
+            //ToySoS toySoS = new ToySoS(); // no id
+            ToySoS toySoS = new ToySoS("TOYSOS01", "ToySoS");
 
             /* Input SimConfiguration */
             //TODO: remove this section after debugging
             SimConfiguration exampleConfig = new SimConfiguration();
-            exampleConfig.setSimTotalTime(100);
+            exampleConfig.setSimTotalTime(10);
 
             /* Input SimScenario */
             //TODO: remove this section after debugging
@@ -96,9 +96,10 @@ public class Main {
              */
 
             /* Declaration and initialization of SimEngine */
-//            SimEngine simEngine = new SimEngine(toySoS, args[1], exampleConfig, exampleScenario);
-//
-//            simEngine.startSimulation();
+            //args[1]: isMapeOn
+            SimEngine simEngine = new SimEngine(toySoS, args[1], exampleConfig, exampleScenario);
+
+            simEngine.startSimulation();
 
         }
         //GUI Mode

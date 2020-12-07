@@ -51,7 +51,7 @@ public abstract class Constituent extends _SimActionableObject_
         initActions();
 
         printObjInfo();
-        printCSInfo();
+        //printCSInfo();
         initObjLocation();
     }
 
@@ -72,7 +72,7 @@ public abstract class Constituent extends _SimActionableObject_
         initActions();
 
         printObjInfo();
-        printCSInfo();
+        //printCSInfo();
         initObjLocation();
     }
 

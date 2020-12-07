@@ -46,11 +46,14 @@ public class ToySoS extends SoS {
         super("TOYSOS01", "ToySoS");
     }
 
+    public ToySoS(String sosId, String sosName) {
+        super(sosId, sosName);
+    }
+
     @Override
     protected void initSoSModel() {
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "]  ===================================================================");
-        System.out.println("[" + timestamp + "] (ToySoS:initSoSModel) An SoS model is initialized.");
 
         initMap();
         initOrgs();
@@ -58,30 +61,34 @@ public class ToySoS extends SoS {
         initData();
 
 
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "]  -------------------------------------------------------------------");
+        System.out.println("[" + timestamp + "] (ToySoS:initSoSModel) An SoS model is initialized.");
+        System.out.println("[" + timestamp + "]  ===================================================================");
 
 
 
-//        /* Case 1: Organizational structure -> CS added */
-//
-//        org1.addSubOrg(org1A);
-//        org1.addSubOrg(org1B);
-//        org1A.addSubOrg(org1AA);
-//
-//        org1.addCS(csA, true);
-//        org1.addCS(csB, true);
+        /* Case 1: Organizational structure -> CS added */
+
+        org1.addSubOrg(org1A);
+        org1.addSubOrg(org1B);
+        org1A.addSubOrg(org1AA);
+
+        org1.addCS(csA, true);
+        org1.addCS(csB, true);
 //        org1.addCS(csB, true); //duplicated
-//        org1A.addCS(csC, true);
-//        org1B.addCS(csD, true);
-//        org1B.addCS(csE, true);
-//        org1AA.addCS(csF, true);
-//        org1AA.addCS(csG, true);
-//
-//        org2.addCS(csH, true);
-//
-//        this.addOrg(org1);
-//        this.addOrg(org2);
-//
-//        this.addCS(csI);    //Direct addition of a CS to SoS
+        org1A.addCS(csC, true);
+        org1B.addCS(csD, true);
+        org1B.addCS(csE, true);
+        org1AA.addCS(csF, true);
+        org1AA.addCS(csG, true);
+
+        org2.addCS(csH, true);
+
+        this.addOrg(org1);
+        this.addOrg(org2);
+
+        this.addCS(csI);    //Direct addition of a CS to SoS
 
 
         /* Case 2: CS added -> Organizational structure */
@@ -115,8 +122,7 @@ public class ToySoS extends SoS {
 //        org2.addCS(csH, true);
 
 
-
-        printModelInfo();
+        //printModelInfo();
     }
 
     protected void initObjLocation() {
@@ -126,7 +132,7 @@ public class ToySoS extends SoS {
     /**
      * Initialization of organizations
      */
-    private void initOrgs(){
+    private void initOrgs() {
         org1 = new ExampleOrgType(this, "ORG01", "Organization 01");
         org1A = new ExampleOrgType(this, "ORG01A", "Organization 01-A");
         org1B = new ExampleOrgType(this, "ORG01B", "Organization 01-B");
@@ -141,7 +147,7 @@ public class ToySoS extends SoS {
     /**
      * Initialization of constituents
      */
-    private void initCSs(){
+    private void initCSs() {
         csA = new ExampleCSType(this, null, "CS0A", "Constituent A");
         csB = new ExampleCSType(this, null, "CS0B", "Constituent B");
         csC = new ExampleCSType(this, null, "CS0C", "Constituent C");
@@ -159,7 +165,7 @@ public class ToySoS extends SoS {
     /**
      * Initialization of data
      */
-    private void initData(){
+    private void initData() {
 //        ExampleDataDomain exampleDataDomainForDataA = new ExampleDataDomain();
 //        dataA = new ExampleDataType("DATA0A", "Data A", "String", exampleDataDomainForDataA);
 //
@@ -181,7 +187,7 @@ public class ToySoS extends SoS {
      * Initialization of a map
      */
     @Override
-    protected void initMap(){
+    protected void initMap() {
 
         //TODO: Add domains for each informationVar
 //        DataVar isAccessibleInfo = new DataVar();
@@ -199,17 +205,15 @@ public class ToySoS extends SoS {
     }
 
 
-
-    @Override
-    public RunResult run() {
-        return null;
-    }
+//    @Override
+//    public RunResult run() {
+//        return null;
+//    }
 
     @Override
     public UpdateResult update(RunResult runResult) {
         return null;
     }
-
 
 
     class ExampleDataDomain extends DataVarDomain {

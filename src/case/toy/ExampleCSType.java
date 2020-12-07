@@ -30,7 +30,7 @@ public class ExampleCSType extends Constituent {
         ObjectLocation thisObjLocation;
         if (mySoS != null && mySoS.sosMap != null) {
             thisObjLocation = new ObjectLocation(mySoS.sosMap.mapDimensions);
-            System.out.println(thisObjLocation.getObjLocDimVars());
+            //System.out.println(thisObjLocation.getObjLocDimVars());
 
             //TODO: make it automated
             thisObjLocation.getObjLocDimVars().get(0).setDataCurValue("0");

@@ -99,7 +99,7 @@ public abstract class _SimDataVariable_ {
                     dataType.equals("INTEGER") ||
                     dataType.equals("integer")) {
                 //Integer.parseInt(this.dataCurValue);
-                System.out.println("INT");
+                //System.out.println("INT");
                 integerData = Integer.valueOf(dataCurValue);
             }
             //Float data
@@ -109,7 +109,7 @@ public abstract class _SimDataVariable_ {
                     dataType.equals("DOUBLE") ||
                     dataType.equals("double") ||
                     dataType.equals("Double")) {
-                System.out.println("DOUBLE");
+                //System.out.println("DOUBLE");
                 floatData = Float.valueOf(dataCurValue);
             }
             //String data
@@ -118,7 +118,7 @@ public abstract class _SimDataVariable_ {
                     dataType.equals("String") ||
                     dataType.equals("STR") ||
                     dataType.equals("str")) {
-                System.out.println("STR");
+                //System.out.println("STR");
                 stringData = dataCurValue;
             }
             //Enumeration / Enumeration String data
@@ -128,7 +128,7 @@ public abstract class _SimDataVariable_ {
                     dataType.equals("ENUMSTRING") ||
                     dataType.equals("enumstring") ||
                     dataType.equals("EnumString")) {
-                System.out.println("ENUM");
+                //System.out.println("ENUM");
                 isEnumData = true;
             }
         }

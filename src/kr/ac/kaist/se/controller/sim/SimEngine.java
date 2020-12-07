@@ -91,7 +91,7 @@ public class SimEngine {
         this.simModel = simModel;
 
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (SimEngine:initSimModel) SimModel is initialized.");
+        System.out.println("[" + timestamp + "] (SimEngine:initSimModel) SimModel is initialized (" + this.simModel + ")");
     }
 
     /**
@@ -101,7 +101,7 @@ public class SimEngine {
         this.simConfig = simConfig;
 
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (SimEngine:initSimConfig) SimConfiguration is initialized.");
+        System.out.println("[" + timestamp + "] (SimEngine:initSimConfig) SimConfiguration is initialized(" + this.simConfig + ")");
     }
 
     /**
@@ -111,7 +111,7 @@ public class SimEngine {
         this.simScenario = simScenario;
 
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (SimEngine:initSimScenario) SimScenario is initialized.");
+        System.out.println("[" + timestamp + "] (SimEngine:initSimScenario) SimScenario is initialized(" + this.simScenario + ")");
     }
 
     /**
@@ -125,11 +125,13 @@ public class SimEngine {
         printSimInputInfo();
 
         timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "]  ===================================================================");
         System.out.println("[" + timestamp + "] (SimEngine:startSimulation) Simulation is started.");
+        System.out.println("[" + timestamp + "]  -------------------------------------------------------------------");
 
         for(int cur_tick = 0; cur_tick < this.simConfig.getSimTotalTime(); cur_tick++){
             timestamp = new Timestamp(System.currentTimeMillis());
-            //System.out.println("[" + timestamp + "] (SimEngine:startSimulation) cur_tick: " + cur_tick);
+            System.out.println("[" + timestamp + "] (SimEngine:startSimulation) cur_tick: " + cur_tick);
 
             RunResult curTickSimResult = runSimModel();
         }
@@ -152,6 +154,18 @@ public class SimEngine {
 
     }
 
+    /**
+     * A method to actually run a simulation model
+     * @return
+     */
+    protected RunResult runSimModel(){
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":runSimModel)");
+
+        return simModel.run();
+        //return null;
+    }
+
     private void printSimInputInfo() {
         timestamp = new Timestamp(System.currentTimeMillis());
 
@@ -168,8 +182,5 @@ public class SimEngine {
 
     }
 
-    protected RunResult runSimModel(){
-//        return SoS.run();
-        return null;
-    }
+
 }
