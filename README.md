@@ -23,7 +23,13 @@
 > Installation
 
 ### For Contributors
-> Contributors
+Contributors of this project may extend this project to conduct an experiment that executes a simulation model(s) of a particular SoS. This project can be differently used for different types of contributers: (i) a methodologist who wants to develop his/her own method for analysis/design/development, (ii) a system engineer who performs actual modeling, verification, or validation.
+
+For methodologists
+- Something
+
+For system engineers
+- Something
 
 
 ## More Information
