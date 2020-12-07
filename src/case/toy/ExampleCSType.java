@@ -26,7 +26,7 @@ public class ExampleCSType extends Constituent {
 
     @Override
     protected void initObjLocation() {
-//
+
         ObjectLocation thisObjLocation;
         if (mySoS != null && mySoS.sosMap != null) {
             thisObjLocation = new ObjectLocation(mySoS.sosMap.mapDimensions);
@@ -60,7 +60,7 @@ public class ExampleCSType extends Constituent {
                 "ExampleCS-MoveAction01",
                 new ArrayList<>(Arrays.asList(ToySoSMap.xDim, ToySoSMap.yDim)));
 
-
+        capableActionList.add(exampleCSMoveAction);
     }
 
 
