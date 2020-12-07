@@ -23,7 +23,7 @@
 > Installation
 
 ### For Contributors
-> Contributors of this project may extend this project to conduct an experiment that executes a simulation model(s) of a particular SoS. This project can be differently used for different types of contributers: (i) a methodologist who wants to develop his/her own method for analysis/design/development, (ii) a system engineer who performs actual modeling, verification, or validation.
+Contributors of this project may extend this project to conduct an experiment that executes a simulation model(s) of a particular SoS. This project can be differently used for different types of contributers: (i) a methodologist who wants to develop his/her own method for analysis/design/development, (ii) a system engineer who performs actual modeling, verification, or validation.
 
 > For methodologists
 > - Something
@@ -48,5 +48,5 @@
 > Publications
 
 ## Copyright
-> Copyright 2017-2021 - SESoS Group in Korea Advanced Institute of Science and Technology (KAIST).
+Copyright 2017-2021 - SESoS Group in Korea Advanced Institute of Science and Technology (KAIST).
 > https://se.kaist.ac.kr
