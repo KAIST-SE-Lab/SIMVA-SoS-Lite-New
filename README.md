@@ -36,9 +36,9 @@ For system engineers
 
 ### Future Work
 - XML2Java: Automated model coversion from an XML file to Java-based SoS simulation models
-> Description
+>> Description
 - XML2Property: Automated conversion of property models from an XML file to Java-based verification properties
-> Description
+>> Description
 
 ### Other Related Webpages
 > Webpage
