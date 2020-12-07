@@ -85,6 +85,11 @@ public abstract class SoS extends _SimContainerObject_ {
     protected abstract void initSoSModel();
 
     /**
+     * Abstract method for the initialization of a simulation map of an SoS
+     */
+    protected abstract void initMap();
+
+    /**
      *
      */
     protected void printModelInfo(){
@@ -464,5 +469,13 @@ public abstract class SoS extends _SimContainerObject_ {
 
     public void setSystemEntityList(ArrayList<SystemEntity> systemEntityList) {
         this.systemEntityList = systemEntityList;
+    }
+
+    public SimMap getSosMap() {
+        return sosMap;
+    }
+
+    public void setSosMap(SimMap sosMap) {
+        this.sosMap = sosMap;
     }
 }

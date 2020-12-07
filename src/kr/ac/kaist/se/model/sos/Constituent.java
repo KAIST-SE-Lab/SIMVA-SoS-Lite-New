@@ -48,7 +48,11 @@ public abstract class Constituent extends _SimActionableObject_
 
         msgQueue = new LinkedList<_SimMessage_>();
 
+        initActions();
+
         printObjInfo();
+        printCSInfo();
+        initObjLocation();
     }
 
     public Constituent(SoS simModel, Organization myOrg, String csId, String csName, boolean isStatic, boolean isActivated, boolean isAvailable){
@@ -65,11 +69,22 @@ public abstract class Constituent extends _SimActionableObject_
 
         msgQueue = new LinkedList<_SimMessage_>();
 
+        initActions();
+
         printObjInfo();
+        printCSInfo();
+        initObjLocation();
     }
 
+    //For debugging
+    private void printCSInfo(){
+        System.out.println(mySoS + "|" + mySoS.sosMap + "|" + myOrg + "|" + id + "|" + name);
+    }
 
-
+    /**
+     * Initialization of object location
+     */
+    protected abstract void initObjLocation();
 
 
     /* Getters & Setters */

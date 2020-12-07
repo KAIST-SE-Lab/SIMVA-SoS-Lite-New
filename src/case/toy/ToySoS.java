@@ -52,11 +52,12 @@ public class ToySoS extends SoS {
         System.out.println("[" + timestamp + "]  ===================================================================");
         System.out.println("[" + timestamp + "] (ToySoS:initSoSModel) An SoS model is initialized.");
 
+        initMap();
         initOrgs();
         initCSs();
         initData();
 
-        initMap();
+
 
 
 
@@ -118,6 +119,10 @@ public class ToySoS extends SoS {
         printModelInfo();
     }
 
+    protected void initObjLocation() {
+
+    }
+
     /**
      * Initialization of organizations
      */
@@ -175,7 +180,8 @@ public class ToySoS extends SoS {
     /**
      * Initialization of a map
      */
-    private void initMap(){
+    @Override
+    protected void initMap(){
 
         //TODO: Add domains for each informationVar
 //        DataVar isAccessibleInfo = new DataVar();
@@ -192,6 +198,8 @@ public class ToySoS extends SoS {
         sosMap = toySoSMap;
     }
 
+
+
     @Override
     public RunResult run() {
         return null;
@@ -201,6 +209,8 @@ public class ToySoS extends SoS {
     public UpdateResult update(RunResult runResult) {
         return null;
     }
+
+
 
     class ExampleDataDomain extends DataVarDomain {
 

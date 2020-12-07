@@ -6,13 +6,17 @@ import java.util.ArrayList;
 
 public class ObjectLocation {
 
-    ArrayList<DimensionVar> objLocDims;
+    ArrayList<DimensionVar> objLocDimVars;
 
-    public ArrayList<DimensionVar> getObjLocDims() {
-        return objLocDims;
+    public ObjectLocation(ArrayList<DimensionVar> mapDims) {
+        this.objLocDimVars = mapDims;
     }
 
-    public void setObjLocDims(ArrayList<DimensionVar> objLocDims) {
-        this.objLocDims = objLocDims;
+    public ArrayList<DimensionVar> getObjLocDimVars() {
+        return objLocDimVars;
+    }
+
+    public void setObjLocDimVars(ArrayList<DimensionVar> objLocDimVars) {
+        this.objLocDimVars = objLocDimVars;
     }
 }

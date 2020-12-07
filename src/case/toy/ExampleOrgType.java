@@ -13,6 +13,11 @@ public class ExampleOrgType extends Organization {
         super(simModel, orgId, orgName, isStatic, isActivated, isAvailable);
     }
 
+
+    protected void initObjLocation() {
+
+    }
+
     @Override
     public void move() {
 
@@ -27,4 +32,6 @@ public class ExampleOrgType extends Organization {
     public UpdateResult update(RunResult runResult) {
         return null;
     }
+
+
 }

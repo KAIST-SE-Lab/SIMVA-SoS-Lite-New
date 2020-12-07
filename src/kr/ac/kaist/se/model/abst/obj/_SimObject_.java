@@ -2,6 +2,7 @@ package kr.ac.kaist.se.model.abst.obj;
 
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.intf.Simulatable;
+import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 
 import java.sql.Timestamp;
@@ -45,8 +46,8 @@ public abstract class _SimObject_ implements Simulatable {
 
         if (this.getClass() != null){
             timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("[" + timestamp + "] (" + thisClassName + ") An object is created.");
-            System.out.println("[" + timestamp + "] (" + thisClassName + ") id: " + this.id +
+            //System.out.println("[" + timestamp + "] (" + thisClassName + ") An object is created.");
+            System.out.println("[" + timestamp + "] (" + thisClassName + " Object Created) id: " + this.id +
                     ", name: " + this.name +
                     ", isStatic: " + this.isStatic +
                     ", isActivated: " + this.isActivated +
@@ -55,6 +56,11 @@ public abstract class _SimObject_ implements Simulatable {
         }
 
     }
+
+//    public _SimObject_() {
+//        initObjLocation();
+//    }
+
 
 
 
@@ -116,5 +122,24 @@ public abstract class _SimObject_ implements Simulatable {
 
     public void setMsgQueue(Queue<_SimMessage_> msgQueue) {
         this.msgQueue = msgQueue;
+    }
+
+    /**
+     * Print current location of this object using getCurLocation()
+     */
+    protected void printCurLocation(){
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.print("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") ObjctLocation is initialized: (");
+
+        int index = 0;
+        for (DimensionVar dimVar : objLocation.getObjLocDimVars()){
+            if (index+1 < objLocation.getObjLocDimVars().size()){
+                System.out.print(dimVar.getDataCurValue() + ",");
+            }else{
+                System.out.print(dimVar.getDataCurValue());
+            }
+            index++;
+        }
+        System.out.println(")");
     }
 }
