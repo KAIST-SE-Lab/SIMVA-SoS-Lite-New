@@ -94,10 +94,5 @@ public class ExampleCSType extends Constituent {
 
     }
 
-    @Override
-    public RunResult run() {
-        return null;
-    }
-
 
 }

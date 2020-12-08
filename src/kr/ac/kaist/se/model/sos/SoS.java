@@ -98,7 +98,7 @@ public abstract class SoS extends _SimContainerObject_ {
      */
     public RunResult run(){
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":run)");
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):run)");
 
         //Since an SoS is not an actionable object, selectedActionList is an empty list
         //SubRunResults of orgs, envs, infras will be added into the list
@@ -116,7 +116,10 @@ public abstract class SoS extends _SimContainerObject_ {
         }
 
         for(Organization org: this.orgList){
-            runResult.addSubRunResult(org.run());
+            //Only if the organization is the top-level organization
+            if (org.parentOrg == null) {
+                runResult.addSubRunResult(org.run());
+            }
         }
 
         return runResult;

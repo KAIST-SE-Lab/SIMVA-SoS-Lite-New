@@ -71,24 +71,24 @@ public class ToySoS extends SoS {
         /* Case 1: Organizational structure -> CS added */
 
         org1.addSubOrg(org1A);
-        org1.addSubOrg(org1B);
-        org1A.addSubOrg(org1AA);
+//        org1.addSubOrg(org1B);
+//        org1A.addSubOrg(org1AA);
 
         org1.addCS(csA, true);
         org1.addCS(csB, true);
 //        org1.addCS(csB, true); //duplicated
         org1A.addCS(csC, true);
-        org1B.addCS(csD, true);
-        org1B.addCS(csE, true);
-        org1AA.addCS(csF, true);
-        org1AA.addCS(csG, true);
+//        org1B.addCS(csD, true);
+//        org1B.addCS(csE, true);
+//        org1AA.addCS(csF, true);
+//        org1AA.addCS(csG, true);
 
-        org2.addCS(csH, true);
+//        org2.addCS(csH, true);
 
         this.addOrg(org1);
-        this.addOrg(org2);
+//        this.addOrg(org2);
 
-        this.addCS(csI);    //Direct addition of a CS to SoS
+//        this.addCS(csI);    //Direct addition of a CS to SoS
 
 
         /* Case 2: CS added -> Organizational structure */
@@ -122,7 +122,7 @@ public class ToySoS extends SoS {
 //        org2.addCS(csH, true);
 
 
-        //printModelInfo();
+        printModelInfo();
     }
 
     protected void initObjLocation() {

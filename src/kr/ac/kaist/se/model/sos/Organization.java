@@ -95,7 +95,7 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
      */
     public RunResult run(){
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":run)");
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):run) suborg:" + subOrgList.size() + ", directCSs:" + directCSList.size());
 
         //TODO: Message broadcasting
 
@@ -105,6 +105,10 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
 
         for(Organization suborg: this.subOrgList){
             runResult.addSubRunResult(suborg.run());
+        }
+
+        for(Constituent directCS: this.directCSList){
+            runResult.addSubRunResult(directCS.run());
         }
 
         return runResult;

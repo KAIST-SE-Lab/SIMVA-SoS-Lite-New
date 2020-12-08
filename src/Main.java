@@ -31,7 +31,7 @@ public class Main {
             /* Input SimConfiguration */
             //TODO: remove this section after debugging
             SimConfiguration exampleConfig = new SimConfiguration();
-            exampleConfig.setSimTotalTime(10);
+            exampleConfig.setSimTotalTime(3);
 
             /* Input SimScenario */
             //TODO: remove this section after debugging
@@ -111,8 +111,8 @@ public class Main {
             launchSimInputUI();
         }
 
-        timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (Main) Simulation engine is terminated.");
+//        timestamp = new Timestamp(System.currentTimeMillis());
+//        System.out.println("[" + timestamp + "] (Main) Simulation engine is terminated.");
 
     }
 

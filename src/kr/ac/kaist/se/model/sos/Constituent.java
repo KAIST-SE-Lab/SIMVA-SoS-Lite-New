@@ -8,7 +8,9 @@ import kr.ac.kaist.se.model.intf.Movable;
 import kr.ac.kaist.se.model.intf.Stateful;
 import kr.ac.kaist.se.model.sos.cap.MoveAction;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
+import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -74,6 +76,20 @@ public abstract class Constituent extends _SimActionableObject_
         printObjInfo();
         //printCSInfo();
         initObjLocation();
+    }
+
+
+    @Override
+    public RunResult run() {
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):run)");
+
+
+        RunResult runResult = new RunResult(this, new ArrayList<>(0));
+
+        runResult.setSelectedActionList(this.selectedActionList);
+
+        return runResult;
     }
 
     //For debugging

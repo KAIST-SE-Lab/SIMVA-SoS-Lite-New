@@ -127,14 +127,18 @@ public class SimEngine {
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "]  ===================================================================");
         System.out.println("[" + timestamp + "] (SimEngine:startSimulation) Simulation is started.");
-        System.out.println("[" + timestamp + "]  -------------------------------------------------------------------");
 
         for(int cur_tick = 0; cur_tick < this.simConfig.getSimTotalTime(); cur_tick++){
             timestamp = new Timestamp(System.currentTimeMillis());
+            System.out.println("[" + timestamp + "]  -------------------------------------------------------------------");
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) cur_tick: " + cur_tick);
 
             RunResult curTickSimResult = runSimModel();
         }
+
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "]  ===================================================================");
+        System.out.println("[" + timestamp + "] (Main) Simulation engine is terminated.");
 
         /*
         //MAPE-loop is off
