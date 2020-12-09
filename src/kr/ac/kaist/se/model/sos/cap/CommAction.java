@@ -30,8 +30,9 @@ public class CommAction extends _SimAction_ {
     }
 
     @Override
-    protected boolean checkPrecondition() {
-        return false;
+    public boolean checkPrecondition() {
+        //TODO: Edit checkPrecondition phrase
+        return true;
     }
 
     @Override

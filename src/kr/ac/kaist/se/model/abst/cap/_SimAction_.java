@@ -51,7 +51,7 @@ public abstract class _SimAction_ {
     }
 
 
-    protected abstract boolean checkPrecondition();
+    public abstract boolean checkPrecondition();
 
     //TODO: check (set) return
     public abstract void executeAction();

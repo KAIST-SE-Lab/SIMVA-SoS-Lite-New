@@ -109,6 +109,20 @@ public abstract class _SimObject_ implements Simulatable {
      * @return ObjectLocation of this organization
      */
     public ObjectLocation getCurLocation() {
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.print("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):getCurLocation) ");
+
+        //Updated location
+        int index = 0;
+        System.out.print("(");
+        for (DimensionVar locDimVar : objLocation.getObjLocDimVars()){
+            System.out.print(objLocation.getObjLocDimVars().get(index++).getDataCurValue());
+            if (index < objLocation.getObjLocDimVars().size()){
+                System.out.print(",");
+            }
+        }
+        System.out.println(")");
+
         return objLocation;
     }
 

@@ -5,6 +5,7 @@ import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
 import kr.ac.kaist.se.model.intf.Movable;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
+import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -111,10 +112,43 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
             runResult.addSubRunResult(directCS.run());
         }
 
+//        System.out.println(id + ": " + runResult.getSubRunResults().size() + " | " + runResult.getSelectedActionList().size());
+
+//        System.out.println(runResult.getSubRunResults().size());
+//        for (RunResult aRunResult : runResult.getSubRunResults()){
+//            System.out.println(aRunResult.getSelectedActionList());
+//        }
+
         return runResult;
     }
 
+    @Override
+    public UpdateResult update(RunResult runResult) {
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):update)");
 
+//        System.out.println("Organization:update(..): " + runResult.getRunSubject().getId());
+//        return null;
+
+        UpdateResult updateResult = new UpdateResult();
+
+        for(RunResult subRunResult: runResult.getSubRunResults()){
+            //Organization-type subject (i.e., suborganization)
+            if(subRunResult.getRunSubject() instanceof Organization){
+                Organization target = (Organization) subRunResult.getRunSubject();
+                UpdateResult subUpdateResult = target.update(subRunResult);
+                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
+            }
+            //Member CS
+            else if(subRunResult.getRunSubject() instanceof Constituent){
+                Constituent target = (Constituent) subRunResult.getRunSubject();
+                UpdateResult subUpdateResult = target.update(subRunResult);
+                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
+            }
+        }
+
+        return updateResult;
+    }
 
     /**
      * A method to check if a CS is contained or not

@@ -11,6 +11,7 @@ import kr.ac.kaist.se.model.sos.data.DimensionVarDomain;
  */
 public class MapFloorDimensionType extends DimensionVar {
 
+
     public MapFloorDimensionType(String dataId, String dataName, String dataType) {
         super(dataId, dataName, dataType);
     }
@@ -28,12 +29,17 @@ public class MapFloorDimensionType extends DimensionVar {
     }
 
     @Override
-    public void increaseValueOfDim(int diff) {
-
+    public void updateValueOfDim(int diff) {
+        //TODO: Loop of Enumeration or Min/Max constraints
     }
 
-    @Override
-    public void decreaseValueOfDim(int diff) {
-
-    }
+//    @Override
+//    public void increaseValueOfDim(int diff) {
+//
+//    }
+//
+//    @Override
+//    public void decreaseValueOfDim(int diff) {
+//
+//    }
 }

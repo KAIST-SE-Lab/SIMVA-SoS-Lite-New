@@ -31,8 +31,8 @@ public interface Simulatable {
 
     /**
      * The method update() actually executes behaviors allowed by the SimEngine.
-     * @param runResult
-     * @return
+     * @param runResult runResult object (i.e., actions allowed to be executed) of current tick
+     * @return  list of action execution results (i.e., logs)
      */
     UpdateResult update(RunResult runResult);
 }

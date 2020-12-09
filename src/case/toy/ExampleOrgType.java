@@ -24,8 +24,8 @@ public class ExampleOrgType extends Organization {
     }
 
 
-    @Override
-    public UpdateResult update(RunResult runResult) {
-        return null;
-    }
+//    @Override
+//    public UpdateResult update(RunResult runResult) {
+//        return null;
+//    }
 }

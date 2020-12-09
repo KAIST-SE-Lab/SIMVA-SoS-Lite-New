@@ -13,13 +13,15 @@ import java.sql.Timestamp;
  *
  * @author ymbaek
  */
-public abstract class DimensionVar extends _SimDataVariable_ {
+public abstract class DimensionVar extends _SimDataVariable_{
 
     //Domain of a dimension variable
     protected DimensionVarDomain varDomain;
 
-    public abstract void increaseValueOfDim(int diff);
-    public abstract void decreaseValueOfDim(int diff);
+    public abstract void updateValueOfDim(int diff);
+
+//    public abstract void increaseValueOfDim(int diff);
+//    public abstract void decreaseValueOfDim(int diff);
 
 
     public DimensionVar(String dataId, String dataName, String dataType) {
@@ -56,13 +58,23 @@ public abstract class DimensionVar extends _SimDataVariable_ {
 
     private void printDimensionVarCreation(){
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (DimensionVar) A DimensionVar is initialized: " +
-                varId + " | " +
-                varName + " | " +
-                varType + " | varDomain(" +
-                varDomain.getDomainType() + ", " +
-                varDomain.getDomainMinVal() + ", " +
-                varDomain.getDomainMaxVal() + ", " +
-                varDomain.getDomainEnumVal() + ")");
+
+        if(varDomain != null) {
+            System.out.println("[" + timestamp + "] (DimensionVar) A DimensionVar is initialized: " +
+                    varId + " | " +
+                    varName + " | " +
+                    varType + " | varDomain(" +
+                    varDomain.getDomainType() + ", " +
+                    varDomain.getDomainMinVal() + ", " +
+                    varDomain.getDomainMaxVal() + ", " +
+                    varDomain.getDomainEnumVal() + ")");
+        }else{
+            System.out.println("[" + timestamp + "] (DimensionVar) A DimensionVar is initialized: " +
+                    varId + " | " +
+                    varName + " | " +
+                    varType + ")");
+        }
     }
+
+
 }

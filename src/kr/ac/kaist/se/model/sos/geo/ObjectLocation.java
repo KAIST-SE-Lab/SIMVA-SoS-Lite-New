@@ -19,4 +19,8 @@ public class ObjectLocation {
     public void setObjLocDimVars(ArrayList<DimensionVar> objLocDimVars) {
         this.objLocDimVars = objLocDimVars;
     }
+
+    public void updateLocation(ArrayList<String> dimIds){
+
+    }
 }

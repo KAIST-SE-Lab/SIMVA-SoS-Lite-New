@@ -5,6 +5,7 @@ import kr.ac.kaist.se.model.intf.Actionable;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -28,6 +29,9 @@ public abstract class _SimActionableObject_ extends _SimObject_ implements Actio
      * @return
      */
     public UpdateResult update(RunResult runResult){
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "/_SimActionableObject_(" + id + "):update)");
+
         UpdateResult updateResult = new UpdateResult();
 
         for (_SimAction_ action: runResult.getSelectedActionList()){
@@ -71,7 +75,11 @@ public abstract class _SimActionableObject_ extends _SimObject_ implements Actio
     }
 
     public void clearSelectedActionList(){
+        int beforeSize = selectedActionList.size();
         selectedActionList.clear();
+
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":clearSelectedActionList) before size:" + beforeSize);
     }
 
 

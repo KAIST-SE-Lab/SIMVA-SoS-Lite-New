@@ -135,13 +135,13 @@ public class ToySoS extends SoS {
     private void initOrgs() {
         org1 = new ExampleOrgType(this, "ORG01", "Organization 01");
         org1A = new ExampleOrgType(this, "ORG01A", "Organization 01-A");
-        org1B = new ExampleOrgType(this, "ORG01B", "Organization 01-B");
-        org1AA = new ExampleOrgType(this, "ORG01AA", "Organization 01-A-A");
-        org2 = new ExampleOrgType(this, "ORG02", "Organization 02");
-        org2A = new ExampleOrgType(this, "ORG02A", "Organization 02-A");
+//        org1B = new ExampleOrgType(this, "ORG01B", "Organization 01-B");
+//        org1AA = new ExampleOrgType(this, "ORG01AA", "Organization 01-A-A");
+//        org2 = new ExampleOrgType(this, "ORG02", "Organization 02");
+//        org2A = new ExampleOrgType(this, "ORG02A", "Organization 02-A");
 
         org1.setOrgType(EnumOrgType.COLLABORATIVE);
-        org2.setOrgType(EnumOrgType.ACKNOWLEDGED);
+//        org2.setOrgType(EnumOrgType.ACKNOWLEDGED);
     }
 
     /**
@@ -151,14 +151,14 @@ public class ToySoS extends SoS {
         csA = new ExampleCSType(this, null, "CS0A", "Constituent A");
         csB = new ExampleCSType(this, null, "CS0B", "Constituent B");
         csC = new ExampleCSType(this, null, "CS0C", "Constituent C");
-        csD = new ExampleCSType(this, null, "CS0D", "Constituent D");
-        csE = new ExampleCSType(this, null, "CS0E", "Constituent E");
-        csF = new ExampleCSType(this, null, "CS0F", "Constituent F");
-        csG = new ExampleCSType(this, null, "CS0G", "Constituent G");
-        csH = new ExampleCSType(this, null, "CS0H", "Constituent H");
-
-        //independent CS
-        csI = new ExampleCSType(this, null, "CS0I", "Constituent I");
+//        csD = new ExampleCSType(this, null, "CS0D", "Constituent D");
+//        csE = new ExampleCSType(this, null, "CS0E", "Constituent E");
+//        csF = new ExampleCSType(this, null, "CS0F", "Constituent F");
+//        csG = new ExampleCSType(this, null, "CS0G", "Constituent G");
+//        csH = new ExampleCSType(this, null, "CS0H", "Constituent H");
+//
+//        //independent CS
+//        csI = new ExampleCSType(this, null, "CS0I", "Constituent I");
     }
 
 
@@ -210,10 +210,10 @@ public class ToySoS extends SoS {
 //        return null;
 //    }
 
-    @Override
-    public UpdateResult update(RunResult runResult) {
-        return null;
-    }
+//    @Override
+//    public UpdateResult update(RunResult runResult) {
+//        return null;
+//    }
 
 
     class ExampleDataDomain extends DataVarDomain {

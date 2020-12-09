@@ -3,7 +3,9 @@ package kr.ac.kaist.se.model.sos;
 import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
 import kr.ac.kaist.se.model.map.SimMap;
+import kr.ac.kaist.se.simdata.output.SimLog;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
+import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -125,6 +127,27 @@ public abstract class SoS extends _SimContainerObject_ {
         return runResult;
     }
 
+    @Override
+    public UpdateResult update(RunResult runResult) {
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):update)");
+
+        UpdateResult updateResult = new UpdateResult();
+
+        for(RunResult subRunResult: runResult.getSubRunResults()){
+            //Organization-type subject
+            if(subRunResult.getRunSubject() instanceof Organization){
+                Organization target = (Organization) subRunResult.getRunSubject();
+                UpdateResult subUpdateResult = target.update(subRunResult);
+                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
+            }
+            //TODO: Code for Infrastructure and Environment
+        }
+
+
+        return updateResult;
+        //return null;
+    }
 
     /**
      *

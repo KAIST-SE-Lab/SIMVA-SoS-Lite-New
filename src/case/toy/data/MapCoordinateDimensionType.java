@@ -29,12 +29,29 @@ public class MapCoordinateDimensionType extends DimensionVar {
     }
 
     @Override
-    public void increaseValueOfDim(int diff) {
+    public void updateValueOfDim(int diff) {
+        int newValue = Integer.parseInt(this.dataCurValue);
+        newValue += diff;
 
+        //TODO: Value checking
+        //System.out.println(varDomain.isValidValue(newValue));
+
+        this.dataCurValue = newValue + "";
     }
 
-    @Override
-    public void decreaseValueOfDim(int diff) {
-
-    }
+//    @Override
+//    public void increaseValueOfDim(int diff) {
+//        int newValue = Integer.parseInt(this.dataCurValue);
+//        newValue += diff;
+//
+//        this.dataCurValue = newValue + "";
+//    }
+//
+//    @Override
+//    public void decreaseValueOfDim(int diff) {
+//        int newValue = Integer.parseInt(this.dataCurValue);
+//        newValue -= diff;
+//
+//        this.dataCurValue = newValue + "";
+//    }
 }

@@ -1,5 +1,7 @@
 package kr.ac.kaist.se.model.abst.data;
 
+import kr.ac.kaist.se.model.sos.data.DimensionVar;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -8,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author ymbaek
  */
-public abstract class _SimDataVariable_ {
+public abstract class _SimDataVariable_ implements Cloneable{
 
     protected Timestamp timestamp;    //Timestamp for stdout
 
@@ -149,6 +151,23 @@ public abstract class _SimDataVariable_ {
      */
     protected boolean isValidValue(String dataValue){
         return true;
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    public _SimDataVariable_ clone(){
+        _SimDataVariable_ dimVar = null;
+
+        try {
+            dimVar = (_SimDataVariable_) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return dimVar;
     }
 
 

@@ -1,13 +1,16 @@
 package kr.ac.kaist.se.controller.sim;
 
 import kr.ac.kaist.se.controller.mape.MapeEngine;
+import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.simdata.input.SimConfiguration;
 import kr.ac.kaist.se.simdata.input.SimScenario;
 import kr.ac.kaist.se.simdata.output.SimLog;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
+import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * Simulation engine for a simulation of a simulation model
@@ -117,6 +120,8 @@ public class SimEngine {
     /**
      * Method to start a simulation of simModel.
      * (Deprecated: executeSimulation(...))
+     *
+     * @return SimLog
      */
     public SimLog startSimulation(){
 
@@ -133,7 +138,26 @@ public class SimEngine {
             System.out.println("[" + timestamp + "]  -------------------------------------------------------------------");
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) cur_tick: " + cur_tick);
 
+            /* PHASE 01: Collecting RunResults from SimModel*/
+
             RunResult curTickSimResult = runSimModel();
+
+            System.out.println("[" + timestamp + "] (SimEngine:startSimulation) RunResult is returned: " +
+                    curTickSimResult.getSelectedActionList().size() + " | " +
+                    curTickSimResult.getSubRunResults().size());
+
+            curTickSimResult = this.resolveConflict(curTickSimResult);
+
+            //printAllRunResults(curTickSimResult);
+            System.out.println("[" + timestamp + "] (SimEngine:startSimulation) selectedActions of curTickSimResult: " + getSelectedActionsFromRunResult(curTickSimResult));
+
+
+
+            /* PHASE 02: Update SimModel by actually executing the actions, allowed by this SimEngine */
+
+            UpdateResult curTickUpdateResult = this.updateSimModel(curTickSimResult);
+
+
         }
 
         timestamp = new Timestamp(System.currentTimeMillis());
@@ -159,7 +183,40 @@ public class SimEngine {
     }
 
     /**
-     * A method to actually run a simulation model
+     *
+     * @param curTickSimResult
+     * @return
+     */
+    private RunResult resolveConflict(RunResult curTickSimResult) {
+        //TODO: To implement a logic to resolve a conflict
+        return curTickSimResult;
+    }
+
+//    private void printAllRunResults(RunResult runResult){
+//        for (_SimAction_ action : runResult.getSelectedActionList()){
+//            System.out.print("(" + action.getActionSubject().getId() + ":" + action.getActionName() + ")|");
+//        }
+//        for (RunResult subRunResult: runResult.getSubRunResults()){
+//            printAllRunResults(subRunResult);
+//        }
+//        //System.out.println();
+//    }
+
+    private ArrayList<_SimAction_> getSelectedActionsFromRunResult(RunResult runResult){
+        ArrayList<_SimAction_> actionsInRunResult = new ArrayList<>();
+
+        actionsInRunResult.addAll(runResult.getSelectedActionList());
+
+        for (RunResult subRunResult: runResult.getSubRunResults()){
+            actionsInRunResult.addAll(getSelectedActionsFromRunResult(subRunResult));
+        }
+
+        return actionsInRunResult;
+    }
+
+
+    /**
+     * A method to collect selected actions from simModel by running a simulation model.
      * @return
      */
     protected RunResult runSimModel(){
@@ -169,6 +226,19 @@ public class SimEngine {
         return simModel.run();
         //return null;
     }
+
+    /**
+     * A method to execute actions defined in the simulation model.
+     * This method should be called after runSimModel() is called.
+     * @return
+     */
+    protected UpdateResult updateSimModel(RunResult curTickRunResult){
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":updateSimModel)");
+
+        return simModel.update(curTickRunResult);
+    }
+
 
     private void printSimInputInfo() {
         timestamp = new Timestamp(System.currentTimeMillis());

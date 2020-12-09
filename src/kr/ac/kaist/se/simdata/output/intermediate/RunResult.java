@@ -24,6 +24,8 @@ public class RunResult {
         this.subRunResults = new ArrayList<RunResult>();
     }
 
+
+
     public _SimObject_ getRunSubject() {
         return runSubject;
     }
