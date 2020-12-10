@@ -41,12 +41,18 @@ public class MoveAction extends _SimAction_ {
         super(accessibleSoS, actionSubject, actionId, actionName);
         this.allowedDims = allowedDims;
         this.dimVarDiffList = dimVarDiffList;
+
+        printMoveActionCreation();
     }
 
     public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, int actionDuration, float actionCost, float actionBenefit, ArrayList<DimensionVar> allowedDims, ArrayList<Integer> dimVarDiffList) {
         super(accessibleSoS, actionSubject, actionId, actionName, actionDuration, actionCost, actionBenefit);
         this.allowedDims = allowedDims;
         this.dimVarDiffList = dimVarDiffList;
+
+        printMoveActionCreation();
+
+
     }
 
     @Override
@@ -165,7 +171,8 @@ public class MoveAction extends _SimAction_ {
                 actionSubject.getId() + " | " +
                 actionId + " | " +
                 actionName + " | " +
-                allowedDims);
+                allowedDims + " | " +
+                dimVarDiffList);
     }
 
     public ArrayList<DimensionVar> getAllowedDims() {

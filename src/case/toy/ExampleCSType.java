@@ -78,7 +78,9 @@ public class ExampleCSType extends Constituent {
         MoveAction exampleCSMoveAction = new MoveAction(mySoS,
                 this,
                 "MOVEACTION01",
-                "ExampleCS-MoveAction01", allowedDims);
+                "ExampleCS-MoveAction01",
+                allowedDims,
+                new ArrayList<Integer>(Arrays.asList(Integer.valueOf(1), Integer.valueOf(2))));
 
         capableActionList.add(exampleCSMoveAction);
 

@@ -179,18 +179,24 @@ public abstract class Constituent extends _SimActionableObject_
         ArrayList<_SimAction_> possibleMoveActions = new ArrayList<>();
 
         for (_SimAction_ aAction : capableActionList){
+            //If aAction is not a MoveAction
             if (!(aAction instanceof MoveAction)) {
                 if (aAction.checkPrecondition()) {
                     selectedActionList.add(aAction);
                 }
-            }else{
+            }
+            //If aAction is MoveAction
+            else{
                 if (aAction.checkPrecondition()) {
-                    System.out.println("HHH");
+//                    System.out.println("HHH");
                     possibleMoveActions.add(aAction);
                 }
             }
         }
 
+
+        //TODO: MoveAction selection
+        /* Selection of move action (current: random) */
         Random rand = new Random();
 //        System.out.println(possibleMoveActions.size());
         int selectedMoveActionIndex = rand.nextInt(possibleMoveActions.size());
