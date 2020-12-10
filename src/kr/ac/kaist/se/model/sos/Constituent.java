@@ -200,7 +200,7 @@ public abstract class Constituent extends _SimActionableObject_
         Random rand = new Random();
 //        System.out.println(possibleMoveActions.size());
         int selectedMoveActionIndex = rand.nextInt(possibleMoveActions.size());
-        System.out.println(selectedMoveActionIndex);
+        //System.out.println(selectedMoveActionIndex);
 
         selectedActionList.add(possibleMoveActions.get(selectedMoveActionIndex));
 

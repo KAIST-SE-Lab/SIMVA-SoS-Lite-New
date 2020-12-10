@@ -30,28 +30,13 @@ public class MapCoordinateDimensionType extends DimensionVar {
 
     @Override
     public void updateValueOfDim(int diff) {
-        int newValue = Integer.parseInt(this.dataCurValue);
+        int newValue = Integer.parseInt(this.getDataCurValue());
         newValue += diff;
 
         //TODO: Value checking
         //System.out.println(varDomain.isValidValue(newValue));
 
-        this.dataCurValue = newValue + "";
+        this.setDataCurValue(newValue + "");
     }
 
-//    @Override
-//    public void increaseValueOfDim(int diff) {
-//        int newValue = Integer.parseInt(this.dataCurValue);
-//        newValue += diff;
-//
-//        this.dataCurValue = newValue + "";
-//    }
-//
-//    @Override
-//    public void decreaseValueOfDim(int diff) {
-//        int newValue = Integer.parseInt(this.dataCurValue);
-//        newValue -= diff;
-//
-//        this.dataCurValue = newValue + "";
-//    }
 }

@@ -18,41 +18,28 @@ import java.util.Arrays;
  */
 public class MoveAction extends _SimAction_ {
 
+    protected int numOfAllowedDims = 0;
     protected ArrayList<DimensionVar> allowedDims = new ArrayList<>();
 
     protected ArrayList<Integer> dimVarDiffList = new ArrayList<>();
 
 
-    public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, ArrayList<DimensionVar> allowedDims) {
+    public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, int numOfAllowedDims, ArrayList<DimensionVar> allowedDims, ArrayList<Integer> dimVarDiffList) {
         super(accessibleSoS, actionSubject, actionId, actionName);
-        this.allowedDims = allowedDims;
-
-        printMoveActionCreation();
-    }
-
-    public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, int actionDuration, float actionCost, float actionBenefit, ArrayList<DimensionVar> allowedDims) {
-        super(accessibleSoS, actionSubject, actionId, actionName, actionDuration, actionCost, actionBenefit);
-        this.allowedDims = allowedDims;
-
-        printMoveActionCreation();
-    }
-
-    public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, ArrayList<DimensionVar> allowedDims, ArrayList<Integer> dimVarDiffList) {
-        super(accessibleSoS, actionSubject, actionId, actionName);
+        this.numOfAllowedDims = numOfAllowedDims;
         this.allowedDims = allowedDims;
         this.dimVarDiffList = dimVarDiffList;
 
         printMoveActionCreation();
     }
 
-    public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, int actionDuration, float actionCost, float actionBenefit, ArrayList<DimensionVar> allowedDims, ArrayList<Integer> dimVarDiffList) {
+    public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, int actionDuration, float actionCost, float actionBenefit, int numOfAllowedDims, ArrayList<DimensionVar> allowedDims, ArrayList<Integer> dimVarDiffList) {
         super(accessibleSoS, actionSubject, actionId, actionName, actionDuration, actionCost, actionBenefit);
+        this.numOfAllowedDims = numOfAllowedDims;
         this.allowedDims = allowedDims;
         this.dimVarDiffList = dimVarDiffList;
 
         printMoveActionCreation();
-
-
     }
 
     @Override
@@ -104,10 +91,19 @@ public class MoveAction extends _SimAction_ {
 //        Integer xDimDiff = Integer.valueOf(1);
 //        Integer yDimDiff = Integer.valueOf(2);
 
-        updatedCurLoc.getObjLocDimVars().get(0).updateValueOfDim(1);
-        updatedCurLoc.getObjLocDimVars().get(1).updateValueOfDim(+2);
+        int dimIndex = 0;
+        for (DimensionVar allowedDimVar : allowedDims){
+//            System.out.println(allowedDims.size());
 
-        System.out.print("(updated curLoc: ");
+            int valueDiff = dimVarDiffList.get(dimIndex);
+            updatedCurLoc.getObjLocDimVars().get(dimIndex).updateValueOfDim(valueDiff);
+            dimIndex++;
+        }
+
+//        updatedCurLoc.getObjLocDimVars().get(0).updateValueOfDim(dimVarDiffList.get(0));
+//        updatedCurLoc.getObjLocDimVars().get(1).updateValueOfDim(dimVarDiffList.get(1));
+
+        System.out.print("MoveAction:(updated curLoc: ");
         int index = 0;
         for(DimensionVar dimVar: updatedCurLoc.getObjLocDimVars()){
                 System.out.print(dimVar.getDataCurValue());
@@ -171,7 +167,7 @@ public class MoveAction extends _SimAction_ {
                 actionSubject.getId() + " | " +
                 actionId + " | " +
                 actionName + " | " +
-                allowedDims + " | " +
+                allowedDims + "(" + numOfAllowedDims + ") | " +
                 dimVarDiffList);
     }
 

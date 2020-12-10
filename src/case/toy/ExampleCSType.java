@@ -1,11 +1,14 @@
 import data.MapCoordinateDimensionType;
+import data.MapFloorDimensionType;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
+import kr.ac.kaist.se.model.abst.data.EnumDomainType;
 import kr.ac.kaist.se.model.sos.Constituent;
 import kr.ac.kaist.se.model.sos.Organization;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.model.sos.cap.MoveAction;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
+import kr.ac.kaist.se.model.sos.data.DimensionVarDomain;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 
@@ -61,28 +64,54 @@ public class ExampleCSType extends Constituent {
     private void initMoveActions() {
         /* Define allowed dimensions from declared dimensions of its map */
         ArrayList<DimensionVar> allowedDims = new ArrayList<>();
+        ArrayList<DimensionVar> allowedDims2 = new ArrayList<>();
 
-        MapCoordinateDimensionType xDim;
-        MapCoordinateDimensionType yDim;
+        MapCoordinateDimensionType xDimVar;
+        MapCoordinateDimensionType yDimVar;
+        MapFloorDimensionType floorDimVar;
 
         // Deep copy by clone(): they have different references
-        xDim = (MapCoordinateDimensionType) ToySoSMap.xDim.clone();
-        yDim = (MapCoordinateDimensionType) ToySoSMap.yDim.clone();
+        xDimVar = (MapCoordinateDimensionType) ToySoSMap.xDim.clone();
+        yDimVar = (MapCoordinateDimensionType) ToySoSMap.yDim.clone();
+        floorDimVar = (MapFloorDimensionType) ToySoSMap.floorDim.clone();
 
-        allowedDims.add(xDim);
-        allowedDims.add(yDim);
+//        DimensionVarDomain xDimDomain = ToySoSMap.xDim.getVarDomain();
+        xDimVar.setVarDomain(ToySoSMap.xDim.getVarDomain());
+        yDimVar.setVarDomain(ToySoSMap.yDim.getVarDomain());
+        floorDimVar.setVarDomain(ToySoSMap.floorDim.getVarDomain());
+
+//        xDim.setDataCurValue("0");
+//        yDim.setDataCurValue("0");
+//        floorDim.setDataCurValue("FLOOR_1");
+
+        allowedDims.add(xDimVar);
+        allowedDims.add(yDimVar);
+
+        allowedDims2.add(xDimVar);
+        allowedDims2.add(yDimVar);
+        allowedDims2.add(floorDimVar);
 
 //        System.out.println(xDim);
 //        System.out.println(ToySoSMap.xDim);
 
-        MoveAction exampleCSMoveAction = new MoveAction(mySoS,
+        MoveAction exampleCSMoveAction1 = new MoveAction(mySoS,
                 this,
                 "MOVEACTION01",
                 "ExampleCS-MoveAction01",
+                2,
                 allowedDims,
                 new ArrayList<Integer>(Arrays.asList(Integer.valueOf(1), Integer.valueOf(2))));
 
-        capableActionList.add(exampleCSMoveAction);
+        MoveAction exampleCSMoveAction2 = new MoveAction(mySoS,
+                this,
+                "MOVEACTION02",
+                "ExampleCS-MoveAction01",
+                3,
+                allowedDims2,
+                new ArrayList<Integer>(Arrays.asList(Integer.valueOf(3), Integer.valueOf(2), Integer.valueOf(1))));
+
+        capableActionList.add(exampleCSMoveAction1);
+        capableActionList.add(exampleCSMoveAction2);
 
 //        System.out.println(this.id + " >> initMoveAction() >> " + capableActionList.size());
     }

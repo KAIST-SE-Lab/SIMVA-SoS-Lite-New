@@ -77,4 +77,11 @@ public abstract class DimensionVar extends _SimDataVariable_{
     }
 
 
+    public DimensionVarDomain getVarDomain() {
+        return varDomain;
+    }
+
+    public void setVarDomain(DimensionVarDomain varDomain) {
+        this.varDomain = varDomain;
+    }
 }

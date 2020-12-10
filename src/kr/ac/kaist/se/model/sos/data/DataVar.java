@@ -39,4 +39,12 @@ public class DataVar extends _SimDataVariable_ {
         this.isDomainConstrained = true;
 
     }
+
+    public DataVarDomain getVarDomain() {
+        return varDomain;
+    }
+
+    public void setVarDomain(DataVarDomain varDomain) {
+        this.varDomain = varDomain;
+    }
 }

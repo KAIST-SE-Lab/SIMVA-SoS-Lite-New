@@ -33,7 +33,7 @@ public class ToySoSMap extends SimMap {
         /* Definition of domains for each dimension variable */
         MapCoordinateDimensionDomain xDimDomain = new MapCoordinateDimensionDomain(EnumDomainType.VALUE_RANGE, 0, 10);
         MapCoordinateDimensionDomain yDimDomain = new MapCoordinateDimensionDomain(EnumDomainType.VALUE_RANGE, 0, 10);
-        MapFloorDimensionDomain floorDimDomain = new MapFloorDimensionDomain(EnumDomainType.ENUMERATION, new ArrayList<String>(Arrays.asList("FLOOR_1", "FLOOR_2")));
+        MapFloorDimensionDomain floorDimDomain = new MapFloorDimensionDomain(EnumDomainType.ENUMERATION, new ArrayList<String>(Arrays.asList("FLOOR_B1", "FLOOR_1", "FLOOR_2", "FLOOR_3")));
 
         /* Initialization of every dimension with the domains defined */
         xDim = new MapCoordinateDimensionType("DIM_X", "xDimension", "Int", xDimDomain);

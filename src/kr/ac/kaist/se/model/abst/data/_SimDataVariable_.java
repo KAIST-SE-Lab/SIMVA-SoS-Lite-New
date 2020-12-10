@@ -1,5 +1,6 @@
 package kr.ac.kaist.se.model.abst.data;
 
+import kr.ac.kaist.se.model.sos.data.DataVarDomain;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 
 import java.sql.Timestamp;
@@ -18,13 +19,16 @@ public abstract class _SimDataVariable_ implements Cloneable{
     protected String varName;      //name of a data (variable)
     protected String varType;      //type of a data (variable)
 
-    private Integer integerData;
-    private Float floatData;
-    private String stringData;
-    private ArrayList<String> enumData;
+    protected Integer integerData;
+    protected Float floatData;
+    protected String stringData;    //String-type or Enum data
+//    protected String enumData;
 
-    protected String dataDefaultValue;  //default value of a data (variable)
-    protected String dataCurValue;      //current value of a data (variable)
+//    protected _SimDomain_ varDomain;
+
+
+    private String dataDefaultValue;  //default value of a data (variable)
+    private String dataCurValue;      //current value of a data (variable)
 
     protected boolean isEnumData = false;
     protected boolean isValueAssigned = false;
@@ -132,6 +136,9 @@ public abstract class _SimDataVariable_ implements Cloneable{
                     dataType.equals("EnumString")) {
                 //System.out.println("ENUM");
                 isEnumData = true;
+                stringData = dataCurValue;
+
+                System.out.println(dataCurValue);
             }
         }
         else{
@@ -241,13 +248,6 @@ public abstract class _SimDataVariable_ implements Cloneable{
         this.floatData = floatData;
     }
 
-    public ArrayList<String> getEnumData() {
-        return enumData;
-    }
-
-    public void setEnumData(ArrayList<String> enumData) {
-        this.enumData = enumData;
-    }
 
     public String getDataDefaultValue() {
         return dataDefaultValue;
