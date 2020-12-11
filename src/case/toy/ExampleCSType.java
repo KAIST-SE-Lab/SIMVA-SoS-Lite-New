@@ -3,6 +3,7 @@ import data.MapFloorDimensionType;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.abst.data.EnumDomainType;
+import kr.ac.kaist.se.model.abst.data._SimDomain_;
 import kr.ac.kaist.se.model.sos.Constituent;
 import kr.ac.kaist.se.model.sos.Organization;
 import kr.ac.kaist.se.model.sos.SoS;
@@ -35,9 +36,70 @@ public class ExampleCSType extends Constituent {
         if (mySoS != null && mySoS.sosMap != null) {
             ArrayList<DimensionVar> mapDims = new ArrayList<>();
 
+            String tmpDimVarId;
+            String tmpDimVarName;
+            String tmpDimVarType;
+            String tmpDimVarDefaultValue;
+            String tmpDimVarCurValue;
+            DimensionVarDomain tmpDimVarDomain;
+
+
+            int index = 0;
+
             // Deep copy by clone(): they have different references
-            for(DimensionVar dimVar: mySoS.sosMap.mapDimensions){
-                mapDims.add((DimensionVar)dimVar.clone());
+            for(DimensionVar dimVar: mySoS.getSosMap().getMapDimensions()){
+                DimensionVar clonedDimVar = (DimensionVar)dimVar.clone();
+
+                mapDims.add(clonedDimVar);
+//
+//                System.out.println(clonedDimVar instanceof MapCoordinateDimensionType);
+
+//                if (dimVar instanceof MapCoordinateDimensionType){
+//                    MapCoordinateDimensionType tmpDimVar = new MapCoordinateDimensionType();
+//
+//                    tmpDimVarId = dimVar.getVarId();
+//
+//                    tmpDimVarName = dimVar.getVarName();
+//                    tmpDimVarType = dimVar.getVarType();
+//                    tmpDimVarDefaultValue = dimVar.getDataDefaultValue();
+//                    tmpDimVarCurValue = dimVar.getDataCurValue();
+//                    tmpDimVarDomain = dimVar.getVarDomain();
+//                    System.out.println(tmpDimVarDomain + " | " + dimVar.getVarDomain());
+//
+//                    tmpDimVar.setVarId(tmpDimVarId);
+//                    tmpDimVar.setVarName(tmpDimVarName);
+//                    tmpDimVar.setVarType(tmpDimVarType);
+//                    tmpDimVar.setDataDefaultValue(tmpDimVarDefaultValue);
+//                    tmpDimVar.setDataCurValue(tmpDimVarCurValue);
+//                    tmpDimVar.setVarDomain(tmpDimVarDomain);
+//
+//                    mapDims.add(tmpDimVar);
+//
+////                    System.out.println("ExampleCSType: " + tmpDimVar + " | " + dimVar);
+//                } else if (dimVar instanceof MapFloorDimensionType){
+//                    MapFloorDimensionType tmpDimVar = new MapFloorDimensionType();
+//
+//                    tmpDimVarId = dimVar.getVarId();
+//                    tmpDimVarName = dimVar.getVarName();
+//                    tmpDimVarType = dimVar.getVarType();
+//                    tmpDimVarDefaultValue = dimVar.getDataDefaultValue();
+//                    tmpDimVarCurValue = dimVar.getDataCurValue();
+//                    tmpDimVarDomain = dimVar.getVarDomain();
+//
+//                    tmpDimVar.setVarId(tmpDimVarId);
+//                    tmpDimVar.setVarName(tmpDimVarName);
+//                    tmpDimVar.setVarType(tmpDimVarType);
+//                    tmpDimVar.setDataDefaultValue(tmpDimVarDefaultValue);
+//                    tmpDimVar.setDataCurValue(tmpDimVarCurValue);
+//                    tmpDimVar.setVarDomain(tmpDimVarDomain);
+//
+//                    mapDims.add(tmpDimVar);
+////                    System.out.println("ExampleCSType: " + tmpDimVar + " | " + dimVar);
+//                }
+
+
+//                System.out.println("ExampleCSType: " + clonedDimVar + " | " + mapDims.get(index));
+                index++;
             }
 
             thisObjLocation = new ObjectLocation(mapDims);
@@ -50,7 +112,7 @@ public class ExampleCSType extends Constituent {
 
             objLocation = thisObjLocation;
 
-            printCurLocation();
+//            printCurLocation();
         }
     }
 
@@ -65,6 +127,7 @@ public class ExampleCSType extends Constituent {
         /* Define allowed dimensions from declared dimensions of its map */
         ArrayList<DimensionVar> allowedDims = new ArrayList<>();
         ArrayList<DimensionVar> allowedDims2 = new ArrayList<>();
+        ArrayList<DimensionVar> allowedDimsForFloorMoving = new ArrayList<>();
 
         MapCoordinateDimensionType xDimVar;
         MapCoordinateDimensionType yDimVar;
@@ -75,7 +138,7 @@ public class ExampleCSType extends Constituent {
         yDimVar = (MapCoordinateDimensionType) ToySoSMap.yDim.clone();
         floorDimVar = (MapFloorDimensionType) ToySoSMap.floorDim.clone();
 
-//        DimensionVarDomain xDimDomain = ToySoSMap.xDim.getVarDomain();
+        // Set domains for each dimension variable
         xDimVar.setVarDomain(ToySoSMap.xDim.getVarDomain());
         yDimVar.setVarDomain(ToySoSMap.yDim.getVarDomain());
         floorDimVar.setVarDomain(ToySoSMap.floorDim.getVarDomain());
@@ -91,27 +154,47 @@ public class ExampleCSType extends Constituent {
         allowedDims2.add(yDimVar);
         allowedDims2.add(floorDimVar);
 
+        allowedDimsForFloorMoving.add(floorDimVar);
+
 //        System.out.println(xDim);
 //        System.out.println(ToySoSMap.xDim);
 
-        MoveAction exampleCSMoveAction1 = new MoveAction(mySoS,
-                this,
-                "MOVEACTION01",
-                "ExampleCS-MoveAction01",
-                2,
-                allowedDims,
-                new ArrayList<Integer>(Arrays.asList(Integer.valueOf(1), Integer.valueOf(2))));
+//        MoveAction exampleCSMoveAction1 = new MoveAction(mySoS,
+//                this,
+//                "MOVEACTION01",
+//                "ExampleCS-MoveAction01",
+//                2,
+//                allowedDims,
+//                new ArrayList<Integer>(Arrays.asList(Integer.valueOf(1), Integer.valueOf(2))));
+//
+//        MoveAction exampleCSMoveAction2 = new MoveAction(mySoS,
+//                this,
+//                "MOVEACTION02",
+//                "ExampleCS-MoveAction02",
+//                3,
+//                allowedDims2,
+//                new ArrayList<Integer>(Arrays.asList(Integer.valueOf(4), Integer.valueOf(2), Integer.valueOf(-1))));
 
-        MoveAction exampleCSMoveAction2 = new MoveAction(mySoS,
+        MoveAction goUpOneFloorMoveAction = new MoveAction(mySoS,
                 this,
-                "MOVEACTION02",
-                "ExampleCS-MoveAction01",
-                3,
-                allowedDims2,
-                new ArrayList<Integer>(Arrays.asList(Integer.valueOf(3), Integer.valueOf(2), Integer.valueOf(1))));
+                "MOVE_TO_UPSTAIR",
+                "ExampleCS-goUpOneFloorMoveAction",
+                1,
+                allowedDimsForFloorMoving,
+                new ArrayList<Integer>(Arrays.asList(Integer.valueOf(1))));
 
-        capableActionList.add(exampleCSMoveAction1);
-        capableActionList.add(exampleCSMoveAction2);
+        MoveAction goDownOnFloorMoveAction = new MoveAction(mySoS,
+                this,
+                "MOVE_TO_DOWNSTAIR",
+                "ExampleCS-goDownOnFloorMoveAction",
+                1,
+                allowedDimsForFloorMoving,
+                new ArrayList<Integer>(Arrays.asList(Integer.valueOf(-1))));
+
+//        capableActionList.add(exampleCSMoveAction1);
+//        capableActionList.add(exampleCSMoveAction2);
+        capableActionList.add(goUpOneFloorMoveAction);
+        capableActionList.add(goDownOnFloorMoveAction);
 
 //        System.out.println(this.id + " >> initMoveAction() >> " + capableActionList.size());
     }

@@ -18,11 +18,16 @@ public abstract class DimensionVar extends _SimDataVariable_{
     //Domain of a dimension variable
     protected DimensionVarDomain varDomain;
 
-    public abstract void updateValueOfDim(int diff);
+    public abstract boolean checkUpdateValid(int diff);
+
+    public abstract boolean updateValueOfDim(int diff);
 
 //    public abstract void increaseValueOfDim(int diff);
 //    public abstract void decreaseValueOfDim(int diff);
 
+    public DimensionVar(){
+        super();
+    }
 
     public DimensionVar(String dataId, String dataName, String dataType) {
         super(dataId, dataName, dataType);

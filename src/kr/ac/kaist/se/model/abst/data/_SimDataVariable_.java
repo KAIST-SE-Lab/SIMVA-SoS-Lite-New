@@ -37,6 +37,10 @@ public abstract class _SimDataVariable_ implements Cloneable{
 //    protected _SimDomain_ dataDomain;   //domain of a data variable (min-max/enum)
 
 
+    public _SimDataVariable_(){
+        printDataCreation();
+    }
+
     public _SimDataVariable_(String varId, String varName, String varType) {
         this.varId = varId;
         this.varName = varName;
@@ -138,13 +142,13 @@ public abstract class _SimDataVariable_ implements Cloneable{
                 isEnumData = true;
                 stringData = dataCurValue;
 
-                System.out.println(dataCurValue);
+                //System.out.println(dataCurValue);
             }
         }
         else{
 
         }
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") Actual data: " + integerData + " | " + floatData + " | " + stringData + " | " + isEnumData);
+//        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") Actual data: " + integerData + " | " + floatData + " | " + stringData + " | " + isEnumData);
 
     }
 
@@ -162,8 +166,8 @@ public abstract class _SimDataVariable_ implements Cloneable{
 
 
     /**
-     *
-     * @return
+     * An implemented method of Cloneable interface
+     * @return cloned object of this class
      */
     public _SimDataVariable_ clone(){
         _SimDataVariable_ dimVar = null;
@@ -176,6 +180,7 @@ public abstract class _SimDataVariable_ implements Cloneable{
 
         return dimVar;
     }
+
 
 
 

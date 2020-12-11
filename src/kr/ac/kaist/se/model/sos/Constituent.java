@@ -210,12 +210,9 @@ public abstract class Constituent extends _SimActionableObject_
     @Override
     public void doAction(_SimAction_ actionObj) {
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):doAction) " + actionObj);
+        System.out.println("[" + timestamp + "] (Constituent:" + this.getClass().getSimpleName() + "(" + id + "):doAction) " + actionObj.getActionId());
         if (actionObj instanceof MoveAction){
-
-
             actionObj.executeAction();
-
             //ObjectLocation curLoc = getCurLocation();
 
 
@@ -224,6 +221,8 @@ public abstract class Constituent extends _SimActionableObject_
         }else if(actionObj instanceof FuncAction){
             actionObj.executeAction();
         }
+
+//        System.out.println();
     }
 
 

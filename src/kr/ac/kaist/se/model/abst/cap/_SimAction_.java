@@ -54,7 +54,7 @@ public abstract class _SimAction_ {
     public abstract boolean checkPrecondition();
 
     //TODO: check (set) return
-    public abstract void executeAction();
+    public abstract boolean executeAction();
 
 
     public SoS getAccessibleSoS() {

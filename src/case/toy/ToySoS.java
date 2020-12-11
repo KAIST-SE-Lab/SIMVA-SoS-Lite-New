@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class ToySoS extends SoS {
 
-    //TODO: check 'public static'
-    public static ToySoSMap toySoSMap;
+//    //TODO: check 'public static'
+//    public ToySoSMap toySoSMap;
 
     /* Organizations */
     ExampleOrgType org1;
@@ -196,7 +196,7 @@ public class ToySoS extends SoS {
 //        locInfos.add(isAccessibleInfo);
 //        locInfos.add(isChargingStation);
 
-        toySoSMap = new ToySoSMap("MAP01", "Toy SoS Map 01");
+        ToySoSMap toySoSMap = new ToySoSMap("MAP01", "Toy SoS Map 01");
 
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (ToySoS:initMap) An SoSMap is initialized.");

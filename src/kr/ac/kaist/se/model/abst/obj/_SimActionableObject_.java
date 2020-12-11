@@ -41,6 +41,8 @@ public abstract class _SimActionableObject_ extends _SimObject_ implements Actio
             updateResult.addLogToList(null);
         }
 
+        System.out.println();
+
         return updateResult;
     }
 

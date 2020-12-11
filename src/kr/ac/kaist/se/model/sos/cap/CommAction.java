@@ -36,7 +36,7 @@ public class CommAction extends _SimAction_ {
     }
 
     @Override
-    public void executeAction() {
-
+    public boolean executeAction() {
+        return true;
     }
 }

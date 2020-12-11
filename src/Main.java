@@ -9,10 +9,9 @@ import java.sql.Timestamp;
 public class Main {
 
     /**
-     * @param args
-     * args[0]: isGuiMode (0/others)
-     * args[1]: isOnMape (0/others)
-     * args[2]: is
+     * @param args args[0]: isGuiMode (0/others)
+     *             args[1]: isOnMape (0/others)
+     *             args[2]: is
      */
     public static void main(String[] args) {
 
@@ -20,7 +19,7 @@ public class Main {
 
         //A user can select a mode for launching SimEngine
         //Non-GUI Mode
-        if (args[0].equals("0")){
+        if (args[0].equals("0")) {
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] (Main) Simulation engine is launched (Non-GUI Mode).");
 
@@ -103,7 +102,7 @@ public class Main {
 
         }
         //GUI Mode
-        else{
+        else {
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] (Main) Simulation engine is launched (GUI Mode).");
 
@@ -115,9 +114,6 @@ public class Main {
 //        System.out.println("[" + timestamp + "] (Main) Simulation engine is terminated.");
 
     }
-
-
-
 
 
     /**
@@ -142,7 +138,6 @@ public class Main {
         //MainUI simInputUI = new MainUI();
         SwingUtilities.invokeLater(new MainUI());
     }
-
 
 
 }
