@@ -159,14 +159,14 @@ public class ExampleCSType extends Constituent {
 //        System.out.println(xDim);
 //        System.out.println(ToySoSMap.xDim);
 
-//        MoveAction exampleCSMoveAction1 = new MoveAction(mySoS,
-//                this,
-//                "MOVEACTION01",
-//                "ExampleCS-MoveAction01",
-//                2,
-//                allowedDims,
-//                new ArrayList<Integer>(Arrays.asList(Integer.valueOf(1), Integer.valueOf(2))));
-//
+        MoveAction exampleCSMoveAction1 = new MoveAction(mySoS,
+                this,
+                "MOVEACTION01",
+                "ExampleCS-MoveAction01",
+                2,
+                allowedDims,
+                new ArrayList<Integer>(Arrays.asList(Integer.valueOf(1), Integer.valueOf(1))));
+
 //        MoveAction exampleCSMoveAction2 = new MoveAction(mySoS,
 //                this,
 //                "MOVEACTION02",
@@ -191,7 +191,7 @@ public class ExampleCSType extends Constituent {
                 allowedDimsForFloorMoving,
                 new ArrayList<Integer>(Arrays.asList(Integer.valueOf(-1))));
 
-//        capableActionList.add(exampleCSMoveAction1);
+        capableActionList.add(exampleCSMoveAction1);
 //        capableActionList.add(exampleCSMoveAction2);
         capableActionList.add(goUpOneFloorMoveAction);
         capableActionList.add(goDownOnFloorMoveAction);

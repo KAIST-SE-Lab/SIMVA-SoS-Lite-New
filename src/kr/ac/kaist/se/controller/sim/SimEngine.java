@@ -135,16 +135,18 @@ public class SimEngine {
 
         for(int cur_tick = 0; cur_tick < this.simConfig.getSimTotalTime(); cur_tick++){
             timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("[" + timestamp + "]  -------------------------------------------------------------------");
+            System.out.println("[" + timestamp + "] ===================================================================");
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) cur_tick: " + cur_tick);
 
             /* PHASE 01: Collecting RunResults from SimModel*/
 
             RunResult curTickSimResult = runSimModel();
 
-            System.out.println("[" + timestamp + "] (SimEngine:startSimulation) RunResult is returned: " +
-                    curTickSimResult.getSelectedActionList().size() + " | " +
-                    curTickSimResult.getSubRunResults().size());
+            timestamp = new Timestamp(System.currentTimeMillis());
+            System.out.println("[" + timestamp + "] ===================================================================");
+            System.out.println("[" + timestamp + "] (SimEngine:startSimulation) RunResult is returned: (getSelectedActionList().size():" +
+                    curTickSimResult.getSelectedActionList().size() + ") | (getSubRunREsults().size():" +
+                    curTickSimResult.getSubRunResults().size() + ")");
 
             curTickSimResult = this.resolveConflict(curTickSimResult);
 
