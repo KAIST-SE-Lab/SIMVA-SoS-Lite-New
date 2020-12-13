@@ -81,6 +81,8 @@ public abstract class DimensionVar extends _SimDataVariable_{
         }
     }
 
+//    public
+
 
     public DimensionVarDomain getVarDomain() {
         return varDomain;

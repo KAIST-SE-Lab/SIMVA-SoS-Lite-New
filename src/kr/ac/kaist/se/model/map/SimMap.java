@@ -3,6 +3,7 @@ package kr.ac.kaist.se.model.map;
 import kr.ac.kaist.se.model.abst.geo._SimMap_;
 import kr.ac.kaist.se.model.abst.data._SimDataVariable_;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
+import kr.ac.kaist.se.model.sos.data.DataVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 
 import java.util.ArrayList;
@@ -15,7 +16,14 @@ import java.util.HashMap;
 public abstract class SimMap extends _SimMap_ {
 
     //Dimensions of this map
-    public ArrayList<DimensionVar> mapDimensions = new ArrayList<>();
+    protected ArrayList<DimensionVar> mapDimensions = new ArrayList<>();
+
+    //LocInformations of this map
+    public ArrayList<DataVar> mapInfos = new ArrayList<>();
+
+//    protected
+
+
 
     //TODO: Object location hashmap
     //Hashmap to store objects' locations
@@ -34,9 +42,22 @@ public abstract class SimMap extends _SimMap_ {
         //objLocationHashMap = new HashMap<>();
     }
 
+    public SimMap(String mapId, String mapName, ArrayList<DimensionVar> mapDimensions, ArrayList<DataVar> mapInfos) {
+        this.mapId = mapId;
+        this.mapName = mapName;
+        this.mapDimensions = mapDimensions;
+        this.mapInfos = mapInfos;
+    }
+
     //TODO: check return
     protected abstract void initializeMap();
 
+
+    protected void getAllLocationPoints(){
+        for (DimensionVar dimVar : mapDimensions){
+
+        }
+    }
 
     /* Getters & Setters */
 
@@ -51,6 +72,20 @@ public abstract class SimMap extends _SimMap_ {
     public void addMapDimension(DimensionVar dimensionVar){
         if (dimensionVar != null) {
             this.mapDimensions.add(dimensionVar);
+        }
+    }
+
+    public ArrayList<DataVar> getMapInfos() {
+        return mapInfos;
+    }
+
+    public void setMapInfos(ArrayList<DataVar> mapInfos) {
+        this.mapInfos = mapInfos;
+    }
+
+    public void addMapInfo(DataVar infoVar){
+        if (infoVar != null){
+            this.mapInfos.add(infoVar);
         }
     }
 }

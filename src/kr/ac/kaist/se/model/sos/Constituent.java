@@ -165,17 +165,8 @@ public abstract class Constituent extends _SimActionableObject_
         //TODO: update if it already exists
     }
 
-//    @Override
-//    public void doDecisionMaking() {
-//        selectedActionList = capableActionList;
-//    }
-
-
     @Override
-    protected void selectActions() {
-//        selectedActionList = capableActionList;
-        //doDecisionMaking();
-
+    public void doDecisionMaking() {
         ArrayList<_SimAction_> possibleMoveActions = new ArrayList<>();
 
         for (_SimAction_ aAction : capableActionList){
@@ -203,7 +194,13 @@ public abstract class Constituent extends _SimActionableObject_
         //System.out.println(selectedMoveActionIndex);
 
         selectedActionList.add(possibleMoveActions.get(selectedMoveActionIndex));
+    }
 
+
+    @Override
+    protected void selectActions() {
+
+        doDecisionMaking();
 
     }
 
