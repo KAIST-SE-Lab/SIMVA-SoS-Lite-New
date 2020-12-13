@@ -1,3 +1,4 @@
+import cap.ExampleFuncAction;
 import data.MapCoordinateDimensionType;
 import data.MapFloorDimensionType;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
@@ -120,6 +121,7 @@ public class ExampleCSType extends Constituent {
     protected void initActions() {
 
         initMoveActions();
+        initFuncActions();
 
     }
 
@@ -199,6 +201,16 @@ public class ExampleCSType extends Constituent {
 //        System.out.println(this.id + " >> initMoveAction() >> " + capableActionList.size());
     }
 
+    private void initFuncActions(){
+        ExampleFuncAction funcAction01 = new ExampleFuncAction(mySoS,
+                this,
+                "FUNC_ACTION_01",
+                "Example Func Action - 01",
+                1, 3, 5);
+
+        capableActionList.add(funcAction01);
+    }
+
 
 //    @Override
 //    protected void selectActions() {
@@ -220,10 +232,10 @@ public class ExampleCSType extends Constituent {
 //
 //    }
 
-    @Override
-    public void doDecisionMaking() {
-        selectedActionList = capableActionList;
-    }
+//    @Override
+//    public void doDecisionMaking() {
+//        selectedActionList = capableActionList;
+//    }
 
     @Override
     public void move() {
