@@ -1,11 +1,12 @@
 package kr.ac.kaist.se.model.abst.comm;
 
+import kr.ac.kaist.se.model.intf.Transmittable;
 import kr.ac.kaist.se.model.sos.data.DataVar;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public abstract class _SimMessage_ {
+public abstract class _SimMessage_ implements Transmittable{
 
     protected Timestamp timestamp;    //Timestamp for stdout
 

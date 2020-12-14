@@ -122,8 +122,11 @@ public class ExampleCSType extends Constituent {
 
         initMoveActions();
         initFuncActions();
+        initCommActions();
 
     }
+
+
 
     private void initMoveActions() {
         /* Define allowed dimensions from declared dimensions of its map */
@@ -201,6 +204,9 @@ public class ExampleCSType extends Constituent {
 //        System.out.println(this.id + " >> initMoveAction() >> " + capableActionList.size());
     }
 
+    /**
+     * Initialization of functional actions (FuncAction)
+     */
     private void initFuncActions(){
         ExampleFuncAction funcAction01 = new ExampleFuncAction(mySoS,
                 this,
@@ -209,6 +215,13 @@ public class ExampleCSType extends Constituent {
                 1, 3, 5);
 
         capableActionList.add(funcAction01);
+    }
+
+    /**
+     * Initialization of communication actions (CommAction)
+     */
+    private void initCommActions() {
+
     }
 
 

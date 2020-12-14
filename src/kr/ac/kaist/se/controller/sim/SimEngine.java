@@ -3,6 +3,7 @@ package kr.ac.kaist.se.controller.sim;
 import kr.ac.kaist.se.controller.mape.MapeEngine;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.sos.SoS;
+import kr.ac.kaist.se.model.sos.cap.CommAction;
 import kr.ac.kaist.se.simdata.input.SimConfiguration;
 import kr.ac.kaist.se.simdata.input.SimScenario;
 import kr.ac.kaist.se.simdata.output.SimLog;
@@ -150,6 +151,10 @@ public class SimEngine {
 
             curTickSimResult = this.resolveConflict(curTickSimResult);
 
+
+            ArrayList<CommAction> selectedCommActions = readCommActions(curTickSimResult);
+
+
             //printAllRunResults(curTickSimResult);
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) selectedActions of curTickSimResult: " + getSelectedActionsFromRunResult(curTickSimResult));
 
@@ -185,6 +190,25 @@ public class SimEngine {
     }
 
     /**
+     * Read CommActions from RunResult
+     * @param curTickSimResult
+     * @return
+     */
+    private ArrayList<CommAction> readCommActions(RunResult curTickSimResult) {
+        ArrayList<CommAction> selectedCommActions = new ArrayList<>();
+        ArrayList<_SimAction_> selectedActions = getSelectedActionsFromRunResult(curTickSimResult);
+
+        for (_SimAction_ aAction: selectedActions){
+            if (aAction instanceof CommAction){
+                selectedCommActions.add((CommAction) aAction);
+            }
+        }
+
+
+        return null;
+    }
+
+    /**
      *
      * @param curTickSimResult
      * @return
@@ -214,6 +238,23 @@ public class SimEngine {
         }
 
         return actionsInRunResult;
+    }
+
+
+    private void removeActionFromRunResult(RunResult runResult, _SimAction_ aAction){
+
+
+        for (RunResult subRunResult: runResult.getSubRunResults()){
+            if (subRunResult.getSelectedActionList().contains(aAction)){
+                subRunResult.getSelectedActionList().remove(aAction);
+            }
+        }
+
+        for (_SimAction_ selectedAction: runResult.getSelectedActionList()){
+            if (selectedAction.getActionId().equals(aAction.getActionId())){
+                runResult.getSelectedActionList().remove(selectedAction);
+            }
+        }
     }
 
 
