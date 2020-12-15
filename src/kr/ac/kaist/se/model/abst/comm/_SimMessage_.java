@@ -19,6 +19,45 @@ public abstract class _SimMessage_ implements Transmittable{
 
     protected ArrayList<DataVar> msgDataList = new ArrayList<>();
 
+    public _SimMessage_(String msgId, String msgTag, EnumMsgType msgType) {
+        this.msgId = msgId;
+        this.msgTag = msgTag;
+        this.msgType = msgType;
+    }
+
+    public _SimMessage_(String msgId, String msgTag, EnumMsgType msgType, ArrayList<DataVar> msgDataList) {
+        this.msgId = msgId;
+        this.msgTag = msgTag;
+        this.msgType = msgType;
+        this.msgDataList = msgDataList;
+    }
+
+    public _SimMessage_(String msgId, String msgTag, EnumMsgType msgType, String senderId, String receiverId, ArrayList<DataVar> msgDataList) {
+        this.msgId = msgId;
+        this.msgTag = msgTag;
+        this.msgType = msgType;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+        this.msgDataList = msgDataList;
+    }
+
+    /**
+     * A method to check if this message is appropriately sendable or not
+     * @return
+     */
+    public boolean isSendable(){
+        timestamp = new Timestamp(System.currentTimeMillis());
+
+        if ((senderId != null && !senderId.equals("")) &&
+                (receiverId != null && !receiverId.equals("")) &&
+                (msgDataList != null && msgDataList.size() > 0)){
+            System.out.println("[" + timestamp + "] (_SimMessage_(" + this.getClass().getSimpleName() + ":executeAction) *****");
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public String getMsgId() {
         return msgId;
     }

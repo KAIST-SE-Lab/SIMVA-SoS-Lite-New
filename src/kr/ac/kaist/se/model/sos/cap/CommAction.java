@@ -5,6 +5,8 @@ import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.sos.SoS;
 
+import java.sql.Timestamp;
+
 /**
  * A concrete class to represent an action for communication.
  * The communication is performed by sending a message to a specific object.
@@ -51,6 +53,10 @@ public class CommAction extends _SimAction_ {
     @Override
     public boolean executeAction() {
         //Send a message
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (CommAction:executeAction) *****");
+
+
         return true;
     }
 

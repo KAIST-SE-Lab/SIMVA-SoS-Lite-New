@@ -2,13 +2,16 @@ import cap.ExampleFuncAction;
 import data.MapCoordinateDimensionType;
 import data.MapFloorDimensionType;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
+import kr.ac.kaist.se.model.abst.comm.EnumMsgType;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.abst.data.EnumDomainType;
 import kr.ac.kaist.se.model.abst.data._SimDomain_;
 import kr.ac.kaist.se.model.sos.Constituent;
 import kr.ac.kaist.se.model.sos.Organization;
 import kr.ac.kaist.se.model.sos.SoS;
+import kr.ac.kaist.se.model.sos.cap.CommAction;
 import kr.ac.kaist.se.model.sos.cap.MoveAction;
+import kr.ac.kaist.se.model.sos.comm.Message;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVarDomain;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
@@ -221,7 +224,15 @@ public class ExampleCSType extends Constituent {
      * Initialization of communication actions (CommAction)
      */
     private void initCommActions() {
+        Message exampleMsg = new Message("MSG01", "MSG01tag", EnumMsgType.GENERAL_MSG);
 
+        CommAction commAction01 = new CommAction(mySoS,
+                this,
+                "COMM_ACTION01",
+                "Communication Action 01",
+                exampleMsg);
+
+        capableActionList.add(commAction01);
     }
 
 
