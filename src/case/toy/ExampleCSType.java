@@ -12,6 +12,7 @@ import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.model.sos.cap.CommAction;
 import kr.ac.kaist.se.model.sos.cap.MoveAction;
 import kr.ac.kaist.se.model.sos.comm.Message;
+import kr.ac.kaist.se.model.sos.data.DataVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVarDomain;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
@@ -225,6 +226,18 @@ public class ExampleCSType extends Constituent {
      */
     private void initCommActions() {
         Message exampleMsg = new Message("MSG01", "MSG01tag", EnumMsgType.GENERAL_MSG);
+
+        exampleMsg.setSenderId(this.getId());
+        //TODO: how to access to myOrg's id?
+        exampleMsg.setReceiverId("SIMOBJECT_XX");
+
+        ArrayList<DataVar> msgDataList = new ArrayList<>();
+        msgDataList.add(new DataVar("MSG01_DATAVAR01",
+                "Data varabiel 01 of MSG01",
+                "Int",
+                "30"));
+
+        exampleMsg.setMsgDataList(msgDataList);
 
         CommAction commAction01 = new CommAction(mySoS,
                 this,

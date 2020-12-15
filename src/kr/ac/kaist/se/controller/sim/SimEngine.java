@@ -147,20 +147,24 @@ public class SimEngine {
             System.out.println("[" + timestamp + "] ===================================================================");
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) RunResult is returned: (getSelectedActionList().size():" +
                     curTickSimResult.getSelectedActionList().size() + ") | (getSubRunREsults().size():" +
-                    curTickSimResult.getSubRunResults().size() + ")");
+                    curTickSimResult.getSubRunResults().size() + ") | (total#ofActions:" +
+                    getSelectedActionsFromRunResult(curTickSimResult).size() +")");
+
+            /* PHASE 02: Resolving conflicts of the RunResult of the current tick */
 
             curTickSimResult = this.resolveConflict(curTickSimResult);
 
 
+            /* PHASE 03: Collecting CommActions to process message sending */
+
             ArrayList<CommAction> selectedCommActions = readCommActions(curTickSimResult);
 
 
-            //printAllRunResults(curTickSimResult);
+
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) selectedActions of curTickSimResult: " + getSelectedActionsFromRunResult(curTickSimResult));
 
 
-
-            /* PHASE 02: Update SimModel by actually executing the actions, allowed by this SimEngine */
+            /* PHASE 04: Update SimModel by actually executing the actions, allowed by this SimEngine */
 
             UpdateResult curTickUpdateResult = this.updateSimModel(curTickSimResult);
 
@@ -189,6 +193,23 @@ public class SimEngine {
 
     }
 
+    private void printIncludedActions(ArrayList<? extends _SimAction_> actionList){
+        int index = 0;
+
+        System.out.print("printIncludedActions(): ");
+
+        for (_SimAction_ aAction: actionList){
+            if (index + 1 < actionList.size()){
+                System.out.print(aAction.getActionId() + "(" + aAction.getActionSubject().getId()+"), ");
+            }else {
+                System.out.print(aAction.getActionId() + "(" + aAction.getActionSubject().getId() + ")");
+            }
+
+            index++;
+        }
+        System.out.println();
+    }
+
     /**
      * Read CommActions from RunResult
      * @param curTickSimResult
@@ -196,16 +217,26 @@ public class SimEngine {
      */
     private ArrayList<CommAction> readCommActions(RunResult curTickSimResult) {
         ArrayList<CommAction> selectedCommActions = new ArrayList<>();
-        ArrayList<_SimAction_> selectedActions = getSelectedActionsFromRunResult(curTickSimResult);
+//        ArrayList<_SimAction_> selectedActions = getSelectedActionsFromRunResult(curTickSimResult);
+        ArrayList<_SimAction_> selectedActions = curTickSimResult.getSelectedActionList();
 
         for (_SimAction_ aAction: selectedActions){
             if (aAction instanceof CommAction){
-                selectedCommActions.add((CommAction) aAction);
+                if (aAction.checkPrecondition()) {
+                    selectedCommActions.add((CommAction) aAction);
+                    curTickSimResult.getSelectedActionList().remove(aAction);
+//                System.out.println("***" + aAction.getActionId() + "(" + aAction.getActionSubject().getId() + ")");
+                }
             }
         }
 
+        for (RunResult subRunResult : curTickSimResult.getSubRunResults()){
+//            System.out.println("---");
+            selectedCommActions.addAll(readCommActions(subRunResult));
+        }
 
-        return null;
+
+        return selectedCommActions;
     }
 
     /**

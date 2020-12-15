@@ -17,6 +17,12 @@ public class DataVar extends _SimDataVariable_ {
         super(dataId, dataName, dataType);
     }
 
+    public DataVar(String dataId, String dataName, String dataType, String dataCurValue) {
+        super(dataId, dataName, dataType);
+        setDataCurValue(dataCurValue);
+    }
+
+
     public DataVar(String dataId, String dataName, String dataType, DataVarDomain dataDomain) {
         super(dataId, dataName, dataType);
 

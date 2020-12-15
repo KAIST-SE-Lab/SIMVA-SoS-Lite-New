@@ -47,14 +47,25 @@ public class CommAction extends _SimAction_ {
     @Override
     public boolean checkPrecondition() {
         //TODO: Edit checkPrecondition phrase
-        return true;
+        if (message.isSendable()){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     @Override
     public boolean executeAction() {
         //Send a message
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (CommAction:executeAction) *****");
+        System.out.println("[" + timestamp + "] (CommAction:executeAction) message[" +
+                message.getMsgId() + "|" +
+                message.getMsgTag() + "|" +
+                message.getMsgType() + "|" +
+                message.getSenderId() + "->" +
+                message.getReceiverId() + "|" +
+                message.getMsgDataList() + "]");
 
 
         return true;
