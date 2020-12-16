@@ -6,6 +6,7 @@ import kr.ac.kaist.se.model.intf.Movable;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
+import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class MoveAction extends _SimAction_ {
     }
 
     @Override
-    public boolean executeAction() {
+    public SimLogEvent executeAction() {
 
 //        for (DimensionVar allowedDimVar : allowedDims) {
 //            System.out.print(allowedDimVar.getVarId());
@@ -159,7 +160,8 @@ public class MoveAction extends _SimAction_ {
 
             actionSubject.setObjLocation(updatedCurLoc);
 
-            return true;
+            //TODO: check return
+            return null;
         }else{
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.print("[" + timestamp + "] (MoveAction(" + this.getActionId() + "):executeAction) A MoveAction execution denied (updatedLoc:");
@@ -167,7 +169,8 @@ public class MoveAction extends _SimAction_ {
             printLocation(updatedCurLoc);
             System.out.println(")");
 
-            return false;
+            //TODO: check return
+            return null;
         }
 
 

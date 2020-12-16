@@ -123,7 +123,7 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
     }
 
     @Override
-    public UpdateResult update(RunResult runResult) {
+    public UpdateResult update(RunResult runResult, int tick) {
 //        timestamp = new Timestamp(System.currentTimeMillis());
 //        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):update)");
 
@@ -136,13 +136,13 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
             //Organization-type subject (i.e., suborganization)
             if(subRunResult.getRunSubject() instanceof Organization){
                 Organization target = (Organization) subRunResult.getRunSubject();
-                UpdateResult subUpdateResult = target.update(subRunResult);
+                UpdateResult subUpdateResult = target.update(subRunResult, tick);
                 updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
             }
             //Member CS
             else if(subRunResult.getRunSubject() instanceof Constituent){
                 Constituent target = (Constituent) subRunResult.getRunSubject();
-                UpdateResult subUpdateResult = target.update(subRunResult);
+                UpdateResult subUpdateResult = target.update(subRunResult, tick);
                 updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
             }
         }

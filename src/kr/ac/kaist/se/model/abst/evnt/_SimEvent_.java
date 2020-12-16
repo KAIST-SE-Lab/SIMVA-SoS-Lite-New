@@ -17,6 +17,7 @@ public abstract class _SimEvent_ {
     protected EnumEventType eventType;   //type of an event
 
 
+
     public String getId() {
         return id;
     }

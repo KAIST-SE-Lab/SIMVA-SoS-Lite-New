@@ -27,10 +27,13 @@ public class SimEngine {
 
     Timestamp timestamp;
 
+//    private int cur_tick = 0;
+
     protected SoS simModel;
     protected SimConfiguration simConfig = new SimConfiguration();
     protected SimScenario simScenario = new SimScenario();
     protected boolean isMapeOn;
+
 
     protected MapeEngine mapeEngine;
 
@@ -174,7 +177,7 @@ public class SimEngine {
 
             /* PHASE 04: Update SimModel by actually executing the actions, allowed by this SimEngine */
 
-            UpdateResult curTickUpdateResult = this.updateSimModel(curTickSimResult);
+            UpdateResult curTickUpdateResult = this.updateSimModel(curTickSimResult, cur_tick);
 
 
             /* PHASE 05: MAPE */
@@ -321,11 +324,11 @@ public class SimEngine {
      *
      * @return
      */
-    protected UpdateResult updateSimModel(RunResult curTickRunResult) {
+    protected UpdateResult updateSimModel(RunResult curTickRunResult, int tick) {
 //        timestamp = new Timestamp(System.currentTimeMillis());
 //        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":updateSimModel)");
 
-        return simModel.update(curTickRunResult);
+        return simModel.update(curTickRunResult, tick);
     }
 
 
@@ -344,6 +347,13 @@ public class SimEngine {
         System.out.println("[" + timestamp + "] └───────────────────────────────────────────────────────────────────┘");
 
     }
+
+
+
+//
+//    public int getCurTick(){
+//        return cur_tick;
+//    }
 
 
 }

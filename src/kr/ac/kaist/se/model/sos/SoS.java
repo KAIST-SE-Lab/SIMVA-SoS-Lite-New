@@ -128,7 +128,7 @@ public abstract class SoS extends _SimContainerObject_ {
     }
 
     @Override
-    public UpdateResult update(RunResult runResult) {
+    public UpdateResult update(RunResult runResult, int tick) {
 //        timestamp = new Timestamp(System.currentTimeMillis());
 //        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):update)");
 
@@ -138,10 +138,23 @@ public abstract class SoS extends _SimContainerObject_ {
             //Organization-type subject
             if(subRunResult.getRunSubject() instanceof Organization){
                 Organization target = (Organization) subRunResult.getRunSubject();
-                UpdateResult subUpdateResult = target.update(subRunResult);
+                UpdateResult subUpdateResult = target.update(subRunResult, tick);
                 updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
             }
             //TODO: Code for Infrastructure and Environment
+            //Organization-type subject
+            if(subRunResult.getRunSubject() instanceof Infrastructure){
+                Infrastructure target = (Infrastructure) subRunResult.getRunSubject();
+                UpdateResult subUpdateResult = target.update(subRunResult, tick);
+                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
+            }
+
+            //Organization-type subject
+            if(subRunResult.getRunSubject() instanceof Environment){
+                Environment target = (Environment) subRunResult.getRunSubject();
+                UpdateResult subUpdateResult = target.update(subRunResult, tick);
+                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
+            }
         }
 
 

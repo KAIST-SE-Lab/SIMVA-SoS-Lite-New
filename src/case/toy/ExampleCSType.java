@@ -1,11 +1,10 @@
 import cap.ExampleFuncAction;
 import data.MapCoordinateDimensionType;
 import data.MapFloorDimensionType;
-import kr.ac.kaist.se.model.abst.cap._SimAction_;
+import kr.ac.kaist.se.controller.sim.SimEngine;
 import kr.ac.kaist.se.model.abst.comm.EnumMsgType;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
-import kr.ac.kaist.se.model.abst.data.EnumDomainType;
-import kr.ac.kaist.se.model.abst.data._SimDomain_;
+import kr.ac.kaist.se.model.abst.evnt.EnumEventType;
 import kr.ac.kaist.se.model.sos.Constituent;
 import kr.ac.kaist.se.model.sos.Organization;
 import kr.ac.kaist.se.model.sos.SoS;
@@ -16,7 +15,7 @@ import kr.ac.kaist.se.model.sos.data.DataVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVarDomain;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
-import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
+import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

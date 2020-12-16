@@ -1,7 +1,10 @@
 package kr.ac.kaist.se.model.abst.obj;
 
+import kr.ac.kaist.se.controller.sim.SimEngine;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
+import kr.ac.kaist.se.model.abst.evnt.EnumEventType;
 import kr.ac.kaist.se.model.intf.Actionable;
+import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
@@ -28,21 +31,24 @@ public abstract class _SimActionableObject_ extends _SimObject_ implements Actio
      * @param runResult
      * @return
      */
-    public UpdateResult update(RunResult runResult){
+    public UpdateResult update(RunResult runResult, int tick){
 //        timestamp = new Timestamp(System.currentTimeMillis());
 //        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "/_SimActionableObject_(" + id + "):update)");
 
         UpdateResult updateResult = new UpdateResult();
 
         for (_SimAction_ action: runResult.getSelectedActionList()){
-            doAction(action);
+            SimLogEvent actionLogEvent = doAction(action);
 
             //TODO: Add proper SimLog object
-            updateResult.addLogToList(null);
+//            updateResult.addLogToList(null);
+
+            updateResult.addLogEventToList(actionLogEvent);
         }
 
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "]  ----------------------------");
+
 
         return updateResult;
     }

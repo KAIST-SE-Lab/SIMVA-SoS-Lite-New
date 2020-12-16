@@ -4,6 +4,7 @@ import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.sos.SoS;
+import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 
 import java.sql.Timestamp;
 
@@ -56,7 +57,7 @@ public class CommAction extends _SimAction_ {
     }
 
     @Override
-    public boolean executeAction() {
+    public SimLogEvent executeAction() {
         //Send a message
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (CommAction:executeAction) message[" +
@@ -68,7 +69,8 @@ public class CommAction extends _SimAction_ {
                 message.getMsgDataList() + "]");
 
 
-        return true;
+        //TODO: check return
+        return null;
     }
 
     public _SimMessage_ getMessage() {

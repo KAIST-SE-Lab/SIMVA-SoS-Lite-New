@@ -6,8 +6,10 @@ import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 
 /**
  * Abstract class for general simulation objects
@@ -36,6 +38,9 @@ public abstract class _SimObject_ implements Simulatable {
 
     /** Queue for storing incoming messages from other objects */
     protected Queue<_SimMessage_> msgQueue = new LinkedList<>();
+
+    /** ArrayList to store logEventIds */
+    private ArrayList<String> logEventIdList = new ArrayList<>();
 
 
     /**
@@ -156,5 +161,24 @@ public abstract class _SimObject_ implements Simulatable {
             index++;
         }
         System.out.println(")");
+    }
+
+
+    public String getLogEventIdAutomatically(){
+        String newId = "";
+
+        Random rand = new Random();
+//        newId += rand.nextInt( 99999) + "";
+
+//        boolean isDuplicate = false;
+
+        while (true) {
+            newId += String.format("EVNT_%s_%s", this.id, Integer.toHexString(rand.nextInt(99999)));
+            if(!logEventIdList.contains(newId)){
+                break;
+            }
+        }
+
+        return newId;
     }
 }

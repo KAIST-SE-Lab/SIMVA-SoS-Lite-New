@@ -34,5 +34,5 @@ public interface Simulatable {
      * @param runResult runResult object (i.e., actions allowed to be executed) of current tick
      * @return  list of action execution results (i.e., logs)
      */
-    UpdateResult update(RunResult runResult);
+    UpdateResult update(RunResult runResult, int tick);
 }

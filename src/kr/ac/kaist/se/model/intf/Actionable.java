@@ -1,6 +1,7 @@
 package kr.ac.kaist.se.model.intf;
 
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
+import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 
 /**
  * Interface for actionable objects.
@@ -11,5 +12,5 @@ import kr.ac.kaist.se.model.abst.cap._SimAction_;
 public interface Actionable {
 
     //TODO: check return
-    void doAction(_SimAction_ actionObj);
+    SimLogEvent doAction(_SimAction_ actionObj);
 }

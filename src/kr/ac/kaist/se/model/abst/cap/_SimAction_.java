@@ -2,6 +2,7 @@ package kr.ac.kaist.se.model.abst.cap;
 
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.sos.SoS;
+import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 
 import java.sql.Timestamp;
 
@@ -54,7 +55,7 @@ public abstract class _SimAction_ {
     public abstract boolean checkPrecondition();
 
     //TODO: check (set) return
-    public abstract boolean executeAction();
+    public abstract SimLogEvent executeAction();
 
 
     public SoS getAccessibleSoS() {

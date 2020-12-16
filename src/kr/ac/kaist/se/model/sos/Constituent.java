@@ -13,6 +13,7 @@ import kr.ac.kaist.se.model.sos.cap.MoveAction;
 import kr.ac.kaist.se.model.sos.data.DataVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
+import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 
 import javax.xml.crypto.Data;
@@ -192,13 +193,17 @@ public abstract class Constituent extends _SimActionableObject_
 
 
         //TODO: MoveAction selection
-        /* Selection of move action (current: random) */
-        Random rand = new Random();
-//        System.out.println(possibleMoveActions.size());
-        int selectedMoveActionIndex = rand.nextInt(possibleMoveActions.size());
-        //System.out.println(selectedMoveActionIndex);
 
-        selectedActionList.add(possibleMoveActions.get(selectedMoveActionIndex));
+        /* Selection of move action (current: random) */
+
+        if (possibleMoveActions != null && possibleMoveActions.size() > 0) {
+            Random rand = new Random();
+//        System.out.println(possibleMoveActions.size());
+            int selectedMoveActionIndex = rand.nextInt(possibleMoveActions.size());
+            //System.out.println(selectedMoveActionIndex);
+
+            selectedActionList.add(possibleMoveActions.get(selectedMoveActionIndex));
+        }
 
         System.out.println("[" + timestamp + "] (Constituent:" + this.getClass().getSimpleName() + ":post-doDecisionMaking) capableActionList(" +
                 capableActionList.size() + "), selectedActionList(" + selectedActionList.size() + ") = " + selectedActionList);
@@ -216,20 +221,25 @@ public abstract class Constituent extends _SimActionableObject_
     }
 
     @Override
-    public void doAction(_SimAction_ actionObj) {
+    public SimLogEvent doAction(_SimAction_ actionObj) {
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (Constituent:" + this.getClass().getSimpleName() + "(" + id + "):doAction) " + actionObj.getActionId() + " is executed.");
 
+        //TODO: check initialization
+        SimLogEvent actionLogEvent = new SimLogEvent();
+
         if (actionObj instanceof MoveAction){
-            actionObj.executeAction();
+            actionLogEvent = actionObj.executeAction();
             //ObjectLocation curLoc = getCurLocation();
         }else if(actionObj instanceof CommAction){
-            actionObj.executeAction();
+            actionLogEvent =  actionObj.executeAction();
         }else if(actionObj instanceof FuncAction){
-            actionObj.executeAction();
+            actionLogEvent = actionObj.executeAction();
         }
 
 //        System.out.println();
+
+        return actionLogEvent;
     }
 
 

@@ -3,6 +3,7 @@ package cap;
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.model.sos.cap.FuncAction;
+import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 
 import java.sql.Timestamp;
 
@@ -21,11 +22,11 @@ public class ExampleFuncAction extends FuncAction {
     }
 
     @Override
-    public boolean executeAction() {
+    public SimLogEvent executeAction() {
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":executeAction) FuncAction (" + actionId + ")");
 
 
-        return true;
+        return null;
     }
 }
