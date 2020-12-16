@@ -17,12 +17,11 @@ import java.util.ArrayList;
  * Simulation engine for a simulation of a simulation model
  * Discrete-time evnt-based simulation
  *
- * @inputs  Simulation Model (simModel)
- *          MapeMode (isMapeOn)
- *          Simulation Configuration (simConfig)
- *          Simulation Scenario (simScenario)
- *
  * @author ehcho, yjshin, ymbaek
+ * @inputs Simulation Model (simModel)
+ * MapeMode (isMapeOn)
+ * Simulation Configuration (simConfig)
+ * Simulation Scenario (simScenario)
  */
 public class SimEngine {
 
@@ -59,12 +58,12 @@ public class SimEngine {
     /**
      * Initialization of Simulation Engine
      *
-     * @param simModel      Simulation model (SoS)
-     * @param isMapeOn      "0":mape-off, "1"/others:mape-on
-     * @param simConfig     Simulation configuration object
-     * @param simScenario   Simulation scenario object
+     * @param simModel    Simulation model (SoS)
+     * @param isMapeOn    "0":mape-off, "1"/others:mape-on
+     * @param simConfig   Simulation configuration object
+     * @param simScenario Simulation scenario object
      */
-    private void initSimEngine(SoS simModel, String isMapeOn, SimConfiguration simConfig, SimScenario simScenario){
+    private void initSimEngine(SoS simModel, String isMapeOn, SimConfiguration simConfig, SimScenario simScenario) {
         if (simModel != null) {
             // Initialize simulation model
             initSimModel(simModel);
@@ -101,7 +100,7 @@ public class SimEngine {
     /**
      * Initialization of simulation configuration
      */
-    private void initSimConfig(SimConfiguration simConfig){
+    private void initSimConfig(SimConfiguration simConfig) {
         this.simConfig = simConfig;
 
         timestamp = new Timestamp(System.currentTimeMillis());
@@ -111,7 +110,7 @@ public class SimEngine {
     /**
      * Initialization of simulation scenario
      */
-    private void initSimScenario(SimScenario simScenario){
+    private void initSimScenario(SimScenario simScenario) {
         this.simScenario = simScenario;
 
         timestamp = new Timestamp(System.currentTimeMillis());
@@ -124,31 +123,37 @@ public class SimEngine {
      *
      * @return SimLog
      */
-    public SimLog startSimulation(){
+    public SimLog startSimulation() {
 
         SimLog simLog = new SimLog();
 
         printSimInputInfo();
 
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "]  ===================================================================");
+        System.out.println();
+        System.out.println("[" + timestamp + "] ===================================================================");
         System.out.println("[" + timestamp + "] (SimEngine:startSimulation) Simulation is started.");
 
-        for(int cur_tick = 0; cur_tick < this.simConfig.getSimTotalTime(); cur_tick++){
+        for (int cur_tick = 0; cur_tick < this.simConfig.getSimTotalTime(); cur_tick++) {
+            System.out.println();
             timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("[" + timestamp + "] ===================================================================");
+//            System.out.println("[" + timestamp + "] ===================================================================");
+            System.out.println("[" + timestamp + "] ┌──────────────────────────────────────────────────────────────────┐");
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) cur_tick: " + cur_tick);
+            System.out.println("[" + timestamp + "] └──────────────────────────────────────────────────────────────────┘");
 
             /* PHASE 01: Collecting RunResults from SimModel*/
 
             RunResult curTickSimResult = runSimModel();
 
             timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("[" + timestamp + "] ===================================================================");
+//            System.out.println("[" + timestamp + "] ===================================================================");
+            System.out.println("[" + timestamp + "] ┌──────────────────────────────────────────────────────────────────┐");
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) RunResult is returned: (getSelectedActionList().size():" +
                     curTickSimResult.getSelectedActionList().size() + ") | (getSubRunREsults().size():" +
                     curTickSimResult.getSubRunResults().size() + ") | (total#ofActions:" +
-                    getSelectedActionsFromRunResult(curTickSimResult).size() +")");
+                    getSelectedActionsFromRunResult(curTickSimResult).size() + ")");
+            System.out.println("[" + timestamp + "] └──────────────────────────────────────────────────────────────────┘");
 
             /* PHASE 02: Resolving conflicts of the RunResult of the current tick */
 
@@ -158,6 +163,9 @@ public class SimEngine {
             /* PHASE 03: Collecting CommActions to process message sending */
 
             ArrayList<CommAction> selectedCommActions = readCommActions(curTickSimResult);
+
+            timestamp = new Timestamp(System.currentTimeMillis());
+            System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":readCommActions) selectedCommActions.size(): " + selectedCommActions.size());
 
 
 
@@ -169,39 +177,41 @@ public class SimEngine {
             UpdateResult curTickUpdateResult = this.updateSimModel(curTickSimResult);
 
 
+            /* PHASE 05: MAPE */
+
+            /*
+            //MAPE-loop is off
+            if (isMapeOn.equals("0")){
+                timestamp = new Timestamp(System.currentTimeMillis());
+                System.out.println("[" + timestamp + "] (SimEngine:StartSimulation) MAPE Engine: OFF.");
+            }
+            //MAPE-loop is on
+            else{
+                timestamp = new Timestamp(System.currentTimeMillis());
+                System.out.println("[" + timestamp + "] (SimEngine:StartSimulation) MAPE Engine: ON.");
+            }
+             */
+
         }
 
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "]  ===================================================================");
         System.out.println("[" + timestamp + "] (Main) Simulation engine is terminated.");
 
-        /*
-        //MAPE-loop is off
-        if (isMapeOn.equals("0")){
-            timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("[" + timestamp + "] (SimEngine:StartSimulation) MAPE Engine: OFF.");
-        }
-        //MAPE-loop is on
-        else{
-            timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("[" + timestamp + "] (SimEngine:StartSimulation) MAPE Engine: ON.");
-        }
-         */
-
 
         return simLog;
 
     }
 
-    private void printIncludedActions(ArrayList<? extends _SimAction_> actionList){
+    private void printIncludedActions(ArrayList<? extends _SimAction_> actionList) {
         int index = 0;
 
         System.out.print("printIncludedActions(): ");
 
-        for (_SimAction_ aAction: actionList){
-            if (index + 1 < actionList.size()){
-                System.out.print(aAction.getActionId() + "(" + aAction.getActionSubject().getId()+"), ");
-            }else {
+        for (_SimAction_ aAction : actionList) {
+            if (index + 1 < actionList.size()) {
+                System.out.print(aAction.getActionId() + "(" + aAction.getActionSubject().getId() + "), ");
+            } else {
                 System.out.print(aAction.getActionId() + "(" + aAction.getActionSubject().getId() + ")");
             }
 
@@ -212,6 +222,7 @@ public class SimEngine {
 
     /**
      * Read CommActions from RunResult
+     *
      * @param curTickSimResult
      * @return
      */
@@ -220,8 +231,8 @@ public class SimEngine {
 //        ArrayList<_SimAction_> selectedActions = getSelectedActionsFromRunResult(curTickSimResult);
         ArrayList<_SimAction_> selectedActions = curTickSimResult.getSelectedActionList();
 
-        for (_SimAction_ aAction: selectedActions){
-            if (aAction instanceof CommAction){
+        for (_SimAction_ aAction : selectedActions) {
+            if (aAction instanceof CommAction) {
                 if (aAction.checkPrecondition()) {
                     selectedCommActions.add((CommAction) aAction);
                     curTickSimResult.getSelectedActionList().remove(aAction);
@@ -230,22 +241,25 @@ public class SimEngine {
             }
         }
 
-        for (RunResult subRunResult : curTickSimResult.getSubRunResults()){
+        for (RunResult subRunResult : curTickSimResult.getSubRunResults()) {
 //            System.out.println("---");
             selectedCommActions.addAll(readCommActions(subRunResult));
         }
+
 
 
         return selectedCommActions;
     }
 
     /**
-     *
      * @param curTickSimResult
      * @return
      */
     private RunResult resolveConflict(RunResult curTickSimResult) {
         //TODO: To implement a logic to resolve a conflict
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":resolveConflict)");
+
         return curTickSimResult;
     }
 
@@ -259,12 +273,12 @@ public class SimEngine {
 //        //System.out.println();
 //    }
 
-    private ArrayList<_SimAction_> getSelectedActionsFromRunResult(RunResult runResult){
+    private ArrayList<_SimAction_> getSelectedActionsFromRunResult(RunResult runResult) {
         ArrayList<_SimAction_> actionsInRunResult = new ArrayList<>();
 
         actionsInRunResult.addAll(runResult.getSelectedActionList());
 
-        for (RunResult subRunResult: runResult.getSubRunResults()){
+        for (RunResult subRunResult : runResult.getSubRunResults()) {
             actionsInRunResult.addAll(getSelectedActionsFromRunResult(subRunResult));
         }
 
@@ -272,17 +286,17 @@ public class SimEngine {
     }
 
 
-    private void removeActionFromRunResult(RunResult runResult, _SimAction_ aAction){
+    private void removeActionFromRunResult(RunResult runResult, _SimAction_ aAction) {
 
 
-        for (RunResult subRunResult: runResult.getSubRunResults()){
-            if (subRunResult.getSelectedActionList().contains(aAction)){
+        for (RunResult subRunResult : runResult.getSubRunResults()) {
+            if (subRunResult.getSelectedActionList().contains(aAction)) {
                 subRunResult.getSelectedActionList().remove(aAction);
             }
         }
 
-        for (_SimAction_ selectedAction: runResult.getSelectedActionList()){
-            if (selectedAction.getActionId().equals(aAction.getActionId())){
+        for (_SimAction_ selectedAction : runResult.getSelectedActionList()) {
+            if (selectedAction.getActionId().equals(aAction.getActionId())) {
                 runResult.getSelectedActionList().remove(selectedAction);
             }
         }
@@ -291,24 +305,25 @@ public class SimEngine {
 
     /**
      * A method to collect selected actions from simModel by running a simulation model.
+     *
      * @return
      */
-    protected RunResult runSimModel(){
-        timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":runSimModel)");
+    protected RunResult runSimModel() {
+//        timestamp = new Timestamp(System.currentTimeMillis());
+//        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":runSimModel)");
 
         return simModel.run();
-        //return null;
     }
 
     /**
      * A method to execute actions defined in the simulation model.
      * This method should be called after runSimModel() is called.
+     *
      * @return
      */
-    protected UpdateResult updateSimModel(RunResult curTickRunResult){
-        timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":updateSimModel)");
+    protected UpdateResult updateSimModel(RunResult curTickRunResult) {
+//        timestamp = new Timestamp(System.currentTimeMillis());
+//        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":updateSimModel)");
 
         return simModel.update(curTickRunResult);
     }

@@ -23,7 +23,7 @@ public class ExampleFuncAction extends FuncAction {
     @Override
     public boolean executeAction() {
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") FuncAction is executed*****");
+        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":executeAction) FuncAction (" + actionId + ")");
 
 
         return true;

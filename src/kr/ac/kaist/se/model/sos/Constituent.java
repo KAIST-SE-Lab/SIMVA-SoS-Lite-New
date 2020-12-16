@@ -90,8 +90,8 @@ public abstract class Constituent extends _SimActionableObject_
     public RunResult run() {
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + " of " + myOrg.getId() + "):run) size of capableActions:" +
-                capableActionList.size());
-        System.out.println("[" + timestamp + "] CapableActionList: " + capableActionList);
+                capableActionList.size() + " = " + capableActionList);
+//        System.out.println("[" + timestamp + "] CapableActionList: " + capableActionList);
 
         //Before selecting actions, read a message from its message queue
         readIncomingMsgs();
@@ -110,9 +110,9 @@ public abstract class Constituent extends _SimActionableObject_
 //        RunResult runResult = new RunResult(this, new ArrayList<>(0));
 //        runResult.setSelectedActionList(this.selectedActionList);
 
-        timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + " of " + myOrg.getId() + "):run) size of selectedActionList:" +
-                selectedActionList.size() + "(" + selectedActionList + ")");
+//        timestamp = new Timestamp(System.currentTimeMillis());
+//        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + " of " + myOrg.getId() + "):run) size of selectedActionList:" +
+//                selectedActionList.size() + "(" + selectedActionList + ")");
         System.out.println("[" + timestamp + "]  ----------------------------");
 
         RunResult runResult = new RunResult(this, this.selectedActionList);
@@ -201,15 +201,15 @@ public abstract class Constituent extends _SimActionableObject_
         selectedActionList.add(possibleMoveActions.get(selectedMoveActionIndex));
 
         System.out.println("[" + timestamp + "] (Constituent:" + this.getClass().getSimpleName() + ":post-doDecisionMaking) capableActionList(" +
-                capableActionList.size() + "), selectedActionList(" + selectedActionList.size() + ")");
+                capableActionList.size() + "), selectedActionList(" + selectedActionList.size() + ") = " + selectedActionList);
     }
 
 
     @Override
     protected void selectActions() {
-        timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (Constituent:" + this.getClass().getSimpleName() + ":pre-doDecisionMaking) capableActionList(" +
-                capableActionList.size() + "), selectedActionList(" + selectedActionList.size() + ")");
+//        timestamp = new Timestamp(System.currentTimeMillis());
+//        System.out.println("[" + timestamp + "] (Constituent:" + this.getClass().getSimpleName() + ":pre-doDecisionMaking) capableActionList(" +
+//                capableActionList.size() + "), selectedActionList(" + selectedActionList.size() + ")");
 
         doDecisionMaking();
 
@@ -218,12 +218,11 @@ public abstract class Constituent extends _SimActionableObject_
     @Override
     public void doAction(_SimAction_ actionObj) {
         timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (Constituent:" + this.getClass().getSimpleName() + "(" + id + "):doAction) " + actionObj.getActionId());
+        System.out.println("[" + timestamp + "] (Constituent:" + this.getClass().getSimpleName() + "(" + id + "):doAction) " + actionObj.getActionId() + " is executed.");
+
         if (actionObj instanceof MoveAction){
             actionObj.executeAction();
             //ObjectLocation curLoc = getCurLocation();
-
-
         }else if(actionObj instanceof CommAction){
             actionObj.executeAction();
         }else if(actionObj instanceof FuncAction){

@@ -51,7 +51,7 @@ public abstract class _SimMessage_ implements Transmittable{
         if ((senderId != null && !senderId.equals("")) &&
                 (receiverId != null && !receiverId.equals("")) &&
                 (msgDataList != null && msgDataList.size() > 0)){
-            System.out.println("[" + timestamp + "] (_SimMessage_(" + this.getClass().getSimpleName() + ":executeAction) *****");
+//            System.out.println("[" + timestamp + "] (_SimMessage_(" + this.getClass().getSimpleName() + ":" + this.msgId + ") isSendable: true");
             return true;
         }else{
             return false;

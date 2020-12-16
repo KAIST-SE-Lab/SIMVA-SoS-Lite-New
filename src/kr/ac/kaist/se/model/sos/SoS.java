@@ -99,8 +99,8 @@ public abstract class SoS extends _SimContainerObject_ {
      * @return
      */
     public RunResult run(){
-        timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):run)");
+//        timestamp = new Timestamp(System.currentTimeMillis());
+//        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):run) -> ");
 
         //Since an SoS is not an actionable object, selectedActionList is an empty list
         //SubRunResults of orgs, envs, infras will be added into the list
@@ -129,8 +129,8 @@ public abstract class SoS extends _SimContainerObject_ {
 
     @Override
     public UpdateResult update(RunResult runResult) {
-        timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):update)");
+//        timestamp = new Timestamp(System.currentTimeMillis());
+//        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):update)");
 
         UpdateResult updateResult = new UpdateResult();
 

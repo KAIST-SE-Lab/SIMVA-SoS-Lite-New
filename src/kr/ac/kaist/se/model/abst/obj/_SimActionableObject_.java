@@ -29,8 +29,8 @@ public abstract class _SimActionableObject_ extends _SimObject_ implements Actio
      * @return
      */
     public UpdateResult update(RunResult runResult){
-        timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "/_SimActionableObject_(" + id + "):update)");
+//        timestamp = new Timestamp(System.currentTimeMillis());
+//        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "/_SimActionableObject_(" + id + "):update)");
 
         UpdateResult updateResult = new UpdateResult();
 
@@ -78,11 +78,11 @@ public abstract class _SimActionableObject_ extends _SimObject_ implements Actio
     }
 
     public void clearSelectedActionList(){
-        int beforeSize = selectedActionList.size();
+//        int beforeSize = selectedActionList.size();
         selectedActionList.clear();
 
-        timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":clearSelectedActionList) before size:" + beforeSize);
+//        timestamp = new Timestamp(System.currentTimeMillis());
+//        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":clearSelectedActionList) before size:" + beforeSize);
     }
 
 
