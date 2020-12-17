@@ -352,6 +352,32 @@ public abstract class SoS extends _SimContainerObject_ {
 
 
 
+    public ArrayList<_SimObject_> getAllSimObjects(){
+        ArrayList<_SimObject_> allSimObjects = new ArrayList<>();
+
+        for(Organization aOrg: this.orgList){
+            allSimObjects.add(aOrg);
+            for (Constituent aCS: aOrg.getDirectCSList()){
+                allSimObjects.add(aCS);
+            }
+        }
+
+        for(Infrastructure aInfra: this.infraList){
+            allSimObjects.add(aInfra);
+        }
+
+        for(Environment aEnv: this.envList){
+            allSimObjects.add(aEnv);
+        }
+
+
+        return allSimObjects;
+    }
+
+//    public ArrayList<_SimObject_> getMember(){
+//
+//    }
+
 
 
 

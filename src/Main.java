@@ -1,4 +1,5 @@
 import kr.ac.kaist.se.controller.sim.SimEngine;
+import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.simdata.input.SimConfiguration;
 import kr.ac.kaist.se.simdata.input.SimScenario;
 import kr.ac.kaist.se.view.MainUI;
@@ -24,7 +25,7 @@ public class Main {
         /* Input SimConfiguration */
         //TODO: remove this section after debugging
         SimConfiguration exampleConfig = new SimConfiguration();
-        exampleConfig.setSimTotalTime(10);
+        exampleConfig.setSimTotalTime(1);
 
         /* Input SimScenario */
         //TODO: remove this section after debugging
@@ -108,9 +109,9 @@ public class Main {
             System.out.println("[" + timestamp + "] (Main) Simulation engine is launched (GUI Mode).");
 
             // Launch a GUI for taking input files from a user
-            launchMainUI();
+            launchMainUI(toySoS, args[1], exampleConfig, exampleScenario);
 
-            SimEngine simEngine = new SimEngine(toySoS, args[1], exampleConfig, exampleScenario);
+
             //simEngine.startSimulation();
         }
 
@@ -125,7 +126,7 @@ public class Main {
      * This method instantiates MainUI (simInputUI),
      * which has menus/buttons for choosing input files.
      */
-    private static void launchMainUI() {
+    private static void launchMainUI(SoS simModel, String isMapeOn, SimConfiguration simConfig, SimScenario simScenario) {
         // Set Look and Feel using the UIManager for Swing Objects
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -140,7 +141,7 @@ public class Main {
             e.printStackTrace();
         }
         //MainUI simInputUI = new MainUI();
-        SwingUtilities.invokeLater(new MainUI());
+        SwingUtilities.invokeLater(new MainUI(simModel, isMapeOn, simConfig, simScenario));
     }
 
 

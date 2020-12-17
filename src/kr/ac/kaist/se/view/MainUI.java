@@ -1,5 +1,10 @@
 package kr.ac.kaist.se.view;
 
+import kr.ac.kaist.se.controller.sim.SimEngine;
+import kr.ac.kaist.se.model.sos.SoS;
+import kr.ac.kaist.se.simdata.input.SimConfiguration;
+import kr.ac.kaist.se.simdata.input.SimScenario;
+import kr.ac.kaist.se.view.frame.ModelInfoFrame;
 import kr.ac.kaist.se.view.parts.SimEngineTabPane;
 import kr.ac.kaist.se.view.parts.SimStatusBarPanel;
 
@@ -14,6 +19,12 @@ import java.util.Date;
 public class MainUI implements ActionListener, Runnable {
 
     protected TimerThread timerThread;
+
+
+    private SoS simModel;
+    private String isMapeOn;
+    private SimConfiguration simConfig;
+    private SimScenario simScenario;
 
     ImageIcon simEngineIcon;
 
@@ -46,7 +57,12 @@ public class MainUI implements ActionListener, Runnable {
     JLabel simDataLabel;
     JLabel simTimeLabel;
 
-    public MainUI(){
+    public MainUI(SoS simModel, String isMapeOn, SimConfiguration simConfig, SimScenario simScenario){
+        this.simModel = simModel;
+        this.isMapeOn = isMapeOn;
+        this.simConfig = simConfig;
+        this.simScenario = simScenario;
+
     }
 
     @Override
@@ -66,6 +82,15 @@ public class MainUI implements ActionListener, Runnable {
         initStatusBar();
 
         initTabbedPanes();
+
+
+        SimEngine simEngine = new SimEngine(simModel, isMapeOn, simConfig, simScenario);
+//        simEngine.startSimulation();
+
+        ModelInfoFrame modelInfoFrame = new ModelInfoFrame(simModel, isMapeOn, simConfig, simScenario);
+
+
+
 
         /* Add components */
         mainUIframe.setJMenuBar(menuBar);
