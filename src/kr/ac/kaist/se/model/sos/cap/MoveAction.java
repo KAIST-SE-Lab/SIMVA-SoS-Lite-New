@@ -1,12 +1,14 @@
 package kr.ac.kaist.se.model.sos.cap;
 
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
+import kr.ac.kaist.se.model.abst.evnt.EnumEventType;
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.intf.Movable;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
+import kr.ac.kaist.se.simdata.output.SimLog;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -50,7 +52,10 @@ public class MoveAction extends _SimAction_ {
     }
 
     @Override
-    public SimLogEvent executeAction() {
+    public ArrayList<SimLogEvent> executeAction(int tick) {
+        //Clear of the actionLogEvents to make new logEvents
+        actionLogEvents.clear();
+
 
 //        for (DimensionVar allowedDimVar : allowedDims) {
 //            System.out.print(allowedDimVar.getVarId());
@@ -154,14 +159,23 @@ public class MoveAction extends _SimAction_ {
 
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.print("[" + timestamp + "] (MoveAction(" + this.getActionId() + "):executeAction) A MoveAction is executed (updatedLoc:");
-
             printLocation(updatedCurLoc);
             System.out.println(")");
+
+            //Generate LogEvent
+            actionLogEvents.add(new SimLogEvent(actionSubject.getLogEventIdAutomatically(this),
+                    EnumEventType.LOCATION_CHANGE,
+                    new Timestamp(System.currentTimeMillis()),
+                    tick,
+                    actionSubject.getId(),
+                    actionSubject,
+                    "EVENT_SPEC"));
+//            System.out.println(actionLogEvents.get(0).getStringLogEvent());
 
             actionSubject.setObjLocation(updatedCurLoc);
 
             //TODO: check return
-            return null;
+            return actionLogEvents;
         }else{
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.print("[" + timestamp + "] (MoveAction(" + this.getActionId() + "):executeAction) A MoveAction execution denied (updatedLoc:");

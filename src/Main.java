@@ -17,24 +17,26 @@ public class Main {
 
         Timestamp timestamp;
 
+        /* Input SimModel */
+        //ToySoS toySoS = new ToySoS(); // no id
+        ToySoS toySoS = new ToySoS("TOYSOS01", "ToySoS");
+
+        /* Input SimConfiguration */
+        //TODO: remove this section after debugging
+        SimConfiguration exampleConfig = new SimConfiguration();
+        exampleConfig.setSimTotalTime(10);
+
+        /* Input SimScenario */
+        //TODO: remove this section after debugging
+        SimScenario exampleScenario = new SimScenario("Scenario01", false);
+
+
         //A user can select a mode for launching SimEngine
         //Non-GUI Mode
         if (args[0].equals("0")) {
+
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] (Main) Simulation engine is launched (Non-GUI Mode).");
-
-            /* Input SimModel */
-            //ToySoS toySoS = new ToySoS(); // no id
-            ToySoS toySoS = new ToySoS("TOYSOS01", "ToySoS");
-
-            /* Input SimConfiguration */
-            //TODO: remove this section after debugging
-            SimConfiguration exampleConfig = new SimConfiguration();
-            exampleConfig.setSimTotalTime(1);
-
-            /* Input SimScenario */
-            //TODO: remove this section after debugging
-            SimScenario exampleScenario = new SimScenario("Scenario01", false);
 
             /*
             //INSTANT (50, 70, 30, -1)
@@ -97,7 +99,6 @@ public class Main {
             /* Declaration and initialization of SimEngine */
             //args[1]: isMapeOn
             SimEngine simEngine = new SimEngine(toySoS, args[1], exampleConfig, exampleScenario);
-
             simEngine.startSimulation();
 
         }
@@ -107,7 +108,10 @@ public class Main {
             System.out.println("[" + timestamp + "] (Main) Simulation engine is launched (GUI Mode).");
 
             // Launch a GUI for taking input files from a user
-            launchSimInputUI();
+            launchMainUI();
+
+            SimEngine simEngine = new SimEngine(toySoS, args[1], exampleConfig, exampleScenario);
+            //simEngine.startSimulation();
         }
 
 //        timestamp = new Timestamp(System.currentTimeMillis());
@@ -121,7 +125,7 @@ public class Main {
      * This method instantiates MainUI (simInputUI),
      * which has menus/buttons for choosing input files.
      */
-    private static void launchSimInputUI() {
+    private static void launchMainUI() {
         // Set Look and Feel using the UIManager for Swing Objects
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");

@@ -139,21 +139,27 @@ public abstract class SoS extends _SimContainerObject_ {
             if(subRunResult.getRunSubject() instanceof Organization){
                 Organization target = (Organization) subRunResult.getRunSubject();
                 UpdateResult subUpdateResult = target.update(subRunResult, tick);
-                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
+                updateResult.addAllLogEventToList(subUpdateResult.getLogEventList());
+
+//                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
             }
             //TODO: Code for Infrastructure and Environment
             //Organization-type subject
             if(subRunResult.getRunSubject() instanceof Infrastructure){
                 Infrastructure target = (Infrastructure) subRunResult.getRunSubject();
                 UpdateResult subUpdateResult = target.update(subRunResult, tick);
-                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
+                updateResult.addAllLogEventToList(subUpdateResult.getLogEventList());
+
+//                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
             }
 
             //Organization-type subject
             if(subRunResult.getRunSubject() instanceof Environment){
                 Environment target = (Environment) subRunResult.getRunSubject();
                 UpdateResult subUpdateResult = target.update(subRunResult, tick);
-                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
+                updateResult.addAllLogEventToList(subUpdateResult.getLogEventList());
+
+//                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
             }
         }
 

@@ -4,14 +4,21 @@ import kr.ac.kaist.se.controller.mape.MapeEngine;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.model.sos.cap.CommAction;
+import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 import kr.ac.kaist.se.simdata.input.SimConfiguration;
 import kr.ac.kaist.se.simdata.input.SimScenario;
 import kr.ac.kaist.se.simdata.output.SimLog;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.FileHandler;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Simulation engine for a simulation of a simulation model
@@ -25,7 +32,12 @@ import java.util.ArrayList;
  */
 public class SimEngine {
 
+    Logger logger = Logger.getLogger("Simulation Engine Logger");
+    private static final String format = "[%1$tF %1$tT] [%2$-7s] %3$s %n";
+    FileHandler fileHandler;
+
     Timestamp timestamp;
+    int simTick = 0;
 
 //    private int cur_tick = 0;
 
@@ -51,10 +63,39 @@ public class SimEngine {
 
     public SimEngine(SoS simModel, String isMapeOn, SimConfiguration simConfig, SimScenario simScenario) {
 
+
+//        System.setProperty("java.util.logging.SimpleFormatter.format",
+//                "%1$tF %1$tT %4$s %2$s %5$s%6$s%n");
+
+        System.setProperty("java.util.logging.SimpleFormatter.format",
+                format);
+
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (SimEngine) SimEngine is constructed.");
 
+        try {
+            fileHandler = new FileHandler("SimEngineLog.log");
+            logger.addHandler(fileHandler);
+
+            SimpleFormatter formatter = new SimpleFormatter();
+//            fileHandler.setFormatter(formatter);
+            fileHandler.setFormatter(new SimpleFormatter(){
+                @Override
+                public synchronized String format(LogRecord lr) {
+                    return String.format(format,
+                            new Date(lr.getMillis()),
+                            lr.getLevel().getLocalizedName(),
+                            lr.getMessage()
+                            );
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        logger.info("(pre-simulation) A SimEngine object is constructed and initialized.");
         initSimEngine(simModel, isMapeOn, simConfig, simScenario);
+        logger.info("(pre-simulation) SimulationEngine is initialized: " + simModel + ", " + isMapeOn + ", " + simConfig + ", " + simScenario);
 
     }
 
@@ -132,12 +173,17 @@ public class SimEngine {
 
         printSimInputInfo();
 
+        logger.info("(pre-simulation) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println();
         System.out.println("[" + timestamp + "] ===================================================================");
         System.out.println("[" + timestamp + "] (SimEngine:startSimulation) Simulation is started.");
 
         for (int cur_tick = 0; cur_tick < this.simConfig.getSimTotalTime(); cur_tick++) {
+
+            simTick = cur_tick;
+
             System.out.println();
             timestamp = new Timestamp(System.currentTimeMillis());
 //            System.out.println("[" + timestamp + "] ===================================================================");
@@ -148,9 +194,11 @@ public class SimEngine {
             /* PHASE 01: Collecting RunResults from SimModel*/
 
             RunResult curTickSimResult = runSimModel();
+            logger.info("(cur_tick:" + simTick + ") RunResult of current tick is returned: # of selectedActions(" + getSelectedActionsFromRunResult(curTickSimResult).size() + ")");
 
             timestamp = new Timestamp(System.currentTimeMillis());
 //            System.out.println("[" + timestamp + "] ===================================================================");
+            System.out.println();
             System.out.println("[" + timestamp + "] ┌──────────────────────────────────────────────────────────────────┐");
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) RunResult is returned: (getSelectedActionList().size():" +
                     curTickSimResult.getSelectedActionList().size() + ") | (getSubRunREsults().size():" +
@@ -161,11 +209,13 @@ public class SimEngine {
             /* PHASE 02: Resolving conflicts of the RunResult of the current tick */
 
             curTickSimResult = this.resolveConflict(curTickSimResult);
+            logger.info("(cur_tick:" + simTick + ") Conflicts are resolved: filtered # of selectedActions(" + getSelectedActionsFromRunResult(curTickSimResult).size() + ")");
 
 
             /* PHASE 03: Collecting CommActions to process message sending */
 
             ArrayList<CommAction> selectedCommActions = readCommActions(curTickSimResult);
+            logger.info("(cur_tick:" + simTick + ") Communication actions are read: # of commActions(" + selectedCommActions.size() + ")");
 
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":readCommActions) selectedCommActions.size(): " + selectedCommActions.size());
@@ -178,7 +228,15 @@ public class SimEngine {
             /* PHASE 04: Update SimModel by actually executing the actions, allowed by this SimEngine */
 
             UpdateResult curTickUpdateResult = this.updateSimModel(curTickSimResult, cur_tick);
+            logger.info("(cur_tick:" + simTick + ") RunResult of current tick is returned: # of logs(" + curTickUpdateResult.getLogEventList().size() + ")");
 
+            System.out.println("[" + timestamp + "] ┌──────────────────────────────────────────────────────────────────┐");
+            System.out.println("[" + timestamp + "] (SimEngine:startSimulation) size of log: " + curTickUpdateResult.getLogEventList().size());
+            System.out.println("[" + timestamp + "] └──────────────────────────────────────────────────────────────────┘");
+
+
+//            logger.info("(cur_tick:" + cur_tick + ") Info");
+//            logger.warning("(cur_tick:" + cur_tick + ") Warning");
 
             /* PHASE 05: MAPE */
 
@@ -195,11 +253,16 @@ public class SimEngine {
             }
              */
 
+            logger.info("(cur_tick:" + simTick + ") ===================================================================");
+
         }
 
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "]  ===================================================================");
         System.out.println("[" + timestamp + "] (Main) Simulation engine is terminated.");
+
+        logger.info("(post-simulation) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+        logger.info("(post-simulation) Simulation engine is terminated.");
 
 
         return simLog;
@@ -288,6 +351,18 @@ public class SimEngine {
         return actionsInRunResult;
     }
 
+//    private ArrayList<SimLogEvent> getLogEventsFromUpdateResult(UpdateResult updateResult) {
+//        ArrayList<SimLogEvent> logEventsInRunResult = new ArrayList<>();
+//
+//        logEventsInRunResult.addAll(updateResult.get());
+//
+//        for (RunResult subRunResult : updateResult.getSubRunResults()) {
+//            logEventsInRunResult.addAll(getSelectedActionsFromRunResult(subRunResult));
+//        }
+//
+//        return logEventsInRunResult;
+//    }
+
 
     private void removeActionFromRunResult(RunResult runResult, _SimAction_ aAction) {
 
@@ -345,6 +420,18 @@ public class SimEngine {
         System.out.println("[" + timestamp + "]    > [numOfEvents (length): " + simScenario.getNumOfEvents() + "]");
         System.out.println("[" + timestamp + "]    > [numOfUnitEvents (length of unit events): " + simScenario.getNumOfUnitEvents() + "]");
         System.out.println("[" + timestamp + "] └───────────────────────────────────────────────────────────────────┘");
+
+        logger.info("(pre-simulation) ┌─ Simulation Inputs ───────────────────────────────────────────────┐");
+        logger.info("(pre-simulation)  - Simulation Configuration ");
+        logger.info("(pre-simulation)    > [simTotalTime: " + simConfig.getSimTotalTime() + "]");
+        logger.info("(pre-simulation)    > [SimMapeMode: " + simConfig.isSimMapeMode() + "]");
+        logger.info("(pre-simulation)    > [SimHasScenario: " + simConfig.isSimHasScenario() + "]");
+        logger.info("(pre-simulation)   - Simulation Scenario ");
+        logger.info("(pre-simulation)    > [scenarioName: " + simScenario.getScenarioName() + "]");
+        logger.info("(pre-simulation)    > [numOfEvents (length): " + simScenario.getNumOfEvents() + "]");
+        logger.info("(pre-simulation)    > [numOfUnitEvents (length of unit events): " + simScenario.getNumOfUnitEvents() + "]");
+        logger.info("(pre-simulation) └───────────────────────────────────────────────────────────────────┘");
+
 
     }
 

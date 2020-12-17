@@ -38,12 +38,16 @@ public abstract class _SimActionableObject_ extends _SimObject_ implements Actio
         UpdateResult updateResult = new UpdateResult();
 
         for (_SimAction_ action: runResult.getSelectedActionList()){
-            SimLogEvent actionLogEvent = doAction(action);
+            ArrayList<SimLogEvent> actionLogEvents = doAction(action, tick);
 
             //TODO: Add proper SimLog object
 //            updateResult.addLogToList(null);
 
-            updateResult.addLogEventToList(actionLogEvent);
+            //If the list of actionLogEvents has any logEvent
+            if (actionLogEvents != null) {
+//                System.out.println("not null");
+                updateResult.addAllLogEventToList(actionLogEvents);
+            }
         }
 
         timestamp = new Timestamp(System.currentTimeMillis());

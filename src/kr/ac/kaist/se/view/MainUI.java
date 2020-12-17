@@ -17,7 +17,7 @@ public class MainUI implements ActionListener, Runnable {
 
     ImageIcon simEngineIcon;
 
-    JFrame mainUIframe;
+    public static JFrame mainUIframe;
 
     JMenuBar menuBar;
     JMenu fileMenu;
@@ -38,7 +38,6 @@ public class MainUI implements ActionListener, Runnable {
 
 
     SimEngineTabPane simEngineTabPane;
-
 
 
     SimStatusBarPanel statusBar;
@@ -83,7 +82,7 @@ public class MainUI implements ActionListener, Runnable {
         contentPane.setLayout(new BorderLayout());
 
         mainUIframe.add(statusBar, BorderLayout.SOUTH);
-        mainUIframe.add(simEngineTabPane, BorderLayout.CENTER);
+        //mainUIframe.add(simEngineTabPane, BorderLayout.CENTER);
 
         //mainUIframe.pack();
 
@@ -106,7 +105,7 @@ public class MainUI implements ActionListener, Runnable {
         timerThread = new TimerThread(simDataLabel, simTimeLabel);
         timerThread.start();
 
-        mainUIframe.pack();
+        //mainUIframe.pack();
         mainUIframe.setVisible(true);
 
         //System.out.println(simDataLabel.getTopLevelAncestor());

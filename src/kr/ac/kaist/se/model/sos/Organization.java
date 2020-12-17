@@ -137,13 +137,17 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
             if(subRunResult.getRunSubject() instanceof Organization){
                 Organization target = (Organization) subRunResult.getRunSubject();
                 UpdateResult subUpdateResult = target.update(subRunResult, tick);
-                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
+                updateResult.addAllLogEventToList(subUpdateResult.getLogEventList());
+
+//                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
             }
             //Member CS
             else if(subRunResult.getRunSubject() instanceof Constituent){
                 Constituent target = (Constituent) subRunResult.getRunSubject();
                 UpdateResult subUpdateResult = target.update(subRunResult, tick);
-                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
+                updateResult.addAllLogEventToList(subUpdateResult.getLogEventList());
+
+//                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
             }
         }
 

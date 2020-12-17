@@ -3,6 +3,8 @@ package kr.ac.kaist.se.model.intf;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 
+import java.util.ArrayList;
+
 /**
  * Interface for actionable objects.
  * Actionable objects can execute doActions(..) method.
@@ -12,5 +14,5 @@ import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 public interface Actionable {
 
     //TODO: check return
-    SimLogEvent doAction(_SimAction_ actionObj);
+    ArrayList<SimLogEvent> doAction(_SimAction_ actionObj, int tick);
 }

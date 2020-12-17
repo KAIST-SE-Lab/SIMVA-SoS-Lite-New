@@ -2,11 +2,13 @@ package kr.ac.kaist.se.model.sos.cap;
 
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
+import kr.ac.kaist.se.model.abst.evnt.EnumEventType;
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * A concrete class to represent an action for communication.
@@ -57,7 +59,11 @@ public class CommAction extends _SimAction_ {
     }
 
     @Override
-    public SimLogEvent executeAction() {
+    public ArrayList<SimLogEvent> executeAction(int tick) {
+
+        //Clear of the actionLogEvents to make new logEvents
+        actionLogEvents.clear();
+
         //Send a message
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (CommAction:executeAction) message[" +
@@ -68,9 +74,18 @@ public class CommAction extends _SimAction_ {
                 message.getReceiverId() + "|" +
                 message.getMsgDataList() + "]");
 
+        //Generate LogEvent
+        actionLogEvents.add(new SimLogEvent(actionSubject.getLogEventIdAutomatically(this),
+                EnumEventType.COMMUNICATION,
+                new Timestamp(System.currentTimeMillis()),
+                tick,
+                actionSubject.getId(),
+                actionSubject,
+                "EVENT_SPEC"));
+
 
         //TODO: check return
-        return null;
+        return actionLogEvents;
     }
 
     public _SimMessage_ getMessage() {

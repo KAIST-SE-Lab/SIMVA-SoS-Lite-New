@@ -5,6 +5,7 @@ import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * Abstract class to represent an action object
@@ -14,6 +15,9 @@ import java.sql.Timestamp;
 public abstract class _SimAction_ {
 
     protected Timestamp timestamp;    //Timestamp for stdout
+
+    /* ArrayList to store SimLogEvents of executed actions for return */
+    protected ArrayList<SimLogEvent> actionLogEvents = new ArrayList<>();
 
     protected SoS accessibleSoS;    //Accessible SimModel (SoS)
     protected _SimActionableObject_ actionSubject;  //Subject who performs this action
@@ -55,7 +59,7 @@ public abstract class _SimAction_ {
     public abstract boolean checkPrecondition();
 
     //TODO: check (set) return
-    public abstract SimLogEvent executeAction();
+    public abstract ArrayList<SimLogEvent> executeAction(int tick);
 
 
     public SoS getAccessibleSoS() {

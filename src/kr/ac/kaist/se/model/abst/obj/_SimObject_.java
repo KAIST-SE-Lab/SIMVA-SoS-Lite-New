@@ -1,5 +1,6 @@
 package kr.ac.kaist.se.model.abst.obj;
 
+import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.intf.Simulatable;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
@@ -164,7 +165,7 @@ public abstract class _SimObject_ implements Simulatable {
     }
 
 
-    public String getLogEventIdAutomatically(){
+    public String getLogEventIdAutomatically(_SimAction_ eventAction){
         String newId = "";
 
         Random rand = new Random();
@@ -173,7 +174,7 @@ public abstract class _SimObject_ implements Simulatable {
 //        boolean isDuplicate = false;
 
         while (true) {
-            newId += String.format("EVNT_%s_%s", this.id, Integer.toHexString(rand.nextInt(99999)));
+            newId += String.format("EVNT_%S_%s_%s", eventAction.getClass().getSimpleName(), this.id, Integer.toHexString(rand.nextInt(99999)));
             if(!logEventIdList.contains(newId)){
                 break;
             }

@@ -221,25 +221,26 @@ public abstract class Constituent extends _SimActionableObject_
     }
 
     @Override
-    public SimLogEvent doAction(_SimAction_ actionObj) {
+    public ArrayList<SimLogEvent> doAction(_SimAction_ actionObj, int tick) {
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (Constituent:" + this.getClass().getSimpleName() + "(" + id + "):doAction) " + actionObj.getActionId() + " is executed.");
 
         //TODO: check initialization
-        SimLogEvent actionLogEvent = new SimLogEvent();
+//        SimLogEvent actionLogEvent = new SimLogEvent();
+        ArrayList<SimLogEvent> actionLogEvents = new ArrayList<>();
 
         if (actionObj instanceof MoveAction){
-            actionLogEvent = actionObj.executeAction();
+            actionLogEvents = actionObj.executeAction(tick);
             //ObjectLocation curLoc = getCurLocation();
         }else if(actionObj instanceof CommAction){
-            actionLogEvent =  actionObj.executeAction();
+            actionLogEvents = actionObj.executeAction(tick);
         }else if(actionObj instanceof FuncAction){
-            actionLogEvent = actionObj.executeAction();
+            actionLogEvents = actionObj.executeAction(tick);
         }
 
 //        System.out.println();
 
-        return actionLogEvent;
+        return actionLogEvents;
     }
 
 
