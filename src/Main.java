@@ -25,7 +25,7 @@ public class Main {
         /* Input SimConfiguration */
         //TODO: remove this section after debugging
         SimConfiguration exampleConfig = new SimConfiguration();
-        exampleConfig.setSimTotalTime(1);
+        exampleConfig.setSimTotalTime(10);
 
         /* Input SimScenario */
         //TODO: remove this section after debugging

@@ -11,7 +11,7 @@ import kr.ac.kaist.se.simdata.output.SimLog;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
-import java.io.IOException;
+import java.io.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,9 +32,16 @@ import java.util.logging.SimpleFormatter;
  */
 public class SimEngine {
 
+    /* Logger for SimEngine */
     Logger logger = Logger.getLogger("Simulation Engine Logger");
     private static final String format = "[%1$tF %1$tT] [%2$-7s] %3$s %n";
     FileHandler fileHandler;
+
+    /* Record of SimLogEvents */
+    BufferedWriter outputWriter = null;
+    String lineSeparator = System.getProperty("line.separator");
+    File logFile = new File("SimModelLog.log");
+
 
     Timestamp timestamp;
     int simTick = 0;
@@ -89,6 +96,32 @@ public class SimEngine {
                             );
                 }
             });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+        try {
+
+            if (!logFile.exists()){
+//                System.out.println("no file");
+            }else{
+                timestamp = new Timestamp(System.currentTimeMillis());
+
+                outputWriter = new BufferedWriter(new FileWriter(logFile));
+                outputWriter.write("SimEngine constructed at" + timestamp + lineSeparator);
+                outputWriter.write("> SimModel: " + simModel + lineSeparator);
+                outputWriter.write("> isMapeOn: " + isMapeOn + lineSeparator);
+                outputWriter.write("> simConfig: " + simConfig + lineSeparator);
+                outputWriter.write("> simScenario: " + simScenario + lineSeparator);
+                outputWriter.write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + lineSeparator);
+                outputWriter.flush();
+//                System.out.println("have file");
+            }
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -234,6 +267,16 @@ public class SimEngine {
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) size of log: " + curTickUpdateResult.getLogEventList().size());
             System.out.println("[" + timestamp + "] └──────────────────────────────────────────────────────────────────┘");
 
+            for (SimLogEvent aLogEvent: curTickUpdateResult.getLogEventList()){
+
+                try {
+                    outputWriter.write(aLogEvent.getStringLogEvent() + lineSeparator);
+                    outputWriter.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
 
 //            logger.info("(cur_tick:" + cur_tick + ") Info");
 //            logger.warning("(cur_tick:" + cur_tick + ") Warning");
@@ -264,6 +307,13 @@ public class SimEngine {
         logger.info("(post-simulation) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         logger.info("(post-simulation) Simulation engine is terminated.");
 
+
+        //Close of outputWriter
+        try {
+            outputWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return simLog;
 
