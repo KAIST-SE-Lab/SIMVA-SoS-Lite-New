@@ -493,4 +493,51 @@ public class SimEngine {
 //    }
 
 
+    public int getSimTick() {
+        return simTick;
+    }
+
+    public void setSimTick(int simTick) {
+        this.simTick = simTick;
+    }
+
+    public SoS getSimModel() {
+        return simModel;
+    }
+
+    public void setSimModel(SoS simModel) {
+        this.simModel = simModel;
+    }
+
+    public SimConfiguration getSimConfig() {
+        return simConfig;
+    }
+
+    public void setSimConfig(SimConfiguration simConfig) {
+        this.simConfig = simConfig;
+    }
+
+    public SimScenario getSimScenario() {
+        return simScenario;
+    }
+
+    public void setSimScenario(SimScenario simScenario) {
+        this.simScenario = simScenario;
+    }
+
+    public boolean isMapeOn() {
+        return isMapeOn;
+    }
+
+    public void setMapeOn(boolean mapeOn) {
+        isMapeOn = mapeOn;
+    }
+
+    public MapeEngine getMapeEngine() {
+        return mapeEngine;
+    }
+
+    public void setMapeEngine(MapeEngine mapeEngine) {
+        this.mapeEngine = mapeEngine;
+    }
 }

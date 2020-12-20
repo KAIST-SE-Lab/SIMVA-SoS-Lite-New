@@ -223,7 +223,7 @@ public class ExampleCSType extends Constituent {
     /**
      * Initialization of communication actions (CommAction)
      */
-    private void initCommActions() {
+    public void initCommActions() {
         Message exampleMsg = new Message("MSG01", "MSG01tag", EnumMsgType.GENERAL_MSG);
 
         exampleMsg.setSenderId(this.getId());
@@ -258,10 +258,10 @@ public class ExampleCSType extends Constituent {
 //
 //    }
 
-    @Override
-    public void sendMsg(_SimMessage_ msgObj) {
-
-    }
+//    @Override
+//    public void sendMsg(_SimMessage_ msgObj) {
+//
+//    }
 
 //    @Override
 //    public void readIncomingMsgs() {

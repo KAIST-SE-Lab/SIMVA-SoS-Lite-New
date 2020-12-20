@@ -10,8 +10,13 @@ import kr.ac.kaist.se.model.abst.comm._SimMessage_;
  */
 public interface Communicatable {
 
-    //TODO: check return
-    void sendMsg(_SimMessage_ msgObj);
+    /**
+     * Initialization of communication actions
+     */
+    void initCommActions();
+
+//    //TODO: check return
+//    void sendMsg(_SimMessage_ msgObj);
 
     //TODO: check return
     void readIncomingMsgs();

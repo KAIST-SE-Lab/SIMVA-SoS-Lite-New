@@ -1,6 +1,9 @@
 package kr.ac.kaist.se.view.frame;
 
+import kr.ac.kaist.se.controller.sim.SimEngine;
+import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
+import kr.ac.kaist.se.model.intf.Stateful;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.simdata.input.SimConfiguration;
 import kr.ac.kaist.se.simdata.input.SimScenario;
@@ -22,6 +25,8 @@ public class ModelInfoFrame extends JFrame implements ActionListener {
 
     JScrollPane treePane;
 
+    SimEngine simEngine;
+
 //    private JTree tree;
 //    private JTreeTable treeTable;
 
@@ -29,14 +34,16 @@ public class ModelInfoFrame extends JFrame implements ActionListener {
     private JScrollPane scrollPane;
 
 
-    public ModelInfoFrame(SoS simModel, String isMapeOn, SimConfiguration simConfig, SimScenario simScenario) {
+    public ModelInfoFrame(SimEngine simEngine) {
+        this.simEngine = simEngine;
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
-        this.setSize(600, 600);
-        this.setTitle(simModel.getName());
+        this.setSize(1500, 600);
+        this.setTitle(simEngine.getSimModel().getName());
 
 
-        String[] header = {"Class", "ObjId", "ObjName"};
+        String[] header = {"Class", "ObjId", "ObjName", "ObjState", "ObjCapableActions"};
         DefaultTableModel tableModel = new DefaultTableModel(header, 0);
 
         simObjTable = new JTable(tableModel);
@@ -44,9 +51,9 @@ public class ModelInfoFrame extends JFrame implements ActionListener {
 
         this.add(treePane, "Center");
 
-        ArrayList<_SimObject_> allSimObjects = simModel.getAllSimObjects();
+        ArrayList<_SimObject_> allSimObjects = simEngine.getSimModel().getAllSimObjects();
 
-        Object objects[] = new Object[3];
+        Object objects[] = new Object[5];
         for (int i = 0; i < allSimObjects.size(); i++){
 
             _SimObject_ aSimObject = allSimObjects.get(i);
@@ -54,6 +61,15 @@ public class ModelInfoFrame extends JFrame implements ActionListener {
             objects[0] = aSimObject.getClass().getSimpleName();
             objects[1] = aSimObject.getId();
             objects[2] = aSimObject.getName();
+
+            if (aSimObject instanceof Stateful){
+                objects[3] = "Stateful";
+            }
+
+            if (aSimObject instanceof _SimActionableObject_){
+                objects[4] = ((_SimActionableObject_)aSimObject).getCapableActionList().size() + "";
+            }
+
 
             tableModel.addRow(objects);
         }

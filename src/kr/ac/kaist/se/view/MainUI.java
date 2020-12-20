@@ -87,7 +87,7 @@ public class MainUI implements ActionListener, Runnable {
         SimEngine simEngine = new SimEngine(simModel, isMapeOn, simConfig, simScenario);
 //        simEngine.startSimulation();
 
-        ModelInfoFrame modelInfoFrame = new ModelInfoFrame(simModel, isMapeOn, simConfig, simScenario);
+        ModelInfoFrame modelInfoFrame = new ModelInfoFrame(simEngine);
 
 
 
@@ -131,7 +131,7 @@ public class MainUI implements ActionListener, Runnable {
         timerThread.start();
 
         //mainUIframe.pack();
-        mainUIframe.setVisible(true);
+        //mainUIframe.setVisible(true);
 
         //System.out.println(simDataLabel.getTopLevelAncestor());
     }
