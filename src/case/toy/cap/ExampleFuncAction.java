@@ -39,8 +39,13 @@ public class ExampleFuncAction extends FuncAction {
                 tick,
                 actionSubject.getId(),
                 actionSubject,
-                "EVENT_SPEC"));
+                generateLogEventSpec()));
 
         return actionLogEvents;
+    }
+
+    @Override
+    public String generateLogEventSpec() {
+        return null;
     }
 }

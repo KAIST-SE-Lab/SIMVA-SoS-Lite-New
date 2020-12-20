@@ -3,16 +3,13 @@ package kr.ac.kaist.se.model.sos.cap;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.evnt.EnumEventType;
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
-import kr.ac.kaist.se.model.intf.Movable;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
-import kr.ac.kaist.se.simdata.output.SimLog;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A concrete class to represent an action for geographical movement.
@@ -169,7 +166,7 @@ public class MoveAction extends _SimAction_ {
                     tick,
                     actionSubject.getId(),
                     actionSubject,
-                    "EVENT_SPEC"));
+                    generateLogEventSpec()));
 //            System.out.println(actionLogEvents.get(0).getStringLogEvent());
 
             actionSubject.setObjLocation(updatedCurLoc);
@@ -269,6 +266,11 @@ public class MoveAction extends _SimAction_ {
 
 
         //accessibleSoS.sosMap.mapDimensions
+    }
+
+    @Override
+    public String generateLogEventSpec() {
+        return null;
     }
 
     private void printLocation(ObjectLocation objLocation){

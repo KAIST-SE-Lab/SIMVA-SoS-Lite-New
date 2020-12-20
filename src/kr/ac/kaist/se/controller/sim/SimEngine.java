@@ -100,31 +100,33 @@ public class SimEngine {
             e.printStackTrace();
         }
 
-
+        if (!logFile.exists()){
+                System.out.println("no file");
+        }
 
         try {
+            outputWriter = new BufferedWriter(new FileWriter(logFile));
 
-            if (!logFile.exists()){
-//                System.out.println("no file");
-            }else{
-                timestamp = new Timestamp(System.currentTimeMillis());
+            timestamp = new Timestamp(System.currentTimeMillis());
 
-                outputWriter = new BufferedWriter(new FileWriter(logFile));
-                outputWriter.write("SimEngine constructed at" + timestamp + lineSeparator);
-                outputWriter.write("> SimModel: " + simModel + lineSeparator);
-                outputWriter.write("> isMapeOn: " + isMapeOn + lineSeparator);
-                outputWriter.write("> simConfig: " + simConfig + lineSeparator);
-                outputWriter.write("> simScenario: " + simScenario + lineSeparator);
-                outputWriter.write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + lineSeparator);
-                outputWriter.flush();
-//                System.out.println("have file");
-            }
+            String currentPath = new java.io.File( "." ).getCanonicalPath();
 
-
-
+            outputWriter.write(currentPath + "\\SimModelLog.log" + lineSeparator);
+            outputWriter.write("> last update:" + timestamp + lineSeparator);
+            outputWriter.write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + lineSeparator);
+            outputWriter.write("SimEngine constructed at" + timestamp + lineSeparator);
+            outputWriter.write("> SimModel: " + simModel + "(" + simModel.getName() + ")" + lineSeparator);
+            outputWriter.write("> isMapeOn: " + isMapeOn + lineSeparator);
+            outputWriter.write("> simConfig: " + simConfig + lineSeparator);
+            outputWriter.write("> simScenario: " + simScenario + lineSeparator);
+            outputWriter.write("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + lineSeparator);
+            outputWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+
 
         logger.info("(pre-simulation) A SimEngine object is constructed and initialized.");
         initSimEngine(simModel, isMapeOn, simConfig, simScenario);

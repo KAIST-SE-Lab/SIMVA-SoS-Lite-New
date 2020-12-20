@@ -61,6 +61,12 @@ public abstract class _SimAction_ {
     //TODO: check (set) return
     public abstract ArrayList<SimLogEvent> executeAction(int tick);
 
+    /**
+     * A method to generate event specification for SimEventLog
+     * @return
+     */
+    public abstract String generateLogEventSpec();
+
 
     public SoS getAccessibleSoS() {
         return accessibleSoS;

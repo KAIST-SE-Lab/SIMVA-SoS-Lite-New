@@ -81,11 +81,16 @@ public class CommAction extends _SimAction_ {
                 tick,
                 actionSubject.getId(),
                 actionSubject,
-                "EVENT_SPEC"));
+                generateLogEventSpec()));
 
 
         //TODO: check return
         return actionLogEvents;
+    }
+
+    @Override
+    public String generateLogEventSpec() {
+        return null;
     }
 
     public _SimMessage_ getMessage() {
