@@ -2,6 +2,7 @@ package kr.ac.kaist.se.controller.sim;
 
 import kr.ac.kaist.se.controller.mape.MapeEngine;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
+import kr.ac.kaist.se.model.abst.obj._SimObject_;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.model.sos.cap.CommAction;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
@@ -256,6 +257,9 @@ public class SimEngine {
             System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":readCommActions) selectedCommActions.size(): " + selectedCommActions.size());
 
 
+            processMsgs(selectedCommActions);
+
+
 
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) selectedActions of curTickSimResult: " + getSelectedActionsFromRunResult(curTickSimResult));
 
@@ -342,7 +346,7 @@ public class SimEngine {
      * Read CommActions from RunResult
      *
      * @param curTickSimResult
-     * @return
+     * @return selected communication actions
      */
     private ArrayList<CommAction> readCommActions(RunResult curTickSimResult) {
         ArrayList<CommAction> selectedCommActions = new ArrayList<>();
@@ -364,10 +368,25 @@ public class SimEngine {
             selectedCommActions.addAll(readCommActions(subRunResult));
         }
 
-
-
         return selectedCommActions;
     }
+
+
+    private boolean processMsgs(ArrayList<CommAction> selectedCommActions){
+
+        for (CommAction commAction: selectedCommActions){
+            _SimObject_ receiverObj = simModel.getMemberSimObject(commAction.getMessage().getReceiverId());
+
+            if (receiverObj != null) {
+                receiverObj.getMsgQueue().offer(commAction.getMessage());
+            }else{
+                System.out.println("Receiver not found");
+            }
+        }
+
+        return true;
+    }
+
 
     /**
      * @param curTickSimResult

@@ -1,10 +1,9 @@
 import cap.ExampleFuncAction;
 import data.MapCoordinateDimensionType;
 import data.MapFloorDimensionType;
-import kr.ac.kaist.se.controller.sim.SimEngine;
 import kr.ac.kaist.se.model.abst.comm.EnumMsgType;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
-import kr.ac.kaist.se.model.abst.evnt.EnumEventType;
+import kr.ac.kaist.se.model.abst.obj._SimObject_;
 import kr.ac.kaist.se.model.sos.Constituent;
 import kr.ac.kaist.se.model.sos.Organization;
 import kr.ac.kaist.se.model.sos.SoS;
@@ -15,7 +14,6 @@ import kr.ac.kaist.se.model.sos.data.DataVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVarDomain;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
-import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -224,29 +222,59 @@ public class ExampleCSType extends Constituent {
      * Initialization of communication actions (CommAction)
      */
     public void initCommActions() {
-        Message exampleMsg = new Message("MSG01", "MSG01tag", EnumMsgType.GENERAL_MSG);
-
-        exampleMsg.setSenderId(this.getId());
-        //TODO: how to access to myOrg's id?
-        exampleMsg.setReceiverId("SIMOBJECT_XX");
-
-        ArrayList<DataVar> msgDataList = new ArrayList<>();
-        msgDataList.add(new DataVar("MSG01_DATAVAR01",
-                "Data varabiel 01 of MSG01",
-                "Int",
-                "30"));
-
-        exampleMsg.setMsgDataList(msgDataList);
 
         CommAction commAction01 = new CommAction(mySoS,
                 this,
                 "COMM_ACTION01",
                 "Communication Action 01",
-                exampleMsg);
+                null);
 
         capableActionList.add(commAction01);
     }
 
+
+
+    @Override
+    public _SimMessage_ makeMsgForCommAction(CommAction aCommAction) {
+
+
+        Message message = new Message("MSG01", "MSG01tag", EnumMsgType.GENERAL_MSG);
+
+        message.setSenderId(this.getId());
+
+//        findReceiverObjIdFromSoS("random");
+
+        //TODO: how to access to myOrg's id?
+        message.setReceiverId("ORG01A");
+
+        ArrayList<DataVar> msgDataList = new ArrayList<>();
+        msgDataList.add(new DataVar("MSG01_DATAVAR01",
+                "Data varabile 01 of MSG01",
+                "Int",
+                "30"));
+
+        message.setMsgDataList(msgDataList);
+
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "]");
+
+        return message;
+    }
+
+    @Override
+    public String findReceiverObjIdFromSoS(String condition) {
+
+        ArrayList<_SimObject_> sosObjects = mySoS.getAllSimObjects();
+//        System.out.println(sosObjects.size());
+
+//        for (mySoS.getAllSimObjects())
+//
+//        if (condition.equals("random")){
+//
+//        }
+
+        return null;
+    }
 
 //    @Override
 //    protected void selectActions() {

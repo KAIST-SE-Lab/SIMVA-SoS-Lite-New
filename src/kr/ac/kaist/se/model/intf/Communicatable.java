@@ -1,6 +1,8 @@
 package kr.ac.kaist.se.model.intf;
 
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
+import kr.ac.kaist.se.model.sos.cap.CommAction;
+import kr.ac.kaist.se.model.sos.comm.Message;
 
 /**
  * Interface for objects that can communicate with other objects.
@@ -20,4 +22,13 @@ public interface Communicatable {
 
     //TODO: check return
     void readIncomingMsgs();
+
+    /**
+     *
+     * @param condition
+     * @return
+     */
+    String findReceiverObjIdFromSoS(String condition);
+
+    _SimMessage_ makeMsgForCommAction(CommAction aCommAction);
 }

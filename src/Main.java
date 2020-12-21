@@ -1,5 +1,7 @@
 import kr.ac.kaist.se.controller.sim.SimEngine;
+import kr.ac.kaist.se.model.abst.evnt.*;
 import kr.ac.kaist.se.model.sos.SoS;
+import kr.ac.kaist.se.simdata.evnt.SimScenarioEvent;
 import kr.ac.kaist.se.simdata.input.SimConfiguration;
 import kr.ac.kaist.se.simdata.input.SimScenario;
 import kr.ac.kaist.se.view.MainUI;
@@ -25,12 +27,13 @@ public class Main {
         /* Input SimConfiguration */
         //TODO: remove this section after debugging
         SimConfiguration exampleConfig = new SimConfiguration();
-        exampleConfig.setSimTotalTime(10);
+        exampleConfig.setSimTotalTime(1);
 
         /* Input SimScenario */
         //TODO: remove this section after debugging
         SimScenario exampleScenario = new SimScenario("Scenario01", false);
 
+//        addScenarioEvents(exampleScenario, exampleConfig);
 
         //A user can select a mode for launching SimEngine
         //Non-GUI Mode
@@ -39,63 +42,6 @@ public class Main {
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] (Main) Simulation engine is launched (Non-GUI Mode).");
 
-            /*
-            //INSTANT (50, 70, 30, -1)
-            SimScenarioEvent event01 = new SimScenarioEvent("event01",
-                    "event01",
-                    EnumEventType.VALUE_UPDATE,
-                    exampleConfig.getSimTotalTime(),
-                    null,
-                    null,
-                    EnumEventTargetScope.SINGLE_OBJECT,
-                    EnumEventPredefBehavior.NOT_DETERMINED,
-                    EnumEventOccPattern.INSTANT,
-                    50, 70,
-                    30,
-                    -1,
-                    false,
-                    EnumEventProbDist.NOT_PROBABILISTIC,
-                    null);
-
-            //CONSTANT (60, 90, -1, -1)
-            SimScenarioEvent event02 = new SimScenarioEvent("event02",
-                    "event02",
-                    EnumEventType.VALUE_UPDATE,
-                    exampleConfig.getSimTotalTime(),
-                    null,
-                    null,
-                    EnumEventTargetScope.SINGLE_OBJECT,
-                    EnumEventPredefBehavior.NOT_DETERMINED,
-                    EnumEventOccPattern.CONSTANT,
-                    60, 90,
-                    -1,
-                    -1,
-                    false,
-                    EnumEventProbDist.NOT_PROBABILISTIC,
-                    null);
-
-            //PERIODIC (78, 89, 3, 5)
-            SimScenarioEvent event03 = new SimScenarioEvent("event03",
-                    "event03",
-                    EnumEventType.VALUE_UPDATE,
-                    exampleConfig.getSimTotalTime(),
-                    null,
-                    null,
-                    EnumEventTargetScope.SINGLE_OBJECT,
-                    EnumEventPredefBehavior.NOT_DETERMINED,
-                    EnumEventOccPattern.PERIODIC,
-                    78,89,
-                    3,
-                    5,
-                    false,
-                    EnumEventProbDist.NOT_PROBABILISTIC,
-                    null);
-
-            exampleScenario.addSimScenarioEvent(event01);
-            exampleScenario.addSimScenarioEvent(event02);
-            exampleScenario.addSimScenarioEvent(event03);
-
-             */
 
             /* Declaration and initialization of SimEngine */
             //args[1]: isMapeOn
@@ -142,6 +88,66 @@ public class Main {
         }
         //MainUI simInputUI = new MainUI();
         SwingUtilities.invokeLater(new MainUI(simModel, isMapeOn, simConfig, simScenario));
+    }
+
+    private static void addScenarioEvents(SimScenario simScenario, SimConfiguration simConfiguration){
+
+            //INSTANT (50, 70, 30, -1)
+            SimScenarioEvent event01 = new SimScenarioEvent("event01",
+                    "event01",
+                    EnumEventType.VALUE_UPDATE,
+                    simConfiguration.getSimTotalTime(),
+                    null,
+                    null,
+                    EnumEventTargetScope.SINGLE_OBJECT,
+                    EnumEventPredefBehavior.NOT_DETERMINED,
+                    EnumEventOccPattern.INSTANT,
+                    50, 70,
+                    30,
+                    -1,
+                    false,
+                    EnumEventProbDist.NOT_PROBABILISTIC,
+                    null);
+
+            //CONSTANT (60, 90, -1, -1)
+            SimScenarioEvent event02 = new SimScenarioEvent("event02",
+                    "event02",
+                    EnumEventType.VALUE_UPDATE,
+                    simConfiguration.getSimTotalTime(),
+                    null,
+                    null,
+                    EnumEventTargetScope.SINGLE_OBJECT,
+                    EnumEventPredefBehavior.NOT_DETERMINED,
+                    EnumEventOccPattern.CONSTANT,
+                    60, 90,
+                    -1,
+                    -1,
+                    false,
+                    EnumEventProbDist.NOT_PROBABILISTIC,
+                    null);
+
+            //PERIODIC (78, 89, 3, 5)
+            SimScenarioEvent event03 = new SimScenarioEvent("event03",
+                    "event03",
+                    EnumEventType.VALUE_UPDATE,
+                    simConfiguration.getSimTotalTime(),
+                    null,
+                    null,
+                    EnumEventTargetScope.SINGLE_OBJECT,
+                    EnumEventPredefBehavior.NOT_DETERMINED,
+                    EnumEventOccPattern.PERIODIC,
+                    78,89,
+                    3,
+                    5,
+                    false,
+                    EnumEventProbDist.NOT_PROBABILISTIC,
+                    null);
+
+        simScenario.addSimScenarioEvent(event01);
+        simScenario.addSimScenarioEvent(event02);
+        simScenario.addSimScenarioEvent(event03);
+
+
     }
 
 

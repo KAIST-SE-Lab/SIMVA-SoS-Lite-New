@@ -174,19 +174,28 @@ public abstract class Constituent extends _SimActionableObject_
 
         for (_SimAction_ aAction : capableActionList){
             //If aAction is not a MoveAction
-            if (!(aAction instanceof MoveAction)) {
+            if (aAction instanceof FuncAction) {
                 if (aAction.checkPrecondition()) {
                     selectedActionList.add(aAction);
 //                    System.out.println("selectedActionList.size(): " + selectedActionList.size());
                 }
             }
             //If aAction is MoveAction
-            else{
+            else if (aAction instanceof MoveAction){
                 if (aAction.checkPrecondition()) {
 //                    System.out.println("HHH");
                     possibleMoveActions.add(aAction);
 //                    System.out.println("selectedActionList.size(): " + selectedActionList.size());
 
+                }
+            }
+            else if (aAction instanceof CommAction){
+                //Dynamically set a message based on makeMsgForCommAction() method.
+                //The makeMsgForCommAction() method should be implemented in a concrete Constituent class.
+                ((CommAction) aAction).setMessage(makeMsgForCommAction((CommAction)aAction));
+
+                if (aAction.checkPrecondition()){
+                    //TODO
                 }
             }
         }
@@ -205,6 +214,7 @@ public abstract class Constituent extends _SimActionableObject_
             selectedActionList.add(possibleMoveActions.get(selectedMoveActionIndex));
         }
 
+        timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (Constituent:" + this.getClass().getSimpleName() + ":post-doDecisionMaking) capableActionList(" +
                 capableActionList.size() + "), selectedActionList(" + selectedActionList.size() + ") = " + selectedActionList);
     }
