@@ -1,6 +1,7 @@
 import cap.ExampleFuncAction;
 import data.MapCoordinateDimensionType;
 import data.MapFloorDimensionType;
+import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.comm.EnumMsgType;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
@@ -18,6 +19,7 @@ import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class ExampleCSType extends Constituent {
 
@@ -31,10 +33,12 @@ public class ExampleCSType extends Constituent {
     }
 
 
+
     @Override
     protected void initObjLocation() {
 
         ObjectLocation thisObjLocation;
+
         if (mySoS != null && mySoS.sosMap != null) {
             ArrayList<DimensionVar> mapDims = new ArrayList<>();
 
@@ -301,10 +305,23 @@ public class ExampleCSType extends Constituent {
 //        selectedActionList = capableActionList;
 //    }
 
+
     @Override
-    public void move() {
+    public ArrayList<_SimAction_> selectMoveActions(ArrayList<_SimAction_> possibleMoveActions) {
+        ArrayList<_SimAction_> selectedMoveActions = new ArrayList<>();
 
+        if (possibleMoveActions != null && possibleMoveActions.size() > 0) {
+            Random rand = new Random();
+            int selectedMoveActionIndex = rand.nextInt(possibleMoveActions.size());
+
+            selectedMoveActions.add(possibleMoveActions.get(selectedMoveActionIndex));
+        }
+
+        if (selectedMoveActions.size() != 0) {
+            return selectedMoveActions;
+        } else {
+            return null;
+        }
     }
-
 
 }

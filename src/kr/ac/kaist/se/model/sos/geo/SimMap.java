@@ -1,4 +1,4 @@
-package kr.ac.kaist.se.model.map;
+package kr.ac.kaist.se.model.sos.geo;
 
 import kr.ac.kaist.se.model.abst.geo._SimMap_;
 import kr.ac.kaist.se.model.abst.data._SimDataVariable_;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * An abstract class to represent a simulation map
+ * A class to represent a geographical map of an SoS
  * @author ymbaek
  */
 public abstract class SimMap extends _SimMap_ {
@@ -20,8 +20,6 @@ public abstract class SimMap extends _SimMap_ {
 
     //LocInformations of this map
     public ArrayList<DataVar> mapInfos = new ArrayList<>();
-
-//    protected
 
 
 

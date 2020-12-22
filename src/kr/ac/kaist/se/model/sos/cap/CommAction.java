@@ -49,8 +49,12 @@ public class CommAction extends _SimAction_ {
 
     @Override
     public boolean checkPrecondition() {
+
+        boolean isSenderAvailable = (actionSubject.getId() != null && accessibleSoS.getMemberSimObjectById(actionSubject.getId()) != null);
+        boolean isReceiverAvailable = (message.getReceiverId() != null && accessibleSoS.getMemberSimObjectById(message.getReceiverId()) != null);
+
         //TODO: Edit checkPrecondition phrase
-        if (message.isSendable()){
+        if (isSenderAvailable && isReceiverAvailable && message.isSendable()){
             return true;
         }else{
             return false;

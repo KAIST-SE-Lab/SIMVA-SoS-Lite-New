@@ -1,5 +1,6 @@
 package kr.ac.kaist.se.model.intf;
 
+import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 
 import java.util.ArrayList;
@@ -12,7 +13,10 @@ import java.util.ArrayList;
  */
 public interface Movable {
 
-
-    //TODO: check return
-    void move();
+    /**
+     * Select a move action(s) among possible move actions
+     * @param possibleMoveActions MoveActions that can be executed
+     * @return List of selected move actions
+     */
+    ArrayList<_SimAction_> selectMoveActions(ArrayList<_SimAction_> possibleMoveActions);
 }

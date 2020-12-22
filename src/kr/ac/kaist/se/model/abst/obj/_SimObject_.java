@@ -144,6 +144,7 @@ public abstract class _SimObject_ implements Simulatable {
         this.msgQueue = msgQueue;
     }
 
+
     /**
      * Print current location of this object using getCurLocation()
      */
@@ -165,6 +166,11 @@ public abstract class _SimObject_ implements Simulatable {
     }
 
 
+    /**
+     * Method to automatically generate an id of a SimLogEvent
+     * @param eventAction target action to be executed
+     * @return Generated id
+     */
     public String getLogEventIdAutomatically(_SimAction_ eventAction){
         String newId = "";
 

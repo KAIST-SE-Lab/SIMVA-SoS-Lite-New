@@ -18,10 +18,10 @@ import java.util.ArrayList;
  */
 public class MoveAction extends _SimAction_ {
 
-    protected int numOfAllowedDims = 0;
-    protected ArrayList<DimensionVar> allowedDims = new ArrayList<>();
+    private int numOfAllowedDims;
+    private ArrayList<DimensionVar> allowedDims;
 
-    protected ArrayList<Integer> dimVarDiffList = new ArrayList<>();
+    private ArrayList<Integer> dimVarDiffList;
 
 
     public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, int numOfAllowedDims, ArrayList<DimensionVar> allowedDims, ArrayList<Integer> dimVarDiffList) {
@@ -53,14 +53,7 @@ public class MoveAction extends _SimAction_ {
         //Clear of the actionLogEvents to make new logEvents
         actionLogEvents.clear();
 
-
-//        for (DimensionVar allowedDimVar : allowedDims) {
-//            System.out.print(allowedDimVar.getVarId());
-//        }
-//        System.out.println();
-
         //TODO: This code is a psuedo way to implement a MoveAction
-
 
 //        printAllowedDims();
 
@@ -68,74 +61,25 @@ public class MoveAction extends _SimAction_ {
         ObjectLocation updatedCurLoc = actionSubject.getCurLocation().clone();
 
 
-//        printLocation(actionSubject.getCurLocation());
-//        System.out.println();
-
-//        int index = 0;
-//        for (DimensionVar curLocDimVar: curLoc.getObjLocDimVars()){
-//            System.out.println(curLocDimVar.getVarId());
-//            System.out.println(allowedDims.get(index++).getVarId());
-////            if (curLocDimVar.getVarId() )
-//        }
-
-        //+1, -1
-//        while (index < allowedDims.size()){
-//            DimensionVar tmpDimVar = curLoc.getObjLocDimVars().get(index);
-//
-//            System.out.println(tmpDimVar.getVarId() + "(" + tmpDimVar.getDataCurValue() + ") | " + allowedDims.get(index).getVarId());
-//            System.out.println(tmpDimVar + " | " + allowedDims.get(index));
-//            System.out.println(tmpDimVar.getVarId() == allowedDims.get(index).getVarId());
-//
-//            curLoc.getObjLocDimVars().get(index).increaseValueOfDim(1);
-//
-//            tmpDimVar = curLoc.getObjLocDimVars().get(index);
-//
-//            System.out.println(tmpDimVar.getVarId() + "(" + tmpDimVar.getDataCurValue() + ") | " + allowedDims.get(index).getVarId());
-//
-//            index++;
-//        }
-
-
-//        printLocation(actionSubject.getCurLocation());
-//        System.out.println();
-//
-//        System.out.println(updatedCurLoc.getObjLocDimVars());
-//        System.out.println(actionSubject.getCurLocation().getObjLocDimVars());
-//
-//        printLocation(actionSubject.getCurLocation());
-//        System.out.println();
-
-        //DimVar -> id same, allowed
-
-//        Integer xDimDiff = Integer.valueOf(1);
-//        Integer yDimDiff = Integer.valueOf(2);
-
-//        System.out.print("MoveAction: ");
-//        for (DimensionVar allowedDimVar : allowedDims) {
-//            System.out.print(allowedDimVar.getVarId() + " ");
-//        }
-//        System.out.println();
-
         int index = 0;
         ArrayList<Integer> targetDims = new ArrayList<>();
-//        System.out.print("MoveAction: ");
+        //For all dimension variables of actionSubject's dimensions,
+        //Check if objLocDimVar.getVarId().equals(allowedDimVar.getVarId())
         for (DimensionVar objLocDimVar : actionSubject.getCurLocation().getObjLocDimVars()) {
-//            System.out.print(objLocDimVar.getVarId() + " ");
             for (DimensionVar allowedDimVar : allowedDims) {
                 if (objLocDimVar.getVarId().equals(allowedDimVar.getVarId())) {
-//                    System.out.print(index + " ");
+                    //Set target dimensions
                     targetDims.add(Integer.valueOf(index));
                 }
             }
             index++;
         }
-//        System.out.println();
 
-//        System.out.println("MoveAction: " + targetDims);
 
         int dimIndex = 0;
         boolean isMovable = true;
 
+        //For all target dimensions, check the MoveActions are valid
         for (Integer targetDimIndex : targetDims){
             int valueDiff = dimVarDiffList.get(dimIndex);
             if(!updatedCurLoc.getObjLocDimVars().get(targetDimIndex).checkUpdateValid(valueDiff)){
@@ -144,11 +88,14 @@ public class MoveAction extends _SimAction_ {
             dimIndex++;
         }
 
+        //If all dimensions of the MoveAction are valid to move
         if (isMovable){
             dimIndex = 0;
 
             for (Integer targetDimIndex : targetDims){
                 int valueDiff = dimVarDiffList.get(dimIndex);
+
+                //Update the location value
                 updatedCurLoc.getObjLocDimVars().get(targetDimIndex).updateValueOfDim(valueDiff);
 
                 dimIndex++;
@@ -167,7 +114,6 @@ public class MoveAction extends _SimAction_ {
                     actionSubject.getId(),
                     actionSubject,
                     generateLogEventSpec()));
-//            System.out.println(actionLogEvents.get(0).getStringLogEvent());
 
             actionSubject.setObjLocation(updatedCurLoc);
 
@@ -184,95 +130,19 @@ public class MoveAction extends _SimAction_ {
             return null;
         }
 
-
-        //TODO: recover this part
-
-//        int dimIndex = 0;
-//        boolean isMoveSuccessful = true;
-//        for (DimensionVar allowedDimVar : allowedDims){
-//            int valueDiff = dimVarDiffList.get(dimIndex);
-//            //If any of dimension does not allow to move
-//            if (!updatedCurLoc.getObjLocDimVars().get(dimIndex).checkUpdateValid(valueDiff)){
-//                isMoveSuccessful = false;
-//            }
-//        }
-
-//        //Only if checkUpdateValid results of all dimensions are true
-//        if (isMoveSuccessful) {
-//            dimIndex = 0;
-//            for (DimensionVar allowedDimVar : allowedDims) {
-////            System.out.println(allowedDims.size());
-//
-//                int valueDiff = dimVarDiffList.get(dimIndex);
-//                updatedCurLoc.getObjLocDimVars().get(dimIndex).updateValueOfDim(valueDiff);
-//                dimIndex++;
-//            }
-//
-//            timestamp = new Timestamp(System.currentTimeMillis());
-//            System.out.print("[" + timestamp + "] (MoveAction(" + this.getActionId() + "):executeAction) A MoveAction is executed (updatedLoc:");
-//
-//            printLocation(updatedCurLoc);
-//            System.out.println(")");
-//
-//            actionSubject.setObjLocation(updatedCurLoc);
-//
-//            return true;
-//        }else{
-//            timestamp = new Timestamp(System.currentTimeMillis());
-//            System.out.print("[" + timestamp + "] (MoveAction(" + this.getActionId() + "):executeAction) A MoveAction execution denied (updatedLoc:");
-//
-//            printLocation(updatedCurLoc);
-//            System.out.println(")");
-//
-//            return false;
-//        }
-
-
-//        updatedCurLoc.getObjLocDimVars().get(0).updateValueOfDim(dimVarDiffList.get(0));
-//        updatedCurLoc.getObjLocDimVars().get(1).updateValueOfDim(dimVarDiffList.get(1));
-
-
-
-
-
-
-
-//        printLocation(actionSubject.getCurLocation());
-//        System.out.print("->");
-
-
-
-
-
-        //curLoc.updateLocation(new ArrayList<String>(Arrays.asList("DIM_X")));
-
-//        int index = 0;
-//        for (DimensionVar locDimVar : curLoc.getObjLocDimVars()){
-//            System.out.print(curLoc.getObjLocDimVars().get(index++).getDataCurValue());
-//            if (index < curLoc.getObjLocDimVars().size()){
-//                System.out.print(",");
-//            }
-//        }
-//        System.out.println(")");
-
-
-//
-//        //Modify locations
-//        ArrayList<DimensionVar> tmpLocDims = curLoc.getObjLocDimVars();
-//
-//        for (DimensionVar locDim: tmpLocDims){
-//            locDim.increaseValueOfDim(3);
-//        }
-
-
-        //accessibleSoS.sosMap.mapDimensions
     }
+
 
     @Override
     public String generateLogEventSpec() {
         return null;
     }
 
+
+    /**
+     * Print location of an object
+     * @param objLocation A given ObjectLocation object
+     */
     private void printLocation(ObjectLocation objLocation){
         System.out.print("(");
         int index = 0;
@@ -286,7 +156,9 @@ public class MoveAction extends _SimAction_ {
     }
 
 
-
+    /**
+     * Print allowed dimensions of this move action
+     */
     private void printAllowedDims(){
 
         System.out.print("(allowedDims: ");
@@ -301,6 +173,9 @@ public class MoveAction extends _SimAction_ {
     }
 
 
+    /**
+     * Print information about the creation of this MoveAction
+     */
     private void printMoveActionCreation(){
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (MoveAction) A MoveAction is initialized: (" +

@@ -11,12 +11,14 @@ import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
  */
 public abstract class _SimNonActionableObject_ extends _SimObject_{
 
+    /** Id of reference */
     protected String referenceId;
 
     /**
-     *
-     * @param runResult
-     * @return
+     * Method to update simulation models.
+     * This method is called by the SimEngine
+     * @param runResult Run Result of current tick of this model
+     * @return update result of this tick of this model
      */
     public UpdateResult update(RunResult runResult){
 

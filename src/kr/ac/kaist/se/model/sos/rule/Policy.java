@@ -1,4 +1,4 @@
-package kr.ac.kaist.se.model.rule;
+package kr.ac.kaist.se.model.sos.rule;
 
 import kr.ac.kaist.se.model.abst.rule._SimRule_;
 

@@ -3,8 +3,7 @@ import data.MapCoordinateDimensionType;
 import data.MapFloorDimensionDomain;
 import data.MapFloorDimensionType;
 import kr.ac.kaist.se.model.abst.data.EnumDomainType;
-import kr.ac.kaist.se.model.map.SimMap;
-import kr.ac.kaist.se.model.sos.data.DataVar;
+import kr.ac.kaist.se.model.sos.geo.SimMap;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 
 import java.sql.Timestamp;

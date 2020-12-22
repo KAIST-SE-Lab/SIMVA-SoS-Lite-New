@@ -19,10 +19,10 @@ import java.util.ArrayList;
  */
 public abstract class _SimActionableObject_ extends _SimObject_ implements Actionable {
 
-    //List of capable actions
+    /** List of capable actions */
     protected ArrayList<_SimAction_> capableActionList = new ArrayList<>();
 
-    //List of selected actions for execution of a particular tick
+    /** List of selected actions for execution of a particular tick */
     protected ArrayList<_SimAction_> selectedActionList = new ArrayList<>();
 
 
@@ -88,11 +88,7 @@ public abstract class _SimActionableObject_ extends _SimObject_ implements Actio
     }
 
     public void clearSelectedActionList(){
-//        int beforeSize = selectedActionList.size();
         selectedActionList.clear();
-
-//        timestamp = new Timestamp(System.currentTimeMillis());
-//        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":clearSelectedActionList) before size:" + beforeSize);
     }
 
 

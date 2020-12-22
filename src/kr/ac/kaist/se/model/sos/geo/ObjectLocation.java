@@ -5,6 +5,10 @@ import kr.ac.kaist.se.model.sos.data.DimensionVar;
 
 import java.util.ArrayList;
 
+/**
+ * A concrete class to represent a specific location of an object
+ * @author ymbaek
+ */
 public class ObjectLocation implements Cloneable{
 
     ArrayList<DimensionVar> objLocDimVars;

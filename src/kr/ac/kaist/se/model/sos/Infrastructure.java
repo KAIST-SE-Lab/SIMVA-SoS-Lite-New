@@ -2,6 +2,8 @@ package kr.ac.kaist.se.model.sos;
 
 import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
 
+import java.util.ArrayList;
+
 /**
  * Abstract class to represent an Infrastructure (Infra)
  * (1-tier _SimContainerObject_)
@@ -17,7 +19,19 @@ import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
  */
 public abstract class Infrastructure extends _SimContainerObject_ {
 
-    protected SoS mySoS;                //SoS that this infrastructure belongs to
+    //SoS that this infrastructure belongs to
+    protected SoS mySoS;
+
+    //Type of an infrastructure
+    protected EnumInfraType infraType;
+
+    /** Member lists */
+    //Member system entities
+    protected ArrayList<SystemEntity> systemEntityList;
+    //Member service entities
+    protected ArrayList<ServiceEntity> serviceEntityList;
+    //Member resource entities
+    protected ArrayList<ResourceEntity> resourceEntityList;
 
     public Infrastructure(SoS simModel, String infraId, String infraName){
         this.mySoS = simModel;

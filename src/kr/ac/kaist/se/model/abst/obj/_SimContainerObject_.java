@@ -5,5 +5,6 @@ package kr.ac.kaist.se.model.abst.obj;
  * such as SoS, Organization, Infrastructure, and Environment
  */
 public abstract class _SimContainerObject_ extends _SimObject_{
+    /** type of SimContainerObject */
     protected EnumContainerType containerType;
 }

@@ -72,9 +72,6 @@ public class SimEngine {
     public SimEngine(SoS simModel, String isMapeOn, SimConfiguration simConfig, SimScenario simScenario) {
 
 
-//        System.setProperty("java.util.logging.SimpleFormatter.format",
-//                "%1$tF %1$tT %4$s %2$s %5$s%6$s%n");
-
         System.setProperty("java.util.logging.SimpleFormatter.format",
                 format);
 
@@ -84,9 +81,8 @@ public class SimEngine {
         try {
             fileHandler = new FileHandler("SimEngineLog.log");
             logger.addHandler(fileHandler);
+            logger.setUseParentHandlers(false);
 
-            SimpleFormatter formatter = new SimpleFormatter();
-//            fileHandler.setFormatter(formatter);
             fileHandler.setFormatter(new SimpleFormatter(){
                 @Override
                 public synchronized String format(LogRecord lr) {
@@ -375,7 +371,7 @@ public class SimEngine {
     private boolean processMsgs(ArrayList<CommAction> selectedCommActions){
 
         for (CommAction commAction: selectedCommActions){
-            _SimObject_ receiverObj = simModel.getMemberSimObject(commAction.getMessage().getReceiverId());
+            _SimObject_ receiverObj = simModel.getMemberSimObjectById(commAction.getMessage().getReceiverId());
 
             if (receiverObj != null) {
                 receiverObj.getMsgQueue().offer(commAction.getMessage());

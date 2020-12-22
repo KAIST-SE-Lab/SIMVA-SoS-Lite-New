@@ -2,8 +2,7 @@ package kr.ac.kaist.se.model.sos;
 
 import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
-import kr.ac.kaist.se.model.map.SimMap;
-import kr.ac.kaist.se.simdata.output.SimLog;
+import kr.ac.kaist.se.model.sos.geo.SimMap;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
@@ -27,16 +26,22 @@ import java.util.ArrayList;
 public abstract class SoS extends _SimContainerObject_ {
 
 
-    /* Member containers */
-    protected ArrayList<Organization> orgList;      //List of organizations
-    protected ArrayList<Infrastructure> infraList;  //List of infrastructures
-    protected ArrayList<Environment> envList;       //List of environments
+    /** Member containers */
+    //List of organizations
+    protected ArrayList<Organization> orgList;
+    //List of infrastructures
+    protected ArrayList<Infrastructure> infraList;
+    //List of environments
+    protected ArrayList<Environment> envList;
 
-    /* Member constituents */
-    protected ArrayList<Constituent> csList;       //List of all constituent systems
+    /** Member constituents */
+    //List of all constituent systems
+    protected ArrayList<Constituent> csList;
 
-    /* Infrastructure entities */
-    protected ArrayList<SystemEntity> systemEntityList;     //List of infra system entities
+    /** Infrastructure entities */
+    //List of infra system entities
+    protected ArrayList<SystemEntity> systemEntityList;
+
     //Service
     //Resource
 
@@ -140,8 +145,6 @@ public abstract class SoS extends _SimContainerObject_ {
                 Organization target = (Organization) subRunResult.getRunSubject();
                 UpdateResult subUpdateResult = target.update(subRunResult, tick);
                 updateResult.addAllLogEventToList(subUpdateResult.getLogEventList());
-
-//                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
             }
             //TODO: Code for Infrastructure and Environment
             //Organization-type subject
@@ -149,8 +152,6 @@ public abstract class SoS extends _SimContainerObject_ {
                 Infrastructure target = (Infrastructure) subRunResult.getRunSubject();
                 UpdateResult subUpdateResult = target.update(subRunResult, tick);
                 updateResult.addAllLogEventToList(subUpdateResult.getLogEventList());
-
-//                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
             }
 
             //Organization-type subject
@@ -158,18 +159,16 @@ public abstract class SoS extends _SimContainerObject_ {
                 Environment target = (Environment) subRunResult.getRunSubject();
                 UpdateResult subUpdateResult = target.update(subRunResult, tick);
                 updateResult.addAllLogEventToList(subUpdateResult.getLogEventList());
-
-//                updateResult.addAllLogToList(subUpdateResult.getUpdateLogList());
             }
         }
 
 
         return updateResult;
-        //return null;
     }
 
     /**
-     *
+     * A method to print SoS model information.
+     * This method prints out all objects included in this SoS.
      */
     protected void printModelInfo(){
         timestamp = new Timestamp(System.currentTimeMillis());
@@ -233,9 +232,9 @@ public abstract class SoS extends _SimContainerObject_ {
 
 
     /**
-     *
-     * @param org
-     * @return
+     * A method to print member organizations recursively.
+     * @param org An organization to be printed
+     * @param depth Depths of organizations (for recursive execution)
      */
     private void printOrgsRecursively(Organization org, int depth){
 
@@ -294,17 +293,6 @@ public abstract class SoS extends _SimContainerObject_ {
 
     }
 
-//    private int getNumOfAllOrgs(ArrayList<Organization> aOrgList){
-//        int cnt = 0;
-//        for (Organization org: aOrgList){
-//            // If the org has sub-organizations
-//            if (org.subOrgList.size() != 0){
-//                cnt += getNumOfAllOrgs(org.subOrgList);
-//            }
-//            cnt++;
-//        }
-//        return cnt;
-//    }
 
 
     /**
@@ -313,7 +301,7 @@ public abstract class SoS extends _SimContainerObject_ {
      * @param objId     unique id of object
      * @return          object that has the given id
      */
-    public _SimObject_ getMemberSimObject(String objId){
+    public _SimObject_ getMemberSimObjectById(String objId){
 
         //SoS
         if(this.id.equals(objId)){
@@ -351,7 +339,10 @@ public abstract class SoS extends _SimContainerObject_ {
     }
 
 
-
+    /**
+     * A method to get all SimObjects of this SoS
+     * @return All SimObjects of this SoS
+     */
     public ArrayList<_SimObject_> getAllSimObjects(){
         ArrayList<_SimObject_> allSimObjects = new ArrayList<>();
 
@@ -374,11 +365,6 @@ public abstract class SoS extends _SimContainerObject_ {
         return allSimObjects;
     }
 
-//    public ArrayList<_SimObject_> getMember(){
-//
-//    }
-
-
 
 
     /**
@@ -388,7 +374,7 @@ public abstract class SoS extends _SimContainerObject_ {
      * @return true if the given id is duplicate (i.e., it must be false if you want to add an object into a list)
      */
     public boolean isDuplicateId(String objId){
-        if (getMemberSimObject(objId) != null){
+        if (getMemberSimObjectById(objId) != null){
             return true;    //There is a duplicate id
         }else{
             return false;   //There is no duplicate id
@@ -426,17 +412,6 @@ public abstract class SoS extends _SimContainerObject_ {
         }
     }
 
-//    /**
-//     * Recursively add sub organizations into orgList of this SoS
-//     * @param aOrg
-//     */
-//    private void addSubOrgsToSoS(Organization aOrg){
-//        for (Organization subOrg : aOrg.getSubOrgList()){
-//            addOrg(subOrg);
-////            orgList.add(subOrg);
-////            addSubOrgsToSoS(subOrg);
-//        }
-//    }
 
     public void removeOrg(Organization aOrg){
         timestamp = new Timestamp(System.currentTimeMillis());

@@ -23,25 +23,25 @@ public class SimScenarioEvent extends _SimEvent_ {
     int simTotalTime = 0;   //Total simulation time
 
     /* Target information */
-    protected String targetObjId;       //Id of target object
-    protected _SimObject_ targetObj;    //Target object
+    private String targetObjId;       //Id of target object
+    private _SimObject_ targetObj;    //Target object
 
-    protected EnumEventTargetScope targetScope; //Scope of target
+    private EnumEventTargetScope targetScope; //Scope of target
 
     /* Behavioral information */
-    protected EnumEventPredefBehavior predefBehavior;   //Predefined behavior of an event
+    private EnumEventPredefBehavior predefBehavior;   //Predefined behavior of an event
 
     /* Temporal information */
-    protected EnumEventOccPattern occPattern;   //Occurrence pattern
-    protected int startTime = 0;                    //Start time for all events
-    protected int endTime = 0;                      //End time for all events
-    protected int duration = 1;                     //Duration for an event that has duration
-    protected int period = -1;                       //Period for periodic events
+    private EnumEventOccPattern occPattern;   //Occurrence pattern
+    private int startTime = 0;                    //Start time for all events
+    private int endTime = 0;                      //End time for all events
+    private int duration = 1;                     //Duration for an event that has duration
+    private int period = -1;                       //Period for periodic events
 
     /* Probability information */
-    protected boolean isProbabilistic;      //Probabilistic event or not
-    protected EnumEventProbDist probDist;   //Probability distribution
-    protected String probExp;               //Expression of probability (this should conform to probDist)
+    private boolean isProbabilistic;      //Probabilistic event or not
+    private EnumEventProbDist probDist;   //Probability distribution
+    private String probExp;               //Expression of probability (this should conform to probDist)
 
     public SimScenarioEvent(String id,
                             String name,
@@ -203,6 +203,7 @@ public class SimScenarioEvent extends _SimEvent_ {
         }
 
     }
+
 
     /**
      * Behavior of event execution should be specified in this method.

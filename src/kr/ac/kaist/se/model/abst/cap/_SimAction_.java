@@ -56,14 +56,23 @@ public abstract class _SimAction_ {
     }
 
 
+    /**
+     * A method to check precondition of this action
+     * @return true if this action is executable
+     */
     public abstract boolean checkPrecondition();
 
+    /**
+     * A method to actually execute this action
+     * @param tick current tick of simulation
+     * @return List of SimLogEvent generated after executing this action
+     */
     //TODO: check (set) return
     public abstract ArrayList<SimLogEvent> executeAction(int tick);
 
     /**
      * A method to generate event specification for SimEventLog
-     * @return
+     * @return Generated String-type log event specification
      */
     public abstract String generateLogEventSpec();
 

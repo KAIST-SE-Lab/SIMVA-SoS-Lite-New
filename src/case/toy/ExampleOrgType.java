@@ -1,8 +1,11 @@
+import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.sos.Organization;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
+
+import java.util.ArrayList;
 
 public class ExampleOrgType extends Organization {
     public ExampleOrgType(SoS simModel, String orgId, String orgName) {
@@ -19,8 +22,8 @@ public class ExampleOrgType extends Organization {
     }
 
     @Override
-    public void move() {
-
+    public ArrayList<_SimAction_> selectMoveActions(ArrayList<_SimAction_> possibleMoveActions) {
+        return null;
     }
 
 

@@ -23,8 +23,10 @@ import java.util.LinkedList;
 public abstract class SystemEntity extends _SimActionableObject_
         implements Stateful, Communicatable, Movable {
 
-    protected SoS mySoS;                //SoS that this object belongs to
-    protected Infrastructure myInfra;   //Infrastructure that this object belongs to
+    //SoS that this object belongs to
+    protected SoS mySoS;
+    //Infrastructure that this object belongs to
+    protected Infrastructure myInfra;
 
     public SystemEntity(SoS simModel, Infrastructure myInfra, String systemId, String systemName){
         this.mySoS = simModel;
