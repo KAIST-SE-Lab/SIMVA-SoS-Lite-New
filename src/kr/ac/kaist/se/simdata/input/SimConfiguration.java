@@ -2,9 +2,9 @@ package kr.ac.kaist.se.simdata.input;
 
 public class SimConfiguration {
 
-    protected int simTotalTime = 0;
-    protected boolean simMapeMode = false;
-    protected boolean simHasScenario = false;
+    private int simTotalTime = 0;
+    private boolean simMapeMode = false;
+    private boolean simHasScenario = false;
 
     public SimConfiguration(){
 

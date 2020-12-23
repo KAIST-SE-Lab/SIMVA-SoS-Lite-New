@@ -34,28 +34,28 @@ import java.util.logging.SimpleFormatter;
 public class SimEngine {
 
     /* Logger for SimEngine */
-    Logger logger = Logger.getLogger("Simulation Engine Logger");
-    private static final String format = "[%1$tF %1$tT] [%2$-7s] %3$s %n";
-    FileHandler fileHandler;
+    private Logger logger = Logger.getLogger("Simulation Engine Logger");
+    private static final String logFormat = "[%1$tF %1$tT] [%2$-7s] %3$s %n";
+    private FileHandler fileHandler;
 
     /* Record of SimLogEvents */
-    BufferedWriter outputWriter = null;
-    String lineSeparator = System.getProperty("line.separator");
-    File logFile = new File("SimModelLog.log");
+    private BufferedWriter outputWriter = null;
+    private String lineSeparator = System.getProperty("line.separator");
+    private File logFile = new File("SimModelLog.log");
 
 
     Timestamp timestamp;
-    int simTick = 0;
+    private int simTick = 0;
 
 //    private int cur_tick = 0;
 
-    protected SoS simModel;
-    protected SimConfiguration simConfig = new SimConfiguration();
-    protected SimScenario simScenario = new SimScenario();
-    protected boolean isMapeOn;
+    private SoS simModel;
+    private SimConfiguration simConfig = new SimConfiguration();
+    private SimScenario simScenario = new SimScenario();
+    private boolean isMapeOn;
 
 
-    protected MapeEngine mapeEngine;
+    private MapeEngine mapeEngine;
 
 
 //    public SimEngine(SoS simModel, String isMapeOn) {
@@ -73,7 +73,7 @@ public class SimEngine {
 
 
         System.setProperty("java.util.logging.SimpleFormatter.format",
-                format);
+                logFormat);
 
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (SimEngine) SimEngine is constructed.");
@@ -86,7 +86,7 @@ public class SimEngine {
             fileHandler.setFormatter(new SimpleFormatter(){
                 @Override
                 public synchronized String format(LogRecord lr) {
-                    return String.format(format,
+                    return String.format(logFormat,
                             new Date(lr.getMillis()),
                             lr.getLevel().getLocalizedName(),
                             lr.getMessage()
@@ -453,7 +453,7 @@ public class SimEngine {
      *
      * @return
      */
-    protected RunResult runSimModel() {
+    private RunResult runSimModel() {
 //        timestamp = new Timestamp(System.currentTimeMillis());
 //        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":runSimModel)");
 
@@ -466,7 +466,7 @@ public class SimEngine {
      *
      * @return
      */
-    protected UpdateResult updateSimModel(RunResult curTickRunResult, int tick) {
+    private UpdateResult updateSimModel(RunResult curTickRunResult, int tick) {
 //        timestamp = new Timestamp(System.currentTimeMillis());
 //        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ":updateSimModel)");
 

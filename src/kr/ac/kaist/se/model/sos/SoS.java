@@ -41,9 +41,12 @@ public abstract class SoS extends _SimContainerObject_ {
     /** Infrastructure entities */
     //List of infra system entities
     protected ArrayList<SystemEntity> systemEntityList;
+    //List of infra service entities
+    protected ArrayList<ServiceEntity> serviceEntityList;
+    //List of infra resource entities
+    protected ArrayList<ResourceEntity> resourceEntityList;
 
-    //Service
-    //Resource
+
 
     /* Environment entities */
 

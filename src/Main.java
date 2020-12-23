@@ -1,7 +1,7 @@
 import kr.ac.kaist.se.controller.sim.SimEngine;
 import kr.ac.kaist.se.model.abst.evnt.*;
 import kr.ac.kaist.se.model.sos.SoS;
-import kr.ac.kaist.se.simdata.evnt.SimScenarioEvent;
+import kr.ac.kaist.se.simdata.evnt.*;
 import kr.ac.kaist.se.simdata.input.SimConfiguration;
 import kr.ac.kaist.se.simdata.input.SimScenario;
 import kr.ac.kaist.se.view.MainUI;

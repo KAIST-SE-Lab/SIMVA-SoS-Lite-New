@@ -1,6 +1,5 @@
 package kr.ac.kaist.se.simdata.evnt;
 
-import kr.ac.kaist.se.controller.sim.SimEngine;
 import kr.ac.kaist.se.model.abst.evnt.*;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
 
