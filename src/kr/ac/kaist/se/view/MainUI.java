@@ -131,7 +131,7 @@ public class MainUI implements ActionListener, Runnable {
         timerThread.start();
 
         //mainUIframe.pack();
-        //mainUIframe.setVisible(true);
+//        mainUIframe.setVisible(true);
 
         //System.out.println(simDataLabel.getTopLevelAncestor());
     }

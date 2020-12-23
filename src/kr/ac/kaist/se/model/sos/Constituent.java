@@ -158,6 +158,8 @@ public abstract class Constituent extends _SimActionableObject_
 
     @Override
     public void doDecisionMaking() {
+
+
         ArrayList<_SimAction_> possibleMoveActions = new ArrayList<>();
 
 
