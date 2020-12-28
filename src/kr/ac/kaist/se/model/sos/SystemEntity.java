@@ -39,6 +39,9 @@ public abstract class SystemEntity extends _SimActionableObject_
         this.isActivated = true;
         this.isAvailable = true;
 
+        //A system entity is a stateful object
+        this.isStateful = true;
+
         msgQueue = new LinkedList<_SimMessage_>();
 
         printObjInfo();
@@ -55,6 +58,9 @@ public abstract class SystemEntity extends _SimActionableObject_
         this.isStatic = isStatic;
         this.isActivated = isActivated;
         this.isAvailable = isAvailable;
+
+        //A system entity is a stateful object
+        this.isStateful = true;
 
         msgQueue = new LinkedList<_SimMessage_>();
 

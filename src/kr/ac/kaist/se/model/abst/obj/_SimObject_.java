@@ -39,6 +39,8 @@ public abstract class _SimObject_ implements Simulatable {
     //Available object / Unavailable object
     protected boolean isAvailable;
 
+    /** State-related information */
+    protected boolean isStateful;
     //States of an object
     protected ArrayList<ObjectState> objStates = new ArrayList<>();
     //Initial state of an object

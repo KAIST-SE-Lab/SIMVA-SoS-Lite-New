@@ -56,6 +56,9 @@ public abstract class Constituent extends _SimActionableObject_
         this.isActivated = true;
         this.isAvailable = true;
 
+        //A constituent is a stateful object
+        this.isStateful = true;
+
         msgQueue = new LinkedList<_SimMessage_>();
 
         initActions();
@@ -76,6 +79,9 @@ public abstract class Constituent extends _SimActionableObject_
         this.isStatic = isStatic;
         this.isActivated = isActivated;
         this.isAvailable = isAvailable;
+
+        //A constituent is a stateful object
+        this.isStateful = true;
 
         msgQueue = new LinkedList<_SimMessage_>();
 
@@ -256,6 +262,17 @@ public abstract class Constituent extends _SimActionableObject_
 
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] (Constituent:" + this.getClass().getSimpleName() + "(" + id + "):doStateTransition) A state transition (<" + previousStateId + "> -> <" + curStateId + ">) is executed.");
+
+            //TODO: Make and add a SimLogEvent to transitionLogEvents
+            /*
+            new SimLogEvent(actionSubject.getLogEventIdAutomatically(this),
+                    EnumEventType.LOCATION_CHANGE,
+                    new Timestamp(System.currentTimeMillis()),
+                    tick,
+                    actionSubject.getId(),
+                    actionSubject,
+                    generateLogEventSpec())
+             */
 
 
             return transitionLogEvents;
