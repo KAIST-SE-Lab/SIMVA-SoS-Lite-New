@@ -193,6 +193,23 @@ public abstract class _SimObject_ implements Simulatable {
         this.curStateId = curStateId;
     }
 
+    /**
+     * A method to get an actual state object (ObjectState) with id
+     * @param stateId id to be found
+     * @return a state found, which have the stateId
+     */
+    public ObjectState getCurState(String stateId){
+        ObjectState returnState = null;
+
+        for (ObjectState state : objStates){
+            if (stateId.equals(state.getId())){
+                returnState = state;
+            }
+        }
+
+        return returnState;
+    }
+
     public ObjectLocation getObjLocation() {
         return objLocation;
     }

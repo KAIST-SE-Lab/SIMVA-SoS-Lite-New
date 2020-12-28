@@ -3,6 +3,7 @@ package kr.ac.kaist.se.model.sos;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
+import kr.ac.kaist.se.model.abst.state._SimState_;
 import kr.ac.kaist.se.model.intf.Communicatable;
 import kr.ac.kaist.se.model.intf.DecisionMakeable;
 import kr.ac.kaist.se.model.intf.Movable;
@@ -228,6 +229,40 @@ public abstract class Constituent extends _SimActionableObject_
 
 
         return actionLogEvents;
+    }
+
+
+    @Override
+    public ArrayList<SimLogEvent> doStateTransition(String newStateId, int tick) {
+
+        boolean isExistState = false;
+        for (_SimState_ state : objStates){
+            if (newStateId.equals(state.getId())){
+                isExistState = true;
+            }
+        }
+
+        if (isExistState) {
+
+            String previousStateId = curStateId;
+            ArrayList<SimLogEvent> transitionLogEvents = new ArrayList<>();
+
+            //If the new state is same as the current state (i.e., self-transition)
+            if (newStateId.equals(curStateId)){
+                //do nothing
+            }else{
+                curStateId = newStateId;
+            }
+
+            timestamp = new Timestamp(System.currentTimeMillis());
+            System.out.println("[" + timestamp + "] (Constituent:" + this.getClass().getSimpleName() + "(" + id + "):doStateTransition) A state transition (<" + previousStateId + "> -> <" + curStateId + ">) is executed.");
+
+
+            return transitionLogEvents;
+        } else {
+            return null;
+        }
+
     }
 
 
