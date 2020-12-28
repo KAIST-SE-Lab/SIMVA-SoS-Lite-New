@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 /**
  * Abstract class to represent a state of a SimObject
+ *
+ * @author ymbaek
  */
 public abstract class _SimState_ {
     protected String id;
