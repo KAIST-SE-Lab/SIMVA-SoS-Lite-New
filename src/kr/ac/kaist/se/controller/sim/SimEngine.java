@@ -1,11 +1,14 @@
 package kr.ac.kaist.se.controller.sim;
 
 import kr.ac.kaist.se.controller.mape.MapeEngine;
+import kr.ac.kaist.se.controller.util.SimScenarioReader;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.model.sos.cap.CommAction;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
+import kr.ac.kaist.se.simdata.evnt.SimScenarioEvent;
+import kr.ac.kaist.se.simdata.evnt.SimScenarioUnitEvent;
 import kr.ac.kaist.se.simdata.input.SimConfiguration;
 import kr.ac.kaist.se.simdata.input.SimScenario;
 import kr.ac.kaist.se.simdata.output.SimLog;
@@ -54,6 +57,7 @@ public class SimEngine {
     private SimScenario simScenario = new SimScenario();
     private boolean isMapeOn;
 
+    private SimScenarioReader scenarioReader;
 
     private MapeEngine mapeEngine;
 
@@ -154,8 +158,11 @@ public class SimEngine {
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] (SimEngine:initSimEngine) simConfig: null");
         }
-        if (simScenario != null) {
-            // Initialize simulation scenario
+        if (simScenario != null && simScenario.getNumOfUnitEvents() != 0) {
+            //Initialize SimScenarioReader
+            scenarioReader = new SimScenarioReader();
+
+            //Initialize simulation scenario
             initSimScenario(simScenario);
         } else {
             timestamp = new Timestamp(System.currentTimeMillis());
@@ -223,7 +230,21 @@ public class SimEngine {
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) cur_tick: " + cur_tick);
             System.out.println("[" + timestamp + "] └──────────────────────────────────────────────────────────────────┘");
 
-            /* PHASE 01: Collecting RunResults from SimModel*/
+
+            /* PHASE 01: Executing SimScenarioUnitEvent of a given SimScenario */
+            ArrayList<SimScenarioUnitEvent> scenarioUnitEvents = new ArrayList<>();
+
+            for (SimScenarioUnitEvent unitEvent : simScenario.getUnitEventList()){
+                if (unitEvent.getStartTime() == cur_tick){
+                    unitEvent.executeEvent();
+                }
+            }
+//            if (simScenario != null && simScenario.getNumOfUnitEvents() != 0){
+//
+//            }
+
+
+            /* PHASE 01: Collecting RunResults from SimModel */
 
             RunResult curTickSimResult = runSimModel();
             logger.info("(cur_tick:" + simTick + ") RunResult of current tick is returned: # of selectedActions(" + getSelectedActionsFromRunResult(curTickSimResult).size() + ")");
