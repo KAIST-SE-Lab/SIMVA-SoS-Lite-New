@@ -12,6 +12,11 @@ public class ObjectState extends _SimState_ {
     //subjectObject should be an object who owns this ObjectState
     private _SimObject_ subjectObject;
 
+    public ObjectState(String id, _SimObject_ subjectObject) {
+        super(id);
+        this.subjectObject = subjectObject;
+    }
+
     public ObjectState(String id, String name, _SimObject_ subjectObject) {
         super(id, name);
         this.subjectObject = subjectObject;

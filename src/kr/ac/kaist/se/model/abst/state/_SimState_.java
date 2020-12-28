@@ -23,6 +23,14 @@ public abstract class _SimState_ {
     protected ArrayList<_SimState_> nextStates = new ArrayList<>();
 
 
+    public _SimState_(String id) {
+        this.id = id;
+
+        //Automatically set its name and tag with its id
+        this.name = this.id;
+        this.tag = this.id;
+    }
+
     public _SimState_(String id, String name) {
         this.id = id;
         this.name = name;

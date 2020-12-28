@@ -124,7 +124,6 @@ public abstract class _SimObject_ implements Simulatable {
 
     /**
      * A method that returns current location of this object
-     *
      * @return ObjectLocation of this organization
      */
     public ObjectLocation getCurLocation() {
@@ -242,4 +241,6 @@ public abstract class _SimObject_ implements Simulatable {
 
         return newId;
     }
+
+
 }
