@@ -16,6 +16,8 @@ public class Execution {
      */
     public static void main(String[] args, SoS sos, SimConfiguration simConfiguration, SimScenario simScenario) {
 
+        System.out.println("***************************************************");
+
         Timestamp timestamp;
 
         //A user can select a mode for launching SimEngine
