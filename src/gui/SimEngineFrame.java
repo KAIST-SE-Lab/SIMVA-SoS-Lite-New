@@ -9,7 +9,7 @@ public class SimEngineFrame extends JFrame implements ActionListener {
 
     JButton aButton;
 
-    public SimEngineFrame(){
+    public SimEngineFrame() {
 
         ImageIcon image = new ImageIcon("logo.png");
 
@@ -93,7 +93,7 @@ public class SimEngineFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == aButton){
+        if (e.getSource() == aButton) {
             System.out.println("aButton is clicked");
             aButton.setEnabled(false);
         }

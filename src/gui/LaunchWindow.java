@@ -14,7 +14,7 @@ public class LaunchWindow implements ActionListener {
 
     JButton dialogButton = new JButton("Dialog");
 
-    public LaunchWindow(){
+    public LaunchWindow() {
 
         startButton1.setBounds(100, 100, 200, 100);
         startButton1.setFocusable(false);
@@ -45,20 +45,17 @@ public class LaunchWindow implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == startButton1){
+        if (e.getSource() == startButton1) {
             frame.dispose();
 //            SimEngineFrame simEngineFrame = new SimEngineFrame();
             MyFrame myFrame = new MyFrame();
-        }
-        else if(e.getSource() == startButton2){
+        } else if (e.getSource() == startButton2) {
             frame.dispose();
             MyFrame2 myFrame2 = new MyFrame2();
-        }
-        else if(e.getSource() == startButton3){
+        } else if (e.getSource() == startButton3) {
             frame.dispose();
             GameFrame gameFrame = new GameFrame();
-        }
-        else if(e.getSource() == dialogButton) {
+        } else if (e.getSource() == dialogButton) {
             //PLAIN, INFORMATION, QUESTION, WARNING, ERROR
             //JOptionPane.showMessageDialog(null, "A Dialog is shown", "Dialog", JOptionPane.PLAIN_MESSAGE);
 

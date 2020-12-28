@@ -6,26 +6,19 @@ import java.sql.Timestamp;
 
 /**
  * Abstract class to define a dimension of a geolocation
- *
+ * <p>
  * To enable a MoveAction,
  * increaseValueOfDim(..) and decreaseValueOfDim(..) should be implemented
  * to specify how an object can move according to the definition
  *
  * @author ymbaek
  */
-public abstract class DimensionVar extends _SimDataVariable_{
+public abstract class DimensionVar extends _SimDataVariable_ {
 
     //Domain of a dimension variable
     protected DimensionVarDomain varDomain;
 
-    public abstract boolean checkUpdateValid(int diff);
-
-    public abstract boolean updateValueOfDim(int diff);
-
-//    public abstract void increaseValueOfDim(int diff);
-//    public abstract void decreaseValueOfDim(int diff);
-
-    public DimensionVar(){
+    public DimensionVar() {
         super();
     }
 
@@ -33,6 +26,9 @@ public abstract class DimensionVar extends _SimDataVariable_{
         super(dataId, dataName, dataType);
         printDimensionVarCreation();
     }
+
+//    public abstract void increaseValueOfDim(int diff);
+//    public abstract void decreaseValueOfDim(int diff);
 
     public DimensionVar(String dataId, String dataName, String dataType, DimensionVarDomain dataDomain) {
         super(dataId, dataName, dataType);
@@ -61,10 +57,14 @@ public abstract class DimensionVar extends _SimDataVariable_{
         printDimensionVarCreation();
     }
 
-    private void printDimensionVarCreation(){
+    public abstract boolean checkUpdateValid(int diff);
+
+    public abstract boolean updateValueOfDim(int diff);
+
+    private void printDimensionVarCreation() {
         timestamp = new Timestamp(System.currentTimeMillis());
 
-        if(varDomain != null) {
+        if (varDomain != null) {
             System.out.println("[" + timestamp + "] (DimensionVar) A DimensionVar is initialized: " +
                     varId + " | " +
                     varName + " | " +
@@ -73,7 +73,7 @@ public abstract class DimensionVar extends _SimDataVariable_{
                     varDomain.getDomainMinVal() + ", " +
                     varDomain.getDomainMaxVal() + ", " +
                     varDomain.getDomainEnumVal() + ")");
-        }else{
+        } else {
             System.out.println("[" + timestamp + "] (DimensionVar) A DimensionVar is initialized: " +
                     varId + " | " +
                     varName + " | " +

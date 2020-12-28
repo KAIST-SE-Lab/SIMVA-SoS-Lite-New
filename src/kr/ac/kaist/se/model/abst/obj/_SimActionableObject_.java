@@ -1,8 +1,6 @@
 package kr.ac.kaist.se.model.abst.obj;
 
-import kr.ac.kaist.se.controller.sim.SimEngine;
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
-import kr.ac.kaist.se.model.abst.evnt.EnumEventType;
 import kr.ac.kaist.se.model.intf.Actionable;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
@@ -19,25 +17,28 @@ import java.util.ArrayList;
  */
 public abstract class _SimActionableObject_ extends _SimObject_ implements Actionable {
 
-    /** List of capable actions */
+    /**
+     * List of capable actions
+     */
     protected ArrayList<_SimAction_> capableActionList = new ArrayList<>();
 
-    /** List of selected actions for execution of a particular tick */
+    /**
+     * List of selected actions for execution of a particular tick
+     */
     protected ArrayList<_SimAction_> selectedActionList = new ArrayList<>();
 
 
     /**
-     *
      * @param runResult
      * @return
      */
-    public UpdateResult update(RunResult runResult, int tick){
+    public UpdateResult update(RunResult runResult, int tick) {
 //        timestamp = new Timestamp(System.currentTimeMillis());
 //        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "/_SimActionableObject_(" + id + "):update)");
 
         UpdateResult updateResult = new UpdateResult();
 
-        for (_SimAction_ action: runResult.getSelectedActionList()){
+        for (_SimAction_ action : runResult.getSelectedActionList()) {
             ArrayList<SimLogEvent> actionLogEvents = doAction(action, tick);
 
             //TODO: Add proper SimLog object
@@ -71,23 +72,23 @@ public abstract class _SimActionableObject_ extends _SimObject_ implements Actio
 
     /* Action add/remove of capableActionList and selectedActionList */
 
-    public void addActionToCapableActionList(_SimAction_ aAction){
+    public void addActionToCapableActionList(_SimAction_ aAction) {
         capableActionList.add(aAction);
     }
 
-    public void addActionToSelectedActionList(_SimAction_ aAction){
+    public void addActionToSelectedActionList(_SimAction_ aAction) {
         selectedActionList.add(aAction);
     }
 
-    public void removeActionFromCapableActionList(_SimAction_ aAction){
+    public void removeActionFromCapableActionList(_SimAction_ aAction) {
         capableActionList.remove(aAction);
     }
 
-    public void removeActionFromSelectedActionList(_SimAction_ aAction){
+    public void removeActionFromSelectedActionList(_SimAction_ aAction) {
         selectedActionList.remove(aAction);
     }
 
-    public void clearSelectedActionList(){
+    public void clearSelectedActionList() {
         selectedActionList.clear();
     }
 

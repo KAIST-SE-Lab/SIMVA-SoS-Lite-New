@@ -45,8 +45,7 @@ public class SimLogEvent extends _SimEvent_ {
     }
 
 
-
-    public String getStringLogEvent(){
+    public String getStringLogEvent() {
         String stringLogEvent = "";
 
         stringLogEvent += simTime + "|";

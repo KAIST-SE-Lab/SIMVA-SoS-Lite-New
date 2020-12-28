@@ -5,11 +5,11 @@ import kr.ac.kaist.se.model.abst.obj._SimContainerObject_;
 /**
  * Abstract class to represent an Environment (Env)
  * (1-tier _SimContainerObject_)
- *
+ * <p>
  * According to the Meta-Model for Systems-of-Systems (M2SoS),
  * an environment consists of multiple external EnvElements (passive or active),
  * which interact with constituent objects of an SoS.
- *
+ * <p>
  * Interfaces: Simulatable
  * (An env is not movable)
  *
@@ -19,7 +19,7 @@ public abstract class Environment extends _SimContainerObject_ {
 
     protected SoS mySoS;                //SoS that this environment belongs to
 
-    public Environment(SoS simModel, String envId, String envName){
+    public Environment(SoS simModel, String envId, String envName) {
         this.mySoS = simModel;
 
         this.id = envId;
@@ -33,7 +33,7 @@ public abstract class Environment extends _SimContainerObject_ {
         printObjInfo();
     }
 
-    public Environment(SoS simModel, String envId, String envName, boolean isStatic, boolean isActivated, boolean isAvailable){
+    public Environment(SoS simModel, String envId, String envName, boolean isStatic, boolean isActivated, boolean isAvailable) {
         this.mySoS = simModel;
 
         this.id = envId;

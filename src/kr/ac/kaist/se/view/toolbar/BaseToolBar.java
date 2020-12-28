@@ -4,11 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 
 public class BaseToolBar extends JToolBar implements ActionListener {
 
-    public BaseToolBar(){
+    public BaseToolBar() {
         setFloatable(true);
         setRollover(true);
         setBounds(0, 0, getWidth(), 30);
@@ -19,7 +18,7 @@ public class BaseToolBar extends JToolBar implements ActionListener {
     protected JButton makeNavigationButton(String imageName,
                                            String actionCommand,
                                            String toolTipText,
-                                           String altText){
+                                           String altText) {
         JButton button = new JButton();
 
         String imgLocation = imageName + ".png";

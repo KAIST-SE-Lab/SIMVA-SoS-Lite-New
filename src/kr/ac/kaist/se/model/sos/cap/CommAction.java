@@ -21,19 +21,19 @@ public class CommAction extends _SimAction_ {
     private _SimMessage_ message;
 
     public CommAction(SoS accessibleSoS,
-                         _SimActionableObject_ actionSubject,
-                         String actionId,
-                         String actionName) {
+                      _SimActionableObject_ actionSubject,
+                      String actionId,
+                      String actionName) {
         super(accessibleSoS, actionSubject, actionId, actionName);
     }
 
     public CommAction(SoS accessibleSoS,
-                         _SimActionableObject_ actionSubject,
-                         String actionId,
-                         String actionName,
-                         int actionDuration,
-                         float actionCost,
-                         float actionBenefit) {
+                      _SimActionableObject_ actionSubject,
+                      String actionId,
+                      String actionName,
+                      int actionDuration,
+                      float actionCost,
+                      float actionBenefit) {
         super(accessibleSoS, actionSubject, actionId, actionName, actionDuration, actionCost, actionBenefit);
     }
 
@@ -54,11 +54,7 @@ public class CommAction extends _SimAction_ {
         boolean isReceiverAvailable = (message.getReceiverId() != null && accessibleSoS.getMemberSimObjectById(message.getReceiverId()) != null);
 
         //TODO: Edit checkPrecondition phrase
-        if (isSenderAvailable && isReceiverAvailable && message.isSendable()){
-            return true;
-        }else{
-            return false;
-        }
+        return isSenderAvailable && isReceiverAvailable && message.isSendable();
 
     }
 

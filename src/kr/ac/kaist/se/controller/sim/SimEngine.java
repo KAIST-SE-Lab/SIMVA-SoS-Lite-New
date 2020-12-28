@@ -7,7 +7,6 @@ import kr.ac.kaist.se.model.abst.obj._SimObject_;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.model.sos.cap.CommAction;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
-import kr.ac.kaist.se.simdata.evnt.SimScenarioEvent;
 import kr.ac.kaist.se.simdata.evnt.SimScenarioUnitEvent;
 import kr.ac.kaist.se.simdata.input.SimConfiguration;
 import kr.ac.kaist.se.simdata.input.SimScenario;
@@ -15,7 +14,10 @@ import kr.ac.kaist.se.simdata.output.SimLog;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,18 +38,15 @@ import java.util.logging.SimpleFormatter;
  */
 public class SimEngine {
 
-    /* Logger for SimEngine */
-    private Logger logger = Logger.getLogger("Simulation Engine Logger");
     private static final String logFormat = "[%1$tF %1$tT] [%2$-7s] %3$s %n";
+    Timestamp timestamp;
+    /* Logger for SimEngine */
+    private final Logger logger = Logger.getLogger("Simulation Engine Logger");
     private FileHandler fileHandler;
-
     /* Record of SimLogEvents */
     private BufferedWriter outputWriter = null;
-    private String lineSeparator = System.getProperty("line.separator");
-    private File logFile = new File("SimModelLog.log");
-
-
-    Timestamp timestamp;
+    private final String lineSeparator = System.getProperty("line.separator");
+    private final File logFile = new File("SimModelLog.log");
     private int simTick = 0;
 
 //    private int cur_tick = 0;
@@ -87,22 +86,22 @@ public class SimEngine {
             logger.addHandler(fileHandler);
             logger.setUseParentHandlers(false);
 
-            fileHandler.setFormatter(new SimpleFormatter(){
+            fileHandler.setFormatter(new SimpleFormatter() {
                 @Override
                 public synchronized String format(LogRecord lr) {
                     return String.format(logFormat,
                             new Date(lr.getMillis()),
                             lr.getLevel().getLocalizedName(),
                             lr.getMessage()
-                            );
+                    );
                 }
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        if (!logFile.exists()){
-                System.out.println("no file");
+        if (!logFile.exists()) {
+            System.out.println("no file");
         }
 
         try {
@@ -110,7 +109,7 @@ public class SimEngine {
 
             timestamp = new Timestamp(System.currentTimeMillis());
 
-            String currentPath = new java.io.File( "." ).getCanonicalPath();
+            String currentPath = new java.io.File(".").getCanonicalPath();
 
             outputWriter.write(currentPath + "\\SimModelLog.log" + lineSeparator);
             outputWriter.write("> last update:" + timestamp + lineSeparator);
@@ -125,8 +124,6 @@ public class SimEngine {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
 
         logger.info("(pre-simulation) A SimEngine object is constructed and initialized.");
@@ -234,8 +231,8 @@ public class SimEngine {
             /* PHASE 01: Executing SimScenarioUnitEvent of a given SimScenario */
             ArrayList<SimScenarioUnitEvent> scenarioUnitEvents = new ArrayList<>();
 
-            for (SimScenarioUnitEvent unitEvent : simScenario.getUnitEventList()){
-                if (unitEvent.getStartTime() == cur_tick){
+            for (SimScenarioUnitEvent unitEvent : simScenario.getUnitEventList()) {
+                if (unitEvent.getStartTime() == cur_tick) {
                     unitEvent.executeEvent();
                 }
             }
@@ -277,7 +274,6 @@ public class SimEngine {
             processMsgs(selectedCommActions);
 
 
-
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) selectedActions of curTickSimResult: " + getSelectedActionsFromRunResult(curTickSimResult));
 
 
@@ -290,7 +286,7 @@ public class SimEngine {
             System.out.println("[" + timestamp + "] (SimEngine:startSimulation) size of log: " + curTickUpdateResult.getLogEventList().size());
             System.out.println("[" + timestamp + "] └──────────────────────────────────────────────────────────────────┘");
 
-            for (SimLogEvent aLogEvent: curTickUpdateResult.getLogEventList()){
+            for (SimLogEvent aLogEvent : curTickUpdateResult.getLogEventList()) {
 
                 try {
                     outputWriter.write(aLogEvent.getStringLogEvent() + lineSeparator);
@@ -389,14 +385,14 @@ public class SimEngine {
     }
 
 
-    private boolean processMsgs(ArrayList<CommAction> selectedCommActions){
+    private boolean processMsgs(ArrayList<CommAction> selectedCommActions) {
 
-        for (CommAction commAction: selectedCommActions){
+        for (CommAction commAction : selectedCommActions) {
             _SimObject_ receiverObj = simModel.getMemberSimObjectById(commAction.getMessage().getReceiverId());
 
             if (receiverObj != null) {
                 receiverObj.getMsgQueue().offer(commAction.getMessage());
-            }else{
+            } else {
                 System.out.println("Receiver not found");
             }
         }
@@ -456,9 +452,7 @@ public class SimEngine {
 
 
         for (RunResult subRunResult : runResult.getSubRunResults()) {
-            if (subRunResult.getSelectedActionList().contains(aAction)) {
-                subRunResult.getSelectedActionList().remove(aAction);
-            }
+            subRunResult.getSelectedActionList().remove(aAction);
         }
 
         for (_SimAction_ selectedAction : runResult.getSelectedActionList()) {
@@ -522,7 +516,6 @@ public class SimEngine {
 
 
     }
-
 
 
 //

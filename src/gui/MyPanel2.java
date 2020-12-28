@@ -20,7 +20,7 @@ public class MyPanel2 extends JPanel implements ActionListener {
     int x = 0;
     int y = 0;
 
-    public MyPanel2(){
+    public MyPanel2() {
         image = new ImageIcon("logo.png").getImage();
 
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -30,7 +30,7 @@ public class MyPanel2 extends JPanel implements ActionListener {
         timer.start();
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
 
         super.paint(g); //paint background
 
@@ -42,7 +42,7 @@ public class MyPanel2 extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(x >= PANEL_WIDTH){
+        if (x >= PANEL_WIDTH) {
             xVelocity = xVelocity * -1;
         }
 

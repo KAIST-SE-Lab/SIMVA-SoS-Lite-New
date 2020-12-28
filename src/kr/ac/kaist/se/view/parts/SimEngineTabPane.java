@@ -19,7 +19,7 @@ public class SimEngineTabPane extends JPanel {
     TabSimulationPanel tabSimulationPanel;
     TabResultsPanel tabResultsPanel;
 
-    public SimEngineTabPane(){
+    public SimEngineTabPane() {
         super(new GridLayout(1, 1));
         tabbedPane = new JTabbedPane();
 

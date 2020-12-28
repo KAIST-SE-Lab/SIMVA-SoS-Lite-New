@@ -6,7 +6,7 @@ public class SimConfiguration {
     private boolean simMapeMode = false;
     private boolean simHasScenario = false;
 
-    public SimConfiguration(){
+    public SimConfiguration() {
 
     }
 

@@ -23,7 +23,7 @@ public class MyFrame extends JFrame implements ActionListener, ChangeListener {
     JLabel label;
     JSlider slider;
 
-    public MyFrame(){
+    public MyFrame() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new FlowLayout());
 
@@ -63,8 +63,8 @@ public class MyFrame extends JFrame implements ActionListener, ChangeListener {
         label = new JLabel("Label");
         panel.setPreferredSize(new Dimension(500, 300));
 
-        slider = new JSlider(1,0, 100, 50);
-        slider.setPreferredSize(new Dimension(400,200));
+        slider = new JSlider(1, 0, 100, 50);
+        slider.setPreferredSize(new Dimension(400, 200));
         slider.setPaintTicks(true);
         slider.setPaintLabels(true);
         slider.setPaintTrack(true);
@@ -94,23 +94,19 @@ public class MyFrame extends JFrame implements ActionListener, ChangeListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == button){
+        if (e.getSource() == button) {
             String text = textField.getText();
             System.out.println(text);
 //            button.setEnabled(false);
 
             System.out.println(checkBox.isSelected());
-        }
-        else if (e.getSource() == radioButton1){
+        } else if (e.getSource() == radioButton1) {
             System.out.println(radioButton1.getText());
-        }
-        else if (e.getSource() == radioButton2){
+        } else if (e.getSource() == radioButton2) {
             System.out.println(radioButton2.getText());
-        }
-        else if (e.getSource() == radioButton3){
+        } else if (e.getSource() == radioButton3) {
             System.out.println(radioButton3.getText());
-        }
-        else if (e.getSource() == comboBox){
+        } else if (e.getSource() == comboBox) {
             System.out.println(comboBox.getSelectedIndex());
             System.out.println(comboBox.getSelectedItem());
         }
@@ -118,8 +114,8 @@ public class MyFrame extends JFrame implements ActionListener, ChangeListener {
 
     @Override
     public void stateChanged(ChangeEvent e) {
-        if (e.getSource() == slider){
-            label.setText(""+slider.getValue());
+        if (e.getSource() == slider) {
+            label.setText("" + slider.getValue());
         }
     }
 }

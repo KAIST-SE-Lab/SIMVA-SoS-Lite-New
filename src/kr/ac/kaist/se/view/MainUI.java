@@ -18,18 +18,9 @@ import java.util.Date;
 
 public class MainUI implements ActionListener, Runnable {
 
-    protected TimerThread timerThread;
-
-
-    private SoS simModel;
-    private String isMapeOn;
-    private SimConfiguration simConfig;
-    private SimScenario simScenario;
-
-    ImageIcon simEngineIcon;
-
     public static JFrame mainUIframe;
-
+    protected TimerThread timerThread;
+    ImageIcon simEngineIcon;
     JMenuBar menuBar;
     JMenu fileMenu;
     JMenu simulationMenu;
@@ -46,18 +37,17 @@ public class MainUI implements ActionListener, Runnable {
     JMenuItem exportLogsMenuItem;
     JMenuItem helpMenuItem;
     JMenuItem aboutMenuItem;
-
-
     SimEngineTabPane simEngineTabPane;
-
-
     SimStatusBarPanel statusBar;
-
     JLabel simStatusLabel;
     JLabel simDataLabel;
     JLabel simTimeLabel;
+    private final SoS simModel;
+    private final String isMapeOn;
+    private final SimConfiguration simConfig;
+    private final SimScenario simScenario;
 
-    public MainUI(SoS simModel, String isMapeOn, SimConfiguration simConfig, SimScenario simScenario){
+    public MainUI(SoS simModel, String isMapeOn, SimConfiguration simConfig, SimScenario simScenario) {
         this.simModel = simModel;
         this.isMapeOn = isMapeOn;
         this.simConfig = simConfig;
@@ -226,8 +216,6 @@ public class MainUI implements ActionListener, Runnable {
     }
 
 
-
-
     private void initTabbedPanes() {
         simEngineTabPane = new SimEngineTabPane();
     }
@@ -239,40 +227,36 @@ public class MainUI implements ActionListener, Runnable {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         // Menu items
-        if (sourceObj == openSimModelMenuItem){
+        if (sourceObj == openSimModelMenuItem) {
             System.out.println("[" + timestamp + "] OpenSimModel MenuItem is selected.");
-        } else if (sourceObj == openSimConfigMenuItem){
+        } else if (sourceObj == openSimConfigMenuItem) {
             System.out.println("[" + timestamp + "] OpenSimConfig MenuItem is selected.");
-        } else if (sourceObj == openSimScenarioMenuItem){
+        } else if (sourceObj == openSimScenarioMenuItem) {
             System.out.println("[" + timestamp + "] OpenSimScenario MenuItem is selected.");
-        } else if (sourceObj == exitMenuItem){
+        } else if (sourceObj == exitMenuItem) {
             System.out.println("[" + timestamp + "] ExitMenuItem is selected.");
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] Simulation engine is terminated.");
             System.exit(0);
-        } else if (sourceObj == configSimulationMenuItem){
+        } else if (sourceObj == configSimulationMenuItem) {
             System.out.println("[" + timestamp + "] ConfigSim MenuItem is selected.");
-        } else if (sourceObj == startSimulationMenuItem){
+        } else if (sourceObj == startSimulationMenuItem) {
             System.out.println("[" + timestamp + "] StartSim MenuItem is selected.");
-        } else if (sourceObj == stopSimulationMenuItem){
+        } else if (sourceObj == stopSimulationMenuItem) {
             System.out.println("[" + timestamp + "] StopSim MenuItem is selected.");
-        } else if (sourceObj == exportResultsMenuItem){
+        } else if (sourceObj == exportResultsMenuItem) {
             System.out.println("[" + timestamp + "] ExportResults MenuItem is selected.");
-        } else if (sourceObj == exportLogsMenuItem){
+        } else if (sourceObj == exportLogsMenuItem) {
             System.out.println("[" + timestamp + "] ExportLogs MenuItem is selected.");
-        } else if (sourceObj == helpMenuItem){
+        } else if (sourceObj == helpMenuItem) {
             System.out.println("[" + timestamp + "] Help MenuItem is selected.");
-        } else if (sourceObj == aboutMenuItem){
+        } else if (sourceObj == aboutMenuItem) {
             System.out.println("[" + timestamp + "] About MenuItem is selected.");
         }
     }
 
 
-
-
-
-
-    private class TimerThread extends Thread{
+    private class TimerThread extends Thread {
 
         protected boolean isRunning;
 
@@ -292,7 +276,7 @@ public class MainUI implements ActionListener, Runnable {
 
         @Override
         public void run() {
-            while (isRunning){
+            while (isRunning) {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {

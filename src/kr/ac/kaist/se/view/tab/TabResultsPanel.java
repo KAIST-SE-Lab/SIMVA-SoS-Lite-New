@@ -1,7 +1,6 @@
 package kr.ac.kaist.se.view.tab;
 
 import kr.ac.kaist.se.view.toolbar.ToolBarResultsMode;
-import kr.ac.kaist.se.view.toolbar.ToolBarSimMode;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +12,7 @@ public class TabResultsPanel extends JPanel implements ActionListener {
 
     ToolBarResultsMode toolBarResultsMode;
 
-    public TabResultsPanel(){
+    public TabResultsPanel() {
 
         setLayout(new BorderLayout());
 

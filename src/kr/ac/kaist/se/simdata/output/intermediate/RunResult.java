@@ -17,13 +17,12 @@ public class RunResult {
     private ArrayList<_SimAction_> selectedActionList;
     private ArrayList<RunResult> subRunResults;
 
-    public RunResult(_SimObject_ runSubject, ArrayList<_SimAction_> selectedActionList){
+    public RunResult(_SimObject_ runSubject, ArrayList<_SimAction_> selectedActionList) {
         this.runSubject = runSubject;
         this.selectedActionList = selectedActionList;
 
         this.subRunResults = new ArrayList<RunResult>();
     }
-
 
 
     public _SimObject_ getRunSubject() {
@@ -50,7 +49,7 @@ public class RunResult {
         this.subRunResults = subRunResults;
     }
 
-    public void addSubRunResult(RunResult aRunResult){
+    public void addSubRunResult(RunResult aRunResult) {
         this.subRunResults.add(aRunResult);
     }
 }

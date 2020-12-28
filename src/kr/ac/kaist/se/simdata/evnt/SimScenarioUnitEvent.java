@@ -1,13 +1,15 @@
 package kr.ac.kaist.se.simdata.evnt;
 
-import kr.ac.kaist.se.model.abst.evnt.*;
+import kr.ac.kaist.se.model.abst.evnt.EnumEventType;
+import kr.ac.kaist.se.model.abst.evnt._SimEvent_;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
 
 /**
  * Unit event (1-tick event) for scenario execution
+ *
  * @author ymbaek
  */
-public class SimScenarioUnitEvent extends _SimEvent_{
+public class SimScenarioUnitEvent extends _SimEvent_ {
 
     protected SimScenarioEvent parentEvent;
 
@@ -58,7 +60,7 @@ public class SimScenarioUnitEvent extends _SimEvent_{
         this.probExp = probExp;
     }
 
-    public void executeEvent(){
+    public void executeEvent() {
         parentEvent.executeEvent();
     }
 

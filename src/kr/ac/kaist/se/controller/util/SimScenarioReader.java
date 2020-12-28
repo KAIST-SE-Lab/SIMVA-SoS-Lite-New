@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class SimScenarioReader {
 
-    public SimScenarioReader(){
+    public SimScenarioReader() {
 
     }
 
 
     //TODO: return SimScenarioEvent
-    public ArrayList<SimScenarioEvent> readScenario(){
+    public ArrayList<SimScenarioEvent> readScenario() {
         return null;
     }
 }

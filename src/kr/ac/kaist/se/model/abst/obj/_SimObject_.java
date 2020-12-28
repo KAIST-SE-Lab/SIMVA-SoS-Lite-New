@@ -22,35 +22,51 @@ public abstract class _SimObject_ implements Simulatable {
     protected Timestamp timestamp;    //Timestamp for stdout
 
 
-    /** Universally unique object id */
+    /**
+     * Universally unique object id
+     */
     protected String id;        //Every SimObject should have its own unique id
-    /** Name of an object */
+    /**
+     * Name of an object
+     */
     protected String name;
 
-    /** Static object / Dynamic object */
+    /**
+     * Static object / Dynamic object
+     */
     protected boolean isStatic;
-    /** Activated object / Deactivated object */
+    /**
+     * Activated object / Deactivated object
+     */
     protected boolean isActivated;
-    /** Available object / Unavailable object */
+    /**
+     * Available object / Unavailable object
+     */
     protected boolean isAvailable;
 
-    /** Current location of this object */
+    /**
+     * Current location of this object
+     */
     protected ObjectLocation objLocation;   //Every SimObject has its geo-location
 
-    /** Queue for storing incoming messages from other objects */
+    /**
+     * Queue for storing incoming messages from other objects
+     */
     protected Queue<_SimMessage_> msgQueue = new LinkedList<>();
 
-    /** ArrayList to store logEventIds */
-    private ArrayList<String> logEventIdList = new ArrayList<>();
+    /**
+     * ArrayList to store logEventIds
+     */
+    private final ArrayList<String> logEventIdList = new ArrayList<>();
 
 
     /**
      * Print object information of a _SimObject_
      */
-    protected void printObjInfo(){
+    protected void printObjInfo() {
         String thisClassName = this.getClass().getSimpleName();
 
-        if (this.getClass() != null){
+        if (this.getClass() != null) {
             timestamp = new Timestamp(System.currentTimeMillis());
             //System.out.println("[" + timestamp + "] (" + thisClassName + ") An object is created.");
             System.out.println("[" + timestamp + "] (" + thisClassName + " Object Created) id: " + this.id +
@@ -66,8 +82,6 @@ public abstract class _SimObject_ implements Simulatable {
 //    public _SimObject_() {
 //        initObjLocation();
 //    }
-
-
 
 
     public String getId() {
@@ -112,6 +126,7 @@ public abstract class _SimObject_ implements Simulatable {
 
     /**
      * A method that returns current location of this object
+     *
      * @return ObjectLocation of this organization
      */
     public ObjectLocation getCurLocation() {
@@ -148,16 +163,16 @@ public abstract class _SimObject_ implements Simulatable {
     /**
      * Print current location of this object using getCurLocation()
      */
-    protected void printCurLocation(){
+    protected void printCurLocation() {
 //        timestamp = new Timestamp(System.currentTimeMillis());
 //        System.out.print("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") ObjctLocation is initialized: (");
 
         int index = 0;
         System.out.print("(");
-        for (DimensionVar dimVar : objLocation.getObjLocDimVars()){
-            if (index+1 < objLocation.getObjLocDimVars().size()){
+        for (DimensionVar dimVar : objLocation.getObjLocDimVars()) {
+            if (index + 1 < objLocation.getObjLocDimVars().size()) {
                 System.out.print(dimVar.getDataCurValue() + ",");
-            }else{
+            } else {
                 System.out.print(dimVar.getDataCurValue());
             }
             index++;
@@ -168,10 +183,11 @@ public abstract class _SimObject_ implements Simulatable {
 
     /**
      * Method to automatically generate an id of a SimLogEvent
+     *
      * @param eventAction target action to be executed
      * @return Generated id
      */
-    public String getLogEventIdAutomatically(_SimAction_ eventAction){
+    public String getLogEventIdAutomatically(_SimAction_ eventAction) {
         String newId = "";
 
         Random rand = new Random();
@@ -181,7 +197,7 @@ public abstract class _SimObject_ implements Simulatable {
 
         while (true) {
             newId += String.format("EVNT_%S_%s_%s", eventAction.getClass().getSimpleName(), this.id, Integer.toHexString(rand.nextInt(99999)));
-            if(!logEventIdList.contains(newId)){
+            if (!logEventIdList.contains(newId)) {
                 break;
             }
         }

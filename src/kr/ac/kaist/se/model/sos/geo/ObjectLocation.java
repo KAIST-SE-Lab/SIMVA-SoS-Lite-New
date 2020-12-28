@@ -1,15 +1,15 @@
 package kr.ac.kaist.se.model.sos.geo;
 
-import kr.ac.kaist.se.model.abst.data._SimDataVariable_;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 
 import java.util.ArrayList;
 
 /**
  * A concrete class to represent a specific location of an object
+ *
  * @author ymbaek
  */
-public class ObjectLocation implements Cloneable{
+public class ObjectLocation implements Cloneable {
 
     ArrayList<DimensionVar> objLocDimVars;
 
@@ -25,15 +25,16 @@ public class ObjectLocation implements Cloneable{
         this.objLocDimVars = objLocDimVars;
     }
 
-    public void updateLocation(ArrayList<String> dimIds){
+    public void updateLocation(ArrayList<String> dimIds) {
 
     }
 
     /**
      * An implemented method of Cloneable interface
+     *
      * @return cloned object of this class
      */
-    public ObjectLocation clone(){
+    public ObjectLocation clone() {
         ObjectLocation clonedObjLoc = null;
 
         try {

@@ -7,11 +7,11 @@ import java.util.ArrayList;
 /**
  * Abstract class to represent an Infrastructure (Infra)
  * (1-tier _SimContainerObject_)
- *
+ * <p>
  * According to the Meta-Model for Systems-of-Systems (M2SoS),
  * an infrastructure consists of one or more SystemEntities, ServiceEntities, and ResourceEntities.
  * Main purpose of building an infrastructure is to support goal achievement.
- *
+ * <p>
  * Interfaces: Simulatable
  * (An infra is not movable)
  *
@@ -25,7 +25,9 @@ public abstract class Infrastructure extends _SimContainerObject_ {
     //Type of an infrastructure
     protected EnumInfraType infraType;
 
-    /** Member lists */
+    /**
+     * Member lists
+     */
     //Member system entities
     protected ArrayList<SystemEntity> systemEntityList;
     //Member service entities
@@ -33,7 +35,7 @@ public abstract class Infrastructure extends _SimContainerObject_ {
     //Member resource entities
     protected ArrayList<ResourceEntity> resourceEntityList;
 
-    public Infrastructure(SoS simModel, String infraId, String infraName){
+    public Infrastructure(SoS simModel, String infraId, String infraName) {
         this.mySoS = simModel;
 
         this.id = infraId;
@@ -47,7 +49,7 @@ public abstract class Infrastructure extends _SimContainerObject_ {
         printObjInfo();
     }
 
-    public Infrastructure(SoS simModel, String infraId, String infraName, boolean isStatic, boolean isActivated, boolean isAvailable){
+    public Infrastructure(SoS simModel, String infraId, String infraName, boolean isStatic, boolean isActivated, boolean isAvailable) {
         this.mySoS = simModel;
 
         this.id = infraId;

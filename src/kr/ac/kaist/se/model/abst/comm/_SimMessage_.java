@@ -6,7 +6,7 @@ import kr.ac.kaist.se.model.sos.data.DataVar;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public abstract class _SimMessage_ implements Transmittable{
+public abstract class _SimMessage_ implements Transmittable {
 
     protected Timestamp timestamp;    //Timestamp for stdout
 
@@ -43,19 +43,16 @@ public abstract class _SimMessage_ implements Transmittable{
 
     /**
      * A method to check if this message is appropriately sendable or not
+     *
      * @return
      */
-    public boolean isSendable(){
+    public boolean isSendable() {
         timestamp = new Timestamp(System.currentTimeMillis());
 
-        if ((senderId != null && !senderId.equals("")) &&
+        //            System.out.println("[" + timestamp + "] (_SimMessage_(" + this.getClass().getSimpleName() + ":" + this.msgId + ") isSendable: true");
+        return (senderId != null && !senderId.equals("")) &&
                 (receiverId != null && !receiverId.equals("")) &&
-                (msgDataList != null && msgDataList.size() > 0)){
-//            System.out.println("[" + timestamp + "] (_SimMessage_(" + this.getClass().getSimpleName() + ":" + this.msgId + ") isSendable: true");
-            return true;
-        }else{
-            return false;
-        }
+                (msgDataList != null && msgDataList.size() > 0);
     }
 
     public String getMsgId() {

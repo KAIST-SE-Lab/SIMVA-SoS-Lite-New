@@ -2,7 +2,7 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
 
 public class GameFrame {
 
@@ -14,7 +14,7 @@ public class GameFrame {
     Action leftAction;
     Action rightAction;
 
-    public GameFrame(){
+    public GameFrame() {
         frame = new JFrame("KeyBinding Demo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 500);
@@ -49,32 +49,31 @@ public class GameFrame {
     }
 
 
-
-    public class UpAction extends AbstractAction{
+    public class UpAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            label.setLocation(label.getX(), label.getY()-10);
+            label.setLocation(label.getX(), label.getY() - 10);
         }
     }
 
-    public class DownAction extends AbstractAction{
+    public class DownAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            label.setLocation(label.getX(), label.getY()+10);
+            label.setLocation(label.getX(), label.getY() + 10);
         }
     }
 
-    public class RightAction extends AbstractAction{
+    public class RightAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            label.setLocation(label.getX()+10, label.getY());
+            label.setLocation(label.getX() + 10, label.getY());
         }
     }
 
-    public class LeftAction extends AbstractAction{
+    public class LeftAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            label.setLocation(label.getX()-10, label.getY()-10);
+            label.setLocation(label.getX() - 10, label.getY() - 10);
         }
     }
 }

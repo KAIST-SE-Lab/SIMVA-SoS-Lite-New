@@ -28,7 +28,7 @@ public class MyFrame2 extends JFrame implements ActionListener, ChangeListener, 
     MyPanel2 myPanel2;
 
 
-    public MyFrame2(){
+    public MyFrame2() {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
@@ -99,11 +99,10 @@ public class MyFrame2 extends JFrame implements ActionListener, ChangeListener, 
     }
 
 
-
-    public void fill(){
+    public void fill() {
         int counter = 0;
 
-        while (counter <= 100){
+        while (counter <= 100) {
             bar.setValue(counter);
             bar.setVisible(true);
             try {
@@ -119,14 +118,14 @@ public class MyFrame2 extends JFrame implements ActionListener, ChangeListener, 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == item1A){
+        if (e.getSource() == item1A) {
             System.out.println("item1A is selected");
-        } else if (e.getSource() == item1B){
+        } else if (e.getSource() == item1B) {
             System.out.println("item1B is selected");
-        } else if (e.getSource() == item1C){
+        } else if (e.getSource() == item1C) {
             System.out.println("item1C is selected");
             System.exit(0);
-        } else if (e.getSource() == item2A){
+        } else if (e.getSource() == item2A) {
             JFileChooser fileChooser = new JFileChooser();
 //            System.out.println(fileChooser.showOpenDialog(null));
 
@@ -135,7 +134,7 @@ public class MyFrame2 extends JFrame implements ActionListener, ChangeListener, 
 //            int response = fileChooser.showOpenDialog(null); //to open
             int response = fileChooser.showSaveDialog(null); //to save
 
-            if (response == JFileChooser.APPROVE_OPTION){
+            if (response == JFileChooser.APPROVE_OPTION) {
                 File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
                 System.out.println(file);
             }
@@ -191,19 +190,19 @@ public class MyFrame2 extends JFrame implements ActionListener, ChangeListener, 
 
     /* Drag & Drop */
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponents(g);
         //other contents
     }
 
-    private class ClickListener extends MouseAdapter{
-        public void mousePressed(MouseEvent e){
+    private class ClickListener extends MouseAdapter {
+        public void mousePressed(MouseEvent e) {
             //prevPt = e.getPoint();
         }
     }
 
-    private class DragListener extends MouseMotionAdapter{
-        public void mouseDragger(MouseEvent e){
+    private class DragListener extends MouseMotionAdapter {
+        public void mouseDragger(MouseEvent e) {
 //            Point currentPt = e.getPoint();
 //
 //            imageCorner.translate(

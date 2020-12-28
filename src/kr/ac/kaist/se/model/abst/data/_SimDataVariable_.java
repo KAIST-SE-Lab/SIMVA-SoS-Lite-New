@@ -1,17 +1,13 @@
 package kr.ac.kaist.se.model.abst.data;
 
-import kr.ac.kaist.se.model.sos.data.DataVarDomain;
-import kr.ac.kaist.se.model.sos.data.DimensionVar;
-
 import java.sql.Timestamp;
-import java.util.ArrayList;
 
 /**
  * Abstract class to represent a data variable
  *
  * @author ymbaek
  */
-public abstract class _SimDataVariable_ implements Cloneable{
+public abstract class _SimDataVariable_ implements Cloneable {
 
     protected Timestamp timestamp;    //Timestamp for stdout
 
@@ -25,19 +21,16 @@ public abstract class _SimDataVariable_ implements Cloneable{
 //    protected String enumData;
 
 //    protected _SimDomain_ varDomain;
-
-
-    private String dataDefaultValue;  //default value of a data (variable)
-    private String dataCurValue;      //current value of a data (variable)
-
     protected boolean isEnumData = false;
     protected boolean isValueAssigned = false;
     protected boolean isDomainConstrained = false;
+    private String dataDefaultValue;  //default value of a data (variable)
+    private String dataCurValue;      //current value of a data (variable)
 
 //    protected _SimDomain_ dataDomain;   //domain of a data variable (min-max/enum)
 
 
-    public _SimDataVariable_(){
+    public _SimDataVariable_() {
         printDataCreation();
     }
 
@@ -80,13 +73,12 @@ public abstract class _SimDataVariable_ implements Cloneable{
 
     }
 
-    protected void printDataCreation(){
+    protected void printDataCreation() {
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") A data object (_SimDataVariable_) is created (" +
                 varId + ", " + varName + ", " + varType + ", " + dataDefaultValue + ", " + dataCurValue + ").");
 
     }
-
 
 
     /**
@@ -95,13 +87,13 @@ public abstract class _SimDataVariable_ implements Cloneable{
      *
      * @param dataType Data type of this _SimDataVariable_
      */
-    private void setActualDataTypeVar(String dataType){
+    private void setActualDataTypeVar(String dataType) {
 //        System.out.println(dataType);
 
         timestamp = new Timestamp(System.currentTimeMillis());
 
 
-        if(dataCurValue != null) {
+        if (dataCurValue != null) {
             //Integer data
             if (dataType.equals("INT") ||
                     dataType.equals("int") ||
@@ -144,8 +136,7 @@ public abstract class _SimDataVariable_ implements Cloneable{
 
                 //System.out.println(dataCurValue);
             }
-        }
-        else{
+        } else {
 
         }
 //        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") Actual data: " + integerData + " | " + floatData + " | " + stringData + " | " + isEnumData);
@@ -160,16 +151,17 @@ public abstract class _SimDataVariable_ implements Cloneable{
      * @param dataValue a value to be checked
      * @return true if the given value is valid
      */
-    protected boolean isValidValue(String dataValue){
+    protected boolean isValidValue(String dataValue) {
         return true;
     }
 
 
     /**
      * An implemented method of Cloneable interface
+     *
      * @return cloned object of this class
      */
-    public _SimDataVariable_ clone(){
+    public _SimDataVariable_ clone() {
         _SimDataVariable_ dimVar = null;
 
         try {
@@ -221,11 +213,16 @@ public abstract class _SimDataVariable_ implements Cloneable{
 
         setActualDataTypeVar(this.varType);
     }
+
     public int getIntegerData() {
         return integerData;
     }
 
     public void setIntegerData(int integerData) {
+        this.integerData = integerData;
+    }
+
+    public void setIntegerData(Integer integerData) {
         this.integerData = integerData;
     }
 
@@ -237,6 +234,10 @@ public abstract class _SimDataVariable_ implements Cloneable{
         this.floatData = floatData;
     }
 
+    public void setFloatData(Float floatData) {
+        this.floatData = floatData;
+    }
+
     public String getStringData() {
         return stringData;
     }
@@ -244,15 +245,6 @@ public abstract class _SimDataVariable_ implements Cloneable{
     public void setStringData(String stringData) {
         this.stringData = stringData;
     }
-
-    public void setIntegerData(Integer integerData) {
-        this.integerData = integerData;
-    }
-
-    public void setFloatData(Float floatData) {
-        this.floatData = floatData;
-    }
-
 
     public String getDataDefaultValue() {
         return dataDefaultValue;

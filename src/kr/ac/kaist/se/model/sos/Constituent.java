@@ -11,21 +11,19 @@ import kr.ac.kaist.se.model.sos.cap.CommAction;
 import kr.ac.kaist.se.model.sos.cap.FuncAction;
 import kr.ac.kaist.se.model.sos.cap.MoveAction;
 import kr.ac.kaist.se.model.sos.data.DataVar;
-import kr.ac.kaist.se.model.sos.data.DimensionVar;
-import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 
-import javax.xml.crypto.Data;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Abstract class to represent a constituent system, called CS.
- *
+ * <p>
  * According to the M2SoS, a Constituent is one and only object that can belong to an organization.
  * A Constituent can communicate (i.e., Communicatable) and make its own decisions (i.e., DecisionMakeable).
- *
+ * <p>
  * Interfaces: Simulatable, Actionable, Stateful, Movable, Communicatable, DecisionMakeable
  *
  * @author ymbaek, ehcho, yjshin
@@ -38,13 +36,14 @@ public abstract class Constituent extends _SimActionableObject_
     //Organization that this object belongs to
     protected Organization myOrg;
 
-    /** Knowledge base of this constituent object */
+    /**
+     * Knowledge base of this constituent object
+     */
     //Knowledge base of a single constituent
     protected ArrayList<DataVar> knowledgeBase;
 
 
-
-    public Constituent(SoS simModel, Organization myOrg, String csId, String csName){
+    public Constituent(SoS simModel, Organization myOrg, String csId, String csName) {
         this.mySoS = simModel;
         this.myOrg = myOrg;
 
@@ -65,7 +64,7 @@ public abstract class Constituent extends _SimActionableObject_
         initObjLocation();
     }
 
-    public Constituent(SoS simModel, Organization myOrg, String csId, String csName, boolean isStatic, boolean isActivated, boolean isAvailable){
+    public Constituent(SoS simModel, Organization myOrg, String csId, String csName, boolean isStatic, boolean isActivated, boolean isAvailable) {
         this.mySoS = simModel;
         this.myOrg = myOrg;
 
@@ -116,7 +115,7 @@ public abstract class Constituent extends _SimActionableObject_
 
     @Override
     public void readIncomingMsgs() {
-        if(msgQueue.size() != 0) {
+        if (msgQueue.size() != 0) {
 
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):readIncomingMsgs) size of msgQueue:" +
@@ -148,9 +147,10 @@ public abstract class Constituent extends _SimActionableObject_
 
     /**
      * A method to add or update received msg data to CS's knowledge base
+     *
      * @param dataList
      */
-    private void addOrUpdateDataToKnowledgeBase(ArrayList<DataVar> dataList){
+    private void addOrUpdateDataToKnowledgeBase(ArrayList<DataVar> dataList) {
         knowledgeBase.addAll(dataList);
 
         //TODO: update if it already exists
@@ -163,7 +163,7 @@ public abstract class Constituent extends _SimActionableObject_
         ArrayList<_SimAction_> possibleMoveActions = new ArrayList<>();
 
 
-        for (_SimAction_ aAction : capableActionList){
+        for (_SimAction_ aAction : capableActionList) {
             //If aAction is not a MoveAction
             if (aAction instanceof FuncAction) {
                 if (aAction.checkPrecondition()) {
@@ -171,18 +171,17 @@ public abstract class Constituent extends _SimActionableObject_
                 }
             }
             //If aAction is MoveAction
-            else if (aAction instanceof MoveAction){
+            else if (aAction instanceof MoveAction) {
                 if (aAction.checkPrecondition()) {
                     possibleMoveActions.add(aAction);
 
                 }
-            }
-            else if (aAction instanceof CommAction){
+            } else if (aAction instanceof CommAction) {
                 //Dynamically set a message based on makeMsgForCommAction() method.
                 //The makeMsgForCommAction() method should be implemented in a concrete Constituent class.
-                ((CommAction) aAction).setMessage(makeMsgForCommAction((CommAction)aAction));
+                ((CommAction) aAction).setMessage(makeMsgForCommAction((CommAction) aAction));
 
-                if (aAction.checkPrecondition()){
+                if (aAction.checkPrecondition()) {
                     //TODO
                 }
             }
@@ -218,21 +217,18 @@ public abstract class Constituent extends _SimActionableObject_
 
         ArrayList<SimLogEvent> actionLogEvents = new ArrayList<>();
 
-        if (actionObj instanceof MoveAction){
+        if (actionObj instanceof MoveAction) {
             actionLogEvents = actionObj.executeAction(tick);
             //ObjectLocation curLoc = getCurLocation();
-        }else if(actionObj instanceof CommAction){
+        } else if (actionObj instanceof CommAction) {
             actionLogEvents = actionObj.executeAction(tick);
-        }else if(actionObj instanceof FuncAction){
+        } else if (actionObj instanceof FuncAction) {
             actionLogEvents = actionObj.executeAction(tick);
         }
 
 
         return actionLogEvents;
     }
-
-
-
 
 
     /**

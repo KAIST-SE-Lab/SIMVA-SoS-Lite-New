@@ -7,7 +7,7 @@ public class MyPanel extends JPanel {
 
     Image image;
 
-    public MyPanel(){
+    public MyPanel() {
 
         image = new ImageIcon("logo.png").getImage();
 
@@ -15,7 +15,7 @@ public class MyPanel extends JPanel {
 
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setPaint(Color.blue);
@@ -26,8 +26,8 @@ public class MyPanel extends JPanel {
         g2d.fillRect(100, 100, 100, 100);
 
         g2d.setPaint(Color.orange);
-        g2d.drawOval(200,200,100,100);
-        g2d.fillOval(300,300,100,100);
+        g2d.drawOval(200, 200, 100, 100);
+        g2d.fillOval(300, 300, 100, 100);
 
         int[] xPoints = {150, 250, 350};
         int[] yPoints = {300, 150, 300};

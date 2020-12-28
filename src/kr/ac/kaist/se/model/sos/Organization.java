@@ -38,7 +38,9 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
     //Sub organizations
     protected ArrayList<Organization> subOrgList;
 
-    /** List of member constituents */
+    /**
+     * List of member constituents
+     */
     //All CSs that belong to this org and suborg of this org
     protected ArrayList<Constituent> allMemberCSList;
     //CSs that only (directly) belong to this org
@@ -99,19 +101,20 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
     /**
      * A method to actually run an organization
      * This method executes included models of suborganizations and CSs
+     *
      * @return
      */
-    public RunResult run(){
+    public RunResult run() {
 
         //Since an org is not an actionable object, selectedActionList is an empty list
         //SubRunResults of suborgs and CSs will be added into the list
         RunResult runResult = new RunResult(this, new ArrayList<>(0));
 
-        for(Organization suborg: this.subOrgList){
+        for (Organization suborg : this.subOrgList) {
             runResult.addSubRunResult(suborg.run());
         }
 
-        for(Constituent directCS: this.directCSList){
+        for (Constituent directCS : this.directCSList) {
             runResult.addSubRunResult(directCS.run());
         }
 
@@ -133,15 +136,15 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
 
         UpdateResult updateResult = new UpdateResult();
 
-        for(RunResult subRunResult: runResult.getSubRunResults()){
+        for (RunResult subRunResult : runResult.getSubRunResults()) {
             //Organization-type subject (i.e., suborganization)
-            if(subRunResult.getRunSubject() instanceof Organization){
+            if (subRunResult.getRunSubject() instanceof Organization) {
                 Organization target = (Organization) subRunResult.getRunSubject();
                 UpdateResult subUpdateResult = target.update(subRunResult, tick);
                 updateResult.addAllLogEventToList(subUpdateResult.getLogEventList());
             }
             //Member CS
-            else if(subRunResult.getRunSubject() instanceof Constituent){
+            else if (subRunResult.getRunSubject() instanceof Constituent) {
                 Constituent target = (Constituent) subRunResult.getRunSubject();
                 UpdateResult subUpdateResult = target.update(subRunResult, tick);
                 updateResult.addAllLogEventToList(subUpdateResult.getLogEventList());
@@ -154,6 +157,7 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
 
     /**
      * A method to check if a CS is contained in AllMemberCSList
+     *
      * @param aCS a CS object to be checked
      * @return true if the CS is contained in this organization
      */
@@ -163,6 +167,7 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
 
     /**
      * A method to check if a CS is contained in DirectCSList
+     *
      * @param aCS a CS object to be checked
      * @return true if the CS is contained in this organization
      */
@@ -173,6 +178,7 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
 
     /**
      * A method to check if a CS is already contained in this organization (either in allMemberCS/directCS)
+     *
      * @param aCS a CS object to be checked
      * @return true if the CS is contained in this organization
      */
@@ -241,7 +247,8 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
 
     /**
      * A method to add a CS
-     * @param aCS a CS to be added
+     *
+     * @param aCS      a CS to be added
      * @param isDirect true if a CS is a direct member of this organization.
      *                 Normally, it is true when a CS is added into an organization,
      *                 but false can be assigned when the same CS needs to be added into its parent organization.
@@ -328,7 +335,6 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
      */
 
 
-
     public void removeCS(Constituent aCS) {
         timestamp = new Timestamp(System.currentTimeMillis());
 
@@ -360,6 +366,7 @@ public abstract class Organization extends _SimContainerObject_ implements Movab
 
     /**
      * A method to try to add a direct CS before checking if any suborganizations include the CS
+     *
      * @param aCS a CS to be checked if it is contained in suborgs of this org.
      */
     private void tryToAddDirectCS(Constituent aCS) {

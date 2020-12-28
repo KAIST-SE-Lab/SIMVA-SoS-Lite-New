@@ -12,7 +12,7 @@ public class TabSimulationPanel extends JPanel implements ActionListener {
 
     ToolBarSimMode toolBarSimMode;
 
-    public TabSimulationPanel(){
+    public TabSimulationPanel() {
 
         setLayout(new BorderLayout());
         initToolBar();

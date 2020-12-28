@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 public class ToolBarResultsMode extends BaseToolBar {
 
-    public ToolBarResultsMode(){
+    public ToolBarResultsMode() {
         super();
 
         add(makeNavigationButton("icon_01_label", "ACTION01", "ToolTipText", "AltText"));
@@ -17,7 +17,7 @@ public class ToolBarResultsMode extends BaseToolBar {
     public void actionPerformed(ActionEvent e) {
         String actionCommand = e.getActionCommand();
 
-        if (actionCommand == "ACTION01"){
+        if (actionCommand == "ACTION01") {
             System.out.println("Action01 is selected");
         }
     }

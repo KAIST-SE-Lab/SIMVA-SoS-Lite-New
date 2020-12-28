@@ -18,10 +18,10 @@ import java.util.ArrayList;
  */
 public class MoveAction extends _SimAction_ {
 
-    private int numOfAllowedDims;
+    private final int numOfAllowedDims;
     private ArrayList<DimensionVar> allowedDims;
 
-    private ArrayList<Integer> dimVarDiffList;
+    private final ArrayList<Integer> dimVarDiffList;
 
 
     public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, int numOfAllowedDims, ArrayList<DimensionVar> allowedDims, ArrayList<Integer> dimVarDiffList) {
@@ -80,19 +80,19 @@ public class MoveAction extends _SimAction_ {
         boolean isMovable = true;
 
         //For all target dimensions, check the MoveActions are valid
-        for (Integer targetDimIndex : targetDims){
+        for (Integer targetDimIndex : targetDims) {
             int valueDiff = dimVarDiffList.get(dimIndex);
-            if(!updatedCurLoc.getObjLocDimVars().get(targetDimIndex).checkUpdateValid(valueDiff)){
+            if (!updatedCurLoc.getObjLocDimVars().get(targetDimIndex).checkUpdateValid(valueDiff)) {
                 isMovable = false;
             }
             dimIndex++;
         }
 
         //If all dimensions of the MoveAction are valid to move
-        if (isMovable){
+        if (isMovable) {
             dimIndex = 0;
 
-            for (Integer targetDimIndex : targetDims){
+            for (Integer targetDimIndex : targetDims) {
                 int valueDiff = dimVarDiffList.get(dimIndex);
 
                 //Update the location value
@@ -119,7 +119,7 @@ public class MoveAction extends _SimAction_ {
 
             //TODO: check return
             return actionLogEvents;
-        }else{
+        } else {
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.print("[" + timestamp + "] (MoveAction(" + this.getActionId() + "):executeAction) A MoveAction execution denied (updatedLoc:");
 
@@ -141,12 +141,13 @@ public class MoveAction extends _SimAction_ {
 
     /**
      * Print location of an object
+     *
      * @param objLocation A given ObjectLocation object
      */
-    private void printLocation(ObjectLocation objLocation){
+    private void printLocation(ObjectLocation objLocation) {
         System.out.print("(");
         int index = 0;
-        for(DimensionVar dimVar: objLocation.getObjLocDimVars()){
+        for (DimensionVar dimVar : objLocation.getObjLocDimVars()) {
             System.out.print(dimVar.getDataCurValue());
             if (index++ < objLocation.getObjLocDimVars().size() - 1) {
                 System.out.print(",");
@@ -159,11 +160,11 @@ public class MoveAction extends _SimAction_ {
     /**
      * Print allowed dimensions of this move action
      */
-    private void printAllowedDims(){
+    private void printAllowedDims() {
 
         System.out.print("(allowedDims: ");
         int index = 0;
-        for (DimensionVar dimVar : allowedDims){
+        for (DimensionVar dimVar : allowedDims) {
             System.out.print(dimVar.getVarId() + "(" + ")");
             if (index++ < allowedDims.size() - 1) {
                 System.out.print(",");
@@ -176,7 +177,7 @@ public class MoveAction extends _SimAction_ {
     /**
      * Print information about the creation of this MoveAction
      */
-    private void printMoveActionCreation(){
+    private void printMoveActionCreation() {
         timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println("[" + timestamp + "] (MoveAction) A MoveAction is initialized: (" +
                 (this instanceof MoveAction) + ", " +

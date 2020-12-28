@@ -9,7 +9,7 @@ public class SimStatusBarPanel extends JPanel {
     protected JPanel rightPanel;
 
 
-    public SimStatusBarPanel(){
+    public SimStatusBarPanel() {
         createPartControl();
     }
 

@@ -11,7 +11,7 @@ public class MapeEngine {
     //TODO: define attributes
 
 
-    public MapeEngine(){
+    public MapeEngine() {
 
     }
 }

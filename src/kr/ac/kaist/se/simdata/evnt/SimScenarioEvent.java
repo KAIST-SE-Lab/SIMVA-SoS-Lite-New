@@ -1,6 +1,7 @@
 package kr.ac.kaist.se.simdata.evnt;
 
-import kr.ac.kaist.se.model.abst.evnt.*;
+import kr.ac.kaist.se.model.abst.evnt.EnumEventType;
+import kr.ac.kaist.se.model.abst.evnt._SimEvent_;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
 
 import java.sql.Timestamp;
@@ -9,10 +10,10 @@ import java.util.ArrayList;
 /**
  * An event included in a simulation scenario (SimScenario)
  * SimScenarioEvent should contain:
- *      (i) target information (who will be affected)
- *      (ii) behavioral information (what to execute)
- *      (iii) temporal information (when to execute)
- *      (iv) probability information (what probability)
+ * (i) target information (who will be affected)
+ * (ii) behavioral information (what to execute)
+ * (iii) temporal information (when to execute)
+ * (iv) probability information (what probability)
  *
  * @author ymbaek
  */
@@ -22,25 +23,25 @@ public class SimScenarioEvent extends _SimEvent_ {
     int simTotalTime = 0;   //Total simulation time
 
     /* Target information */
-    private String targetObjId;       //Id of target object
-    private _SimObject_ targetObj;    //Target object
+    private final String targetObjId;       //Id of target object
+    private final _SimObject_ targetObj;    //Target object
 
-    private EnumEventTargetScope targetScope; //Scope of target
+    private final EnumEventTargetScope targetScope; //Scope of target
 
     /* Behavioral information */
-    private EnumEventPredefBehavior predefBehavior;   //Predefined behavior of an event
+    private final EnumEventPredefBehavior predefBehavior;   //Predefined behavior of an event
 
     /* Temporal information */
-    private EnumEventOccPattern occPattern;   //Occurrence pattern
+    private final EnumEventOccPattern occPattern;   //Occurrence pattern
     private int startTime = 0;                    //Start time for all events
     private int endTime = 0;                      //End time for all events
     private int duration = 1;                     //Duration for an event that has duration
     private int period = -1;                       //Period for periodic events
 
     /* Probability information */
-    private boolean isProbabilistic;      //Probabilistic event or not
-    private EnumEventProbDist probDist;   //Probability distribution
-    private String probExp;               //Expression of probability (this should conform to probDist)
+    private final boolean isProbabilistic;      //Probabilistic event or not
+    private final EnumEventProbDist probDist;   //Probability distribution
+    private final String probExp;               //Expression of probability (this should conform to probDist)
 
     public SimScenarioEvent(String id,
                             String name,
@@ -87,15 +88,15 @@ public class SimScenarioEvent extends _SimEvent_ {
      *
      * @return List of decomposed unit events
      */
-    public ArrayList<SimScenarioUnitEvent> readUnitEvents(){
+    public ArrayList<SimScenarioUnitEvent> readUnitEvents() {
 
         int numOfUnitEvents = 0;
         timestamp = new Timestamp(System.currentTimeMillis());
 
-        if (startTime >= simTotalTime){
+        if (startTime >= simTotalTime) {
             System.out.println("[" + timestamp + "] (SimScenarioEvent: readUnitEvents) Non-executable event: id(" + id + ")");
             return null;
-        } else{
+        } else {
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("[" + timestamp + "] (SimScenarioEvent: readUnitEvents) Event decomposition (evnt_id(" + id + "))");
 
@@ -111,20 +112,20 @@ public class SimScenarioEvent extends _SimEvent_ {
             String unitEventId;
 
             // Instant and constant event
-            if (occPattern == EnumEventOccPattern.INSTANT || occPattern == EnumEventOccPattern.CONSTANT){
+            if (occPattern == EnumEventOccPattern.INSTANT || occPattern == EnumEventOccPattern.CONSTANT) {
 
-                if(occPattern == EnumEventOccPattern.INSTANT){
+                if (occPattern == EnumEventOccPattern.INSTANT) {
                     eventEndTime = unitEventStartTime + duration;
-                }else if(occPattern == EnumEventOccPattern.CONSTANT){
+                } else if (occPattern == EnumEventOccPattern.CONSTANT) {
                     eventEndTime = simTotalTime;
                 }
 
-                while(unitEventStartTime < eventEndTime && unitEventStartTime < endTime){
+                while (unitEventStartTime < eventEndTime && unitEventStartTime < endTime) {
                     //TODO: debug
                     appendIdString = String.format("%03d", appendIdNum);
                     unitEventId = id + "_" + appendIdString;
 
-                    SimScenarioUnitEvent unitEvent = new SimScenarioUnitEvent(  this,
+                    SimScenarioUnitEvent unitEvent = new SimScenarioUnitEvent(this,
                             unitEventId,
                             name,
                             eventType,
@@ -144,22 +145,22 @@ public class SimScenarioEvent extends _SimEvent_ {
                 }
             }
             // periodic event
-            else{
+            else {
                 int periodNum = 0;
 
                 //TODO: periodic
 //                for(int periodNum = 0; periodNum < simTotalTime; periodNum++){
-                while(unitEventPeriodStartTime < simTotalTime && unitEventPeriodStartTime < endTime){
+                while (unitEventPeriodStartTime < simTotalTime && unitEventPeriodStartTime < endTime) {
 
                     //For each period, eventEndTime is newly assigned.
                     eventEndTimeInPeriod = unitEventStartTime + duration;
 
-                    while(unitEventStartTime < eventEndTimeInPeriod){
+                    while (unitEventStartTime < eventEndTimeInPeriod) {
                         //TODO: debug
                         appendIdString = String.format("%03d", appendIdNum);
                         unitEventId = id + "_" + appendIdString;
 
-                        SimScenarioUnitEvent unitEvent = new SimScenarioUnitEvent(  this,
+                        SimScenarioUnitEvent unitEvent = new SimScenarioUnitEvent(this,
                                 unitEventId,
                                 name,
                                 eventType,
@@ -177,7 +178,7 @@ public class SimScenarioEvent extends _SimEvent_ {
                         appendIdNum++;
                         numOfUnitEvents++;
 
-                        if(unitEventStartTime >= simTotalTime || unitEventStartTime >= endTime){
+                        if (unitEventStartTime >= simTotalTime || unitEventStartTime >= endTime) {
                             break;
                         }
                     }
@@ -192,8 +193,8 @@ public class SimScenarioEvent extends _SimEvent_ {
             System.out.println("[" + timestamp + "] (SimScenarioEvent: readUnitEvents) Event decomposition finished (numOfUnitEvents: " + numOfUnitEvents + ")");
 
             System.out.print("[" + timestamp + "] (SimScenarioEvent: readUnitEvents) ScenarioEvent decomposed (" + id + "): ");
-            for (int numOfEvents = 0; numOfEvents < unitEventList.size(); numOfEvents++){
-                System.out.print("(" + numOfEvents+ ")" + unitEventList.get(numOfEvents).getId() + "[" + unitEventList.get(numOfEvents).getStartTime() + "] ");
+            for (int numOfEvents = 0; numOfEvents < unitEventList.size(); numOfEvents++) {
+                System.out.print("(" + numOfEvents + ")" + unitEventList.get(numOfEvents).getId() + "[" + unitEventList.get(numOfEvents).getStartTime() + "] ");
             }
 
             System.out.println();
@@ -207,8 +208,8 @@ public class SimScenarioEvent extends _SimEvent_ {
     /**
      * Behavior of event execution should be specified in this method.
      */
-    public void executeEvent(){
-        if (predefBehavior == EnumEventPredefBehavior.NOT_DETERMINED){
+    public void executeEvent() {
+        if (predefBehavior == EnumEventPredefBehavior.NOT_DETERMINED) {
         }
     }
 

@@ -44,48 +44,42 @@ public abstract class _SimDomain_ {
      * @return true if a given value is valid
      */
     /* For integer variable */
-    public boolean isValidValue(int value){
-        if (domainType == EnumDomainType.VALUE_RANGE){
+    public boolean isValidValue(int value) {
+        if (domainType == EnumDomainType.VALUE_RANGE) {
             //If the value is lower than domainMinVal or exceeds domainMaxVal
-            if (!(value >= domainMinVal && value <= domainMaxVal)){
-                return false;
-            }
+            return value >= domainMinVal && value <= domainMaxVal;
         }
         //Wrong domainType
-        else{
+        else {
             return false;
         }
-        return true;
     }
 
     /* For float variable */
-    public boolean isValidValue(float value){
-        if (domainType == EnumDomainType.VALUE_RANGE){
+    public boolean isValidValue(float value) {
+        if (domainType == EnumDomainType.VALUE_RANGE) {
             //If the value is lower than domainMinVal or exceeds domainMaxVal
-            if (!(value >= domainMinVal && value <= domainMaxVal)){
-                return false;
-            }
+            return value >= domainMinVal && value <= domainMaxVal;
         }
         //Wrong domainType
-        else{
+        else {
             return false;
         }
-        return true;
     }
 
     /* For enumeration variable */
-    public boolean isValidValue(String value){
+    public boolean isValidValue(String value) {
         boolean isAllowed = false;
-        if (domainType == EnumDomainType.ENUMERATION){
+        if (domainType == EnumDomainType.ENUMERATION) {
             //If the value is lower than domainMinVal or exceeds domainMaxVal
-            for (String allowedString : domainEnumVal){
-                if (value.equals(allowedString)){
+            for (String allowedString : domainEnumVal) {
+                if (value.equals(allowedString)) {
                     isAllowed = true;
                 }
             }
         }
         //Wrong domainType
-        else{
+        else {
             return false;
         }
         return isAllowed;

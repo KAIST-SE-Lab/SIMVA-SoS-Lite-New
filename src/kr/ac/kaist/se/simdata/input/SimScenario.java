@@ -18,10 +18,10 @@ public class SimScenario {
     protected ArrayList<SimScenarioEvent> eventList = new ArrayList<>();
     protected ArrayList<SimScenarioUnitEvent> unitEventList = new ArrayList<>();
 
-    public SimScenario(){
+    public SimScenario() {
     }
 
-    public SimScenario(String scenarioName, boolean isDefaultScenario){
+    public SimScenario(String scenarioName, boolean isDefaultScenario) {
         this.scenarioName = scenarioName;
         this.isDefaultScenario = isDefaultScenario;
     }
@@ -30,7 +30,7 @@ public class SimScenario {
 //        this.simScenarioFilePath = simScenarioFilePath;
 //    }
 
-    public void addSimScenarioEvent(SimScenarioEvent simScenarioEvent){
+    public void addSimScenarioEvent(SimScenarioEvent simScenarioEvent) {
         //Add simScenarioEvent
         eventList.add(simScenarioEvent);
         numOfEvents = eventList.size();

@@ -17,7 +17,7 @@ public class TabInputUIPanel extends JPanel implements ActionListener {
     JButton openSimConfigButton;
     JButton openSimScenarioButton;
 
-    public TabInputUIPanel(){
+    public TabInputUIPanel() {
 
         setLayout(new BorderLayout());
 
@@ -41,7 +41,7 @@ public class TabInputUIPanel extends JPanel implements ActionListener {
 
 
         JPanel inputControllerPanel = new JPanel();
-        inputControllerPanel.setLayout(new GridLayout(3,1));
+        inputControllerPanel.setLayout(new GridLayout(3, 1));
         inputControllerPanel.setPreferredSize(new Dimension(1200, 100));
         //inputControllerPanel.setMinimumSize(new Dimension(500, 120));
 
@@ -105,11 +105,11 @@ public class TabInputUIPanel extends JPanel implements ActionListener {
         Object sourceObj = e.getSource();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        if (sourceObj == openSimModelButton){
+        if (sourceObj == openSimModelButton) {
             System.out.println("[" + timestamp + "] openSimModelButton is selected.");
-        } else if (sourceObj == openSimConfigButton){
+        } else if (sourceObj == openSimConfigButton) {
             System.out.println("[" + timestamp + "] openSimConfigButton is selected.");
-        } else if (sourceObj == openSimScenarioButton){
+        } else if (sourceObj == openSimScenarioButton) {
             System.out.println("[" + timestamp + "] openSimScenarioButton is selected.");
         }
     }

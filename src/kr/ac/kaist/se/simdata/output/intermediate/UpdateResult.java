@@ -26,25 +26,24 @@ public class UpdateResult {
 //    }
 
 
-
     public ArrayList<SimLog> getUpdateLogList() {
         return updateLogList;
+    }
+
+    public void setUpdateLogList(ArrayList<SimLog> updateLogList) {
+        this.updateLogList = updateLogList;
     }
 
     public void setLogList(ArrayList<SimLog> updateLog) {
         this.updateLogList = updateLog;
     }
 
-    public void addLogToList(SimLog aLog){
+    public void addLogToList(SimLog aLog) {
         this.updateLogList.add(aLog);
     }
 
-    public void addAllLogToList(ArrayList<SimLog> aLogList){
+    public void addAllLogToList(ArrayList<SimLog> aLogList) {
         this.updateLogList.addAll(aLogList);
-    }
-
-    public void setUpdateLogList(ArrayList<SimLog> updateLogList) {
-        this.updateLogList = updateLogList;
     }
 
     public ArrayList<SimLogEvent> getLogEventList() {
@@ -55,7 +54,7 @@ public class UpdateResult {
         this.logEventList = logEventList;
     }
 
-    public void addLogEventToList(SimLogEvent logEvent){
+    public void addLogEventToList(SimLogEvent logEvent) {
         this.logEventList.add(logEvent);
     }
 

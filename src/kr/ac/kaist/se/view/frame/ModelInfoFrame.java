@@ -4,18 +4,9 @@ import kr.ac.kaist.se.controller.sim.SimEngine;
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.abst.obj._SimObject_;
 import kr.ac.kaist.se.model.intf.Stateful;
-import kr.ac.kaist.se.model.sos.SoS;
-import kr.ac.kaist.se.simdata.input.SimConfiguration;
-import kr.ac.kaist.se.simdata.input.SimScenario;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.TreeCellRenderer;
-import javax.swing.tree.TreeModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +21,7 @@ public class ModelInfoFrame extends JFrame implements ActionListener {
 //    private JTree tree;
 //    private JTreeTable treeTable;
 
-    private JTable simObjTable;
+    private final JTable simObjTable;
     private JScrollPane scrollPane;
 
 
@@ -53,8 +44,8 @@ public class ModelInfoFrame extends JFrame implements ActionListener {
 
         ArrayList<_SimObject_> allSimObjects = simEngine.getSimModel().getAllSimObjects();
 
-        Object objects[] = new Object[5];
-        for (int i = 0; i < allSimObjects.size(); i++){
+        Object[] objects = new Object[5];
+        for (int i = 0; i < allSimObjects.size(); i++) {
 
             _SimObject_ aSimObject = allSimObjects.get(i);
 
@@ -62,12 +53,12 @@ public class ModelInfoFrame extends JFrame implements ActionListener {
             objects[1] = aSimObject.getId();
             objects[2] = aSimObject.getName();
 
-            if (aSimObject instanceof Stateful){
+            if (aSimObject instanceof Stateful) {
                 objects[3] = "Stateful";
             }
 
-            if (aSimObject instanceof _SimActionableObject_){
-                objects[4] = ((_SimActionableObject_)aSimObject).getCapableActionList().size() + "";
+            if (aSimObject instanceof _SimActionableObject_) {
+                objects[4] = ((_SimActionableObject_) aSimObject).getCapableActionList().size() + "";
             }
 
 
@@ -86,8 +77,6 @@ public class ModelInfoFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
     }
-
-
 
 
 }

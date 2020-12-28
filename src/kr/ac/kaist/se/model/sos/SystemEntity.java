@@ -5,17 +5,16 @@ import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.intf.Communicatable;
 import kr.ac.kaist.se.model.intf.Movable;
 import kr.ac.kaist.se.model.intf.Stateful;
-import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 
 import java.util.LinkedList;
 
 /**
  * Abstract class to represent a system (or system-based entity).
- *
+ * <p>
  * According to the M2SoS, a SystemEntity is a base class to represent an infrastructure system.
  * A SystemEntity can perform its own actions (i.e., Actionable),
  * and it can do communication actions (i.e., Communicatable).
- *
+ * <p>
  * Interfaces: Simulatable, Actionable, Stateful, Movable, Communicatable
  *
  * @author ymbaek, ehcho, yjshin
@@ -28,7 +27,7 @@ public abstract class SystemEntity extends _SimActionableObject_
     //Infrastructure that this object belongs to
     protected Infrastructure myInfra;
 
-    public SystemEntity(SoS simModel, Infrastructure myInfra, String systemId, String systemName){
+    public SystemEntity(SoS simModel, Infrastructure myInfra, String systemId, String systemName) {
         this.mySoS = simModel;
         this.myInfra = myInfra;
 
@@ -45,7 +44,7 @@ public abstract class SystemEntity extends _SimActionableObject_
         printObjInfo();
     }
 
-    public SystemEntity(SoS simModel, Infrastructure myInfra, String systemId, String systemName, boolean isStatic, boolean isActivated, boolean isAvailable){
+    public SystemEntity(SoS simModel, Infrastructure myInfra, String systemId, String systemName, boolean isStatic, boolean isActivated, boolean isAvailable) {
         this.mySoS = simModel;
         this.myInfra = myInfra;
 
