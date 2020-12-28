@@ -2,6 +2,7 @@ package kr.ac.kaist.se.model.abst.obj;
 
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
+import kr.ac.kaist.se.model.abst.state._SimState_;
 import kr.ac.kaist.se.model.intf.Simulatable;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
@@ -40,8 +41,10 @@ public abstract class _SimObject_ implements Simulatable {
 
     //States of an object
     protected ArrayList<ObjectState> objStates = new ArrayList<>();
+    //Initial state of an object
+    protected String initialStateId;
     //Current state of an object
-    protected String curState;
+    protected String curStateId;
 
 
 
@@ -162,12 +165,33 @@ public abstract class _SimObject_ implements Simulatable {
         this.objStates = objStates;
     }
 
-    public String getCurState() {
-        return curState;
+    public void addObjState(ObjectState aObjState){
+        boolean isDuplicate = false;
+        for (_SimState_ state : objStates){
+            if (aObjState.getId().equals(state.getId())){
+                isDuplicate = true;
+            }
+        }
+
+        if (aObjState != null && isDuplicate == false){
+            objStates.add(aObjState);
+        }
     }
 
-    public void setCurState(String curState) {
-        this.curState = curState;
+    public String getInitialStateId() {
+        return initialStateId;
+    }
+
+    public void setInitialStateId(String initialStateId) {
+        this.initialStateId = initialStateId;
+    }
+
+    public String getCurStateId() {
+        return curStateId;
+    }
+
+    public void setCurStateId(String curStateId) {
+        this.curStateId = curStateId;
     }
 
     public ObjectLocation getObjLocation() {
