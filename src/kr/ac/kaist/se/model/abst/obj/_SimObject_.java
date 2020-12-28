@@ -5,7 +5,9 @@ import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.intf.Simulatable;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
+import kr.ac.kaist.se.model.sos.state.ObjectState;
 
+import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -21,42 +23,35 @@ public abstract class _SimObject_ implements Simulatable {
 
     protected Timestamp timestamp;    //Timestamp for stdout
 
-
-    /**
-     * Universally unique object id
-     */
-    protected String id;        //Every SimObject should have its own unique id
-    /**
-     * Name of an object
-     */
+    /** Basic information of a SimObject */
+    //Universally unique object id (Every SimObject should have its own unique id)
+    protected String id;
+    //Name of an object
     protected String name;
 
-    /**
-     * Static object / Dynamic object
-     */
+
+    /** Properties and state information of a SimObject */
+     //Static object / Dynamic object
     protected boolean isStatic;
-    /**
-     * Activated object / Deactivated object
-     */
+    //Activated object / Deactivated object
     protected boolean isActivated;
-    /**
-     * Available object / Unavailable object
-     */
+    //Available object / Unavailable object
     protected boolean isAvailable;
 
-    /**
-     * Current location of this object
-     */
+    //States of an object
+    protected ArrayList<ObjectState> objStates = new ArrayList<>();
+    //Current state of an object
+    protected String curState;
+
+
+
+    //Current location of this object
     protected ObjectLocation objLocation;   //Every SimObject has its geo-location
 
-    /**
-     * Queue for storing incoming messages from other objects
-     */
+    //Queue for storing incoming messages from other objects
     protected Queue<_SimMessage_> msgQueue = new LinkedList<>();
 
-    /**
-     * ArrayList to store logEventIds
-     */
+    //ArrayList to store logEventIds
     private final ArrayList<String> logEventIdList = new ArrayList<>();
 
 
@@ -159,6 +154,25 @@ public abstract class _SimObject_ implements Simulatable {
         this.msgQueue = msgQueue;
     }
 
+    public ArrayList<ObjectState> getObjStates() {
+        return objStates;
+    }
+
+    public void setObjStates(ArrayList<ObjectState> objStates) {
+        this.objStates = objStates;
+    }
+
+    public String getCurState() {
+        return curState;
+    }
+
+    public void setCurState(String curState) {
+        this.curState = curState;
+    }
+
+    public ObjectLocation getObjLocation() {
+        return objLocation;
+    }
 
     /**
      * Print current location of this object using getCurLocation()

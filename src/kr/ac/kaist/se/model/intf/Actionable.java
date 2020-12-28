@@ -13,6 +13,11 @@ import java.util.ArrayList;
  */
 public interface Actionable {
 
-    //TODO: check return
+    /**
+     * A method to do an action(s)
+     * @param actionObj An actionable object who execute the action(s)
+     * @param tick Simulation tick
+     * @return SimLogEvents of action execution results
+     */
     ArrayList<SimLogEvent> doAction(_SimAction_ actionObj, int tick);
 }

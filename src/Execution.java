@@ -16,7 +16,7 @@ public class Execution {
      */
     public static void main(String[] args, SoS sos, SimConfiguration simConfiguration, SimScenario simScenario) {
 
-        System.out.println("***************************************************");
+        System.out.println("2020-12-18 18:03");
 
         Timestamp timestamp;
 
