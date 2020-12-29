@@ -195,6 +195,15 @@ public abstract class _SimObject_ implements Simulatable {
         this.curStateId = curStateId;
     }
 
+    public boolean isStateful() {
+        return isStateful;
+    }
+
+    public void setStateful(boolean stateful) {
+        isStateful = stateful;
+    }
+
+
     /**
      * A method to get an actual state object (ObjectState) with id
      * @param stateId id to be found

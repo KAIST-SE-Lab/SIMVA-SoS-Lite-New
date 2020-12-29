@@ -2,6 +2,9 @@ package kr.ac.kaist.se.model.abst.obj;
 
 import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.intf.Actionable;
+import kr.ac.kaist.se.model.sos.cap.CommAction;
+import kr.ac.kaist.se.model.sos.cap.FuncAction;
+import kr.ac.kaist.se.model.sos.cap.MoveAction;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 import kr.ac.kaist.se.simdata.output.intermediate.RunResult;
 import kr.ac.kaist.se.simdata.output.intermediate.UpdateResult;
@@ -69,6 +72,8 @@ public abstract class _SimActionableObject_ extends _SimObject_ implements Actio
      * Select an action(s) and store into selectedActionList
      */
     protected abstract void selectActions();
+
+
 
     /* Action add/remove of capableActionList and selectedActionList */
 

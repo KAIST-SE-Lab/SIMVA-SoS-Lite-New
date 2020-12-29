@@ -13,7 +13,8 @@ import java.util.ArrayList;
 public interface Movable {
 
     /**
-     * Select a move action(s) among possible move actions
+     * Select a move action(s) among possible move actions.
+     * A proper mechanism to select move actions should be implemented in a movable object.
      *
      * @param possibleMoveActions MoveActions that can be executed
      * @return List of selected move actions

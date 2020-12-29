@@ -20,13 +20,24 @@ public interface Communicatable {
 //    void sendMsg(_SimMessage_ msgObj);
 
     //TODO: check return
+
+    /**
+     * Read incoming messages from its own msgQueue.
+     * According to its implementation, messages are differently handled.
+     */
     void readIncomingMsgs();
 
     /**
-     * @param condition
-     * @return
+     * A method to find an id of a receiver object from SoS with a search condition
+     * @param condition Search condition
+     * @return An id of a receiver object found
      */
     String findReceiverObjIdFromSoS(String condition);
 
+    /**
+     * Make a message for a communication action
+     * @param aCommAction
+     * @return
+     */
     _SimMessage_ makeMsgForCommAction(CommAction aCommAction);
 }

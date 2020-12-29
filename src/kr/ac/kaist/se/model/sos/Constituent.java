@@ -99,10 +99,9 @@ public abstract class Constituent extends _SimActionableObject_
         System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + " of " + myOrg.getId() + "):run) size of capableActions:" +
                 capableActionList.size() + " = " + capableActionList);
 
-        //Before selecting actions, read a message from its message queue
+        // [Communicatable] Before selecting actions, read a message from its message queue
         readIncomingMsgs();
 
-        //TODO: Check clearSelectedActionList()
         //Clear existing selectedActionList
         clearSelectedActionList();
 
@@ -169,7 +168,6 @@ public abstract class Constituent extends _SimActionableObject_
 
         ArrayList<_SimAction_> possibleMoveActions = new ArrayList<>();
 
-
         for (_SimAction_ aAction : capableActionList) {
             //If aAction is not a MoveAction
             if (aAction instanceof FuncAction) {
@@ -188,14 +186,13 @@ public abstract class Constituent extends _SimActionableObject_
                 //The makeMsgForCommAction() method should be implemented in a concrete Constituent class.
                 ((CommAction) aAction).setMessage(makeMsgForCommAction((CommAction) aAction));
 
+                //TODO: Selection mechanism for CommAction (now: select all communication actions)
                 if (aAction.checkPrecondition()) {
-                    //TODO
+                    selectedActionList.add(aAction);
                 }
             }
         }
 
-
-        //TODO: MoveAction selection
 
         /* Selection of move action (current: random) */
         if (selectMoveActions(possibleMoveActions) != null) {
@@ -241,6 +238,7 @@ public abstract class Constituent extends _SimActionableObject_
     @Override
     public ArrayList<SimLogEvent> doStateTransition(String newStateId, int tick) {
 
+        //TODO: Duplicate code
         boolean isExistState = false;
         for (_SimState_ state : objStates){
             if (newStateId.equals(state.getId())){
