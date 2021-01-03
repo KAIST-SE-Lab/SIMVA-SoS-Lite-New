@@ -5,6 +5,7 @@ import kr.ac.kaist.se.model.sos.data.DataVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A class to represent a geographical map of an SoS
@@ -18,6 +19,8 @@ public abstract class SimMap extends _SimMap_ {
     //Dimensions of this map
     protected ArrayList<DimensionVar> mapDimensions = new ArrayList<>();
 
+
+    protected HashMap<String, ArrayList<DataVar>> mapLocInfos = new HashMap<>();
 
     //TODO: Object location hashmap
     //Hashmap to store objects' locations
@@ -44,7 +47,7 @@ public abstract class SimMap extends _SimMap_ {
     }
 
     //TODO: check return
-    protected abstract void initializeMap();
+    protected abstract void initializeMap(String mapInitInfo);
 
 
     protected void getAllLocationPoints() {
