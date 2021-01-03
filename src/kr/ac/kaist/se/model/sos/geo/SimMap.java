@@ -14,13 +14,16 @@ import java.util.HashMap;
  */
 public abstract class SimMap extends _SimMap_ {
 
+    /** ArrayLists for MapDimensions and MapInformation */
+    //LocDimensions of this map
+    protected ArrayList<DimensionVar> mapDimensions = new ArrayList<>();
     //LocInformations of this map
     public ArrayList<DataVar> mapInfos = new ArrayList<>();
-    //Dimensions of this map
-    protected ArrayList<DimensionVar> mapDimensions = new ArrayList<>();
 
-
+    /** Initialization of map */
+    //HashMap to store location information
     protected HashMap<String, ArrayList<DataVar>> mapLocInfos = new HashMap<>();
+
 
     //TODO: Object location hashmap
     //Hashmap to store objects' locations
@@ -30,6 +33,9 @@ public abstract class SimMap extends _SimMap_ {
         this.mapId = mapId;
         this.mapName = mapName;
         //objLocationHashMap = new HashMap<>();
+
+        initMapDimensions();
+        initMapInformation();
     }
 
     public SimMap(String mapId, String mapName, ArrayList<DimensionVar> mapDimensions) {
@@ -46,9 +52,18 @@ public abstract class SimMap extends _SimMap_ {
         this.mapInfos = mapInfos;
     }
 
-    //TODO: check return
-    protected abstract void initializeMap(String mapInitInfo);
+    protected void initMap(){
+        initMapDimensions();
+        initMapInformation();
 
+        buildMap("");
+    }
+
+    //TODO: check return
+    protected abstract void buildMap(String mapInitInfo);
+
+    protected abstract void initMapDimensions();
+    protected abstract void initMapInformation();
 
     protected void getAllLocationPoints() {
         for (DimensionVar dimVar : mapDimensions) {
