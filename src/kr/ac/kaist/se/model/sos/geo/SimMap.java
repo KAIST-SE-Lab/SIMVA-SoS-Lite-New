@@ -116,6 +116,7 @@ public abstract class SimMap extends _SimMap_ {
             }else{
                 key += dimVar.getDataDefaultValue();
             }
+            index++;
         }
         key += ")";
 
