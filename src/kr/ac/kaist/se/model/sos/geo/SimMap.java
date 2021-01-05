@@ -122,8 +122,12 @@ public abstract class SimMap extends _SimMap_ {
                 key += dimVar.getDataDefaultValue();
             }
 
+            DimensionVar tmpDimVar = (DimensionVar)dimVar.clone();
+            tmpDimVar.setDataCurValue(dimVar.getVarDomain().getDomainMinVal() + "");
+            System.out.println(tmpDimVar.getDataCurValue());
+
             System.out.print(dimVar.getVarName() + "[" + dimVar.getVarDomain().getDomainMinVal());
-            System.out.println("-" + dimVar.getVarDomain().getDomainMinVal() + "]");
+            System.out.println("-" + dimVar.getVarDomain().getDomainMaxVal() + "]");
 
             index++;
         }
