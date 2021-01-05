@@ -28,9 +28,6 @@ public abstract class SimMap extends _SimMap_ {
     protected MapBuilder mapBuilder = new MapBuilder();
 
 
-    //TODO: Object location hashmap
-    //Hashmap to store objects' locations
-    //protected HashMap<ArrayList<_SimDataVariable_>, ArrayList<_SimObject_>> objLocationHashMap;
 
     public SimMap(String mapId, String mapName) {
         this.mapId = mapId;
@@ -62,14 +59,35 @@ public abstract class SimMap extends _SimMap_ {
         initMapDimensions();
         initMapInformation();
 
-        mapBuilder.updateMapData(mapDimVars, mapDataVars, mapLocInfo, new ArrayList<String>());
+        initMapLocInfo();
+
+        //TODO: MapBuilder
+//        mapBuilder.updateMapData(mapDimVars, mapDataVars, mapLocInfo, new ArrayList<String>());
+    }
+
+
+    protected abstract void initMapDimensions();
+    protected abstract void initMapInformation();
+
+
+    /**
+     * A method to initially assign data values into mapLocInfo hashmap.
+     */
+    protected void initMapLocInfo(){
+
+        /*
+        EX) xPosVar, yPosVar, floorNumVar
+         */
+
+        String key = "(";
+
+        for (DimensionVar dimVar : mapDimVars){
+            key += dimVar.getDataDefaultValue();
+        }
     }
 
     //TODO: check return
     protected abstract void buildMap(String mapInitInfo);
-
-    protected abstract void initMapDimensions();
-    protected abstract void initMapInformation();
 
     protected void getAllLocationPoints() {
         for (DimensionVar dimVar : mapDimVars) {
