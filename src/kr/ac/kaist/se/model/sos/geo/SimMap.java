@@ -104,7 +104,12 @@ public abstract class SimMap extends _SimMap_ {
     protected void initMapLocInfo(){
 
         /*
-        EX) xPosVar, yPosVar, floorNumVar
+        EX) xPosVar, yPosVar, floorNumVar:
+        key :=
+            (0, 0, FLOOR_1)
+            (0, 0, FLOOR_B1)
+            (0, 0, FLOOR_2)
+            ...
          */
 
         String key = "(";
@@ -116,11 +121,20 @@ public abstract class SimMap extends _SimMap_ {
             }else{
                 key += dimVar.getDataDefaultValue();
             }
+
+            System.out.print(dimVar.getVarName() + "[" + dimVar.getVarDomain().getDomainMinVal());
+            System.out.println("-" + dimVar.getVarDomain().getDomainMinVal() + "]");
+
             index++;
         }
         key += ")";
 
         System.out.println(key);
+
+
+
+
+
     }
 
     //TODO: check return
