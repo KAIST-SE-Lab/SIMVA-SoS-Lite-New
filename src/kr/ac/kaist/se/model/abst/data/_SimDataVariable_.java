@@ -30,19 +30,19 @@ public abstract class _SimDataVariable_ implements Cloneable {
 //    protected _SimDomain_ dataDomain;   //domain of a data variable (min-max/enum)
 
 
-    public _SimDataVariable_() {
-        printDataCreation();
-    }
-
-    public _SimDataVariable_(String varId, String varName, String varType) {
-        this.varId = varId;
-        this.varName = varName;
-        this.varType = varType;
-
-        setActualDataTypeVar(this.varType);
-        printDataCreation();
-
-    }
+//    public _SimDataVariable_() {
+//        printDataCreation();
+//    }
+//
+//    public _SimDataVariable_(String varId, String varName, String varType) {
+//        this.varId = varId;
+//        this.varName = varName;
+//        this.varType = varType;
+//
+//        setActualDataTypeVar(this.varType);
+//        printDataCreation();
+//
+//    }
 
 
     public _SimDataVariable_(String varId, String varName, String varType, String dataDefaultValue) {

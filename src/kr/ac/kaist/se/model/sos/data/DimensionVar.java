@@ -18,29 +18,20 @@ public abstract class DimensionVar extends _SimDataVariable_ {
     //Domain of a dimension variable
     protected DimensionVarDomain varDomain;
 
-    public DimensionVar() {
-        super();
-    }
+//    public DimensionVar() {
+//        super();
+//    }
 
-    public DimensionVar(String dataId, String dataName, String dataType) {
-        super(dataId, dataName, dataType);
+    public DimensionVar(String dataId, String dataName, String dataType, String dataDefaultValue) {
+        super(dataId, dataName, dataType, dataDefaultValue);
         printDimensionVarCreation();
     }
 
 //    public abstract void increaseValueOfDim(int diff);
 //    public abstract void decreaseValueOfDim(int diff);
 
-    public DimensionVar(String dataId, String dataName, String dataType, DimensionVarDomain dataDomain) {
-        super(dataId, dataName, dataType);
-
-        this.varDomain = dataDomain;
-        this.isDomainConstrained = true;
-
-        printDimensionVarCreation();
-    }
-
-    public DimensionVar(String dataId, String dataName, String dataType, String dataCurValue, DimensionVarDomain dataDomain) {
-        super(dataId, dataName, dataType, dataCurValue);
+    public DimensionVar(String dataId, String dataName, String dataType, String dataDefaultValue, DimensionVarDomain dataDomain) {
+        super(dataId, dataName, dataType, dataDefaultValue);
 
         this.varDomain = dataDomain;
         this.isDomainConstrained = true;
@@ -56,6 +47,15 @@ public abstract class DimensionVar extends _SimDataVariable_ {
 
         printDimensionVarCreation();
     }
+
+//    public DimensionVar(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue, DimensionVarDomain dataDomain) {
+//        super(dataId, dataName, dataType, dataDefaultValue, dataCurValue);
+//
+//        this.varDomain = dataDomain;
+//        this.isDomainConstrained = true;
+//
+//        printDimensionVarCreation();
+//    }
 
     public abstract boolean checkUpdateValid(int diff);
 
