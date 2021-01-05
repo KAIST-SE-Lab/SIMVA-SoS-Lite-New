@@ -5,6 +5,7 @@ import kr.ac.kaist.se.model.abst.geo._SimMap_;
 import kr.ac.kaist.se.model.sos.data.DataVar;
 import kr.ac.kaist.se.model.sos.data.DimensionVar;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -56,10 +57,25 @@ public abstract class SimMap extends _SimMap_ {
     }
 
     protected void initMap(){
+        /* Initialization of map dimensions (mapDimVars) */
         initMapDimensions();
+
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (ToySoSMap: initDimensions) Dimensions (mapDimVars) are initialized (size:" + mapDimVars.size() + ")");
+
+
+        /* Initialization of map data variables (mapDataVars) */
         initMapInformation();
 
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (ToySoSMap: initDimensions) MapInformation (mapDataVars) is initialized (size:" + mapDataVars.size() + ")");
+
+
+        /* Initialization of map location information (mapLocInfo) */
         initMapLocInfo();
+
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("[" + timestamp + "] (ToySoSMap: initDimensions) Location information (mapLocInfo) are initialized (size:" + mapLocInfo.size() + ")");
 
         //TODO: MapBuilder
 //        mapBuilder.updateMapData(mapDimVars, mapDataVars, mapLocInfo, new ArrayList<String>());
