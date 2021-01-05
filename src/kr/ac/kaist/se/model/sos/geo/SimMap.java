@@ -56,6 +56,9 @@ public abstract class SimMap extends _SimMap_ {
         initMap();
     }
 
+    /**
+     * Initialization of a map by calling other methods
+     */
     protected void initMap(){
         /* Initialization of map dimensions (mapDimVars) */
         initMapDimensions();
@@ -82,7 +85,16 @@ public abstract class SimMap extends _SimMap_ {
     }
 
 
+    /**
+     * A method for initialization of map dimensions (mapDimVars)
+     * This method depends on dimensionVars defined for a concrete map
+     */
     protected abstract void initMapDimensions();
+
+    /**
+     * Initialization of map data variables (mapDataVars)
+     * This method depends on dimensionVars defined for a concrete map
+     */
     protected abstract void initMapInformation();
 
 
@@ -98,8 +110,10 @@ public abstract class SimMap extends _SimMap_ {
         String key = "(";
 
         for (DimensionVar dimVar : mapDimVars){
-            key += dimVar.getDataDefaultValue();
+            key += dimVar.getDataDefaultValue() + ",";
         }
+
+        System.out.println(key);
     }
 
     //TODO: check return
