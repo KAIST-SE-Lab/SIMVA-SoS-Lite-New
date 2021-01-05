@@ -109,9 +109,15 @@ public abstract class SimMap extends _SimMap_ {
 
         String key = "(";
 
+        int index = 0;
         for (DimensionVar dimVar : mapDimVars){
-            key += dimVar.getDataDefaultValue() + ",";
+            if (index < mapDimVars.size()-1){
+                key += dimVar.getDataDefaultValue() + ",";
+            }else{
+                key += dimVar.getDataDefaultValue();
+            }
         }
+        key += ")";
 
         System.out.println(key);
     }
