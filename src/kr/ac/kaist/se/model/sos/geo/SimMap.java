@@ -112,8 +112,7 @@ public abstract class SimMap extends _SimMap_ {
             ...
          */
 
-        String key = "(";
-
+        String key = "";
         int index = 0;
         for (DimensionVar dimVar : mapDimVars){
             if (index < mapDimVars.size()-1){
@@ -125,15 +124,21 @@ public abstract class SimMap extends _SimMap_ {
             if (dimVar.getVarType().equals("Int") || dimVar.getVarType().equals("Integer")){
                 DimensionVar tmpDimVar = (DimensionVar)dimVar.clone();
                 tmpDimVar.setDataCurValue((int)dimVar.getVarDomain().getDomainMinVal() + "");
+
+                while (Integer.valueOf(tmpDimVar.getDataCurValue()) <= (int)tmpDimVar.getVarDomain().getDomainMaxVal()){
+                    System.out.print(tmpDimVar.getDataCurValue() + " ");
+                    tmpDimVar.updateValueOfDim(1);
+                }
+
                 System.out.println(tmpDimVar.getDataCurValue());
             }
 
             System.out.print(dimVar.getVarName() + "[" + dimVar.getVarDomain().getDomainMinVal());
+
             System.out.println("-" + dimVar.getVarDomain().getDomainMaxVal() + "]");
 
             index++;
         }
-        key += ")";
 
         System.out.println(key);
 
