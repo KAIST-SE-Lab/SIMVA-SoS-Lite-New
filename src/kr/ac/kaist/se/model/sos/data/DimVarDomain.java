@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class DimVarDomain extends _SimDataDomain_ {
 
 
-    public DimVarDomain(EnumDomainType domainType) {
-        super(domainType);
-    }
+//    public DimVarDomain(EnumDomainType domainType) {
+//        super(domainType);
+//    }
 
     public DimVarDomain(EnumDomainType domainType, float domainMinVal, float domainMaxVal) {
         super(domainType, domainMinVal, domainMaxVal);

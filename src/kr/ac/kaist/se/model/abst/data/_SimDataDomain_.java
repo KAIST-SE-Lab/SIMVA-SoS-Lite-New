@@ -20,9 +20,9 @@ public abstract class _SimDataDomain_ {
     protected ArrayList<String> domainEnumVal = new ArrayList<>();  //Allowed enumeration values
 
 
-    public _SimDataDomain_(EnumDomainType domainType) {
-        this.domainType = domainType;
-    }
+//    public _SimDataDomain_(EnumDomainType domainType) {
+//        this.domainType = domainType;
+//    }
 
     //Constructor for VALUE_RANGE domain
     public _SimDataDomain_(EnumDomainType domainType, float domainMinVal, float domainMaxVal) {
@@ -45,7 +45,7 @@ public abstract class _SimDataDomain_ {
      */
     /* For integer variable */
     public boolean isValidValue(int value) {
-        if (domainType == EnumDomainType.VALUE_RANGE) {
+        if (domainType == EnumDomainType.VALUE_RANGE_DISCRETE) {
             //If the value is lower than domainMinVal or exceeds domainMaxVal
             return value >= domainMinVal && value <= domainMaxVal;
         }
@@ -57,7 +57,7 @@ public abstract class _SimDataDomain_ {
 
     /* For float variable */
     public boolean isValidValue(float value) {
-        if (domainType == EnumDomainType.VALUE_RANGE) {
+        if (domainType == EnumDomainType.VALUE_RANGE_DISCRETE) {
             //If the value is lower than domainMinVal or exceeds domainMaxVal
             return value >= domainMinVal && value <= domainMaxVal;
         }

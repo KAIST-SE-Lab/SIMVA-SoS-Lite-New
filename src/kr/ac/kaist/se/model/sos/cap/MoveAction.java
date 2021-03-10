@@ -52,6 +52,7 @@ public class MoveAction extends _SimAction_ {
                       ArrayList<String> allowedDimVarIds,
                       ArrayList<Integer> dimVarDiffList) {
         super(accessibleSoS, actionSubject, actionId, actionName);
+
         this.allowedDimVarIds = allowedDimVarIds;
         this.dimVarDiffList = dimVarDiffList;
 

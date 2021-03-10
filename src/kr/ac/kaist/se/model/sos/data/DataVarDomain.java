@@ -10,22 +10,22 @@ public class DataVarDomain extends _SimDataDomain_ {
     protected boolean isLogical;
     protected boolean isDiscrete;
 
-    protected String defaultValue;
+//    protected String defaultValue;
 
 
-    public DataVarDomain(EnumDomainType domainType, boolean isLogical, boolean isDiscrete, String defaultValue) {
-        super(domainType);
-        this.isLogical = isLogical;
-        this.isDiscrete = isDiscrete;
-        this.defaultValue = defaultValue;
-    }
+//    public DataVarDomain(EnumDomainType domainType, boolean isLogical, boolean isDiscrete, String defaultValue) {
+//        super(domainType);
+//        this.isLogical = isLogical;
+//        this.isDiscrete = isDiscrete;
+//        this.defaultValue = defaultValue;
+//    }
 
     //For value-range domain
     public DataVarDomain(EnumDomainType domainType, float domainMinVal, float domainMaxVal, boolean isLogical, boolean isDiscrete, String defaultValue) {
         super(domainType, domainMinVal, domainMaxVal);
         this.isLogical = isLogical;
         this.isDiscrete = isDiscrete;
-        this.defaultValue = defaultValue;
+//        this.defaultValue = defaultValue;
     }
 
     //For enumeration domain
@@ -33,7 +33,7 @@ public class DataVarDomain extends _SimDataDomain_ {
         super(domainType, domainEnumVal);
         this.isLogical = isLogical;
         this.isDiscrete = isDiscrete;
-        this.defaultValue = defaultValue;
+//        this.defaultValue = defaultValue;
     }
 
     public boolean isLogical() {
@@ -52,11 +52,11 @@ public class DataVarDomain extends _SimDataDomain_ {
         isDiscrete = discrete;
     }
 
-    public String getDefaultValue() {
-        return defaultValue;
-    }
-
-    public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
-    }
+//    public String getDefaultValue() {
+//        return defaultValue;
+//    }
+//
+//    public void setDefaultValue(String defaultValue) {
+//        this.defaultValue = defaultValue;
+//    }
 }
