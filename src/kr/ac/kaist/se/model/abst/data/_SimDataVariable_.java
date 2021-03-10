@@ -28,50 +28,29 @@ public abstract class _SimDataVariable_ implements Cloneable {
     private String dataDefaultValue;  //default value of a data (variable)
     private String dataCurValue;      //current value of a data (variable)
 
-//    protected _SimDataDomain_ dataDomain;   //domain of a data variable (min-max/enum)
 
 
-//    public _SimDataVariable_() {
-//        printDataCreation();
-//    }
-//
-//    public _SimDataVariable_(String varId, String varName, String varType) {
-//        this.varId = varId;
-//        this.varName = varName;
-//        this.varType = varType;
-//
-//        setActualDataTypeVar(this.varType);
-//        printDataCreation();
-//
-//    }
-
-
-    public _SimDataVariable_(String varId, String varName, String varType, String dataDefaultValue) {
+    public _SimDataVariable_(String varId, String varName, String varType) {
         this.varId = varId;
         this.varName = varName;
         this.varType = varType;
-        this.dataDefaultValue = dataDefaultValue;
 
-        this.dataCurValue = dataDefaultValue;
-        isValueAssigned = true;
-
-        setActualDataTypeVar(this.varType);
         printDataCreation();
-
     }
 
-    public _SimDataVariable_(String varId, String varName, String varType, String dataDefaultValue, String dataCurValue) {
+    public _SimDataVariable_(String varId,
+                             String varName,
+                             String varType,
+                             String dataDefaultValue,
+                             String dataCurValue) {
         this.varId = varId;
         this.varName = varName;
         this.varType = varType;
         this.dataDefaultValue = dataDefaultValue;
         this.dataCurValue = dataCurValue;
 
-        isValueAssigned = true;
-
         setActualDataTypeVar(this.varType);
         printDataCreation();
-
     }
 
     protected void printDataCreation() {
@@ -135,12 +114,10 @@ public abstract class _SimDataVariable_ implements Cloneable {
                 isEnumData = true;
                 stringData = dataCurValue;
 
-                //System.out.println(dataCurValue);
             }
         } else {
 
         }
-//        System.out.println("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") Actual data: " + integerData + " | " + floatData + " | " + stringData + " | " + isEnumData);
 
     }
 
