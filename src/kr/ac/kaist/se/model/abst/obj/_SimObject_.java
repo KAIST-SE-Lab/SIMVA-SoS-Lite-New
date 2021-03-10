@@ -78,9 +78,11 @@ public abstract class _SimObject_ implements Simulatable {
 
     }
 
-//    public _SimObject_() {
-//        initObjLocation();
-//    }
+
+    /**
+     * Initialization of object location
+     */
+    protected abstract void initObjLocation();
 
 
     public String getId() {
