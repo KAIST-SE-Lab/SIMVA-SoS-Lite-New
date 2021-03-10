@@ -130,7 +130,7 @@ public abstract class DimVar extends _SimDataVariable_ {
         }
     }
 
-    
+
     /* Getters & Setters */
 
     public DimVarDomain getVarDomain() {

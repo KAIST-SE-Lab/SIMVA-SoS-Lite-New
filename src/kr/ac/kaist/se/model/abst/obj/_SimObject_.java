@@ -213,6 +213,21 @@ public abstract class _SimObject_ implements Simulatable {
         return returnState;
     }
 
+
+
+    /**
+     * Select a move action(s) among possible move actions.
+     * A proper mechanism to select move actions should be implemented in a movable object.
+     * (This method is originally implemented in 'Movable' interface)
+     *
+     * @param possibleMoveActions MoveActions that can be executed
+     * @return List of selected move actions
+     */
+    protected abstract ArrayList<_SimAction_> selectMoveActions(ArrayList<_SimAction_> possibleMoveActions);
+
+
+
+
     public String getObjLocation() {
         return objLocation;
     }
