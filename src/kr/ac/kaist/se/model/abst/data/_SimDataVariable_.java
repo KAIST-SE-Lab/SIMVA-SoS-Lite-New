@@ -20,14 +20,15 @@ public abstract class _SimDataVariable_ implements Cloneable {
     protected String stringData;    //String-type or Enum data
 //    protected String enumData;
 
-//    protected _SimDomain_ varDomain;
+//    protected _SimDataDomain_ varDomain;
     protected boolean isEnumData = false;
     protected boolean isValueAssigned = false;
     protected boolean isDomainConstrained = false;
+
     private String dataDefaultValue;  //default value of a data (variable)
     private String dataCurValue;      //current value of a data (variable)
 
-//    protected _SimDomain_ dataDomain;   //domain of a data variable (min-max/enum)
+//    protected _SimDataDomain_ dataDomain;   //domain of a data variable (min-max/enum)
 
 
 //    public _SimDataVariable_() {
@@ -208,7 +209,6 @@ public abstract class _SimDataVariable_ implements Cloneable {
     }
 
     public void setDataCurValue(String dataCurValue) {
-        //TODO: Domain check
         this.dataCurValue = dataCurValue;
 
         setActualDataTypeVar(this.varType);

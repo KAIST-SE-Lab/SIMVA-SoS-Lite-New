@@ -3,7 +3,7 @@ package kr.ac.kaist.se.model.sos.geo;
 import kr.ac.kaist.se.controller.util.MapBuilder;
 import kr.ac.kaist.se.model.abst.geo._SimMap_;
 import kr.ac.kaist.se.model.sos.data.DataVar;
-import kr.ac.kaist.se.model.sos.data.DimensionVar;
+import kr.ac.kaist.se.model.sos.data.DimVar;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public abstract class SimMap extends _SimMap_ {
 
     /** ArrayLists for MapDimensions and MapInformation */
     //LocDimensions of this map
-    protected ArrayList<DimensionVar> mapDimVars = new ArrayList<>();
+    protected ArrayList<DimVar> mapDimVars = new ArrayList<>();
     //LocInformations of this map
     public ArrayList<DataVar> mapDataVars = new ArrayList<>();
 
@@ -38,7 +38,7 @@ public abstract class SimMap extends _SimMap_ {
         initMap();
     }
 
-    public SimMap(String mapId, String mapName, ArrayList<DimensionVar> mapDimensions) {
+    public SimMap(String mapId, String mapName, ArrayList<DimVar> mapDimensions) {
         this.mapId = mapId;
         this.mapName = mapName;
         this.mapDimVars = mapDimensions;
@@ -47,7 +47,7 @@ public abstract class SimMap extends _SimMap_ {
         initMap();
     }
 
-    public SimMap(String mapId, String mapName, ArrayList<DimensionVar> mapDimensions, ArrayList<DataVar> mapInfos) {
+    public SimMap(String mapId, String mapName, ArrayList<DimVar> mapDimensions, ArrayList<DataVar> mapInfos) {
         this.mapId = mapId;
         this.mapName = mapName;
         this.mapDimVars = mapDimensions;
@@ -114,7 +114,7 @@ public abstract class SimMap extends _SimMap_ {
 
         String key = "";
         int index = 0;
-        for (DimensionVar dimVar : mapDimVars){
+        for (DimVar dimVar : mapDimVars){
             if (index < mapDimVars.size()-1){
                 key += dimVar.getDataDefaultValue() + ",";
             }else{
@@ -122,13 +122,13 @@ public abstract class SimMap extends _SimMap_ {
             }
 
             if (dimVar.getVarType().equals("Int") || dimVar.getVarType().equals("Integer")){
-                DimensionVar tmpDimVar = (DimensionVar)dimVar.clone();
+                DimVar tmpDimVar = (DimVar)dimVar.clone();
                 tmpDimVar.setDataCurValue((int)dimVar.getVarDomain().getDomainMinVal() + "");
 
-                while (Integer.valueOf(tmpDimVar.getDataCurValue()) <= (int)tmpDimVar.getVarDomain().getDomainMaxVal()){
-                    System.out.print(tmpDimVar.getDataCurValue() + " ");
-                    tmpDimVar.updateValueOfDim(1);
-                }
+//                while (Integer.valueOf(tmpDimVar.getDataCurValue()) <= (int)tmpDimVar.getVarDomain().getDomainMaxVal()){
+//                    System.out.print(tmpDimVar.getDataCurValue() + " ");
+//                    tmpDimVar.updateValueOfDim(1);
+//                }
 
                 System.out.println(tmpDimVar.getDataCurValue());
             }
@@ -152,24 +152,24 @@ public abstract class SimMap extends _SimMap_ {
     protected abstract void buildMap(String mapInitInfo);
 
     protected void getAllLocationPoints() {
-        for (DimensionVar dimVar : mapDimVars) {
+        for (DimVar dimVar : mapDimVars) {
 
         }
     }
 
     /* Getters & Setters */
 
-    public ArrayList<DimensionVar> getMapDimVars() {
+    public ArrayList<DimVar> getMapDimVars() {
         return mapDimVars;
     }
 
-    public void setMapDimVars(ArrayList<DimensionVar> mapDimVars) {
+    public void setMapDimVars(ArrayList<DimVar> mapDimVars) {
         this.mapDimVars = mapDimVars;
     }
 
-    public void addMapDimension(DimensionVar dimensionVar) {
-        if (dimensionVar != null) {
-            this.mapDimVars.add(dimensionVar);
+    public void addMapDimension(DimVar dimVar) {
+        if (dimVar != null) {
+            this.mapDimVars.add(dimVar);
         }
     }
 

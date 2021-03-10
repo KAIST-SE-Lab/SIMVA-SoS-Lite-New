@@ -13,16 +13,16 @@ import java.sql.Timestamp;
  *
  * @author ymbaek
  */
-public abstract class DimensionVar extends _SimDataVariable_ {
+public abstract class DimVar extends _SimDataVariable_ {
 
     //Domain of a dimension variable
-    protected DimensionVarDomain varDomain;
+    protected DimVarDomain varDomain;
 
-//    public DimensionVar() {
+//    public DimVar() {
 //        super();
 //    }
 
-    public DimensionVar(String dataId, String dataName, String dataType, String dataDefaultValue) {
+    public DimVar(String dataId, String dataName, String dataType, String dataDefaultValue) {
         super(dataId, dataName, dataType, dataDefaultValue);
         printDimensionVarCreation();
     }
@@ -30,7 +30,7 @@ public abstract class DimensionVar extends _SimDataVariable_ {
 //    public abstract void increaseValueOfDim(int diff);
 //    public abstract void decreaseValueOfDim(int diff);
 
-    public DimensionVar(String dataId, String dataName, String dataType, String dataDefaultValue, DimensionVarDomain dataDomain) {
+    public DimVar(String dataId, String dataName, String dataType, String dataDefaultValue, DimVarDomain dataDomain) {
         super(dataId, dataName, dataType, dataDefaultValue);
 
         this.varDomain = dataDomain;
@@ -39,7 +39,7 @@ public abstract class DimensionVar extends _SimDataVariable_ {
         printDimensionVarCreation();
     }
 
-    public DimensionVar(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue, DimensionVarDomain dataDomain) {
+    public DimVar(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue, DimVarDomain dataDomain) {
         super(dataId, dataName, dataType, dataDefaultValue, dataCurValue);
 
         this.varDomain = dataDomain;
@@ -48,7 +48,7 @@ public abstract class DimensionVar extends _SimDataVariable_ {
         printDimensionVarCreation();
     }
 
-//    public DimensionVar(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue, DimensionVarDomain dataDomain) {
+//    public DimVar(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue, DimVarDomain dataDomain) {
 //        super(dataId, dataName, dataType, dataDefaultValue, dataCurValue);
 //
 //        this.varDomain = dataDomain;
@@ -65,7 +65,7 @@ public abstract class DimensionVar extends _SimDataVariable_ {
         timestamp = new Timestamp(System.currentTimeMillis());
 
         if (varDomain != null) {
-            System.out.println("[" + timestamp + "] (DimensionVar) A DimensionVar is initialized: " +
+            System.out.println("[" + timestamp + "] (DimVar) A DimVar is initialized: " +
                     varId + " | " +
                     varName + " | " +
                     varType + " | varDomain(" +
@@ -74,7 +74,7 @@ public abstract class DimensionVar extends _SimDataVariable_ {
                     varDomain.getDomainMaxVal() + ", " +
                     varDomain.getDomainEnumVal() + ")");
         } else {
-            System.out.println("[" + timestamp + "] (DimensionVar) A DimensionVar is initialized: " +
+            System.out.println("[" + timestamp + "] (DimVar) A DimVar is initialized: " +
                     varId + " | " +
                     varName + " | " +
                     varType + ")");
@@ -84,11 +84,11 @@ public abstract class DimensionVar extends _SimDataVariable_ {
 //    public
 
 
-    public DimensionVarDomain getVarDomain() {
+    public DimVarDomain getVarDomain() {
         return varDomain;
     }
 
-    public void setVarDomain(DimensionVarDomain varDomain) {
+    public void setVarDomain(DimVarDomain varDomain) {
         this.varDomain = varDomain;
     }
 }

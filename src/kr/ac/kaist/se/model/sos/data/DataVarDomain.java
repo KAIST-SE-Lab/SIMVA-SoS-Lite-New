@@ -1,11 +1,11 @@
 package kr.ac.kaist.se.model.sos.data;
 
 import kr.ac.kaist.se.model.abst.data.EnumDomainType;
-import kr.ac.kaist.se.model.abst.data._SimDomain_;
+import kr.ac.kaist.se.model.abst.data._SimDataDomain_;
 
 import java.util.ArrayList;
 
-public class DataVarDomain extends _SimDomain_ {
+public class DataVarDomain extends _SimDataDomain_ {
 
     protected boolean isLogical;
     protected boolean isDiscrete;

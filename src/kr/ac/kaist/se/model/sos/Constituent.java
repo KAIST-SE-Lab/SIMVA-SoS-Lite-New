@@ -61,7 +61,7 @@ public abstract class Constituent extends _SimActionableObject_
 
         msgQueue = new LinkedList<_SimMessage_>();
 
-        initActions();
+        initCapableActions();
 
         printObjInfo();
         //printCSInfo();
@@ -85,7 +85,7 @@ public abstract class Constituent extends _SimActionableObject_
 
         msgQueue = new LinkedList<_SimMessage_>();
 
-        initActions();
+        initCapableActions();
 
         printObjInfo();
         //printCSInfo();

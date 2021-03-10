@@ -4,7 +4,7 @@ import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.evnt.EnumEventType;
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
 import kr.ac.kaist.se.model.sos.SoS;
-import kr.ac.kaist.se.model.sos.data.DimensionVar;
+import kr.ac.kaist.se.model.sos.data.DimVar;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 
@@ -19,12 +19,12 @@ import java.util.ArrayList;
 public class MoveAction extends _SimAction_ {
 
     private final int numOfAllowedDims;
-    private ArrayList<DimensionVar> allowedDims;
+    private ArrayList<DimVar> allowedDims;
 
-    private final ArrayList<Integer> dimVarDiffList;
+    private ArrayList<Integer> dimVarDiffList;
 
 
-    public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, int numOfAllowedDims, ArrayList<DimensionVar> allowedDims, ArrayList<Integer> dimVarDiffList) {
+    public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, int numOfAllowedDims, ArrayList<DimVar> allowedDims, ArrayList<Integer> dimVarDiffList) {
         super(accessibleSoS, actionSubject, actionId, actionName);
         this.numOfAllowedDims = numOfAllowedDims;
         this.allowedDims = allowedDims;
@@ -33,7 +33,7 @@ public class MoveAction extends _SimAction_ {
         printMoveActionCreation();
     }
 
-    public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, int actionDuration, float actionCost, float actionBenefit, int numOfAllowedDims, ArrayList<DimensionVar> allowedDims, ArrayList<Integer> dimVarDiffList) {
+    public MoveAction(SoS accessibleSoS, _SimActionableObject_ actionSubject, String actionId, String actionName, int actionDuration, float actionCost, float actionBenefit, int numOfAllowedDims, ArrayList<DimVar> allowedDims, ArrayList<Integer> dimVarDiffList) {
         super(accessibleSoS, actionSubject, actionId, actionName, actionDuration, actionCost, actionBenefit);
         this.numOfAllowedDims = numOfAllowedDims;
         this.allowedDims = allowedDims;
@@ -65,8 +65,8 @@ public class MoveAction extends _SimAction_ {
         ArrayList<Integer> targetDims = new ArrayList<>();
         //For all dimension variables of actionSubject's dimensions,
         //Check if objLocDimVar.getVarId().equals(allowedDimVar.getVarId())
-        for (DimensionVar objLocDimVar : actionSubject.getCurLocation().getObjLocDimVars()) {
-            for (DimensionVar allowedDimVar : allowedDims) {
+        for (DimVar objLocDimVar : actionSubject.getCurLocation().getObjLocDimVars()) {
+            for (DimVar allowedDimVar : allowedDims) {
                 if (objLocDimVar.getVarId().equals(allowedDimVar.getVarId())) {
                     //Set target dimensions
                     targetDims.add(Integer.valueOf(index));
@@ -147,7 +147,7 @@ public class MoveAction extends _SimAction_ {
     private void printLocation(ObjectLocation objLocation) {
         System.out.print("(");
         int index = 0;
-        for (DimensionVar dimVar : objLocation.getObjLocDimVars()) {
+        for (DimVar dimVar : objLocation.getObjLocDimVars()) {
             System.out.print(dimVar.getDataCurValue());
             if (index++ < objLocation.getObjLocDimVars().size() - 1) {
                 System.out.print(",");
@@ -164,7 +164,7 @@ public class MoveAction extends _SimAction_ {
 
         System.out.print("(allowedDims: ");
         int index = 0;
-        for (DimensionVar dimVar : allowedDims) {
+        for (DimVar dimVar : allowedDims) {
             System.out.print(dimVar.getVarId() + "(" + ")");
             if (index++ < allowedDims.size() - 1) {
                 System.out.print(",");
@@ -190,11 +190,11 @@ public class MoveAction extends _SimAction_ {
                 dimVarDiffList);
     }
 
-    public ArrayList<DimensionVar> getAllowedDims() {
+    public ArrayList<DimVar> getAllowedDims() {
         return allowedDims;
     }
 
-    public void setAllowedDims(ArrayList<DimensionVar> allowedDims) {
+    public void setAllowedDims(ArrayList<DimVar> allowedDims) {
         this.allowedDims = allowedDims;
     }
 }

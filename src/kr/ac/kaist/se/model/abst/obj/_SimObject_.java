@@ -4,11 +4,10 @@ import kr.ac.kaist.se.model.abst.cap._SimAction_;
 import kr.ac.kaist.se.model.abst.comm._SimMessage_;
 import kr.ac.kaist.se.model.abst.state._SimState_;
 import kr.ac.kaist.se.model.intf.Simulatable;
-import kr.ac.kaist.se.model.sos.data.DimensionVar;
+import kr.ac.kaist.se.model.sos.data.DimVar;
 import kr.ac.kaist.se.model.sos.geo.ObjectLocation;
 import kr.ac.kaist.se.model.sos.state.ObjectState;
 
-import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -135,7 +134,7 @@ public abstract class _SimObject_ implements Simulatable {
 //        //Updated location
 //        int index = 0;
 //        System.out.print("(");
-//        for (DimensionVar locDimVar : objLocation.getObjLocDimVars()){
+//        for (DimVar locDimVar : objLocation.getObjLocDimVars()){
 //            System.out.print(objLocation.getObjLocDimVars().get(index++).getDataCurValue());
 //            if (index < objLocation.getObjLocDimVars().size()){
 //                System.out.print(",");
@@ -234,7 +233,7 @@ public abstract class _SimObject_ implements Simulatable {
 
         int index = 0;
         System.out.print("(");
-        for (DimensionVar dimVar : objLocation.getObjLocDimVars()) {
+        for (DimVar dimVar : objLocation.getObjLocDimVars()) {
             if (index + 1 < objLocation.getObjLocDimVars().size()) {
                 System.out.print(dimVar.getDataCurValue() + ",");
             } else {

@@ -1,6 +1,6 @@
 package kr.ac.kaist.se.model.sos.geo;
 
-import kr.ac.kaist.se.model.sos.data.DimensionVar;
+import kr.ac.kaist.se.model.sos.data.DimVar;
 
 import java.util.ArrayList;
 
@@ -11,17 +11,17 @@ import java.util.ArrayList;
  */
 public class ObjectLocation implements Cloneable {
 
-    ArrayList<DimensionVar> objLocDimVars;
+    ArrayList<DimVar> objLocDimVars;
 
-    public ObjectLocation(ArrayList<DimensionVar> mapDims) {
+    public ObjectLocation(ArrayList<DimVar> mapDims) {
         this.objLocDimVars = mapDims;
     }
 
-    public ArrayList<DimensionVar> getObjLocDimVars() {
+    public ArrayList<DimVar> getObjLocDimVars() {
         return objLocDimVars;
     }
 
-    public void setObjLocDimVars(ArrayList<DimensionVar> objLocDimVars) {
+    public void setObjLocDimVars(ArrayList<DimVar> objLocDimVars) {
         this.objLocDimVars = objLocDimVars;
     }
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author ymbaek
  */
-public abstract class _SimDomain_ {
+public abstract class _SimDataDomain_ {
 
     protected Timestamp timestamp;    //Timestamp for stdout
 
@@ -20,19 +20,19 @@ public abstract class _SimDomain_ {
     protected ArrayList<String> domainEnumVal = new ArrayList<>();  //Allowed enumeration values
 
 
-    public _SimDomain_(EnumDomainType domainType) {
+    public _SimDataDomain_(EnumDomainType domainType) {
         this.domainType = domainType;
     }
 
     //Constructor for VALUE_RANGE domain
-    public _SimDomain_(EnumDomainType domainType, float domainMinVal, float domainMaxVal) {
+    public _SimDataDomain_(EnumDomainType domainType, float domainMinVal, float domainMaxVal) {
         this.domainType = domainType;
         this.domainMinVal = domainMinVal;
         this.domainMaxVal = domainMaxVal;
     }
 
     //Constructor for ENUMERATION domain
-    public _SimDomain_(EnumDomainType domainType, ArrayList<String> domainEnumVal) {
+    public _SimDataDomain_(EnumDomainType domainType, ArrayList<String> domainEnumVal) {
         this.domainType = domainType;
         this.domainEnumVal = domainEnumVal;
     }
