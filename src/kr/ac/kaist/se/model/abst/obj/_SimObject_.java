@@ -50,7 +50,11 @@ public abstract class _SimObject_ implements Simulatable {
 
 
     //Current location of this object
-    protected ObjectLocation objLocation;   //Every SimObject has its geo-location
+//    protected ObjectLocation objLocation;   //Every SimObject has its geo-location
+
+    /** Geo-location information */
+    //Current location of this object
+    protected String objLocation;
 
     //Queue for storing incoming messages from other objects
     protected Queue<_SimMessage_> msgQueue = new LinkedList<>();
@@ -125,29 +129,16 @@ public abstract class _SimObject_ implements Simulatable {
         isAvailable = available;
     }
 
-    /**
-     * A method that returns current location of this object
-     * @return ObjectLocation of this organization
-     */
-    public ObjectLocation getCurLocation() {
-//        timestamp = new Timestamp(System.currentTimeMillis());
-//        System.out.print("[" + timestamp + "] (" + this.getClass().getSimpleName() + "(" + id + "):getCurLocation) ");
-//
-//        //Updated location
-//        int index = 0;
-//        System.out.print("(");
-//        for (DimVar locDimVar : objLocation.getObjLocDimVars()){
-//            System.out.print(objLocation.getObjLocDimVars().get(index++).getDataCurValue());
-//            if (index < objLocation.getObjLocDimVars().size()){
-//                System.out.print(",");
-//            }
-//        }
-//        System.out.println(")");
 
-        return objLocation;
-    }
+//    /**
+//     * A method that returns current location of this object
+//     * @return ObjectLocation of this organization
+//     */
+//    public String getCurLocation() {
+//        return this.objLocation;
+//    }
 
-    public void setObjLocation(ObjectLocation objLocation) {
+    public void setObjLocation(String objLocation) {
         this.objLocation = objLocation;
     }
 
@@ -222,29 +213,29 @@ public abstract class _SimObject_ implements Simulatable {
         return returnState;
     }
 
-    public ObjectLocation getObjLocation() {
+    public String getObjLocation() {
         return objLocation;
     }
 
     /**
      * Print current location of this object using getCurLocation()
      */
-    protected void printCurLocation() {
-//        timestamp = new Timestamp(System.currentTimeMillis());
-//        System.out.print("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") ObjctLocation is initialized: (");
-
-        int index = 0;
-        System.out.print("(");
-        for (DimVar dimVar : objLocation.getObjLocDimVars()) {
-            if (index + 1 < objLocation.getObjLocDimVars().size()) {
-                System.out.print(dimVar.getDataCurValue() + ",");
-            } else {
-                System.out.print(dimVar.getDataCurValue());
-            }
-            index++;
-        }
-        System.out.println(")");
-    }
+//    protected void printCurLocation() {
+////        timestamp = new Timestamp(System.currentTimeMillis());
+////        System.out.print("[" + timestamp + "] (" + this.getClass().getSimpleName() + ") ObjctLocation is initialized: (");
+//
+//        int index = 0;
+//        System.out.print("(");
+//        for (DimVar dimVar : objLocation.getObjLocDimVars()) {
+//            if (index + 1 < objLocation.getObjLocDimVars().size()) {
+//                System.out.print(dimVar.getDataCurValue() + ",");
+//            } else {
+//                System.out.print(dimVar.getDataCurValue());
+//            }
+//            index++;
+//        }
+//        System.out.println(")");
+//    }
 
 
     /**
