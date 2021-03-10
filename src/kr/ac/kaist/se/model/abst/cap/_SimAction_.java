@@ -1,6 +1,7 @@
 package kr.ac.kaist.se.model.abst.cap;
 
 import kr.ac.kaist.se.model.abst.obj._SimActionableObject_;
+import kr.ac.kaist.se.model.abst.obj._SimObject_;
 import kr.ac.kaist.se.model.sos.SoS;
 import kr.ac.kaist.se.simdata.evnt.SimLogEvent;
 
@@ -20,7 +21,7 @@ public abstract class _SimAction_ {
     protected ArrayList<SimLogEvent> actionLogEvents = new ArrayList<>();
 
     protected SoS accessibleSoS;    //Accessible SimModel (SoS)
-    protected _SimActionableObject_ actionSubject;  //Subject who performs this action
+    protected _SimObject_ actionSubject;  //Subject who performs this action
 
     protected String actionId;      //id of action
     protected String actionName;    //name of action
@@ -30,7 +31,7 @@ public abstract class _SimAction_ {
     protected float actionBenefit = -1; //benefit from action execution
 
     protected _SimAction_(SoS accessibleSoS,
-                          _SimActionableObject_ actionSubject,
+                          _SimObject_ actionSubject,
                           String actionId,
                           String actionName) {
         this.accessibleSoS = accessibleSoS;
@@ -40,7 +41,7 @@ public abstract class _SimAction_ {
     }
 
     protected _SimAction_(SoS accessibleSoS,
-                          _SimActionableObject_ actionSubject,
+                          _SimObject_ actionSubject,
                           String actionId,
                           String actionName,
                           int actionDuration,
@@ -88,11 +89,11 @@ public abstract class _SimAction_ {
         this.accessibleSoS = accessibleSoS;
     }
 
-    public _SimActionableObject_ getActionSubject() {
+    public _SimObject_ getActionSubject() {
         return actionSubject;
     }
 
-    public void setActionSubject(_SimActionableObject_ actionSubject) {
+    public void setActionSubject(_SimObject_ actionSubject) {
         this.actionSubject = actionSubject;
     }
 
