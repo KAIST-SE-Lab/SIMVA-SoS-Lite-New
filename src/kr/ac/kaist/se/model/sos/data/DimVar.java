@@ -22,24 +22,29 @@ public abstract class DimVar extends _SimDataVariable_ {
 //        super();
 //    }
 
-    public DimVar(String dataId, String dataName, String dataType, String dataDefaultValue) {
-        super(dataId, dataName, dataType, dataDefaultValue);
-        printDimensionVarCreation();
-    }
+//    public DimVar(String dataId, String dataName, String dataType, String dataDefaultValue) {
+//        super(dataId, dataName, dataType, dataDefaultValue);
+//        printDimensionVarCreation();
+//    }
+//
+////    public abstract void increaseValueOfDim(int diff);
+////    public abstract void decreaseValueOfDim(int diff);
+//
+//    public DimVar(String dataId, String dataName, String dataType, String dataDefaultValue, DimVarDomain dataDomain) {
+//        super(dataId, dataName, dataType, dataDefaultValue);
+//
+//        this.varDomain = dataDomain;
+//        this.isDomainConstrained = true;
+//
+//        printDimensionVarCreation();
+//    }
 
-//    public abstract void increaseValueOfDim(int diff);
-//    public abstract void decreaseValueOfDim(int diff);
-
-    public DimVar(String dataId, String dataName, String dataType, String dataDefaultValue, DimVarDomain dataDomain) {
-        super(dataId, dataName, dataType, dataDefaultValue);
-
-        this.varDomain = dataDomain;
-        this.isDomainConstrained = true;
-
-        printDimensionVarCreation();
-    }
-
-    public DimVar(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue, DimVarDomain dataDomain) {
+    public DimVar(String dataId,
+                  String dataName,
+                  String dataType,
+                  String dataDefaultValue,
+                  String dataCurValue,
+                  DimVarDomain dataDomain) {
         super(dataId, dataName, dataType, dataDefaultValue, dataCurValue);
 
         this.varDomain = dataDomain;
@@ -57,9 +62,25 @@ public abstract class DimVar extends _SimDataVariable_ {
 //        printDimensionVarCreation();
 //    }
 
+
+    /* Abstract methods */
+
+    /**
+     * A method to check if a new value is valid
+     * @param diff difference from current value
+     * @return true if a new value is valid
+     */
     public abstract boolean checkUpdateValid(int diff);
 
+
+    /**
+     * A method to update value according to a given diff (0, +1, -1, ...)
+     * @param diff difference from current value
+     * @return true if the update is successfully performed
+     */
     public abstract boolean updateValueOfDim(int diff);
+
+
 
     private void printDimensionVarCreation() {
         timestamp = new Timestamp(System.currentTimeMillis());
@@ -81,8 +102,36 @@ public abstract class DimVar extends _SimDataVariable_ {
         }
     }
 
-//    public
 
+
+    /**
+     * A method to count the number of possible values of this dimVar
+     * @return  the number counted
+     */
+    public int countPossibleValues(){
+        //case of integer type
+        if (varType == "Int"){
+            return (int)varDomain.getDomainMaxVal() - (int)varDomain.getDomainMinVal() + 1;
+        }
+        //case of enum type
+        else{
+            return varDomain.getDomainEnumVal().size();
+        }
+    }
+
+    public String getValueWithIndex(int index){
+        //case of integer type
+        if (varType == "Int"){
+            return (int)varDomain.getDomainMinVal() + index + "";
+        }
+        //case of enum type
+        else{
+            return varDomain.getDomainEnumVal().get(index);
+        }
+    }
+
+    
+    /* Getters & Setters */
 
     public DimVarDomain getVarDomain() {
         return varDomain;

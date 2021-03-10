@@ -16,14 +16,19 @@ public class DataVar extends _SimDataVariable_ {
 //        super(dataId, dataName, dataType);
 //    }
 
-    public DataVar(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue) {
-        super(dataId, dataName, dataType, dataDefaultValue);
-        setDataCurValue(dataCurValue);
-    }
+//    public DataVar(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue) {
+//        super(dataId, dataName, dataType, dataDefaultValue);
+//        setDataCurValue(dataCurValue);
+//    }
 
 
-    public DataVar(String dataId, String dataName, String dataType, String dataDefaultValue, DataVarDomain dataDomain) {
-        super(dataId, dataName, dataType, dataDefaultValue);
+    public DataVar(String dataId,
+                   String dataName,
+                   String dataType,
+                   String dataDefaultValue,
+                   String dataCurValue,
+                   DataVarDomain dataDomain) {
+        super(dataId, dataName, dataType, dataDefaultValue, dataCurValue);
 
         varDomain = dataDomain;
         this.isDomainConstrained = true;
@@ -37,13 +42,13 @@ public class DataVar extends _SimDataVariable_ {
 //
 //    }
 
-    public DataVar(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue, DataVarDomain dataDomain) {
-        super(dataId, dataName, dataType, dataDefaultValue, dataCurValue);
-
-        varDomain = dataDomain;
-        this.isDomainConstrained = true;
-
-    }
+//    public DataVar(String dataId, String dataName, String dataType, String dataDefaultValue, String dataCurValue, DataVarDomain dataDomain) {
+//        super(dataId, dataName, dataType, dataDefaultValue, dataCurValue);
+//
+//        varDomain = dataDomain;
+//        this.isDomainConstrained = true;
+//
+//    }
 
     public DataVarDomain getVarDomain() {
         return varDomain;
